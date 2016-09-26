@@ -1,22 +1,37 @@
-@extends('layouts.app')
-@section('title','Login')
 
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+      <div class="row">
 
-    <div class="row">
+     
 
-        <div class="col-md-5 col-md-offset-3">
+        <div class="col-md-4 col-md-offset-4 centrar">
+
             <div class="panel panel-default">
-                <div class="panel-heading">Iniciar sesion</div>
+
+                <div class="panel-heading cabecera">Iniciar sesión</div>
+
                 <div class="panel-body">
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Correo</label>
+
+                            <label for="email" class="col-md-4 control-label ">Correo</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input id="email" type="email" class="form-control " name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -30,7 +45,7 @@
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
+                                <input id="password" type="password" class="form-control lab" name="password">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -40,19 +55,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Recuerdame
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+        
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
                                     <i class="fa fa-btn fa-sign-in"></i> Ingresar
                                 </button>
 
@@ -60,9 +67,18 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 
-@endsection
+
+    <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+    <script src="{{asset('plugins/bootstrap/js/bootstrap.js')}}"></script>
+</body>
+</html>
+
+  
+
+
