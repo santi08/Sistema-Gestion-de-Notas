@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
 
-    <title>@yield('title','default')</title>
+        <title>@yield('title','default')</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
+        <meta charset="utf-8">
+    </head>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap.css')}}">
+    <body id="app-layout">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-
-</head>
-<body id="app-layout">
-
-
-    <div class="container">
-        
-        @yield('content')
-    </div>
-
+        <header>
+            <!-- Navbar goes here -->
+                @include('partials.nav')
+        <!-- Page Layout here --> 
+        </header>
     
+        
+        
+        <div class="row">
 
-    <!-- JavaScripts  y jquery-->
-    <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
-    <script src="{{asset('plugins/bootstrap/js/bootstrap.js')}}"></script>
-</body>
+            <div class="col s12 m1 l3"> 
+                
+            </div>
+
+            <div class="col s12 m9 l9"> 
+                
+                
+                     @yield('content')
+                
+            </div>
+
+        </div>
+        <!-- JavaScripts  y jquery-->
+        <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+        <script type="text/javascript">
+            $( document ).ready(function(){
+                $(".button-collapse").sideNav();
+                $('.collapsible').collapsible();
+            });
+        </script>
+        <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+    </body>
 </html>

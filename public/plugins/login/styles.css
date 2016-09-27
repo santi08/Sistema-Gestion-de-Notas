@@ -18,5 +18,15 @@ i.icon-blue:focus {
     color: blue;
 }
 
+.gradient-side{
+
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #b71c1c , grey); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right,  #b71c1c , grey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,  #b71c1c , grey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, r #b71c1c , grey); /* Standard syntax */
+
+}
+
 
 
