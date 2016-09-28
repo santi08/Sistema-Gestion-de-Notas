@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','casa')
 
 @section('content')
 <div class="container">
@@ -8,7 +9,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                   apenas estoy probando 
                 </div>
             </div>
         </div>
