@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
+
 @section('title','Bienvenido')
-=======
-@extends('layouts.layaout')
+
 
 
 @section('content')

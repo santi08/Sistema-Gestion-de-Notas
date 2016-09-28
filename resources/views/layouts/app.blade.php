@@ -23,15 +23,13 @@
         
         <div class="row">
 
-            <div class="col s12 m1 l3"> 
+            <div class="col s12 m4 l3"> 
                 
             </div>
 
-            <div class="col s12 m9 l9"> 
-                
-                
-                     @yield('content')
-                
+            <div class="col s12 m12 l9"> 
+
+                  @yield('content')
             </div>
 
         </div>
