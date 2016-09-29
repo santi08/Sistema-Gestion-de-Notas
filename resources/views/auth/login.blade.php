@@ -26,6 +26,8 @@
 
 
                         </div>
+                        {!!Form::open([ 'method' =>'POSt','class'=>'register-form'])!!}
+
 
                         <div class="row">
                             <div class="col s12 input-field"><i class="material-icons prefix">mail_outline</i>
@@ -49,6 +51,7 @@
                                 </button>     
                             </div>
                         </div>
+                        {!!Form::close()!!}
 
                         <div class="row">
                             <div class="col s12 input-field offset-l3">
