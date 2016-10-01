@@ -6,7 +6,7 @@
   
   </ul>
 
-  <nav class=" gradient  s12 m3">
+  <nav class=" gradient  s12 m3 ">
     <div class="nav-wrapper">
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -23,22 +23,22 @@
         <li class="no-padding"><div class="divider"></div></li>
 
         <li class="no-padding">
-        <a href="#!" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
+        <a href="{{route('admin.profesoresIndex.index')}}" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
 
         </li>
 
 
 
         <li class="no-padding">
-          <a href="#!" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Materias</a>
+          <a href="{{route('admin.materiasIndex.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Materias</a>
         </li>
         
         <li class="no-padding">
-          <a class="subheader white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
+          <a href="{{route('admin.informesIndex.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
         </li>
 
         <li class="no-padding">
-          <a class="waves-effect white-text text-lighten-2 " href="#!" ><i class=" material-icons white-text text-lighten-2">cloud</i>Matricula</a>
+          <a href="{{route('admin.profesoresIndex.index')}}" class="waves-effect white-text text-lighten-2 "><i class=" material-icons white-text text-lighten-2">cloud</i>Matricula</a>
         </li>
 
       </ul>
