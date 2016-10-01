@@ -71,6 +71,7 @@ class AuthController extends Controller
     }
 
     protected function getLogin(){
+<<<<<<< HEAD
         return view('auth.login');
     }
 
@@ -80,6 +81,9 @@ class AuthController extends Controller
 
     protected function getLogout(){
         
+=======
+        return view('home');
+>>>>>>> Test
     }
 
 
