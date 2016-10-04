@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 
 
-
 //Route::auth('login','Auth/AuthController@getLogin');
 /*Route::auth('login','Auth\AuthController@getLogin');
 Route::post('login','Auth\AuthController@getLogin');
@@ -32,7 +31,7 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('profesoresIndex','ProfesoresController');
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
-
+    Route:: resource('usuarios','controladorUsuarios');
 
 
 });
