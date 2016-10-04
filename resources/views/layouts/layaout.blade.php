@@ -12,15 +12,16 @@
 
  <nav >
     <div class="nav-wrapper">
-          <a href="#" class="right waves-effect waves-teal "><i class="material-icons left ">power_settings_new</i> cerrar sesion</a> 
-          <a href="#" class="right  waves-effect waves-teal"><i class="material-icons left ">help</i>Ayuda</a> 
+          <a href="#" class="right waves-effect waves-red "><i class="material-icons left ">power_settings_new</i> cerrar sesion</a> 
+          <a href="#" class="right  waves-effect waves-red"><i class="material-icons left ">help</i>Ayuda</a> 
           <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons left">menu</i></a>
+          @yield('titulo')
     </div> 
 
     <div> 
        <ul id="slide-out" class="side-nav fixed">
         
-         <blockquote><li class="bold"><a href="#!" class="red-text waves-effect waves-teal"><i class="material-icons">home</i>Sistema Gestion de Notas </a></li></blockquote>
+         <blockquote><li class="bold"><a href="#!" class="red-text waves-effect waves-red"><i class="material-icons">home</i>Sistema Gestion de Notas </a></li></blockquote>
 
      <li><div class="userView">
       <img class="background" src="http://www.fondosblackberry.com/user-content/uploads/wall/mid/67/rojo_gradiend_red.jpg">
@@ -30,7 +31,7 @@
     </div></li>
 
    
-    <blockquote><a href="#!" class="waves-effect waves-teal red-text "><i class="material-icons left">toc</i>Informes</a></blockquote>
+    <blockquote><a href="#!" class="waves-effect waves-red red-text "><i class="material-icons left">toc</i>Informes</a></blockquote>
     <!--<blockquote><a href="#!" class="waves-effect waves-teal red-text "><i class="material-icons left">work</i>Profesores </a></blockquote>
     <blockquote><a href="#!" class="waves-effect waves-teal red-text "><i class="material-icons left">movie</i>Materias </a> </blockquote>-->
     
@@ -58,7 +59,7 @@
      <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li>
-            <a class="collapsible-header waves-effect waves-teal red-text">Estudiantes<i class="material-icons left"> perm_identity </i></a>
+            <a class="collapsible-header waves-effect waves-red red-text">Estudiantes<i class="material-icons prefix"> perm_identity </i></a>
             <div class="collapsible-body">
               <ul>
                 <li><a href="#!">Agregrar</a></li>
@@ -77,7 +78,7 @@
      <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li>
-            <a class="collapsible-header waves-effect waves-teal">Profesores<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <a class="collapsible-header waves-effect waves-red">Profesores<i class="mdi-navigation-arrow-drop-down"></i></a>
             <div class="collapsible-body">
               <ul>
                 <li><a href="#!">First</a></li>
@@ -97,7 +98,7 @@
      <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li>
-            <a class="collapsible-header waves-effect waves-teal">Materias<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <a class="collapsible-header waves-effect waves-red">Materias<i class="mdi-navigation-arrow-drop-down"></i></a>
             <div class="collapsible-body">
               <ul>
                 <li><a href="#!">First</a></li>
@@ -114,6 +115,8 @@
    </div>  
   
   </nav>
+
+  @yield('content')
 
 
  <script type="text/javascript" src="{{ asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
