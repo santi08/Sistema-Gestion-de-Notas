@@ -5463,6 +5463,7 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -5471,7 +5472,7 @@ button.list-group-item-danger.active:focus {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
-  color: inherit;
+    
 }
 .panel-title > a,
 .panel-title > small,
@@ -5482,7 +5483,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-footer {
   padding: 10px 15px;
-  background-color: #f5f5f5;
+  background-color: #c62828;
   border-top: 1px solid #ddd;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;

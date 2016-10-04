@@ -7,8 +7,17 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
+<<<<<<< HEAD
         "laravelcollective/html":"5.2.*",
         "laravelcollective/bus": "^5.2.0"
+=======
+<<<<<<< HEAD
+        "laravelcollective/html": "^5.2.0"
+=======
+        "laravelcollective/html": "^5.2.0",
+        "barryvdh/laravel-debugbar": "^2.3"
+>>>>>>> Test
+>>>>>>> b2ecd78946f173a72d712f703b9cb132fdd5c2a1
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
