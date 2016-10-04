@@ -18,29 +18,31 @@
   </nav>
   
       <ul id="slide-out" class="side-nav fixed gradient-side">
+         <li class=""><a href="{{url('/home')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
 
-        <br><br><br>
+
         <li class="no-padding"><div class="divider"></div></li>
 
-        <li class="no-padding">
-        <a href="{{route('admin.profesoresIndex.index')}}" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
-
-        </li>
-
-
-
+        
         <li class="no-padding">
           <a href="{{route('admin.materiasIndex.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Materias</a>
         </li>
         
         <li class="no-padding">
-          <a href="{{route('admin.informesIndex.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
+        <a href="{{route('admin.profesoresIndex.index')}}" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
         </li>
 
         <li class="no-padding">
-          <a href="{{route('admin.profesoresIndex.index')}}" class="waves-effect white-text text-lighten-2 "><i class=" material-icons white-text text-lighten-2">cloud</i>Matricula</a>
+          <a href="{{route('admin.profesoresIndex.index')}}" class="waves-effect white-text text-lighten-2 "><i class=" material-icons white-text text-lighten-2">cloud</i>Estudiantes</a>
         </li>
 
+
+        <li class="no-padding">
+          <a href="{{route('admin.informesIndex.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
+        </li>
+
+
+        
       </ul>
     
   

@@ -39,6 +39,7 @@
             $( document ).ready(function(){
                 $(".button-collapse").sideNav();
                 $('.collapsible').collapsible();
+                 $('.dropdown-button').dropdown('open');
             });
         </script>
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
