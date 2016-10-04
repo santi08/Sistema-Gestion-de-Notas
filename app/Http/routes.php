@@ -14,11 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix'=>'admin'],function(){
-
-  Route:: resource('usuarios','controladorUsuarios');
-});
-
 
 
 
@@ -36,7 +31,7 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('profesoresIndex','ProfesoresController');
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
-
+    Route:: resource('usuarios','controladorUsuarios');
 
 
 });
