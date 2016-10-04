@@ -76,7 +76,7 @@
 <!-- finaliza campo buscar y crear-->
 
  <div class="row">
- 	<table class="col highlight responsive-table bordered ">
+ 	<table class="col highlight responsive-table bordered">
         <thead>
           <tr>
               <th data-field="id">Nombre Completo</th>
