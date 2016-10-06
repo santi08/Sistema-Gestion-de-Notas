@@ -1,13 +1,14 @@
 <!--aqui esta el boton de crear Usuario-->
   
-  <div class="row">
+  <div class="row ">
     <a class="col s3 offset-s3 green waves-effect waves-green btn modal-trigger " href="#modal1"> Registrar Estudiante</a> 
   </div> 
   
   <!-- Estructura Modal -->
   <div id="modal1" class="modal">
     <div class="modal-content ">
-      <h4 class="center red white-text">Registrar Estudiantes</h4>
+      <h4 class="center  red gradient darken-3 white-text">Registrar Estudiantes</h4>
+        <hr>
          {!! Form::open(['route'=>'admin.usuarios.store','method' => 'POST'])!!}
   <!-- inicio fila formulario -->
       <div class="row">
@@ -49,8 +50,8 @@
         </div>
 
         <div class="col s6 offset-s6 input-field">
-        <br>
-        {!! Form::file('image',['class'=> 'col s12 '])!!}</a>
+        <hr>
+        <a>{!! Form::file('text')!!}</a>
         </div> 
         <!-- fin fila botones-->
         </div>
