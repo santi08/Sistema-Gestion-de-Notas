@@ -16,6 +16,7 @@ class controladorUsuarios extends Controller
     public function index(){
      $users= User::orderby('id','ASC')->paginate(10);
      return view('admin.usuarios.index')->with('users',$users);
+
     }
 
     public function create(){
@@ -25,11 +26,10 @@ class controladorUsuarios extends Controller
 
     public function store(Request $requests){
     
-    $user= new User($requests->all());
-    $user->password=bcrypt($requests->password);
-
-    $user->save();
-        }
+        $user= new User($requests->all());
+        $user->password=bcrypt($requests->password);
+        $user->save();
+    }
 
     public function show(Request $requests){
     

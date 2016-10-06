@@ -29,7 +29,6 @@
             </div>
 
             <div class="col s12 m12 l9 card-panel"> 
-
                   @yield('content')
             </div>
 
@@ -40,8 +39,19 @@
             $( document ).ready(function(){
                 $(".button-collapse").sideNav();
                 $('.collapsible').collapsible();
-                 $('.dropdown-button').dropdown('open');
+                $('.dropdown-button').dropdown('open');
+                $('.modal-trigger').leanModal();
+
             });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.collapsible').collapsible({
+                    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                });
+            });
+
         </script>
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>

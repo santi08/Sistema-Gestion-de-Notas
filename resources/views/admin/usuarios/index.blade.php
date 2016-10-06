@@ -1,14 +1,6 @@
 @extends('layouts.app')
+@section('title','Estudiantes')
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Estudiantes</title>
-</head>
-<body>
-@section('titulo')
-<center><h2>Estudiantes</h2></center>
-@endsection
 
 @section('content')
   <br> <br>
@@ -31,7 +23,7 @@
   
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <h4 class="center red">Registrar Estudiantes</h4>
+      <h4 class="center ">Registrar Estudiantes</h4>
          {!! Form::open(['route'=>'admin.usuarios.store','method' => 'POST'])!!}
       
       <div class="row">
@@ -66,7 +58,7 @@
         <div class="col s6 offset-s6 form-group">
          {!!Form::submit('Registrar',['class'=>' green btn btn-primary'])!!}
       </div>
-      <a href="#" class="col s6 offset-s6"> <i class="material-icons prefix"> playlist_add </i> Subir archivo plano</a>
+      <a href="#" class="col s6 offset-s6"> <i class="material-icons prefix">playlist_add</i>Subir archivo plano</a>
       </div>
         {!! Form::close()!!}
     </div>
@@ -89,9 +81,9 @@
         <tbody>
           @foreach($users as $user)
           <tr>
-          	 <td> {{ $user-> firstname}} {{$user-> secondname}} {{$user-> lastname}}</td>
-          	 <td> {{ $user-> codigo }}</td>
-          	 <td> {{ $user-> email }}</td>
+          	 <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
+          	 <td> {{ $user->codigo }}</td>
+          	 <td> {{ $user->email }}</td>
              <td>  <a class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">home</i></a></td>
           </tr>
           @endforeach
@@ -104,14 +96,4 @@
 
 @endsection
 
- <script type="text/javascript" src="{{ asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
- <script type="text/javascript" src="{{ asset('plugins/materialize/js/materialize.js')}}"></script>
-
-<Script>
- $(document).ready(function(){
-    $('.modal-trigger').leanModal();
-  });
- </Script>
-
-</body>
-</html>
+ 

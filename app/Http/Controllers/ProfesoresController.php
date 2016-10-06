@@ -18,7 +18,7 @@ class ProfesoresController extends Controller
     {
         $conexionDocentes = \DB::connection('docentes');
 
-        $sql ='SELECT (SELECT e.nombre from usuario e WHERE e.id = a.UsuarioID) as Nombre , (SELECT e.Apellidos from usuario e WHERE e.id = a.UsuarioID) as Apellidos, c.NombrePrograma, d.Nombre as Asignatura
+        $sql ='SELECT DISTINCT c.Id,(SELECT e.nombre from usuario e WHERE e.id = a.UsuarioID) as Nombre , (SELECT e.Apellidos from usuario e WHERE e.id = a.UsuarioID) as Apellidos, c.NombrePrograma, d.Nombre as Asignatura
                 from horario a
                 INNER JOIN programaacademico_asignatura b on a.AsignaturaId = b.Id
                 INNER JOIN programaacademico c on b.programaacademicoId = c.Id
@@ -28,7 +28,7 @@ class ProfesoresController extends Controller
         $profesores = $conexionDocentes->select(\DB::RAW($sql));
         $profesores = $this->paginateArray($profesores, 10);
 
-        return view('admin.profesores.profesoresIndex',['profesores'=>$profesores]);
+        return view('admin.profesores.profesoresIndex')->with('profesores',$profesores);
     }
 
     /**

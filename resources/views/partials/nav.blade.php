@@ -1,17 +1,17 @@
   
-  <ul id="dropdown1" class="dropdown-content">
+  <ul id="usuario" class="dropdown-content">
     <li><a href="#!">Ver perfil</a></li>
     <li><a href="#!">Cerrar Sesión</a></li>
     <li class="divider"></li>
   
   </ul>
 
-  <nav class=" gradient  s12 m3  ">
+  <nav class=" gradient  s12 m3 l12 ">
     <div class="nav-wrapper">
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
-        <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="dropdown1">Carlos<i class="material-icons left">account_circle</i></a></li>
+        <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">Carlos<i class="material-icons left">account_circle</i></a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
@@ -33,7 +33,7 @@
         </li>
 
         <li class="no-padding">
-          <a href="{{route('admin.profesoresIndex.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
+          <a href="{{route('admin.usuarios.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
         </li>
 
 
