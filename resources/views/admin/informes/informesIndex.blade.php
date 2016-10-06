@@ -2,8 +2,8 @@
 @section('title','Informes')
 
 @section('content')
-	<h4>Aqui van el modulo de informes</h4>
-
+	<h4 class="center">Informes</h4>
+	<hr>
 	<div class="row">
 		<div class="col s2 l2 m2">
 			<a class='dropdown-button btn' href='#' data-activates='periodoAcademico'>Periodo Académico</a>

@@ -11,11 +11,11 @@
 			<div class="col s6 m6 l6">
 
 				<div class="row">
-					<div class="col s12 m12 l12 input-field card">
+					<div class="col s12 m12 l12 input-field ">
         				
         					<i class="material-icons prefix">search</i>
-          					<input id="icon_prefix" type="search" class="validate">
-          					<label for="icon_prefix">First Name</label>
+          					<input id="icon_prefix" type="search" class="validate" >
+          					<label for="icon_prefix">Buscar</label>
       
         			</div>
         		</div>
@@ -55,7 +55,7 @@
 		<ul class="collapsible popout" data-collapsible="accordion">
 
 			@foreach($profesores as $profesor)
-				
+
 				@if($profesor->Nombre == $profesor->Nombre)
 
 					<li>
@@ -74,7 +74,6 @@
       										</td>
       									</tr>
       								@endif
-      								
       								
       								
       							</tbody>

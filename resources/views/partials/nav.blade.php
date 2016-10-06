@@ -25,7 +25,7 @@
 
         
         <li class="no-padding">
-          <a href="{{route('admin.materiasIndex.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Materias</a>
+          <a href="{{route('admin.materiasIndex.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Asignaturas</a>
         </li>
         
         <li class="no-padding">

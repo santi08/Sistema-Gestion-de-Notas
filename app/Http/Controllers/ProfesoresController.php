@@ -25,6 +25,17 @@ class ProfesoresController extends Controller
                 INNER JOIN asignatura d on b.AsignaturaId = d.Id
                 where a.PeriodoAcademicoId = 5 ORDER BY nombre ASC';
 
+        $sql2='SELECT d.Codigo, d.Nombre, a.Grupo
+                from horario a
+                INNER JOIN programaacademico_asignatura b on a.AsignaturaId = b.Id
+                INNER JOIN programaacademico c on b.programaacademicoId = c.Id
+                INNER JOIN asignatura d on b.AsignaturaId = d.Id
+                where a.PeriodoAcademicoId = 5 AND a.UsuarioID
+                ORDER BY nombre ASC';
+
+
+
+
         $profesores = $conexionDocentes->select(\DB::RAW($sql));
         $profesores = $this->paginateArray($profesores, 10);
 

@@ -10,16 +10,11 @@
 
   <div class="input-field col s3 ">
     <input id="last_name " type="text" class="validate ">
-    <label for="last_name" class=" ">Codigo o Nombre <i class="material-icons"> search</i> </label>
+    <label for="last_name" class=" ">Codigo o Nombre<i class="material-icons">search</i> </label>
   </div>
 
 @include('admin.usuarios.crearEstudiante')
-  
-<<<<<<< HEAD
-  <div class="row">
-    <a class="col s3 offset-s3 green waves-effect waves-red btn modal-trigger " href="#modal1"> Registrar Estudiante</a> 
-  </div> 
-  
+     <hr>
   <!-- Estructura Modal -->
   
   <div id="modal1" class="modal">
@@ -65,8 +60,7 @@
     </div>
   </div>
  <!--finaliza el boton crear-->
-=======
->>>>>>> 31002181991fc20b157c45293848b62b031a4a49
+
 </div>
 <!-- finaliza campo buscar -->
 

@@ -6,5 +6,5 @@
 
 @section('content')
 
-    <h2>SISTEMA </h2>
+    <h3>Sistema de Control Académico Universitario</h3>
 @endsection

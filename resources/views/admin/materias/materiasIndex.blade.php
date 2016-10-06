@@ -10,7 +10,7 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col offset-l9">
-					<a class="waves-effect waves-light btn">Registrar notas</a>
+					<a href="{{route('admin.notasIndex.index')}}" class="waves-effect waves-light btn">Registrar notas</a>
 				</div>
 				
 			</div>
