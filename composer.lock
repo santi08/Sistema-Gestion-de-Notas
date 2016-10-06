@@ -4,17 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
-    "hash": "5c224c52d5ff51c72b3e9c10a74c62ac",
-    "content-hash": "fdb76276675694797e0c282f52a480aa",
-
-    "hash": "4d731cf45b0379ab74d2dce5c216805c",
-    "content-hash": "109267570941a3b24fc6c89d61fa76ac",
-
-    "hash": "5c224c52d5ff51c72b3e9c10a74c62ac",
-    "content-hash": "fdb76276675694797e0c282f52a480aa",
-
-
+    "hash": "118c0d0a3d19c1c40c2f428689a6b752",
+    "content-hash": "72651606508c9300282913caa7bd9380",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -223,6 +214,49 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "ignasbernotas/laravel-model-generator",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ignasbernotas/laravel-model-generator.git",
+                "reference": "343ad81e5ec64b224aff01e7054e98faf98f1c61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ignasbernotas/laravel-model-generator/zipball/343ad81e5ec64b224aff01e7054e98faf98f1c61",
+                "reference": "343ad81e5ec64b224aff01e7054e98faf98f1c61",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iber\\Generator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignas Bernotas",
+                    "email": "ignas@iber.lt"
+                }
+            ],
+            "description": "Laravel 5 model generator from existing schema",
+            "keywords": [
+                "generator",
+                "laravel",
+                "model",
+                "schema"
+            ],
+            "time": "2016-05-24 16:57:40"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -500,7 +534,6 @@
             "time": "2016-08-26 11:44:52"
         },
         {
-
             "name": "laravelcollective/bus",
             "version": "v5.2",
             "source": {
@@ -546,7 +579,6 @@
             "time": "2015-12-23 07:43:33"
         },
         {
-
             "name": "laravelcollective/html",
             "version": "v5.2.4",
             "source": {
