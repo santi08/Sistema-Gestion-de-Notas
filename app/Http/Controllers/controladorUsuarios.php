@@ -27,11 +27,16 @@ class controladorUsuarios extends Controller
     
     $user= new User($requests->all());
     $contraseña=$this->crearContraseña($user);
-    $user->password=bcrypt($contraseña);
+    //$user->password=bcrypt($contraseña);
+    $user->password=$contraseña;
     $user->save();
 
     $users= User::orderby('id','ASC')->paginate(10);
     return view('admin.usuarios.index')->with('users',$users);
+
+    }
+
+    public function destroy($id){
 
     }
 
