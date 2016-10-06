@@ -20,19 +20,32 @@ class controladorUsuarios extends Controller
 
     public function create(){
 
-    	return view('admin.usuarios.create');
+    	return view('admin.usuarios.index');
     }
 
     public function store(Request $requests){
     
     $user= new User($requests->all());
-    $user->password=bcrypt($requests->password);
-
+    $contraseña=$this->crearContraseña($user);
+    $user->password=bcrypt($contraseña);
     $user->save();
-        }
+
+    $users= User::orderby('id','ASC')->paginate(10);
+    return view('admin.usuarios.index')->with('users',$users);
+
+    }
+
 
     public function show(Request $requests){
-    
-    
-        }    
+        }
+
+    public function crearContraseña($user){
+     $nombre = $user->firstname;
+     $codigo = $user->codigo;
+     $apellido= $user->lastname;
+
+     $contraseña= $nombre[0].$codigo.$apellido[0];
+
+     return $contraseña;
+    }    
 }

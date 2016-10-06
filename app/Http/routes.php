@@ -31,7 +31,7 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('profesoresIndex','ProfesoresController');
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
-    Route:: resource('usuarios','controladorUsuarios');
+    Route::resource('usuarios','controladorUsuarios');
 
 
 });

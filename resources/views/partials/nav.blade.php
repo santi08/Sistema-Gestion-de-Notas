@@ -33,7 +33,7 @@
         </li>
 
         <li class="no-padding">
-          <a href="{{route('admin.profesoresIndex.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
+          <a href="{{route('admin.usuarios.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
         </li>
 
 
