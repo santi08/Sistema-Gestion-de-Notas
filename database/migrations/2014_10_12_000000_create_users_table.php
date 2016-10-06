@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('idrol');
+            $table->boolean('estado')->nullable()->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -32,15 +32,13 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
     Route::resource('usuarios','controladorUsuarios');
-<<<<<<< HEAD
-   // Route::get('usuarios.{id}.destroy',[
-    //  'uses' =>'controladorUsuarios',
-     // 'as' => 'admin.usuarios.destroy'
-    //	]);
 
-=======
-    Route::resource('notasIndex','NotasController');
->>>>>>> 554334423b04acbd61eee25b27a0e9bbd946bf68
+   Route::get('usuarios/{id}/destroy',[
+     'uses' =>'controladorUsuarios@destroy',
+      'as' => 'admin.usuarios.destroy'
+    ]);
 
 });
+
+
 

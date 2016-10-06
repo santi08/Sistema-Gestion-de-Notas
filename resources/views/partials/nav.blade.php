@@ -6,12 +6,12 @@
   
   </ul>
 
-<<<<<<< HEAD
+
 <div class="navbar-fixed">
   <nav class=" gradient  s12 m3  ">
-=======
+
   <nav class=" gradient  s12 m3 l12 ">
->>>>>>> 554334423b04acbd61eee25b27a0e9bbd946bf68
+
     <div class="nav-wrapper">
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
