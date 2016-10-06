@@ -4,17 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
-    "hash": "5c224c52d5ff51c72b3e9c10a74c62ac",
-    "content-hash": "fdb76276675694797e0c282f52a480aa",
-
-    "hash": "4d731cf45b0379ab74d2dce5c216805c",
-    "content-hash": "109267570941a3b24fc6c89d61fa76ac",
-
-    "hash": "5c224c52d5ff51c72b3e9c10a74c62ac",
-    "content-hash": "fdb76276675694797e0c282f52a480aa",
-
-
+    "hash": "330db8495b6e76c9ad58de8dc20dab80",
+    "content-hash": "462afca2f272d6854328881dd1fcaa75",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -500,7 +491,6 @@
             "time": "2016-08-26 11:44:52"
         },
         {
-
             "name": "laravelcollective/bus",
             "version": "v5.2",
             "source": {
@@ -546,7 +536,6 @@
             "time": "2015-12-23 07:43:33"
         },
         {
-
             "name": "laravelcollective/html",
             "version": "v5.2.4",
             "source": {

@@ -159,6 +159,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
+       
 
         //Barryvdh\Debugbar\ServiceProvider::class,
 
