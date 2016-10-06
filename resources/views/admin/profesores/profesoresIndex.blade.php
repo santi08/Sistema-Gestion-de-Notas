@@ -11,11 +11,12 @@
 			<div class="col s6 m6 l6">
 
 				<div class="row">
-					<div class="col s12 m12 l12">
-        				<div class="input-field search-wrapper card">
-          					<input id="search" type="search" required placeholder="Buscar">
-          					<label for="Buscar"><i class="material-icons center">search</i></label>
-  	     				</div>
+					<div class="col s12 m12 l12 input-field ">
+        				
+        					<i class="material-icons prefix">search</i>
+          					<input id="icon_prefix" type="search" class="validate" >
+          					<label for="icon_prefix">Buscar</label>
+      
         			</div>
         		</div>
 
@@ -50,7 +51,45 @@
 
 	<div class="row">
 		<div class="col s12 m12 l12">
-			<table class="responsive-table striped bordered">
+
+		<ul class="collapsible popout" data-collapsible="accordion">
+
+			@foreach($profesores as $profesor)
+
+				@if($profesor->Nombre == $profesor->Nombre)
+
+					<li>
+      					<div class="collapsible-header">{{$profesor->Nombre}} {{$profesor->Apellidos}}</div>
+      					<div class="collapsible-body">
+      						<table>
+      							<thead>
+      								<th>Programa</th>
+      							</thead>
+      							<tbody>
+      								
+      								@if($profesor->Nombre == $profesor->Nombre)
+      									<tr>
+      										<td>
+      											{{$profesor->NombrePrograma}}
+      										</td>
+      									</tr>
+      								@endif
+      								
+      								
+      							</tbody>
+      						</table>
+      					</div>
+    				</li>
+
+				@endif
+					
+				
+
+			@endforeach
+			
+		</ul>
+			
+			<!--<table class="responsive-table striped bordered">
 				<thead>
 					<th>Nombres</th>
 					<th>Apellidos</th>
@@ -69,7 +108,7 @@
 						</tr>
 					@endforeach
 				</tbody>
-			</table>
+			</table>-->
 			<ul class="pagination">
 				{{$profesores->links()}}
 			</ul>

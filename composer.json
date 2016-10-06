@@ -7,29 +7,10 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         "laravelcollective/html":"5.2.*",
-        "laravelcollective/bus": "^5.2.0"
-=======
-<<<<<<< HEAD
-        "laravelcollective/html": "^5.2.0"
-=======
-        "laravelcollective/html": "^5.2.0",
-        "barryvdh/laravel-debugbar": "^2.3"
->>>>>>> Test
->>>>>>> b2ecd78946f173a72d712f703b9cb132fdd5c2a1
-=======
-        "laravelcollective/html": "^5.2.0",
-        "barryvdh/laravel-debugbar": "^2.3"
-
->>>>>>> 9d3011b7a90f09ab6684385dab45649eff8a704e
-=======
-        "laravelcollective/html": "^5.2.0",
-        "barryvdh/laravel-debugbar": "^2.3"
-
->>>>>>> 9d3011b7a90f09ab6684385dab45649eff8a704e
+        "laravelcollective/bus": "^5.2.0",
+        "barryvdh/laravel-debugbar": "^2.3",
+        "ignasbernotas/laravel-model-generator": "^1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

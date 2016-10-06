@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class MateriasController extends Controller
+class NotasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,7 @@ class MateriasController extends Controller
      */
     public function index()
     {
-
-        
-        
-         return view('admin.materias.materiasIndex');
+        return view('admin.usuarios.notas.notasIndex');
     }
 
     /**
