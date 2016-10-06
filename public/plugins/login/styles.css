@@ -39,5 +39,7 @@ hr {
   text-align: center;
 }
 
+.modal { width: 75% !important ; max-height: 100% !important }
+
 
 
