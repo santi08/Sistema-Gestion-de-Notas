@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Programacion extends Model
 {
     protected $table = 'programacion';
+    protected $connection = 'docentes';
 
     protected $primaryKey = 'Id';
 

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ip extends Model
 {
     protected $table = 'ip';
+    protected $connection = 'docentes';
 
     protected $primaryKey = 'Id';
 

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class RolesPermiso extends Model
 {
     protected $table = 'roles_permisos';
+    protected $connection = 'docentes';
 
     public $timestamps = false;
 

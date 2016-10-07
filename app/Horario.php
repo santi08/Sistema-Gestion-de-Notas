@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Horario extends Model
 {
     protected $table = 'horario';
+    protected $connection = 'docentes';
 
     protected $primaryKey = 'Id';
 
@@ -24,6 +25,18 @@ class Horario extends Model
     ];
 
     protected $guarded = [];
+
+    public function periodoAcademico(){
+        return $this->belongsTo('App\Periodoacademico','PeriodoAcademicoId');
+    }
+
+    public function usuario(){
+        return $this->belongsTo('App\Usuario', 'UsuarioID');
+    }
+
+    public function programaAcademicoAsignatura(){
+        return belongsTo('App\ProgramaacademicoAsignatura', 'AsignaturaId');
+    }
 
         
 }

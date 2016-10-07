@@ -14,6 +14,7 @@ class Usuario extends Model
     protected $primaryKey = 'Id';
 
 	public $timestamps = false;
+    protected $connection = 'docentes';
 
     protected $fillable = [
         'Identificacion',
@@ -24,6 +25,18 @@ class Usuario extends Model
     ];
 
     protected $guarded = [];
+
+    public function sesiones(){
+        return $this->hasMany('App\Sesion','UsuarioIdentificacion');
+    }
+
+    public function programasAcademicos(){
+        return $this->hasMany('App\Programaacademico','UsuarioID');
+    }
+
+    public function horarios(){
+        return $this->hasMany('App\Horario', 'UsuarioID');
+    }
 
         
 }

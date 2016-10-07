@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Periodoacademico extends Model
 {
     protected $table = 'periodoacademico';
+    protected $connection = 'docentes';
+
 
     protected $primaryKey = 'Id';
 
@@ -25,5 +27,10 @@ class Periodoacademico extends Model
 
     protected $guarded = [];
 
+    public function horarios(){
+        return $this->hasMany('App\Horario','PeriodoAcademicoId');
+    }
+
+   
         
 }

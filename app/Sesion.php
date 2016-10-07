@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sesion extends Model
 {
     protected $table = 'sesion';
+    protected $connection = 'docentes';
 
     protected $primaryKey = 'Id';
 
@@ -23,6 +24,19 @@ class Sesion extends Model
     ];
 
     protected $guarded = [];
+
+    public function usuario()
+    {
+       return $this->hasMany('App\Usuario','UsuarioIdentificacion');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Rol','');
+    }
+
+    public function sesionRoles(){
+        return $this->hasMany('App\SesionRol','');
+    }
 
         
 }

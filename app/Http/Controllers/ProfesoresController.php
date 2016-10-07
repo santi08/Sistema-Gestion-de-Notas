@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
+use App\Usuario
+use App\horario
+
 
 class ProfesoresController extends Controller
 {
@@ -18,26 +21,11 @@ class ProfesoresController extends Controller
     {
         $conexionDocentes = \DB::connection('docentes');
 
-        $sql ='SELECT DISTINCT c.Id,(SELECT e.nombre from usuario e WHERE e.id = a.UsuarioID) as Nombre , (SELECT e.Apellidos from usuario e WHERE e.id = a.UsuarioID) as Apellidos, c.NombrePrograma, d.Nombre as Asignatura
-                from horario a
-                INNER JOIN programaacademico_asignatura b on a.AsignaturaId = b.Id
-                INNER JOIN programaacademico c on b.programaacademicoId = c.Id
-                INNER JOIN asignatura d on b.AsignaturaId = d.Id
-                where a.PeriodoAcademicoId = 5 ORDER BY nombre ASC';
-
-        $sql2='SELECT d.Codigo, d.Nombre, a.Grupo
-                from horario a
-                INNER JOIN programaacademico_asignatura b on a.AsignaturaId = b.Id
-                INNER JOIN programaacademico c on b.programaacademicoId = c.Id
-                INNER JOIN asignatura d on b.AsignaturaId = d.Id
-                where a.PeriodoAcademicoId = 5 AND a.UsuarioID
-                ORDER BY nombre ASC';
+        $profesores=Usuario::all()->where(Horario::find(5));
 
 
 
-
-        $profesores = $conexionDocentes->select(\DB::RAW($sql));
-        $profesores = $this->paginateArray($profesores, 10);
+        
 
         return view('admin.profesores.profesoresIndex')->with('profesores',$profesores);
     }

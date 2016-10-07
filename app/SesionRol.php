@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SesionRole
  */
-class SesionRole extends Model
+class SesionRol extends Model
 {
     protected $table = 'sesion_roles';
+    protected $connection = 'docentes';
 
     public $timestamps = false;
 
@@ -19,6 +20,14 @@ class SesionRole extends Model
     ];
 
     protected $guarded = [];
+
+    public function sesion(){
+    	return $this->belongsTo('App\Sesion');
+    }
+
+    public function rol(){
+    	return $this->balonsTo('App\Rol');
+    }
 
         
 }
