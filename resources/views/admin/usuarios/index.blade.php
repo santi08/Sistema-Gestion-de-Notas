@@ -5,7 +5,7 @@
 @section('content')
   <br> <br>
 
-<!--campo buscar -->
+<!--campo buscar y registrar-->
  <div class="row">
 
   <div class="input-field col s3 ">
@@ -13,56 +13,11 @@
     <label for="last_name" class=" ">Codigo o Nombre<i class="material-icons">search</i> </label>
   </div>
 
-@include('admin.usuarios.crearEstudiante')
-     <hr>
-  <!-- Estructura Modal -->
-  
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4 class="center ">Registrar Estudiantes</h4>
-         {!! Form::open(['route'=>'admin.usuarios.store','method' => 'POST'])!!}
-      
-      <div class="row">
-        <div class="col s6 form-group">
-        {!!Form::label ('firstname','Primer Nombre')!!}
-        {!!Form::text('firstname',null,['class'=> 'form-control','placeholder'=> 'primer nombre','required'])!!}
-        </div>
-        <div class="col s6 form-group">
-        {!!Form::label ('secondname','Segundo Nombre')!!}
-        {!!Form::text('secondname',null,['class'=> 'form-control','placeholder'=> 'segundo nombre'])!!}
-        </div>
-        <div class="col s6 form-group">
-        {!!Form::label ('lastname','Primer Apellido')!!}
-        {!!Form::text('lastname',null,['class'=> 'form-control','placeholder'=> 'primer apellido','required'])!!}
-        </div>
-        <div class="col s6 form-group">
-        {!!Form::label ('secondlastname','Primer Apellido')!!}
-        {!!Form::text('secondlastname',null,['class'=> 'form-control','placeholder'=> 'segundo apellido','required'])!!}
-        </div>
-        <div class="col s6 form-group">
-        {!!Form::label ('email','Correo Electronico')!!}
-        {!!Form::email('email',null,['class'=> 'form-control','placeholder'=> 'example@gamil.com','required'])!!}
-        </div>
-         <div class="col s6 form-group">
-        {!!Form::label ('codigo','codigo')!!}
-        {!!Form::number('codigo','value',['class'=> 'form-control','placeholder'=> 'codigo','required'])!!}
-        </div>
-        <div class="col s6 form-group">
-        {!!Form::label ('password','Contraseña')!!}
-        {!!Form::password('password',['class'=> 'form-control','placeholder'=> '*******','required'])!!}
-        </div> 
-        <div class="col s6 offset-s6 form-group">
-         {!!Form::submit('Registrar',['class'=>' green btn btn-primary'])!!}
-      </div>
-      <a href="#" class="col s6 offset-s6"> <i class="material-icons prefix">playlist_add</i>Subir archivo plano</a>
-      </div>
-        {!! Form::close()!!}
-    </div>
-  </div>
- <!--finaliza el boton crear-->
+   @include('admin.usuarios.modals.crearEstudiante')
+  <hr>
 
 </div>
-<!-- finaliza campo buscar -->
+<!-- finaliza campo buscar y registrar -->
 
  <div class="row">
  	<table class="col highlight responsive-table bordered">
@@ -77,12 +32,16 @@
 
         <tbody>
           @foreach($users as $user)
+          @if($user->estado == '1')
           <tr>
-          	 <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
-          	 <td> {{ $user->codigo }}</td>
-          	 <td> {{ $user->email }}</td>
-             <td>  <a class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">home</i></a></td>
+             <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
+             <td> {{ $user->codigo }}</td>
+             <td> {{ $user->email }}</td>
+             <td>  @include('admin.usuarios.modals.eliminarEstudiante')</td>
+
+             <!--<td> <a href="{{ route('admin.usuarios.destroy',$user->id)}}"" class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">delete</i></a></td> -->
           </tr>
+          @endif
           @endforeach
         </tbody>
       </table>
@@ -92,5 +51,7 @@
  {!! $users->render()!!}
 
 @endsection
+
+
 
  

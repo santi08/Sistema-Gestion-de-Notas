@@ -38,8 +38,10 @@ hr {
   background-image: linear-gradient(left, left, #fff, #000, #fff);
   text-align: center;
 }
+ 
+.modal { width: 70% !important ; max-height: 100% !important }
 
-.modal { width: 75% !important ; max-height: 100% !important }
+
 
 
 

@@ -6,7 +6,12 @@
   
   </ul>
 
+
+<div class="navbar-fixed">
+  <nav class=" gradient  s12 m3  ">
+
   <nav class=" gradient  s12 m3 l12 ">
+
     <div class="nav-wrapper">
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -16,10 +21,12 @@
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
   </nav>
+</div>
+  
   
       <ul id="slide-out" class="side-nav fixed gradient-side ">
          <li class=""><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
-
+        
 
         <li class="no-padding"><div class="divider"></div></li>
 

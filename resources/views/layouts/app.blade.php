@@ -27,7 +27,7 @@
             <div class="col s12 m4 l3"> 
                 
             </div>
-
+            
             <div class="col s12 m12 l9 card-panel"> 
                   @yield('content')
             </div>
@@ -37,7 +37,8 @@
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
         <script type="text/javascript">
             $( document ).ready(function(){
-                $(".button-collapse").sideNav();
+               // $(".button-collapse").sideNav();
+                $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
                 $('.modal-trigger').leanModal();
