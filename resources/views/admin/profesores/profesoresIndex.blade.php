@@ -49,47 +49,7 @@
 	</div>
 </div>
 
-	<div class="row">
-		<div class="col s12 m12 l12">
-
-		<ul class="collapsible popout" data-collapsible="accordion">
-
-			@foreach($profesores as $profesor)
-
-				@if($profesor->Nombre == $profesor->Nombre)
-
-					<li>
-      					<div class="collapsible-header">{{$profesor->Nombre}} {{$profesor->Apellidos}}</div>
-      					<div class="collapsible-body">
-      						<table>
-      							<thead>
-      								<th>Programa</th>
-      							</thead>
-      							<tbody>
-      								
-      								@if($profesor->Nombre == $profesor->Nombre)
-      									<tr>
-      										<td>
-      											{{$profesor->NombrePrograma}}
-      										</td>
-      									</tr>
-      								@endif
-      								
-      								
-      							</tbody>
-      						</table>
-      					</div>
-    				</li>
-
-				@endif
-					
-				
-
-			@endforeach
-			
-		</ul>
-			
-			<!--<table class="responsive-table striped bordered">
+			<table class="responsive-table striped bordered">
 				<thead>
 					<th>Nombres</th>
 					<th>Apellidos</th>
@@ -98,19 +58,48 @@
 				
 				</thead>
 				<tbody>
+			
+						
 					@foreach($profesores as $profesor)
-						<tr>
 
-							<td>{{$profesor->Nombre}}</td>
-							<td>{{$profesor->Apellidos}}</td>
-							<td>{{$profesor->NombrePrograma}}</td>
-							<td><a class="btn-floating tiny btn-small waves-effect waves-light  grey darken-2 right"><i class="material-icons">remove_red_eye</i></a></td>
-						</tr>
+						@for($i=0; $i<count($profesor); $i++)
+							<tr>
+								<td>{{$profesor->nombre}}</td>
+								<td>{{$profesor->Apellidos}}</td>
+								<td>{{$profesor->NombrePrograma}}</td>
+
+
+
+									@foreach($asignaturas as $asignatura)
+
+
+
+										@for($i=0; $i<count($asignatura); $i++)
+
+										@if($profesor->id == $asignatura->id)
+											
+												<td>{{$asignatura->codigo}}</td>
+												<td>{{$asignatura->nombre}}</td>
+												<td>{{$asignatura->creditos}}</td>
+										@endif
+
+										@endfor
+
+									@endforeach
+
+
+							</tr>
+						@endfor
+
 					@endforeach
+						
+					
+
 				</tbody>
-			</table>-->
+			</table>
+
 			<ul class="pagination">
-				{{$profesores->links()}}
+			
 			</ul>
 
 		</div>

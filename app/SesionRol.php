@@ -26,7 +26,7 @@ class SesionRol extends Model
     }
 
     public function rol(){
-    	return $this->balonsTo('App\Rol');
+    	return $this->belongsTo('App\Rol');
     }
 
         

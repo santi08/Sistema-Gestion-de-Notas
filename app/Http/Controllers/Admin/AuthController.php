@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
-use App\Estudiante;
+use App\Sesion;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
+    //
+
+     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
     |--------------------------------------------------------------------------
@@ -28,7 +31,13 @@ class AuthController extends Controller
      *
      * @var string
      */
+    protected $connection= 'docentes';   
     protected $redirectTo = '/admin/usuarios';
+    protected $guard= 'admin';
+    protected $loginView ='admin.auth.login';
+    protected $username = 'UsuarioIdentificacion';
+    
+
 
     /**
      * Create a new authentication controller instance.
@@ -40,6 +49,19 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+
+     protected function getCredentials(Request $request)
+    {
+        $entrada= $request->UsuarioIdentificacion;
+        $request['UsuarioIdentificacion']= \DB::connection('docentes')->table('usuario')->select('id')->where('correo','=',$entrada)->value('id');
+
+        //$contrasena=$request->password;
+        //$request->password= Hash::make($contrasena);
+
+        //$this->getTipoUsuario($request);
+        return $request->only($this->loginUsername(), 'password');
+    } 
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,7 +72,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:estudiantes',
+            'email' => 'required|email|max:255|unique:sesion',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -63,14 +85,15 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return Estudiante::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
-    protected function getLogin(){
+    
+   /* protected function getLogin(){
 
         return view('auth.login');
     }
@@ -84,7 +107,6 @@ class AuthController extends Controller
 
         return view('home');
 
-    }
-
+    }*/
 
 }

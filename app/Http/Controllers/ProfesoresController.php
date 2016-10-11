@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
-use App\Usuario
-use App\horario
+use App\Usuario;
+use App\Horario;
 
 
 class ProfesoresController extends Controller
@@ -19,15 +19,20 @@ class ProfesoresController extends Controller
      */
     public function index()
     {
-        $conexionDocentes = \DB::connection('docentes');
 
-        $profesores=Usuario::all()->where(Horario::find(5));
+        //$profesores=Horario::all()->where(Horario::find(5));
+            $profesores = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.nombre','usuario.Apellidos','programaacademico.NombrePrograma')->where('periodoacademicoId','=',5)->orderBy('usuario.nombre','asc')->get();
 
+            $asignaturas=\DB::connection('docentes')->table('horario')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('horario.id','asignatura.codigo', 'asignatura.nombre','asignatura.creditos')->where('periodoacademicoId','=',5)->orderBy('usuario.nombre','asc')->get();
+
+           
 
 
         
 
-        return view('admin.profesores.profesoresIndex')->with('profesores',$profesores);
+        return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('asignaturas',$asignaturas);
+        //dd($profesores);
+        //dd($asignaturas);
     }
 
     /**

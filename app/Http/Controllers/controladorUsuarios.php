@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Estudiante;
 
 
 
@@ -14,7 +14,7 @@ class controladorUsuarios extends Controller
 {
     
     public function index(){
-     $users= User::orderby('id','ASC')->paginate(10);
+     $users= Estudiante::orderby('id','ASC')->paginate(10);
      return view('admin.usuarios.index')->with('users',$users);
 
     }

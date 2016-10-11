@@ -16,7 +16,18 @@
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
-        <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">Carlos<i class="material-icons left">account_circle</i></a></li>
+        <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">
+           
+                @if(Auth()->guard['name'] = 'admin')
+
+                  {{ Auth::guard('admin')->user()->usuarios[0]->Nombre }}
+
+                @else
+
+                  {{ Auth::guard()->user()->primerNombre }}
+                  
+               @endif
+        <i class="material-icons left">account_circle</i></a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>

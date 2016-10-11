@@ -38,7 +38,19 @@ Route::group(['prefix'=>'admin'],function(){
       'as' => 'admin.usuarios.destroy'
     ]);
 
+   Route::get('login','Admin\AuthController@showLoginForm');
+   Route::post('login','Admin\AuthController@login');
+   Route::get('logout','Admin\AuthController@logout');
+   Route::get('login','Admin\AuthController@showLoginForm');
+
 });
+
+   Route::get('login','Auth\AuthController@showLoginForm');
+   Route::post('login','Auth\AuthController@login');
+   Route::get('logout','Auth\AuthController@logout');
+   Route::get('login','Auth\AuthController@showLoginForm');
+
+   Route::Auth();
 
 
 

@@ -31,6 +31,7 @@
         </thead>
 
         <tbody>
+
           @foreach($users as $user)
           @if($user->estado == '1')
           <tr>

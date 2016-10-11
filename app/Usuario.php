@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Usuario extends Model
 {
+    protected $connection = 'docentes';
     protected $table = 'usuario';
 
     protected $primaryKey = 'Id';
-
-	public $timestamps = false;
-    protected $connection = 'docentes';
+	public $timestamps = true;
+  
 
     protected $fillable = [
         'Identificacion',
@@ -26,8 +26,8 @@ class Usuario extends Model
 
     protected $guarded = [];
 
-    public function sesiones(){
-        return $this->hasMany('App\Sesion','UsuarioIdentificacion');
+    public function sesion(){
+        return $this->belongsTo('App\Sesion','UsuarioIdentificacion');
     }
 
     public function programasAcademicos(){

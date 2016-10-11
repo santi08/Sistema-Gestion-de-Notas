@@ -3,15 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;         
 
 /**
  * Class Sesion
  */
-class Sesion extends Model
+class Sesion extends Authenticatable
 {
-    protected $table = 'sesion';
+    
     protected $connection = 'docentes';
-
+    protected $table = 'sesion';
     protected $primaryKey = 'Id';
 
 	public $timestamps = true;
@@ -23,11 +24,20 @@ class Sesion extends Model
         'remember_token'
     ];
 
+     public function getAuthPassword()
+    {
+        return $this->Contrasena;
+    }
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     protected $guarded = [];
 
-    public function usuario()
+    public function usuarios()
     {
-       return $this->hasMany('App\Usuario','UsuarioIdentificacion');
+       return $this->hasMany('App\Usuario','Id');
     }
 
     public function roles(){

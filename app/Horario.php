@@ -9,11 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Horario extends Model
 {
+    protected $connection = 'docentes';   
     protected $table = 'horario';
-    protected $connection = 'docentes';
-
     protected $primaryKey = 'Id';
-
 	public $timestamps = false;
 
     protected $fillable = [
