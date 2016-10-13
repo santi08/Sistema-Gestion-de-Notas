@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
-use App\Usuario
-use App\horario
+use App\Usuario;
+use App\horario;
 
 
 class ProfesoresController extends Controller
@@ -19,15 +19,9 @@ class ProfesoresController extends Controller
      */
     public function index()
     {
-        $conexionDocentes = \DB::connection('docentes');
+       
 
-        $profesores=Usuario::all()->where(Horario::find(5));
-
-
-
-        
-
-        return view('admin.profesores.profesoresIndex')->with('profesores',$profesores);
+        return view('admin.profesores.profesoresIndex');
     }
 
     /**

@@ -35,6 +35,7 @@
         </div>
         <!-- JavaScripts  y jquery-->
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
         <script type="text/javascript">
             $( document ).ready(function(){
                // $(".button-collapse").sideNav();
@@ -42,7 +43,7 @@
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
                 $('.modal-trigger').leanModal();
-
+                $("a.delete").confirm();
             });
         </script>
 
@@ -55,5 +56,7 @@
 
         </script>
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+  <script type="text/javascript">
+  </script>
     </body>
 </html>

@@ -4,7 +4,6 @@
 
 @section('content')
   <br> <br>
-
 <!--campo buscar y registrar-->
  <div class="row">
 
@@ -37,9 +36,9 @@
              <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
              <td> {{ $user->codigo }}</td>
              <td> {{ $user->email }}</td>
-             <td>  @include('admin.usuarios.modals.eliminarEstudiante')</td>
-
-             <!--<td> <a href="{{ route('admin.usuarios.destroy',$user->id)}}"" class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">delete</i></a></td> -->
+             <td> <a href="{{ route('admin.usuarios.destroy',$user->id)}}"" class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">delete</i></a></td> 
+             
+              
           </tr>
           @endif
           @endforeach
@@ -47,7 +46,7 @@
       </table>
 
  </div>
-  
+
  {!! $users->render()!!}
 
 @endsection
