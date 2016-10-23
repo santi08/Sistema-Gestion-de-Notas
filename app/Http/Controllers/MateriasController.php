@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Asignatura;
+use App\Programaacademico;
+use App\Periodoacademico;
+use App\ProgramaacademicoAsignatura;
+use App\Horario;
 
 use App\Http\Requests;
 
@@ -13,12 +18,19 @@ class MateriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $programas = Programaacademico::all();
+        $periodos = Periodoacademico::all();
+
+
+
+        $horarios = Horario::asignaturas($request->get('programa'))->periodo($request->get('periodo'))->paginate(10);
 
         
         
-         return view('admin.materias.materiasIndex');
+  
+         return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('horarios',$horarios);
     }
 
     /**
@@ -86,4 +98,7 @@ class MateriasController extends Controller
     {
         //
     }
+
+
+    
 }

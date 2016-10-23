@@ -6,10 +6,13 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
         <meta charset="utf-8">
+        <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
     </head>
 
     <body id="app-layout">
@@ -42,6 +45,8 @@
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
                 $('.modal-trigger').leanModal();
+                $('select').material_select();
+                
 
             });
         </script>

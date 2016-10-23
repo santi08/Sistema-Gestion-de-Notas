@@ -52,24 +52,7 @@
 	<div class="row">
 		<div class="col s12 m12 l12">
 
-		<ul class="collapsible popout" data-collapsible="accordion">
-
-			
-					
-					<li>
-      					<div class="collapsible-header">{{$profesor->Nombre}} {{$profesor->Apellidos}}</div>
-      					<div class="collapsible-body">
-      						
-      					</div>
-    				</li>
-
-				
-					
-				
-
-			
-			
-		</ul>
+		
 			
 			<!--<table class="responsive-table striped bordered">
 				<thead>
@@ -80,19 +63,11 @@
 				
 				</thead>
 				<tbody>
-					@foreach($profesores as $profesor)
-						<tr>
-
-							<td>{{$profesor->Nombre}}</td>
-							<td>{{$profesor->Apellidos}}</td>
-							<td>{{$profesor->NombrePrograma}}</td>
-							<td><a class="btn-floating tiny btn-small waves-effect waves-light  grey darken-2 right"><i class="material-icons">remove_red_eye</i></a></td>
-						</tr>
-					@endforeach
+					
 				</tbody>
 			</table>-->
 			<ul class="pagination">
-				{{$profesores->links()}}
+				
 			</ul>
 
 		</div>
