@@ -11,6 +11,9 @@ class Estudiante extends Authenticatable
      *
      * @var array
      */
+    protected $table='estudiantes';
+    
+
     protected $fillable = [
         'firstname','secondname','lastname','secondlastname', 'email', 'password','codigo','idrol','estado'
     ];

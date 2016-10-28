@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Estudiante;
 use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,7 +24,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers,ThrottlesLogins; 
 
     /**
      * Where to redirect users after login / registration.
@@ -29,6 +32,8 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/admin/usuarios';
+    protected $username = 'codigo';
+    protected $loginView ='auth.loginUser';
 
     /**
      * Create a new authentication controller instance.
@@ -46,6 +51,9 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+   
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -70,21 +78,16 @@ class AuthController extends Controller
         ]);
     }
 
-    protected function getLogin(){
-
-        return view('auth.login');
+      protected function getFailedLoginMessage()
+    {
+        return 'Código y/o contraseña incorrectos.';
     }
 
-    protected function postLogin(){
-        
+    protected function getLockoutErrorMessage($seconds)  {
+
+    return 'Ha superado el número de intentos. Reintente en'.$seconds.' seconds.';
     }
 
-    protected function getLogout(){
-        
-
-        return view('home');
-
-    }
 
 
 }

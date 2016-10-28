@@ -6,9 +6,52 @@
 <div class="row">
 	<div class="col s12 m12 l12">
 
+			<div class="row">
+
+			<div class="input-fiel col s6">
+					<label>Periodo Academico</label>		
+				<select>
+					<option value="" disabled selected>Seleccione una opción</option>
+					@foreach($PeriodosAcademicos as $PeriodoAcademico)
+						  			
+				    <option value="{{ $PeriodoAcademico->Id}}">
+				    {{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
+				    </option>
+
+					@endforeach
+						  			
+				</select>
+					  	
+			</div>	
+			
+
+			
+					<div class="input-fiel col s6">
+						<label>Programa Academico</label>
+						<select>
+							<option value="" disabled selected>Seleccione una opción</option>
+
+							@foreach($ProgramasAcademicos as $ProgramaAcademico)
+								@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
+									<option value="{{$ProgramaAcademico->id}}">		
+									
+									{{ $ProgramaAcademico->NombrePrograma }}
+								</option>
+								@endif
+							@endforeach
+						
+						</select>
+						
+						  			
+					</div>
+  				
+
+			
+		
+		</div>
 		<div class="row">
 	
-			<div class="col s6 m6 l6">
+			<div class="col s4 m3 l4">
 
 				<div class="row">
 					<div class="col s12 m12 l12 input-field ">
@@ -21,89 +64,103 @@
         		</div>
 
 			</div>
-
-			<div class="col s6 m6 l6 ">
-
-				<div class="row">
-					<br>
-					<div class="col s12 m12 l12 offset-l7">
-						<!-- Dropdown Trigger -->
-  						<a class='dropdown-button btn green darken-1' data-constrainwidth="false" href='#' data-activates='dropdown2'>Programas</a>
-
-  						<!-- Dropdown Structure -->
-  						<ul id='dropdown2' class='dropdown-content'>
-    						<li><a href="#!" >Tecnologia en Sistemas</a></li>
-    						<li class="divider"></li>
-    						<li><a href="#!">Tecnologia Quimica</a></li>
-    						<li class="divider"></li>
-    						<li><a href="#!">Tecnologia en Electrónica</a></li>
-  						</ul>
-					</div>
-  				</div>
-
-			</div>
-		
 		</div>
 
-<hr>
+
+		
+
+	<hr>
 	</div>
 </div>
+<div class="row">
+	<div class="col s3">Nombres</div>
+	<div class="col s3">Apellidos</div>
+	<div class="col s3">Programa</div>
+	<div class="col s3">Acciones</div>
 
-			<table class="responsive-table striped bordered">
-				<thead>
-					<th>Nombres</th>
-					<th>Apellidos</th>
-					<th>Programa</th>
-					<th>Acciones</th>
-				
-				</thead>
-				<tbody>
-			
-						
-					@foreach($profesores as $profesor)
+</div>
 
-						@for($i=0; $i<count($profesor); $i++)
-							<tr>
-								<td>{{$profesor->nombre}}</td>
-								<td>{{$profesor->Apellidos}}</td>
-								<td>{{$profesor->NombrePrograma}}</td>
-
-
-
-									@foreach($asignaturas as $asignatura)
-
-
-
-										@for($i=0; $i<count($asignatura); $i++)
-
-										@if($profesor->id == $asignatura->id)
-											
-												<td>{{$asignatura->codigo}}</td>
-												<td>{{$asignatura->nombre}}</td>
-												<td>{{$asignatura->creditos}}</td>
-										@endif
-
-										@endfor
-
-									@endforeach
-
-
-							</tr>
-						@endfor
-
-					@endforeach
-						
+	<div class="row">
+		
 					
+				@foreach($profesores as $profesor)
+				<ul class="collapsible" data-collapsible="accordion">			
+		    		<li>
+		    			<div class="collapsible-header col s12">
+		    				
+		    				
+		    				
+		      									      								
+		      			</div>
+		      							
+		      			<div class="collapsible-body  grey lighten-3 col s12">
+		      				<p>
+		      					
+		      				</p>
+		      			</div>
+		    		</li>
+		   
+		  						
+								
+									<!--<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>
 
-				</tbody>
-			</table>
+										<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
 
-			<ul class="pagination">
+										<a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
+											
+										</td>
+
+									</tr>
+								-->
+					</ul>
+				@endforeach
 			
-			</ul>
+
+	</div>
+
+	<table class="striped">
+		<thead>
+			<tr>
+				<th>Apellidos</th>
+				<th>Nombre</th>
+				<th>Programa</th>
+				<th>Acciones</th>
+
+			</tr>
+		</thead>
+
+		<tbody>
+		@foreach($profesores as $profesor)
+				<tr>
+					<td>{{$profesor->Apellidos}}</td>
+					<td>{{$profesor->Nombre}}</td>
+					<td>{{ $profesor->NombrePrograma}}</td>
+					<td>
+						<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+
+						<a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
+					</td>
+				</tr>
+		@endforeach
+		</tbody>
+	</table>
+						
+						
+
+			<div class="paginate">
+				{{ $profesores->links()}}
+
+			</div>
 
 		</div>
 	</div>
+
+
+
 @endsection
 
  
