@@ -14,7 +14,7 @@
 
     <body id="app-layout">
 
-        <header>
+        <header> 
             <!-- Navbar goes here -->
                 @include('partials.nav')
         <!-- Page Layout here --> 
@@ -23,12 +23,10 @@
         
         
         <div class="row">
-
-            <div class="col s12 m4 l3"> 
+            <div class="col l4 m6 ">
                 
             </div>
-            
-            <div class="col s12 m12 l9 card-panel"> 
+            <div class="col l8 m6 card-panel"> 
                   @yield('content')
             </div>
 
@@ -42,7 +40,7 @@
                 $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
-                $('.modal-trigger').leanModal();
+                
                 $("a.delete").confirm();
             });
         </script>
@@ -51,6 +49,7 @@
             $(document).ready(function(){
                 $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                    
                 });
             });
 
@@ -58,5 +57,7 @@
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
   <script type="text/javascript">
   </script>
+
+  @yield('scripts')
     </body>
 </html>

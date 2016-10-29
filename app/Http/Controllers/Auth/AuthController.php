@@ -71,19 +71,7 @@ class AuthController extends Controller
     }
 
     protected function getLogin(){
-<<<<<<< HEAD
-        return view('auth.login');
-    }
-
-    protected function postLogin(){
-        
-    }
-
-    protected function getLogout(){
-        
-=======
-        return view('home');
->>>>>>> Test
+        return view('welcome');
     }
 
 

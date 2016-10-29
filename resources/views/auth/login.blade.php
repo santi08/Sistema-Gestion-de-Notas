@@ -12,25 +12,25 @@
 </head>
 <body class="gradient">
 
-       <div class="container">
+       
 
                 <div class="row">
-                    <div class="">
-                    <div class="col s12 m10 l4 card-panel centrar offset-l4 z-depth-3 bordes">
+                    
+                    <div class="col s9 m7 l4 card-panel centrar offset-s1 offset-l4 offset-m3 z-depth-3 bordes ">
+                        
                         <div class="row">
-                            <div class="col s12 input-field center">
-                                <img class="responsive-img " src="{{ asset('img/notes.png')}}">
-                                <div><h5>Sistema de gestion de notas</h5></div>
-                                <div class="divider  red darken-4"></div>
+                            <div class="col s6 waves-light-red center waves-effect waves-teal card" onclick="mostrarDocente()">
+                               <h5>Docente</h5>
                             </div>
 
-
+                             <div class="col s6  waves-effect center waves-teal card" onclick="mostrarEstudiante()">
+                                <h5>Estudiante</h5>
+                            </div>
                         </div>
-                        {!!Form::open([ 'method' =>'POSt','class'=>'register-form'])!!}
-
-
+                        <div id="loginDocentes">
+                        {!!Form::open([ 'method' =>'POST','class'=>'col s12', ])!!}      
                         <div class="row">
-                            <div class="col s12 input-field"><i class="material-icons prefix">mail_outline</i>
+                            <div class="col s12  centrar input-field">
                                 <input id="email" type="email" class="validate">
                                 
                                 <label for="email">Correo</label>
@@ -38,34 +38,73 @@
                         </div>
 
                         <div class="row">
-                            <div class="col s12 input-field "><i class="material-icons prefix icon-blue ">lock_outline</i>
+                            <div class="col s12  centrar input-field ">
                                 <input id="password" type="password" class="validate ">
                                 <label for="password ">Contraseña</label>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col s12 input-field offset-l3">
-                                <button class="btn waves-effect waves-light red darken-4 gradient" type="submit" name="action">Entrar
-                                <i class="material-icons left ">exit_to_app</i>
+                            <div class="col s12 m12 l12 input-field ">
+                                <button class="btn waves-effect waves-light waves-green  boton red darken-4" type="submit" name="action">Entrar
+                                
                                 </button>     
                             </div>
                         </div>
+                        
                         {!!Form::close()!!}
 
                         <div class="row">
-                            <div class="col s12 input-field offset-l3">
+                            <div class="col s12 m12 l12 input-field center">
                                 <p>
                                     <a href="www.google.com">¿Olvidaste tu contraseña?</a>
                                 </p>
                             </div>
                         </div>
+                        </div>
+
+                        <div id="loginEstudiantes" style="display: none;">
+                        {!!Form::open([ 'method' =>'POSt','class'=>'register-form'])!!}      
+                        <div class="row">
+                            <div class="col s12  centrar input-field">
+                                <input id="email" type="email" class="validate">
+                                
+                                <label for="email">Código</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12  centrar input-field ">
+                                <input id="password" type="password" class="validate ">
+                                <label for="password ">Contraseña</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 m12 l12 input-field ">
+                                <button class="btn waves-effect waves-light  boton red darken-4" type="submit" name="action">Entrar
+                                
+                                </button>     
+                            </div>
+                        </div>
+                        
+                        {!!Form::close()!!}
+
+                        <div class="row">
+                            <div class="col s12 m12 l12 input-field center">
+                                <p>
+                                    <a href="www.google.com">¿Olvidaste tu contraseña?</a>
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+
+
 
                     </div>
 
-                    </div>
+                    
                 </div>
-        </div>
         
 
 
@@ -76,6 +115,34 @@
 
 
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+
+    <script type="text/javascript">
+
+        var docente = document.getElementById('loginDocentes');
+        var estudiante= document.getElementById('loginEstudiantes');
+
+        function mostrarDocente() {
+            
+                docente.style.display="block";
+                estudiante.style.display="none";
+
+           
+        }
+
+        function mostrarEstudiante() {
+            
+                docente.style.display="none";
+                estudiante.style.display="block";
+
+           
+        }
+        
+
+         
+
+
+
+    </script>
     <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     
  </body>   

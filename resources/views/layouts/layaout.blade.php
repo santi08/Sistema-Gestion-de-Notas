@@ -126,7 +126,7 @@
 
 $('.button-collapse').sideNav();
   $('.collapsible').collapsible('true');
- 
+ @yield('script')
 
  </script>
 </body>

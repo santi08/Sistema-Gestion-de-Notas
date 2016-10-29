@@ -2,14 +2,11 @@
   <ul id="usuario" class="dropdown-content">
     <li><a href="#!">Ver perfil</a></li>
     <li><a href="#!">Cerrar Sesión</a></li>
-    <li class="divider"></li>
-  
+    <li class="divider"></li> 
   </ul>
 
 
 <div class="navbar-fixed">
-  <nav class=" gradient  s12 m3  ">
-
   <nav class=" gradient  s12 m3 l12 ">
 
     <div class="nav-wrapper">
@@ -19,7 +16,7 @@
         <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">Carlos<i class="material-icons left">account_circle</i></a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-      </div>
+    </div>
   </nav>
 </div>
   

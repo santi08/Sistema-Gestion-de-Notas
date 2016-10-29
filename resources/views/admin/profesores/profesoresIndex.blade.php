@@ -54,38 +54,20 @@
 
 		<ul class="collapsible popout" data-collapsible="accordion">
 
-			@foreach($profesores as $profesor)
-
-				@if($profesor->Nombre == $profesor->Nombre)
-
+			
+					
 					<li>
       					<div class="collapsible-header">{{$profesor->Nombre}} {{$profesor->Apellidos}}</div>
       					<div class="collapsible-body">
-      						<table>
-      							<thead>
-      								<th>Programa</th>
-      							</thead>
-      							<tbody>
-      								
-      								@if($profesor->Nombre == $profesor->Nombre)
-      									<tr>
-      										<td>
-      											{{$profesor->NombrePrograma}}
-      										</td>
-      									</tr>
-      								@endif
-      								
-      								
-      							</tbody>
-      						</table>
+      						
       					</div>
     				</li>
 
-				@endif
+				
 					
 				
 
-			@endforeach
+			
 			
 		</ul>
 			
