@@ -9,7 +9,7 @@ use App\Periodoacademico;
 use App\ProgramaacademicoAsignatura;
 use App\Horario;
 
-use App\Http\Requests;
+
 
 class MateriasController extends Controller
 {
@@ -22,16 +22,28 @@ class MateriasController extends Controller
     {
         $programas = Programaacademico::all();
         $periodos = Periodoacademico::all();
-
-
-
-        $horarios = Horario::asignaturas($request->get('programa'))->periodo($request->get('periodo'))->paginate(10);
-
-        
-        
-  
-         return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('horarios',$horarios);
+        $horarios = Horario::orderBy('Id','ASC')->paginate(10);
+        $vista = view('admin.materias.partialTable')->with('horarios',$horarios);
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        }
+           
+        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('horarios',$horarios);
+                   
     }
+
+    public function filterAjax(Request $request, $idprograma,$idperiodo){
+
+        $horarios = Horario::asignaturas($idprograma)->periodo($idperiodo)->paginate(10);
+            $vista = view('admin.materias.partialTable')->with('horarios',$horarios);  
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        }  
+    }
+
+
+
+    
 
     /**
      * Show the form for creating a new resource.

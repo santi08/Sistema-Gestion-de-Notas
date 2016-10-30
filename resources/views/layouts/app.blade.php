@@ -38,6 +38,8 @@
         </div>
         <!-- JavaScripts  y jquery-->
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+
+    @yield('scripts')
         <script type="text/javascript">
             $( document ).ready(function(){
                // $(".button-collapse").sideNav();
@@ -59,6 +61,8 @@
             });
 
         </script>
+
+
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>
 </html>

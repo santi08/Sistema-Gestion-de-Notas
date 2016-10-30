@@ -42,30 +42,17 @@ class Horario extends Model
 
     public function scopeAsignaturas($query,$programa)
     {
-        $this->programa = $programa;
-
-        echo $this->programa;
-
-        if (!empty($programa)) {
-            /*$query->join('programaacademico_asignatura','horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico.Id','=','programaacademico_asignatura.programaacademicoId')->join('asignatura','asignatura.Id','=','programaacademico_asignatura.AsignaturaId')->where('programaacademico.Id','=',$programa);*/
-
-            /*$query->with(['programaAcademicoAsignatura' => function ($query) {
-                $query->where('programaacademicoId', '=', $this->programa);
-
-                }],'asignatura');*/
-
-                $query->whereHas('programaAcademicoAsignatura', function($query)
-                    {
-                    $query->where('programaacademicoId', '=', $this->programa); 
-
-                });
-
-
-        }
+        
 
        
 
-    
+        if (!empty($programa)) {
+            
+                $query->whereHas('programaAcademicoAsignatura', function ($query)  use($programa) {
+                                $query->where('programaacademicoId', '=', $programa);
+                            })->get();
+        }
+
     }
 
     public function scopePeriodo($query,$periodo){

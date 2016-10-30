@@ -15,17 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-//Route::auth('login','Auth/AuthController@getLogin');
-/*Route::auth('login','Auth\AuthController@getLogin');
-Route::post('login','Auth\AuthController@getLogin');
-
-Route::get('admin/profesores','ProfesoresController@index');
-
-Route::get('/home', 'HomeController@index');
-*/
-
 Route::get('login',function(){
 	return view('auth.login');
 });
@@ -38,10 +27,17 @@ Route::group(['prefix'=>'admin'],function(){
   Route::resource('usuarios','controladorUsuarios');
   Route::resource('notasIndex','NotasController');
 
-   Route::get('usuarios/{id}/destroy',[
+    Route::get('usuarios/{id}/destroy',[
      'uses' =>'controladorUsuarios@destroy',
       'as' => 'admin.usuarios.destroy'
     ]);
+
+    Route::get('materiasIndex/{programaid}/{periodoid}',[
+     'uses' =>'MateriasController@filterAjax',
+      'as' => 'admin.materiasIndex.filterAjax'
+    ]);
+
+   
 
 });
 
