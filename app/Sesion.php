@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;         
 
 /**
@@ -26,8 +27,22 @@ class Sesion extends Authenticatable
 
      public function getAuthPassword()
     {
-        return $this->Contrasena;
+
+       
+        return Hash::make($this->Contrasena);
+
     }
+
+     public function validateCredentials(UserContract $user, array $credentials)
+    {
+        $plain = $credentials['password'];
+
+        
+        dd($user->getAuthPassword());
+
+        return $this->hasher->check($plain, $user->getAuthPassword());
+    }
+
 
     protected $hidden = [
         'password', 'remember_token',
@@ -37,7 +52,7 @@ class Sesion extends Authenticatable
 
     public function usuarios()
     {
-       return $this->hasMany('App\Usuario','Id');
+       return $this->hasMany('App\Usuario','Id','UsuarioIdentificacion');
     }
 
     public function roles(){
@@ -45,7 +60,7 @@ class Sesion extends Authenticatable
     }
 
     public function sesionRoles(){
-        return $this->hasMany('App\SesionRol','');
+        return $this->hasMany('App\SesionRol','sesionId');
     }
 
         

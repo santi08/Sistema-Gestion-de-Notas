@@ -15,7 +15,7 @@ class Rol extends Model
     protected $primaryKey = 'Id';
 
 	public $timestamps = false;
-	protected $connection = 'docentes';
+	
 
     protected $fillable = [
         'Nombre'

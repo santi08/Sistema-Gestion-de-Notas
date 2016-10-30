@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Periodoacademico;
+use App\Programaacademico;
 
 use App\Http\Requests;
 
@@ -15,7 +17,10 @@ class InformesController extends Controller
      */
     public function index()
     {
-        return view('admin.informes.informesIndex');    
+        $PeriodosAcademicos = Periodoacademico::all();
+        $ProgramasAcademicos = Programaacademico::all();
+
+        return view('admin.informes.informesIndex')->with('PeriodosAcademicos',$PeriodosAcademicos)->with('ProgramasAcademicos',$ProgramasAcademicos);    
     }
 
     /**

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Horario;
+use App\Programaacademico;
+use App\Periodoacademico;
 use App\Http\Requests;
 
 class MateriasController extends Controller
@@ -15,10 +17,17 @@ class MateriasController extends Controller
      */
     public function index()
     {
+         $ProgramasAcademicos = Programaacademico::all(); 
+            $PeriodosAcademicos = Periodoacademico::all();
 
+        $asignaturas =  Horario::orderBy('Id','asc')->paginate(10); 
+
+
+    $asignaturas2 = Horario::whereHas('programaAcademicoAsignatura', function ($query) {
+                                $query->where('programaacademicoId', '=', '2');
+                            })->paginate(10);
         
-        
-         return view('admin.materias.materiasIndex');
+         return view('admin.materias.materiasIndex')->with('asignaturas',$asignaturas)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
     }
 
     /**

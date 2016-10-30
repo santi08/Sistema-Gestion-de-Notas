@@ -1,7 +1,21 @@
   
   <ul id="usuario" class="dropdown-content">
-    <li><a href="#!">Ver perfil</a></li>
-    <li><a href="#!">Cerrar Sesión</a></li>
+    <li>
+    <a href="#!">Ver perfil</a></li>
+    <li>
+    @if (isset(Auth::guard('admin')->user()->usuarios[0]->Nombre))
+
+            <a href="{{ url('/logoutdo') }}">
+        
+          @elseif (isset(Auth::user()->firstname))
+
+           <a href="{{ url('/logoutes') }}">
+           
+          @endif
+      
+        Cerrar Sesión
+        </a>
+      </li>
     <li class="divider"></li>
   
   </ul>
@@ -17,17 +31,22 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
         <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">
+
+        
+          @if (Auth::guard('admin')->check())
+
+            {{Auth::guard('admin')->user()->usuarios[0]->Nombre}}
+        
+          @elseif (Auth::check())
+
+            {{Auth::user()->firstname}}
            
-                @if(Auth()->guard['name'] = 'admin')
-
-                  {{ Auth::guard('admin')->user()->usuarios[0]->Nombre }}
-
-                @else
-
-                  {{ Auth::guard()->user()->primerNombre }}
-                  
-               @endif
-        <i class="material-icons left">account_circle</i></a></li>
+          @endif
+           
+           
+           
+           
+        <i class="material-icons prefix left">account_circle</i></a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>

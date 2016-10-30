@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Estudiante;
+use Auth;
 
 
 
@@ -14,6 +15,8 @@ class controladorUsuarios extends Controller
 {
     
     public function index(){
+
+
      $users= Estudiante::orderby('id','ASC')->paginate(10);
      return view('admin.usuarios.index')->with('users',$users);
 

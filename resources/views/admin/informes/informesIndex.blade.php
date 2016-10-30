@@ -2,44 +2,107 @@
 @section('title','Informes')
 
 @section('content')
-	<h4 class="center">Informes</h4>
+	<h4 class="center">Gestion de Informes</h4>
 	<hr>
+	<p class="flow-text">Seleccione los items que desea filtrar</p>
 	<div class="row">
-		<div class="col s2 l2 m2">
-			<a class='dropdown-button btn' href='#' data-activates='periodoAcademico'>Periodo Académico</a>
+		<div class="input-field col s5">
+							
+			<select>
+				<option value="1" disabled selected>Seleccione una opción</option>
+				@foreach($PeriodosAcademicos as $PeriodoAcademico)
+					  			
+			    <option value="{{ $PeriodoAcademico->Id}}">
+			    {{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
+			    </option>
 
-  			<!-- Dropdown Structure -->
-  			<ul id='periodoAcademico' class='dropdown-content'>
-    			<li><a href="#!">one</a></li>
-    			<li><a href="#!">two</a></li>
-   	 			<li class="divider"></li>
-    			<li><a href="#!">three</a></li>
-  			</ul>
+				@endforeach
+					  			
+			</select>
+				  	<label>Periodo Academico</label>
 		</div>
 
-		<div class="col s2 l2 m2">
+		<div class="input-field col s5">
+			<select>
+			<option value="" >Seleccione una opción</option>
+
+			@foreach($ProgramasAcademicos as $ProgramaAcademico)
+			@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
+				<option value="{{$ProgramaAcademico->id}}">		
+				
+				{{ $ProgramaAcademico->NombrePrograma }}
+			</option>
+			@endif
+			@endforeach
 			
+			</select>
+			<label>Programa Academico</label>
+			  			
 		</div>
 
-		<div class="col s2 l2 m2">
+		<div class="col s5 input-field ">
+          		<input id="Profesor" type="search" class="validate" >
+          	<label for="Profesor">Profesor</label>
+        </div>
+
+        <div class="col s5 input-field ">
+          		<input id="Asignatura" type="search" class="validate" >
+          	<label for="Asignatura">Asignatura</label>
+        </div>
+
+        <div class="col s5 input-field ">
+          		<input id="Estudiante" type="search" class="validate" >
+          	<label for="Estudiante">Estudiante</label>
+        </div>
+
+        <div class="input-field col s5">
+			<select>
+			<option value="" >Seleccione una opción</option>
+			<option value="1">TODOS</option>
+			<option value="2">REPITENTES</option>
+
 			
+			</select>
+			<label>Tipo de matricula</label>
+			  			
 		</div>
 
-		<div class="col s2 l2 m2">
-			
-		</div>
-
-		<div class="col s2 l2 m2">
-			
-		</div>
-	</div>
-
-	<div class="row">
 		
+
+
+
 	</div>
 
-	
-        
+
+
+	<div class="row col s3">
+		  <p class="range-field">
+      		<input type="range" id="noUi-origin" min="0" max="5" />
+      		<label>Rango de notas</label>
+    	  </p>
+    </div>
+
+		<!-- <div id="slider-start" class="noUi-target noUi-ltr noUi-horizontal">
+			<div class="noUi-base">
+			|	<div class="noUi-origin" style="left: 13.9024%;">
+					<div class="noUi-handle" data-handle="0" style="z-index: 5;">
+					
+					</div>
+				</div>
+				<div class="noUi-origin" style="left: 80%;">
+					<div class="noUi-handle" data-handle="1" style="z-index: 4;">
+			
+					</div>
+				</div>
+			</div>
+		</div> -->  
+
+    <div class="row col s12 ">
+    	 <a class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
+    	 GENERAR REPORTE</a>
+    </div>
+	      
+	      
 
 
 

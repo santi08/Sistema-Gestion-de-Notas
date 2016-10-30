@@ -27,6 +27,10 @@ Route::get('admin/profesores','ProfesoresController@index');
 */
 
 
+Route::get('login',function(){
+	return view('auth.login');
+});
+
 Route::group(['prefix'=>'admin'],function(){
 
 	Route::resource('profesoresIndex','ProfesoresController');
@@ -92,6 +96,7 @@ Route::post('login/docentes',[
   Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
   Route::post('password/reset', 'Auth\PasswordController@reset');
    
+  Route::get('archivo','ProfesoresController@cargarMateria');
 
   
 

@@ -71,58 +71,8 @@
 
 	<hr>
 	</div>
-</div>
-<div class="row">
-	<div class="col s3">Nombres</div>
-	<div class="col s3">Apellidos</div>
-	<div class="col s3">Programa</div>
-	<div class="col s3">Acciones</div>
 
-</div>
-
-	<div class="row">
-		
-					
-				@foreach($profesores as $profesor)
-				<ul class="collapsible" data-collapsible="accordion">			
-		    		<li>
-		    			<div class="collapsible-header col s12">
-		    				
-		    				
-		    				
-		      									      								
-		      			</div>
-		      							
-		      			<div class="collapsible-body  grey lighten-3 col s12">
-		      				<p>
-		      					
-		      				</p>
-		      			</div>
-		    		</li>
-		   
-		  						
-								
-									<!--<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
-
-										<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
-
-										<a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
-											
-										</td>
-
-									</tr>
-								-->
-					</ul>
-				@endforeach
-			
-
-	</div>
-
-	<table class="striped">
+<table class="striped">
 		<thead>
 			<tr>
 				<th>Apellidos</th>
@@ -147,17 +97,16 @@
 				</tr>
 		@endforeach
 		</tbody>
-	</table>
+</table>
 						
 						
 
 			<div class="paginate">
-				{{ $profesores->links()}}
+				{{ $profesores->count()}}
 
 			</div>
 
-		</div>
-	</div>
+		
 
 
 

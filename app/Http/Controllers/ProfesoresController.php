@@ -11,6 +11,8 @@ use App\Usuario;
 use App\Programaacademico;
 use App\ProgramaacademicoAsignatura;
 use App\Periodoacademico;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class ProfesoresController extends Controller
@@ -23,12 +25,13 @@ class ProfesoresController extends Controller
     public function index()
     {
 
-            //$profesores=Horario::all()->where(Horario::find(5));
+
+           
             $ProgramasAcademicos = Programaacademico::all(); 
             $PeriodosAcademicos = Periodoacademico::all();
-            //$horario = Horario::all();
+        
 
-          // $profesores = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.nombre','usuario.Apellidos','programaacademico.NombrePrograma')->where('periodoacademicoId','=',5)->orderBy('usuario.nombre','asc')->paginate(10);
+           //$profesores = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->orderBy('usuario.Nombre','asc')->paginate(10);
 
             /* foreach ($profesores as $profesor) {
                 # code...
@@ -36,30 +39,40 @@ class ProfesoresController extends Controller
             } */
 
 
-          /*$profesores = Horario::whereHas('programaAcademicoAsignatura', function ($query) {
-                                $query->select('programaacademicoId')->distinct();
+         /* $profesores = Horario::whereHas('programaAcademicoAsignatura', function ($query) {
+                                $query->distinct();
                                 })->groupBy(['UsuarioID'])->paginate(10); */
 
-            $profesores = Horario::join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                        'programaacademico_asignatura.AsignaturaId')
-                                  ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
-                                   ->join('usuario','horario.UsuarioID','=','usuario.Id')
-                                   ->distinct('programaacademico.Id')
-                                   ->select('usuario.*','programaacademico.NombrePrograma')
-                                   ->orderBy('usuario.Apellidos')->paginate(10);
+          /*$profesores = Usuario::join('horario','usuario.Id','=','horario.UsuarioID')
+                                    ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' , 'programaacademico_asignatura.AsignaturaId')
+                                    ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
+                                    ->select('usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->distinct()
+                                    ->orderBy('usuario.Apellidos')->paginate(10);*/
+
+          $profesores = Horario::distinct()
+                                ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                   'programaacademico_asignatura.Id')
+                                ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
+                                ->join('usuario','horario.UsuarioID','=','usuario.Id')
+                                ->select('programaacademico.Id','usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
+                                ->orderBy('usuario.Nombre')->paginate(10);
+
+      // dd($profesores);
 
            // $profesores = Horario::groupBy(['UsuarioID'])->paginate(10);
 
             /*$profesores = Horario::whereHas('programaAcademicoAsignatura', function($q) {
                                                 $q->distinct('programaacademicoId');
                                             })->get();*/
-            
 
+
+         /*  dd(count($profesores)); 
+                $numero = 1;                             
         
-            /*foreach ($profesores as $profesor) {
-                    
-                    dd($profesor);
+           foreach ($profesores as $profesor) {
+            
+            echo $numero." ".$profesor."<br>";
                 //echo $profesor->Nombre."<br>";
-
+                $numero++;
               
                // dd($profesor);
              // echo $profesor->usuario->Nombre."<br>";
@@ -73,19 +86,10 @@ class ProfesoresController extends Controller
 
             //$asignaturas=\DB::connection('docentes')->table('horario')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('horario.id','asignatura.codigo', 'asignatura.nombre','asignatura.creditos')->where('periodoacademicoId','=',5)->orderBy('usuario.nombre','asc')->get();
 
-           
 
-
-           
-
-
-        
-        //dd($profesores);
-        //dd($asignaturas);
-
-       return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
+      return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
        
-        
+
     }
 
 
@@ -97,6 +101,31 @@ class ProfesoresController extends Controller
     public function create()
     {
         //
+    }
+
+    public function cargarMateria(){
+
+        Excel::load('public/listado.xls',function($archivo)
+        {
+
+            $resultado = $archivo->all();
+            dd($resultado);
+
+            foreach ($resultado as $materias) {
+                # code...
+
+                echo $materias->codigo;
+
+                /*foreach ($materias as $materia) {
+                    # code...
+                    echo $materia->codigo."<br>";
+                }*/
+                
+            }
+
+        });
+
+
     }
 
     /**

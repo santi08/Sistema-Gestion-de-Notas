@@ -78,6 +78,7 @@ class AuthController extends Controller
         ]);
     }
 
+
       protected function getFailedLoginMessage()
     {
         return 'Código y/o contraseña incorrectos.';
@@ -86,6 +87,9 @@ class AuthController extends Controller
     protected function getLockoutErrorMessage($seconds)  {
 
     return 'Ha superado el número de intentos. Reintente en'.$seconds.' seconds.';
+
+    protected function getLogin(){
+        return view('welcome');
     }
 
 

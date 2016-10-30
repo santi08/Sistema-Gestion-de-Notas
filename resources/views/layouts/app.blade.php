@@ -5,6 +5,8 @@
         <title>@yield('title','default')</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
+
+         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/nouislider.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -42,6 +44,8 @@
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
                 $('.modal-trigger').leanModal();
+                $('.tooltipped').tooltip({delay: 50});
+
 
             });
         </script>
@@ -53,6 +57,21 @@
                 });
             });
 
+            $(document).ready(function() {
+            $('select').material_select();
+            });
+
+        </script>
+        <script>
+            var startSlider = document.getElementById('slider-start');
+
+            noUiSlider.create(startSlider, {
+                start: [20, 80],
+                range: {
+                    'min': [ 0 ],
+                    'max': [ 100 ]
+                }
+            });
         </script>
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>

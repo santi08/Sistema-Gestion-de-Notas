@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\ProgramaacademicoAsignatura;
+use App\Horario;
 
 class HorariosController extends Controller
 {
@@ -16,6 +18,20 @@ class HorariosController extends Controller
     public function index()
     {
         //
+
+        //$horario = Horario::find(1);
+
+        foreach ($horarios as $horario) {
+            # code...
+             echo $horario->programaacademicoAsignatura->asignatura->Nombre.'<br>';
+             echo $horario->usuario.'<br>';
+
+        }
+
+       
+
+
+
     }
 
     /**

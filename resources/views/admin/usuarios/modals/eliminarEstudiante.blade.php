@@ -1,7 +1,7 @@
 <!--aqui esta el boton de crear Usuario-->
   
   <div class="row ">
-    <a href="#modal2"" class="btn-floating btn-small waves-effect waves-light green modal-trigger "><i class="material-icons">delete</i></a></td>
+    <a href="#modal2"" class="btn-floating btn-small waves-effect waves-light green modal-trigger "><i class="material-icons">delete</i></a>
   </div> 
   
   <!-- Estructura Modal -->

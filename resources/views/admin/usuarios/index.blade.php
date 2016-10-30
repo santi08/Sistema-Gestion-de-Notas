@@ -1,8 +1,10 @@
+
 @extends('layouts.app')
 @section('title','Estudiantes')
 
 
 @section('content')
+
   <br> <br>
 
 <!--campo buscar y registrar-->
@@ -38,10 +40,22 @@
              <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
              <td> {{ $user->codigo }}</td>
              <td> {{ $user->email }}</td>
-             <td>  @include('admin.usuarios.modals.eliminarEstudiante')</td>
+             <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+
+                <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Visualizar"><i class="material-icons">visibility</i></a>
+             </td>
 
              <!--<td> <a href="{{ route('admin.usuarios.destroy',$user->id)}}"" class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">delete</i></a></td> -->
           </tr>
+          <tr>
+            <td>
+            @foreach (Auth::guard('admin')->user()->sesionRoles as $roles )
+                {{$roles->rol->Nombre}}
+            @endforeach
+             
+            </td>
+          </tr>
+          
           @endif
           @endforeach
         </tbody>

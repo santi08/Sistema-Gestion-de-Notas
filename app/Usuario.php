@@ -2,7 +2,10 @@
 
 namespace App;
 
+
+use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Usuario
@@ -37,6 +40,9 @@ class Usuario extends Model
     public function horarios(){
         return $this->hasMany('App\Horario', 'UsuarioID');
     }
+
+
+  
 
         
 }
