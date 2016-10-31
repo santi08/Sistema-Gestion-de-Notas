@@ -26,4 +26,9 @@ class Estudiante extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scopeCodigo($query,$codigo){
+
+        $query->where('codigo','like',$codigo.'%');
+    }
 }

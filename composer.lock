@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "9d36c0feae0cd75b57541904d66fad94",
     "content-hash": "b880833b7301d5d0fd5bf57abfba1b7c",
+=======
+    "hash": "614869dcf3301535f82c21ec45a18a43",
+    "content-hash": "72651606508c9300282913caa7bd9380",
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -805,6 +810,7 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
             "version": "1.0.32",
             "source": {
                 "type": "git",
@@ -815,6 +821,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
                 "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
+=======
+            "version": "1.0.28",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
+                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
                 "shasum": ""
             },
             "require": {
@@ -884,6 +902,7 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
             "time": "2016-10-19 20:38:46"
         },
         {
@@ -952,6 +971,9 @@
                 "laravel"
             ],
             "time": "2016-09-15 21:03:21"
+=======
+            "time": "2016-10-07 12:20:37"
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
         },
         {
             "name": "maximebf/debugbar",

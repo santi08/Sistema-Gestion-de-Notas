@@ -1,5 +1,6 @@
   
   <ul id="usuario" class="dropdown-content">
+<<<<<<< HEAD
     <li>
     <a href="#!">Ver perfil</a></li>
     <li>
@@ -18,12 +19,15 @@
       </li>
     <li class="divider"></li>
   
+=======
+    <li><a href="#!">Ver perfil</a></li>
+    <li><a href="#!">Cerrar Sesión</a></li>
+    <li class="divider"></li> 
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
   </ul>
 
 
 <div class="navbar-fixed">
-  <nav class=" gradient  s12 m3  ">
-
   <nav class=" gradient  s12 m3 l12 ">
 
     <div class="nav-wrapper">
@@ -49,7 +53,7 @@
         <i class="material-icons prefix left">account_circle</i></a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-      </div>
+    </div>
   </nav>
 </div>
   

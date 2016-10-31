@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
+<<<<<<< HEAD
+=======
+use App\Usuario;
+
+
+
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
 use App\Horario;
 use App\Usuario;
 use App\Programaacademico;
@@ -24,12 +31,15 @@ class ProfesoresController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
 
 
            
             $ProgramasAcademicos = Programaacademico::all(); 
             $PeriodosAcademicos = Periodoacademico::all();
         
+=======
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
 
            //$profesores = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->orderBy('usuario.Nombre','asc')->paginate(10);
 
@@ -49,6 +59,7 @@ class ProfesoresController extends Controller
                                     ->select('usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->distinct()
                                     ->orderBy('usuario.Apellidos')->paginate(10);*/
 
+<<<<<<< HEAD
           $profesores = Horario::distinct()
                                 ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                   'programaacademico_asignatura.Id')
                                 ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
@@ -89,6 +100,8 @@ class ProfesoresController extends Controller
 
       return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
        
+=======
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
 
     }
 

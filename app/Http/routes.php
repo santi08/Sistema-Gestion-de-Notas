@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('bienvenido.bienvenido');
 });
 
 
@@ -37,12 +37,40 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
   Route::resource('usuarios','controladorUsuarios');
+<<<<<<< HEAD
 
+=======
+   
+   //cargar inforcavion en el modal eliminar
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
    Route::get('usuarios/{id}/destroy',[
      'uses' =>'controladorUsuarios@destroy',
       'as' => 'admin.usuarios.destroy'
     ]);
+   // activa la accion eliminar en el modal
+   Route::PUT('usuarios/{id}/destroyupdate',[
+     'uses' =>'controladorUsuarios@destroyupdate',
+      'as' => 'admin.usuarios.destroyupdate'
+    ]);
+   //guardar Estudiantes
+   Route::POST('usuarios/guardar',[
+     'uses' =>'controladorUsuarios@guardarEstudiante',
+      'as' => 'admin.usuarios.guardarEstudiante'
+    ]);
 
+   //cargar informacion editarEstudiante
+   Route::get('usuarios/editar/{id}',[
+     'uses' =>'controladorUsuarios@edit',
+      'as' => 'admin.usuarios.edit'
+    ]);
+
+   //editarEstudiante
+   Route::POST('usuarios/editar',[
+     'uses' =>'controladorUsuarios@editar',
+      'as' => 'admin.usuarios.editar'
+    ]);
+
+<<<<<<< HEAD
 
 
    
@@ -54,6 +82,9 @@ Route::group(['prefix'=>'admin'],function(){
    
    
 
+=======
+   
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
 });
 
 Route::get('login/estudiantes',[

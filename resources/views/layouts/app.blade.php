@@ -16,7 +16,7 @@
 
     <body id="app-layout">
 
-        <header>
+        <header> 
             <!-- Navbar goes here -->
                 @include('partials.nav')
         <!-- Page Layout here --> 
@@ -25,28 +25,32 @@
         
         
         <div class="row">
-
-            <div class="col s12 m4 l3"> 
+            <div class="col l4 m6 ">
                 
             </div>
-            
-            <div class="col s12 m12 l9 card-panel"> 
+            <div class="col l8 m6 card-panel"> 
                   @yield('content')
             </div>
 
         </div>
         <!-- JavaScripts  y jquery-->
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
         <script type="text/javascript">
             $( document ).ready(function(){
                // $(".button-collapse").sideNav();
                 $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
+<<<<<<< HEAD
                 $('.modal-trigger').leanModal();
                 $('.tooltipped').tooltip({delay: 50});
 
 
+=======
+                
+                $("a.delete").confirm();
+>>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
             });
         </script>
 
@@ -54,6 +58,7 @@
             $(document).ready(function(){
                 $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                    
                 });
             });
 
@@ -74,5 +79,9 @@
             });
         </script>
         <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+  <script type="text/javascript">
+  </script>
+
+  @yield('scripts')
     </body>
 </html>
