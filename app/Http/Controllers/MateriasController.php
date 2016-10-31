@@ -7,6 +7,11 @@ use App\Horario;
 use App\Programaacademico;
 use App\Periodoacademico;
 use App\Http\Requests;
+use App\Asignatura;
+use App\Programaacademico;
+use App\Periodoacademico;
+use App\ProgramaacademicoAsignatura;
+use App\Horario;
 
 class MateriasController extends Controller
 {
@@ -15,8 +20,9 @@ class MateriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
          $ProgramasAcademicos = Programaacademico::all(); 
             $PeriodosAcademicos = Periodoacademico::all();
 
@@ -28,7 +34,31 @@ class MateriasController extends Controller
                             })->paginate(10);
         
          return view('admin.materias.materiasIndex')->with('asignaturas',$asignaturas)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
+        $programas = Programaacademico::all();
+        $periodos = Periodoacademico::all();
+        $horarios = Horario::orderBy('Id','ASC')->paginate(10);
+        $vista = view('admin.materias.partialTable')->with('horarios',$horarios);
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        }
+           
+        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('horarios',$horarios);
+                   
     }
+
+    public function filterAjax(Request $request, $idprograma,$idperiodo){
+
+        $horarios = Horario::asignaturas($idprograma)->periodo($idperiodo)->paginate(10);
+            $vista = view('admin.materias.partialTable')->with('horarios',$horarios);  
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        }  
+
+    }
+
+
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -95,4 +125,7 @@ class MateriasController extends Controller
     {
         //
     }
+
+
+    
 }

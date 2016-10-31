@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 
+
 //Route::auth('login','Auth/AuthController@getLogin');
 /*Route::auth('login','Auth\AuthController@getLogin');
 Route::post('login','Auth\AuthController@getLogin');
@@ -25,7 +26,6 @@ Route::get('admin/profesores','ProfesoresController@index');
 
 
 */
-
 
 Route::get('login',function(){
 	return view('auth.login');
@@ -37,15 +37,20 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
   Route::resource('usuarios','controladorUsuarios');
-<<<<<<< HEAD
 
-=======
    
    //cargar inforcavion en el modal eliminar
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
    Route::get('usuarios/{id}/destroy',[
      'uses' =>'controladorUsuarios@destroy',
       'as' => 'admin.usuarios.destroy'
+
+  Route::resource('notasIndex','NotasController');
+
+   
+  //cargar inforcavion en el modal eliminar
+  Route::get('usuarios/{id}/destroy',[
+    'uses' =>'controladorUsuarios@destroy',
+    'as' => 'admin.usuarios.destroy'
     ]);
    // activa la accion eliminar en el modal
    Route::PUT('usuarios/{id}/destroyupdate',[
@@ -70,7 +75,6 @@ Route::group(['prefix'=>'admin'],function(){
       'as' => 'admin.usuarios.editar'
     ]);
 
-<<<<<<< HEAD
 
 
    
@@ -82,9 +86,13 @@ Route::group(['prefix'=>'admin'],function(){
    
    
 
-=======
-   
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
+    Route::get('materiasIndex/{programaid}/{periodoid}',[
+     'uses' =>'MateriasController@filterAjax',
+      'as' => 'admin.materiasIndex.filterAjax'
+    ]);
+
+  
+
 });
 
 Route::get('login/estudiantes',[

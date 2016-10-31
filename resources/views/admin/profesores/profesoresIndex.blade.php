@@ -104,11 +104,30 @@
 			<div class="paginate">
 				{{ $profesores->count()}}
 
+
 			</div>
 
 		
 
 
+
+		
+			
+			<!--<table class="responsive-table striped bordered">
+				<thead>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Programa</th>
+					<th>Acciones</th>
+				
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>-->
+			<ul class="pagination">
+				
+			</ul>
 
 @endsection
 

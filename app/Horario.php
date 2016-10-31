@@ -13,6 +13,7 @@ class Horario extends Model
     protected $table = 'horario';
     protected $primaryKey = 'Id';
 	public $timestamps = false;
+    public $programa;
 
     protected $fillable = [
         'Grupo',
@@ -33,6 +34,7 @@ class Horario extends Model
     }
 
     public function programaAcademicoAsignatura(){
+
         return $this->belongsTo ('App\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
@@ -45,6 +47,33 @@ class Horario extends Model
     }
 
 
+        return $this->belongsTo('App\ProgramaacademicoAsignatura', 'AsignaturaId');
+    }
+
+
+    public function scopeAsignaturas($query,$programa)
+    {
+        
+
+       
+
+        if (!empty($programa)) {
+            
+                $query->whereHas('programaAcademicoAsignatura', function ($query)  use($programa) {
+                                $query->where('programaacademicoId', '=', $programa);
+                            })->get();
+        }
+
+    }
+
+    public function scopePeriodo($query,$periodo){
+
+        if(!empty($periodo)){
+            $query->where('PeriodoAcademicoId','=',$periodo);
+
+        }
+        
+    }
 
         
 }

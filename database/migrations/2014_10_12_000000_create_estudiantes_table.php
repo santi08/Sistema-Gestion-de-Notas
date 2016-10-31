@@ -24,6 +24,7 @@ class CreateEstudiantesTable extends Migration
             $table->boolean('estado')->nullable()->default('1');
             $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 
