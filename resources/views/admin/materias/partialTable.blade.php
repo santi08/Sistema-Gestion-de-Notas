@@ -16,8 +16,8 @@
 									<td>{{$horario->Grupo}}</td>
 									<td>
 										<a class="btn-floating red darken-1"><i class="material-icons">picture_as_pdf</i></a></li>
-										<a class="btn-floating red darken-1"><i class="material-icons">insert_chart</i></a></li>
-										<a class="btn-floating red darken-1"><i class="material-icons">insert_chart</i></a></li>
+										<a class="btn-floating light-blue darken-3"><i class="material-icons">insert_chart</i></a></li>
+										<a class="btn-floating grey darken-1"><i class="material-icons">visibility</i></a></li>
 									</td>
 								</tr>
 							@endforeach

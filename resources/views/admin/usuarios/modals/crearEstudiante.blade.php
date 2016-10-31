@@ -1,17 +1,18 @@
 <!--aqui esta el boton de crear Usuario-->
-  
   <div class="row ">
-    <a class="col s3 offset-s3 green waves-effect waves-green btn modal-trigger" href="#modal1">Registrar Estudiante</a> 
+    <a onClick='openModalCrear()' class="col s3 offset-s3 green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante' >Registrar Estudiante</a> 
   </div> 
-  
-  <!-- Estructura Modal -->
-  <div id="modal1" class="modal">
-    <div class="modal-content ">
+ <!-- fin boton crear --> 
+
+<!-- Estructura Modal -->
+<div id="crearEstudiante" class="modal">
+  <div class="modal-content ">
       <h4 class="center  red gradient darken-3 white-text">Registrar Estudiantes</h4>
        
          {!! Form::open(['route'=>'admin.usuarios.store','method' => 'POST'])!!}
+
   <!-- inicio fila formulario -->
-      <div class="row">
+    <div class="row">
         <div class="col s6 input-field">
         {!!Form::text('firstname',null,['class'=>'validate','id'=>'first_name','type'=>'text','required' ])!!}
         {!!Form::label('firstname','Primer Nombre',['for'=>"first_name"])!!}
@@ -36,30 +37,34 @@
         {!!Form::number('codigo',null,['class'=>'validate','id'=>'codigo','type'=>'number','required'])!!}
         {!!Form::label ('codigo','codigo',['for'=> 'codigo'])!!}
         </div>
-       <!-- <div class="col s6 input-field">
-        {!!Form::password('password',['class'=>'validate','id'=>'pass','type'=>'password','required'])!!}
-        {!!Form::label ('password','Contraseña',['for'=>'pass'])!!}
-        </div> -->
-        <!-- fin fila formulario -->
-
+       
         <!-- fila botones -->
         <div class="row">
-
-         <div class="col s6 offset-s6 input-field">
-
-         <button type="submit" class="green btn btn-primary"><i class="material-icons left">save</i>Registrar</button>
-         
-        </div>
-
-        <div class="col s6 offset-s6 input-field">
-        <hr>
-        <a>{!! Form::file('text')!!}</a>
+          <div class="col s6 offset-s6 input-field">
+           <button type="submit" class="green btn"><i class="material-icons left">save</i>Registrar</button>
+           {!! Form::close()!!}
+          </div>
         </div> 
         <!-- fin fila botones-->
-        </div>
-        
-      </div>
-        {!! Form::close()!!}
     </div>
+
+
+  <div class="col-md-4">
+    <fieldset>  
+      <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
+      <div id="RegistrarPorArchivo" class="collapse">
+        {!! Form::open(['route'=>'admin.usuarios.guardarEstudiante','method'=>'POST','files' => 'true']) !!}
+        <div class="form-group">
+          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
+        </div>
+        <button type="submit" class="    btn btn-primary">Enviar</button>
+         {!! Form::close() !!}
+      </div>
+     </fieldset>
+
   </div>
+        
+  </div>
+</div>
+  
  <!--finaliza el boton crear-->

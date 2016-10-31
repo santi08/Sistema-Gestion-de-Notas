@@ -7,6 +7,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
 use App\Usuario;
+
+
+
 use App\Horario;
 
 
@@ -19,12 +22,8 @@ class ProfesoresController extends Controller
      */
     public function index()
     {
-        
-
-        
 
 
-        
 
         return view('admin.profesores.profesoresIndex');
     }
