@@ -181,4 +181,27 @@ $('.carousel.carousel-slider').carousel({full_width: true});
 	});
 </script>
 
+<script type="text/javascript">
+
+        var docente = document.getElementById('loginDocentes');
+        var estudiante= document.getElementById('loginEstudiantes');
+
+        function mostrarDocente() {
+            
+                docente.style.display="block";
+                estudiante.style.display="none";
+
+           
+        }
+
+        function mostrarEstudiante() {
+            
+                docente.style.display="none";
+                estudiante.style.display="block";
+
+           
+        }
+
+    </script>
+
 </html>

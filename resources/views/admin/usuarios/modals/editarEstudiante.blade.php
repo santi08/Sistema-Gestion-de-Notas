@@ -9,7 +9,7 @@
  
 
   <!-- inicio fila formulario -->
-    {!! Form::open(['route'=>'admin.usuarios.editar','method' => 'POST'])!!}
+    {!! Form::open(['route'=>'admin.estudiantes.editar','method' => 'POST'])!!}
        
        <input type="hidden" name="id" id="id">
       <div class="row">

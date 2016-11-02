@@ -3,25 +3,21 @@
     <li>
     <a href="#!">Ver perfil</a></li>
     <li>
-    @if (isset(Auth::guard('admin')->user()->usuarios[0]->Nombre))
+    
+    @if (Auth::guard('admin')->check())
 
             <a href="{{ url('/logoutdo') }}">
         
-          @elseif (isset(Auth::user()->firstname))
+    @elseif (Auth::check())
 
            <a href="{{ url('/logoutes') }}">
            
-          @endif
+    @endif
       
         Cerrar Sesión
         </a>
-      </li>
+    </li>
     <li class="divider"></li>
-  
-
-    <li><a href="#!">Ver perfil</a></li>
-    <li><a href="#!">Cerrar Sesión</a></li>
-    <li class="divider"></li> 
   </ul>
 
 
@@ -41,7 +37,7 @@
         
           @elseif (Auth::check())
 
-            {{Auth::user()->firstname}}
+            {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
            
           @endif
            
@@ -72,7 +68,7 @@
         </li>
 
         <li class="no-padding">
-          <a href="{{route('admin.usuarios.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
+          <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
         </li>
 
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Periodoacademico;
-use App\Programaacademico;
+use App\ModelosSCAD\Periodoacademico;
+use App\ModelosSCAD\Programaacademico;
 
 use App\Http\Requests;
 

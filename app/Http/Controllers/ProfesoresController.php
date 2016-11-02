@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
-use App\Usuario;
-use App\Horario;
-use App\Programaacademico;
-use App\ProgramaacademicoAsignatura;
-use App\Periodoacademico;
+use App\ModelosSCAD\Usuario;
+use App\ModelosSCAD\Horario;
+use App\ModelosSCAD\Programaacademico;
+use App\ModelosSCAD\ProgramaacademicoAsignatura;
+use App\ModelosSCAD\Periodoacademico;
 use Maatwebsite\Excel\Facades\Excel;
 
 

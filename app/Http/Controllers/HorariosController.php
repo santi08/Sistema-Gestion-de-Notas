@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\ProgramaacademicoAsignatura;
-use App\Horario;
+use App\ModelosSCAD\ProgramaacademicoAsignatura;
+use App\ModelosSCAD\Horario;
 
 class HorariosController extends Controller
 {

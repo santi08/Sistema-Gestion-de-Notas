@@ -33,46 +33,9 @@
 <hr>
 
 <div class="row" id="Estudiantes">
- 	<table class="col highlight responsive-table bordered">
-
-        <thead>
-          <tr>
-              <th data-field="id">Nombre Completo</th>
-              <th data-field="name">codigo</th>
-              <th data-field="email">correo</th>
-              <th data-field="accion">Acciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          @foreach($users as $user)
-          @if($user->estado == '1')
-          <tr>
-             <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
-             <td> {{ $user->codigo }}</td>
-             <td> {{ $user->email }}</td>
-             <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-
-                <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Visualizar"><i class="material-icons">visibility</i></a>
-             </td>
-
-             <!--<td> <a href="{{ route('admin.usuarios.destroy',$user->id)}}"" class="btn-floating btn-small waves-effect waves-light green "><i class="material-icons">delete</i></a></td> -->
-          </tr>
-          <tr>
-            <td>
-             
-            </td>
-          </tr>
-          
-          @endif
-          @endforeach
-        </tbody>
-      </table>
-
- </div>
+ 	
   
-
+<table>
     <thead>
       <tr>
        <th data-field="id">Nombre Completo</th>
@@ -83,14 +46,14 @@
     </thead>
 
     <tbody>
-      @foreach($users as $user)
+      @foreach($estudiantes as $estudiante)
         <tr>
-          <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
-          <td> {{ $user->codigo }}</td>
-          <td> {{ $user->email }}</td>
+          <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
+          <td> {{ $estudiante->codigo }}</td>
+          <td> {{ $estudiante->email }}</td>
           <td>
-           <a onClick="abrirModalEditar({{$user->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
-           <a onClick="abrirModalEliminar({{$user->id}})" id="{{$user->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
+           <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
+           <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
           </td> 
         </tr>
       @endforeach
@@ -100,7 +63,7 @@
 
 </div>
 
- {!! $users->render()!!}
+ {!! $estudiantes->render()!!}
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante')
 @overwrite
@@ -110,7 +73,7 @@
  
 function buscar(){
  
- var ruta = "{{ route('admin.usuarios.index')}}";
+ var ruta = "{{ route('admin.estudiantes.index')}}";
  var valor = $('#search').val();
  
   $.ajax({
@@ -129,7 +92,7 @@ function buscar(){
 
 function abrirModalEliminar(id){
     var select1= $('select1').val();
-    var ruta="{{route('admin.usuarios.destroy',['%iduser%'])}}" ;
+    var ruta="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
     ruta = ruta.replace('%iduser%',id);
     var token = $('#token').val(); 
 
@@ -145,7 +108,7 @@ function abrirModalEliminar(id){
   $('#eliminar').click(function(){
 
      var valor= $("#nombre").val();
-      var ruta2="{{route('admin.usuarios.destroyupdate',['%iduser%'])}}" ;
+      var ruta2="{{route('admin.estudiantes.destroyupdate',['%iduser%'])}}" ;
       ruta2 = ruta2.replace('%iduser%',valor);
       var token = $('#token').val();
 
@@ -157,7 +120,7 @@ function abrirModalEliminar(id){
       data:{valor},
       success:function(){
         
-        window.location= "{{route('admin.usuarios.index')}}";
+        window.location= "{{route('admin.estudiantes.index')}}";
 
         
       }
@@ -172,7 +135,7 @@ function abrirModalEliminar(id){
 
   function abrirModalEditar(id){
    
-    var ruta="{{route('admin.usuarios.edit',['%iduser%'])}}" ;
+    var ruta="{{route('admin.estudiantes.edit',['%iduser%'])}}" ;
     ruta = ruta.replace('%iduser%',id);
    
    $.get(ruta,function(res){

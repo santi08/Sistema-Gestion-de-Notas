@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Estudiante;
+use App\ModelosNotas\Estudiante;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -31,7 +31,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/usuarios';
+    protected $redirectTo = '/admin/estudiantes';
     protected $username = 'codigo';
     protected $loginView ='auth.loginUser';
 

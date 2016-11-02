@@ -70,14 +70,15 @@ return [
     */
 
     'providers' => [
+    
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Estudiante::class,
+            'model' => App\ModelosNotas\Estudiante::class,
         ],
 
          'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Sesion::class,
+            'model' => App\ModelosSCAD\Sesion::class,
         ],
 
         // 'users' => [

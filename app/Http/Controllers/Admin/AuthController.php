@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Sesion;
+use App\ModelosSCAD\Sesion;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class AuthController extends Controller
      * @var string
      */
     protected $connection= 'docentes';   
-    protected $redirectTo = '/admin/usuarios';
+    protected $redirectTo = '/admin/estudiantes';
     protected $guard= 'admin';
     protected $loginView ='auth.loginAdmin';
     protected $username = 'UsuarioIdentificacion';
@@ -69,9 +69,7 @@ class AuthController extends Controller
             $password= $request->password;
           
             $request['UsuarioIdentificacion']=\DB::connection('docentes')->table('usuario')->select('id')->where('correo','=',$entrada)->value('id');
-            //$request['password'] = Hash::make($request->password);
-
-        
+          
         return $request->only($this->loginUsername(), 'password');
     }
 
@@ -107,24 +105,5 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-
-    
-    /*
-    protected function getLogin(){
-
-        return view('auth.login');
-    }
-
-    
-    protected function postLogin(){
-        
-    }
-
-    protected function getLogout(){
-        
-
-        return view('home');
-
-    }*/
 
 }

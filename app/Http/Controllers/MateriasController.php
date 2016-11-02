@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Horario;
-use App\Programaacademico;
-use App\Periodoacademico;
+use App\ModelosSCAD\Horario;
+use App\ModelosSCAD\Programaacademico;
+use App\ModelosSCAD\Periodoacademico;
 use App\Http\Requests;
-use App\Asignatura;
-use App\ProgramaacademicoAsignatura;
+use App\ModelosSCAD\Asignatura;
+use App\ModelosSCAD\ProgramaacademicoAsignatura;
 
 
 class MateriasController extends Controller

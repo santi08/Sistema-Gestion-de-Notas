@@ -33,46 +33,68 @@ Route::get('login',function(){
 
 Route::group( ['prefix'=>'admin'],function(){
 
+
+  Route::group( ['prefix'=>'secretario'],function(){
+
+
+
+  });
+
+
+  Route::group( ['prefix'=>'coordinador'],function(){
+
+
+
+  });
+  
+
+  Route::group( ['prefix'=>'docente'],function(){
+
+
+
+  });
+
+
 	Route::resource('profesoresIndex','ProfesoresController');
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
-  Route::resource('usuarios','controladorUsuarios');
+  Route::resource('estudiantes','EstudiantesController');
 
    
    //cargar inforcavion en el modal eliminar
    Route::get('usuarios/{id}/destroy',[
-     'uses' =>'controladorUsuarios@destroy',
-      'as' => 'admin.usuarios.destroy']);
+     'uses' =>'EstudiantesController@destroy',
+      'as' => 'admin.estudiantes.destroy']);
 
   Route::resource('notasIndex','NotasController');
 
    
   //cargar inforcavion en el modal eliminar
-  Route::get('usuarios/{id}/destroy',[
-    'uses' =>'controladorUsuarios@destroy',
-    'as' => 'admin.usuarios.destroy'
+  Route::get('estudiantes/{id}/destroy',[
+    'uses' =>'EstudiantesController@destroy',
+    'as' => 'admin.estudiantes.destroy'
     ]);
    // activa la accion eliminar en el modal
-   Route::put('usuarios/{id}/destroyupdate',[
-     'uses' =>'controladorUsuarios@destroyupdate',
-      'as' => 'admin.usuarios.destroyupdate'
+   Route::put('estudiantes/{id}/destroyupdate',[
+     'uses' =>'EstudiantesController@destroyupdate',
+      'as' => 'admin.estudiantes.destroyupdate'
     ]);
    //guardar Estudiantes
-   Route::post('usuarios/guardar',[
-     'uses' =>'controladorUsuarios@guardarEstudiante',
-      'as' => 'admin.usuarios.guardarEstudiante'
+   Route::post('estudiantes/guardar',[
+     'uses' =>'EstudiantesController@guardarEstudiante',
+      'as' => 'admin.estudiantes.guardarEstudiante'
     ]);
 
    //cargar informacion editarEstudiante
-   Route::get('usuarios/editar/{id}',[
-     'uses' =>'controladorUsuarios@edit',
-      'as' => 'admin.usuarios.edit'
+   Route::get('estudiantes/editar/{id}',[
+     'uses' =>'EstudiantesController@edit',
+      'as' => 'admin.estudiantes.edit'
     ]);
 
    //editarEstudiante
-   Route::post('usuarios/editar',[
-     'uses' =>'controladorUsuarios@editar',
-      'as' => 'admin.usuarios.editar'
+   Route::post('estudiantes/editar',[
+     'uses' =>'EstudiantesController@editar',
+      'as' => 'admin.estudiantes.editar'
     ]);
 
 
@@ -94,6 +116,14 @@ Route::group( ['prefix'=>'admin'],function(){
   
 
 });
+
+
+Route::group( ['prefix'=>'estudiante'],function(){
+
+
+
+});
+
 
 Route::get('login/estudiantes',[
  'uses' => 'Auth\AuthController@showLoginForm',
