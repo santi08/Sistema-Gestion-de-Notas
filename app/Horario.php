@@ -33,6 +33,11 @@ class Horario extends Model
         return $this->belongsTo('App\Usuario', 'UsuarioID');
     }
 
+    public function matriculas(){
+
+        return $this->hasMany('App\Matricula');
+    }
+
     public function programaAcademicoAsignatura(){
 
         return $this->belongsTo ('App\ProgramaacademicoAsignatura', 'AsignaturaId');
@@ -47,10 +52,7 @@ class Horario extends Model
     }
 
 
-        return $this->belongsTo('App\ProgramaacademicoAsignatura', 'AsignaturaId');
-    }
-
-
+   
     public function scopeAsignaturas($query,$programa)
     {
         

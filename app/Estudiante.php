@@ -31,4 +31,9 @@ class Estudiante extends Authenticatable
 
         $query->where('codigo','like',$codigo.'%');
     }
+
+     public function matriculas(){
+
+        return $this->hasMany('App\Matricula');
+    }
 }

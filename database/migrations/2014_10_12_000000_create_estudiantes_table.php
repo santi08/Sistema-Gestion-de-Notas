@@ -14,10 +14,10 @@ class CreateEstudiantesTable extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('secondname');
-            $table->string('lastname');
-            $table->string('secondlastname');
+            $table->string('primerNombre');
+            $table->string('segundoNombre');
+            $table->string('primerApellido');
+            $table->string('segundoApellido');
             $table->string('codigo');
             $table->string('email')->unique();
             $table->string('password');

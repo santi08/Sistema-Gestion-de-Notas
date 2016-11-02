@@ -31,7 +31,7 @@ Route::get('login',function(){
 	return view('auth.login');
 });
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group( ['prefix'=>'admin'],function(){
 
 	Route::resource('profesoresIndex','ProfesoresController');
 	Route::resource('materiasIndex','MateriasController');
@@ -42,7 +42,7 @@ Route::group(['prefix'=>'admin'],function(){
    //cargar inforcavion en el modal eliminar
    Route::get('usuarios/{id}/destroy',[
      'uses' =>'controladorUsuarios@destroy',
-      'as' => 'admin.usuarios.destroy'
+      'as' => 'admin.usuarios.destroy']);
 
   Route::resource('notasIndex','NotasController');
 
@@ -53,12 +53,12 @@ Route::group(['prefix'=>'admin'],function(){
     'as' => 'admin.usuarios.destroy'
     ]);
    // activa la accion eliminar en el modal
-   Route::PUT('usuarios/{id}/destroyupdate',[
+   Route::put('usuarios/{id}/destroyupdate',[
      'uses' =>'controladorUsuarios@destroyupdate',
       'as' => 'admin.usuarios.destroyupdate'
     ]);
    //guardar Estudiantes
-   Route::POST('usuarios/guardar',[
+   Route::post('usuarios/guardar',[
      'uses' =>'controladorUsuarios@guardarEstudiante',
       'as' => 'admin.usuarios.guardarEstudiante'
     ]);
@@ -70,7 +70,7 @@ Route::group(['prefix'=>'admin'],function(){
     ]);
 
    //editarEstudiante
-   Route::POST('usuarios/editar',[
+   Route::post('usuarios/editar',[
      'uses' =>'controladorUsuarios@editar',
       'as' => 'admin.usuarios.editar'
     ]);

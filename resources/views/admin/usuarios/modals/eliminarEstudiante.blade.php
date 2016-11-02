@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!--aqui esta el boton de crear Usuario-->
   
   <div class="row ">
@@ -18,7 +17,6 @@
        <a href="#!" class="modal-action modal-close waves-effect waves-red red btn-flat">Cancelar</a>
        <a href="{{ route('admin.usuarios.destroy',$user->id)}}" class=" modal-action modal-close waves-effect waves-green green btn-flat">Aceptar</a>
        </div> 
-=======
 @extends('layouts.modal')
 @section('id')'eliminarEstudiante'
 @overwrite
@@ -37,7 +35,6 @@
         <a>
           <center><h4>Eliminara a: <p class="black-text"> </p> </h4></center>
         </a>
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
       </div>
     </div> 
 @endsection

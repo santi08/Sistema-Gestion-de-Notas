@@ -19,21 +19,20 @@ use DB;
 class controladorUsuarios extends Controller
 {
     
-<<<<<<< HEAD
-    public function index(){
+    public function index(Request $requests){
 
 
      $users= Estudiante::orderby('id','ASC')->paginate(10);
-=======
-    public function index(Request $requests){
+
+   
      //$users=User::paginate(1);
      //$users= User::orderBy('firstname')->where('estado',1)->paginate(1);
-     $users= User::codigo($requests->get('valor'))->orderBy('id','ASC')->paginate(10);
+     $users= Estudiante::codigo($requests->get('valor'))->orderBy('id','ASC')->paginate(10);
 
      if($requests->ajax()){
        return response()->json(view('admin.usuarios.part.mostrar',compact('users'))->render());
      }
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
+
      return view('admin.usuarios.index')->with('users',$users);
     }
 
@@ -45,7 +44,7 @@ class controladorUsuarios extends Controller
     public function store(Request $requests){
     
 
-    $user= new User($requests->all());
+    $user= new Estudiante($requests->all());
     $contraseña=$this->crearContraseña($user);
     //$user->password=bcrypt($contraseña);
     $user->password=$contraseña;

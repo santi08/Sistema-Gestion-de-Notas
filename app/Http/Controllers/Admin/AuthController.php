@@ -54,17 +54,6 @@ class AuthController extends Controller
     }
 
 
-    protected function encriptarPassword(Request $request){
-
-        $usuario = \DB::connection('docentes')->table('usuario')->select('id')->where('correo','=',$entrada)->value('id');
-        $passwordFormulario = $request->password;
-        $passwordBD= \DB::connection('docentes')->table('sesion')->select('Contrasena')->where(['UsuarioIdentificacion','=',$usuario],['Contrasena','=',$passwordFormulario])->value('Contrasena');
-
-    }
-
-
-
-
      public function validateCredentials(UserContract $user, array $credentials)
     {
         $plain = $credentials['password'];

@@ -8,10 +8,8 @@ use App\Programaacademico;
 use App\Periodoacademico;
 use App\Http\Requests;
 use App\Asignatura;
-use App\Programaacademico;
-use App\Periodoacademico;
 use App\ProgramaacademicoAsignatura;
-use App\Horario;
+
 
 class MateriasController extends Controller
 {

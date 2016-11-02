@@ -102,7 +102,7 @@
 						
 
 			<div class="paginate">
-				{{ $profesores->count()}}
+				{{ $profesores->render()}}
 
 
 			</div>

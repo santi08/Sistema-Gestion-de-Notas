@@ -4,11 +4,9 @@
 
 
 @section('content')
-<<<<<<< HEAD
+
 
   <br> <br>
-=======
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
 
   <br> <br>
 <!--campo buscar y registrar-->
@@ -36,7 +34,7 @@
 
 <div class="row" id="Estudiantes">
  	<table class="col highlight responsive-table bordered">
-<<<<<<< HEAD
+
         <thead>
           <tr>
               <th data-field="id">Nombre Completo</th>
@@ -63,9 +61,6 @@
           </tr>
           <tr>
             <td>
-            @foreach (Auth::guard('admin')->user()->sesionRoles as $roles )
-                {{$roles->rol->Nombre}}
-            @endforeach
              
             </td>
           </tr>
@@ -77,7 +72,7 @@
 
  </div>
   
-=======
+
     <thead>
       <tr>
        <th data-field="id">Nombre Completo</th>
@@ -105,7 +100,6 @@
 
 </div>
 
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
  {!! $users->render()!!}
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante')

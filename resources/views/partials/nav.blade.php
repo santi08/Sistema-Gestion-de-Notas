@@ -1,6 +1,5 @@
   
   <ul id="usuario" class="dropdown-content">
-<<<<<<< HEAD
     <li>
     <a href="#!">Ver perfil</a></li>
     <li>
@@ -19,11 +18,10 @@
       </li>
     <li class="divider"></li>
   
-=======
+
     <li><a href="#!">Ver perfil</a></li>
     <li><a href="#!">Cerrar Sesión</a></li>
     <li class="divider"></li> 
->>>>>>> 5d61f77ba49863e098fdecb0e76bde2ab93e8811
   </ul>
 
 
