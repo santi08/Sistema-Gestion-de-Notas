@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+         'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -65,9 +70,15 @@ return [
     */
 
     'providers' => [
+    
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\ModelosNotas\Estudiante::class,
+        ],
+
+         'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\ModelosSCAD\Sesion::class,
         ],
 
         // 'users' => [

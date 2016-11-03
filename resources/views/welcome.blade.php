@@ -6,5 +6,5 @@
 
 @section('content')
 
-    <h2>SISTEMA DE REGISTRO DE NOTAS</h2>
+    <h3>Sistema de Control Académico Universitario</h3>
 @endsection

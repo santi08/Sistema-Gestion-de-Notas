@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class AddFieldSesion extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->integer('idrol');
+        Schema::connection('docentes')->table('sesion', function (Blueprint $table) {
+            //
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,6 +26,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::table('sesion', function (Blueprint $table) {
+            //
+        });
     }
 }
