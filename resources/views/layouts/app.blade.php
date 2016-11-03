@@ -28,16 +28,37 @@
         
         
         <div class="row">
-            <div class="col l4 m6 ">
+            <div class="col l2 m6 ">
                 
             </div>
-            <div class="col l8 m6 card-panel"> 
+            <div class="col l10 m6 card-panel"> 
+            @if (Auth::guard('admin')->check())
+
+                    @if (count(Auth::guard('admin')->user()->sesionRoles) > 1)
+                        <div class="row col s3">
+                        <label>Seleccione su rol</label>
+                             <select>
+                              @foreach (Auth::guard('admin')->user()->sesionRoles as $rol)
+                                
+                                <option>{{ $rol->rol->Nombre}}</option>
+                              @endforeach
+                               
+                             </select>
+
+                         </div>
+                    @endif
+                  
+                @endif
                   @yield('content')
             </div>
 
         </div>
         <!-- JavaScripts  y jquery-->
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+    
+
+
+
 
 
     @yield('scripts')
@@ -83,6 +104,7 @@
             });
 
         </script>
+
         <script>
             var startSlider = document.getElementById('slider-start');
 
