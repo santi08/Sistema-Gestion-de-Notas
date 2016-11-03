@@ -6,56 +6,8 @@
 
 
 	<div class="row">
-
-		<div class="col s12 m12 l12">
-				<div class="row">
-
-			<div class="input-fiel col s3">
-				<label>Periodo Academico</label>		
-				<select>
-					<option value="1" disabled selected>Seleccione una opción</option>
-					@foreach($PeriodosAcademicos as $PeriodoAcademico)
-						  			
-				    <option value="{{ $PeriodoAcademico->Id}}">
-				    {{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
-				    </option>
-
-					@endforeach
-						  			
-				</select>
-					  	
-			</div>	
-			
-
-			
-					<div class="input-fiel col s5">
-						<label>Programa Academico</label>
-						<select>
-							<option value="" disabled selected>Seleccione una opción</option>
-
-							@foreach($ProgramasAcademicos as $ProgramaAcademico)
-								@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-									<option value="{{$ProgramaAcademico->id}}">		
-									
-									{{ $ProgramaAcademico->NombrePrograma }}
-								</option>
-								@endif
-							@endforeach
-						
-						</select>
-						
-						  			
-					</div>
-  				
-
-			
-		
-		</div>
 			<div class="row">
-
-			
-
-			{!!Form::model(Request::all(),['route'=>'admin.materiasIndex.index','method'=>'GET'])!!}
+				{!!Form::model(Request::all(),['route'=>'admin.materiasIndex.index','method'=>'GET'])!!}
 				<div class="input-field col s5 l5 m4 fuentes" >
 					
     				<select id="programas" name="programas">
@@ -97,64 +49,35 @@
 							<th>Acciones</th>
 						</thead>
 
-						@foreach ($asignaturas as $asignatura)
-						<tr>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-							<td>{{ $asignatura->Grupo}}</td>
-							<td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
-
-							  <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
-
-							   <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
-
-							</td>
-
-
-								
-						</tr>
-						@endforeach
-						
-
 						<tbody>
 
-							@foreach($horarios as $horario)
-								<tr>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-									<td>{{$horario->Grupo}}</td>
-									<td>
-										<a class="btn-floating red"><i class="material-icons">picture_as_pdf</i></a></li>
-										<a class="btn-floating light-blue darken-3"><i class="material-icons">insert_chart</i></a></li>
-										<a class="btn-floating  grey darken-1"><i class="material-icons">visibility</i></a></li>
-									</td>
-								</tr>
-							@endforeach
-					
-						</tbody>
+						@foreach ($asignaturas as $asignatura)
+							<tr>
+								<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
+								<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
+								<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
+								<td>{{ $asignatura->Grupo}}</td>
+								<td><a href="#" class="btn-floating btn-small waves-effect waves-light red 		modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+
+							  	<a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
+
+							   	<a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+
+								</td>
+						</tr>
+
+						@endforeach
+					</tbody>
 					</table>
 
 					<div>
 						{{ $asignaturas->render() }}
 					</div>
-
-
-					{!!$horarios->render()!!}
-
-
 				</div>
 					
-			</div>
-
-			
+			</div>	
 	
 		</div>
-
-	</div>
-
-
 
 @endsection
 
@@ -167,9 +90,8 @@
 				
 				var programa = $('#programas').val();
         		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.materiasIndex.filterAjax',['%idprograma%','%idperiodo%'])}}";
-        		ruta=ruta.replace('%idprograma%',programa);
-        		ruta=ruta.replace('%idperiodo%',periodo);
+        		ruta = "{{route('admin.materiasIndex.filterAjax')}}";
+        		
         		console.log(ruta);
         		
         		$.ajax({
@@ -177,21 +99,24 @@
             		url: ruta,
             		data: {programa:programa,periodo:periodo},
             		
-            		success: function(data) {	
-            			$("#tabla").html(data);	
-            		}
+            		success: function(data) {
+                        $("#tabla").html(data);
+
+                        //console.log("entro");
+
+            		} 
             		
         		});
 
-        	});			
+        	   });
+                     			
 //si selecciona un periodo academico se envia la peticion 
         	$("#periodos").change(function() {
 				
 				var programa = $('#programas').val();
         		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.materiasIndex.filterAjax',['%idprograma%','%idperiodo%'])}}";
-        		ruta=ruta.replace('%idprograma%',programa);
-        		ruta=ruta.replace('%idperiodo%',periodo);
+        		ruta = "{{route('admin.materiasIndex.filterAjax')}}";
+        		
         		console.log(ruta);
         		
         		$.ajax({

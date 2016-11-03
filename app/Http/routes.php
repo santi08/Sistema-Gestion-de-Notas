@@ -74,7 +74,7 @@ Route::group( ['prefix'=>'admin'],function(){
       'as' => 'admin.estudiantes.editar'
     ]);
 
-    Route::get('materiasIndex/{programaid}/{periodoid}',[
+    Route::get('filtros',[
      'uses' =>'MateriasController@filterAjax',
       'as' => 'admin.materiasIndex.filterAjax'
     ]);

@@ -26,10 +26,10 @@
         
         
         <div class="row">
-            <div class="col l4 m6 ">
+            <div class="col l4 m6  ">
                 
             </div>
-            <div class="col l8 m6 card-panel"> 
+            <div class="col l8 m12 s12 card-panel"> 
                   @yield('content')
             </div>
 

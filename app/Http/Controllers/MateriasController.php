@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\ModelosSCAD\Horario;
 use App\ModelosSCAD\Programaacademico;
 use App\ModelosSCAD\Periodoacademico;
-use App\Http\Requests;
 use App\ModelosSCAD\Asignatura;
 use App\ModelosSCAD\ProgramaacademicoAsignatura;
 
@@ -18,36 +17,23 @@ class MateriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
 
-         $ProgramasAcademicos = Programaacademico::all(); 
-            $PeriodosAcademicos = Periodoacademico::all();
-
-        $asignaturas =  Horario::orderBy('Id','asc')->paginate(10); 
-
-
-    $asignaturas2 = Horario::whereHas('programaAcademicoAsignatura', function ($query) {
-                                $query->where('programaacademicoId', '=', '2');
-                            })->paginate(10);
-        
-         return view('admin.materias.materiasIndex')->with('asignaturas',$asignaturas)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
-        $programas = Programaacademico::all();
+        $programas = Programaacademico::all(); 
         $periodos = Periodoacademico::all();
-        $horarios = Horario::orderBy('Id','ASC')->paginate(10);
-        $vista = view('admin.materias.partialTable')->with('horarios',$horarios);
-        if ($request->ajax()) {
-            return response()->json($vista->render());
-        }
-           
-        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('horarios',$horarios);
-                   
+
+        $asignaturas =  Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10); 
+       
+        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);              
     }
 
-    public function filterAjax(Request $request, $idprograma,$idperiodo){
+    public function filterAjax(Request $request){
 
-        $horarios = Horario::asignaturas($idprograma)->periodo($idperiodo)->paginate(10);
-            $vista = view('admin.materias.partialTable')->with('horarios',$horarios);  
+        $asignaturas = Horario::asignaturas($request->get('programa'))->periodo($request->get('perido'))->paginate(10);
+
+        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas); 
+
         if ($request->ajax()) {
             return response()->json($vista->render());
         }  
