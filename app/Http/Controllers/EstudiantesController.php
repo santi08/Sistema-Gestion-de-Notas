@@ -184,26 +184,11 @@ class EstudiantesController extends Controller
     }
 
     public function destroy($id){
-     $usuario = User::find($id);
-     
+     $estudiante = Estudiante::find($id);
+    
      return response()->json(
-        $usuario->toArray()
+        $estudiante->toArray()
      );
-
-
-
-  
-
-     /*$vista= view('admin.usuarios.modals.index')->with('usuario',$usuario);
-     return response(['body'=>$vista->render()]);*/
-     
-
-     /*$user = User::find($id);
-     $user->estado = 0;
-     $user->save();
-     
-     return redirect(route('admin.usuarios.index')); */
-
 
     }
 
@@ -211,7 +196,7 @@ class EstudiantesController extends Controller
 
     public function editar(Request $requests){
      
-     $user = User::find($requests->id);
+     $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
      
@@ -221,7 +206,7 @@ class EstudiantesController extends Controller
     
     public function edit($id){
 
-        $estudiante=User::find($id);
+        $estudiante=Estudiante::find($id);
 
         return response()->json(
             $estudiante->toArray()
@@ -229,7 +214,7 @@ class EstudiantesController extends Controller
     } 
 
     public function destroyupdate(Request $requests,$id){
-     $user= User::find($id);
+     $user= Estudiante::find($id);
      $user->estado=0;
      $user->save();
      

@@ -66,11 +66,13 @@
 </div>
 
  {!! $estudiantes->render()!!}
+
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante')
 @overwrite
 
 @section('scripts')
+
 <script type="text/javascript">
  
 function buscar(){
@@ -93,17 +95,16 @@ function buscar(){
   }     
 
 function abrirModalEliminar(id){
-    var select1= $('select1').val();
     var ruta="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
-    ruta = ruta.replace('%iduser%',id);
-    var token = $('#token').val(); 
-
+    ruta = ruta.replace('%iduser%',id); 
+    var ide= id;
+    
     $.get(ruta,function(res){
-      var nombre = res.firstname+" "+res.secondname+" "+res.lastname;
+      var nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido;
       $("#nombre").val(res.id);
       $('p').text(nombre);
       $('#eliminarEstudiante').openModal();
-      });
+      }); 
 
     }
     
@@ -142,12 +143,12 @@ function abrirModalEliminar(id){
    
    $.get(ruta,function(res){
     $('#id').val(res.id);
-    nombre = res.firstname+" "+res.secondname+" "+res.lastname+" "+res.secondlastname;
+    nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido+" "+res.segundoApellido;
     $('p').text(nombre);
-    $("#firstname").val(res.firstname);
-    $("#segundoNombre").val(res.secondname);
-    $("#primerApellido").val(res.lastname);
-    $("#segundoApellido").val(res.secondlastname);
+    $("#firstname").val(res.primerNombre);
+    $("#segundoNombre").val(res.segundoNombre);
+    $("#primerApellido").val(res.primerApellido);
+    $("#segundoApellido").val(res.segundoApellido);
      $("#email").val(res.email);
     $("#codigo2").val(res.codigo);
     $('#editarEstudiante').openModal();

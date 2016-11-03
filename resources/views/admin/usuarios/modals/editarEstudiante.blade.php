@@ -14,20 +14,20 @@
        <input type="hidden" name="id" id="id">
       <div class="row">
         <div class="col s6 input-field">
-        {!!Form::text('firstname',null,['placeholder'=>'', 'id'=>'firstname', 'class'=>'validate','type'=>'text','required' ])!!}
+        {!!Form::text('primerNombre',null,['placeholder'=>'', 'id'=>'firstname', 'class'=>'validate','type'=>'text','required' ])!!}
         {!!Form::label('firstname','Primer Nombre',['class'=>'active', 'for'=>"first_name"])!!}
         </div>
         <div class="col s6 input-field">
-        {!!Form::text('secondname',null,['placeholder'=> "",'class'=> 'validate','id'=>'segundoNombre','type'=>'text'])!!}
+        {!!Form::text('segundoNombre',null,['placeholder'=> "",'class'=> 'validate','id'=>'segundoNombre','type'=>'text'])!!}
         {!!Form::label ('secondname','Segundo Nombre',['for'=>'second_name'])!!}
         </div>
         <div class="col s6 input-field">
-        {!!Form::text('lastname',null,['placeholder'=>'','class'=>'validate','id'=>'primerApellido','type'=>'text','required'])!!}
+        {!!Form::text('primerApellido',null,['placeholder'=>'','class'=>'validate','id'=>'primerApellido','type'=>'text','required'])!!}
         {!!Form::label ('lastname','Primer Apellido',['for'=> 'last_name'])!!}
         </div>
         <div class="col s6 input-field">
-        {!!Form::text('secondlastname',null,['placeholder'=>'','class'=>'validate','id'=>'segundoApellido','type'=>'text','required'])!!}
-        {!!Form::label ('secondlastname','Primer Apellido',['for'=>'secondlast_name'])!!}
+        {!!Form::text('segundoApellido',null,['placeholder'=>'','class'=>'validate','id'=>'segundoApellido','type'=>'text','required'])!!}
+        {!!Form::label ('secondlastname','Segundo Apellido',['for'=>'secondlast_name'])!!}
         </div>
         <div class="col s6 input-field">
         {!!Form::label ('email','Correo Electronico',['for'=>'email'])!!}

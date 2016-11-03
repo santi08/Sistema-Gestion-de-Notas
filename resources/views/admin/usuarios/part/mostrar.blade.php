@@ -12,15 +12,15 @@
         </thead>
 
         <tbody>
-          @foreach($users as $user)
+          @foreach($estudiantes as $estudiante)
           
           <tr>
-             <td> {{ $user->firstname}} {{$user->secondname}} {{$user->lastname}}</td>
-             <td> {{ $user->codigo }}</td>
-             <td> {{ $user->email }}</td>
+             <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
+             <td> {{ $estudiante->codigo }}</td>
+             <td> {{ $estudiante->email }}</td>
              <td>
-             <a onClick="abrirModalEditar({{$user->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
-             <a onClick="abrirModalEliminar({{$user->id}})" id="{{$user->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
+             <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
+             <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
              
              </td> 
           </tr>
@@ -29,4 +29,4 @@
         </tbody>
       </table>
 
- {!! $users->render()!!}
+ {!! $estudiantes->render()!!}
