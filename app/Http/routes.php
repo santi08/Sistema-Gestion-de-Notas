@@ -17,16 +17,6 @@ Route::get('/', function () {
 
 
 
-
-//Route::auth('login','Auth/AuthController@getLogin');
-/*Route::auth('login','Auth\AuthController@getLogin');
-Route::post('login','Auth\AuthController@getLogin');
-
-Route::get('admin/profesores','ProfesoresController@index');
-
-
-*/
-
 Route::get('login',function(){
 	return view('auth.login');
 });
@@ -36,21 +26,15 @@ Route::group( ['prefix'=>'admin'],function(){
 
   Route::group( ['prefix'=>'secretario'],function(){
 
-
-
   });
 
 
   Route::group( ['prefix'=>'coordinador'],function(){
 
-
-
   });
   
 
   Route::group( ['prefix'=>'docente'],function(){
-
-
 
   });
 
@@ -59,18 +43,10 @@ Route::group( ['prefix'=>'admin'],function(){
 	Route::resource('materiasIndex','MateriasController');
 	Route::resource('informesIndex','InformesController');
   Route::resource('estudiantes','EstudiantesController');
-
-   
-   //cargar inforcavion en el modal eliminar
-   Route::get('usuarios/{id}/destroy',[
-     'uses' =>'EstudiantesController@destroy',
-      'as' => 'admin.estudiantes.destroy']);
-
   Route::resource('notasIndex','NotasController');
-
    
-  //cargar inforcavion en el modal eliminar
-  Route::get('estudiantes/{id}/destroy',[
+  //cargar informacion en el modal eliminar
+  Route::GET('estudiantes/{id}/destroy',[
     'uses' =>'EstudiantesController@destroy',
     'as' => 'admin.estudiantes.destroy'
     ]);
@@ -79,6 +55,7 @@ Route::group( ['prefix'=>'admin'],function(){
      'uses' =>'EstudiantesController@destroyupdate',
       'as' => 'admin.estudiantes.destroyupdate'
     ]);
+   
    //guardar Estudiantes
    Route::post('estudiantes/guardar',[
      'uses' =>'EstudiantesController@guardarEstudiante',
@@ -96,17 +73,6 @@ Route::group( ['prefix'=>'admin'],function(){
      'uses' =>'EstudiantesController@editar',
       'as' => 'admin.estudiantes.editar'
     ]);
-
-
-
-   
-  //Route::get('login','Admin\AuthController@showLoginForm');
- // Route::post('login','Admin\AuthController@login');
-   
-   //Route::get('logout','Admin\AuthController@logout');
-
-   
-   
 
     Route::get('materiasIndex/{programaid}/{periodoid}',[
      'uses' =>'MateriasController@filterAjax',

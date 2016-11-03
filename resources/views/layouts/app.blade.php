@@ -5,16 +5,14 @@
         <title>@yield('title','default')</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
-
-         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/nouislider.css')}}">
+         
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
-
+        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
-        <meta charset="utf-8">
-        <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
+        
+        
     </head>
 
     <body id="app-layout">
@@ -38,34 +36,19 @@
         </div>
         <!-- JavaScripts  y jquery-->
         <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
-
-
-    @yield('scripts')
-
-        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
+    
+        @yield('scripts')
 
         <script type="text/javascript">
             $( document ).ready(function(){
-               // $(".button-collapse").sideNav();
                 $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();
                 $('.dropdown-button').dropdown('open');
-                $('.modal-trigger').leanModal();
+                
                 $('.tooltipped').tooltip({delay: 50});
 
-
-
-                
-                $("a.delete").confirm();
-
-                $('.modal-trigger').leanModal();
                 $('select').material_select();
                 
-
-
-                
-                $("a.delete").confirm();
-
 
             });
         </script>
@@ -83,23 +66,8 @@
             });
 
         </script>
-        <script>
-            var startSlider = document.getElementById('slider-start');
+        
 
-            noUiSlider.create(startSlider, {
-                start: [20, 80],
-                range: {
-                    'min': [ 0 ],
-                    'max': [ 100 ]
-                }
-            });
-        </script>
-
-
-        <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
-  <script type="text/javascript">
-  </script>
-
- 
+  <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>
 </html>

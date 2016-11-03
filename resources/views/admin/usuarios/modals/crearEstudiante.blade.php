@@ -18,7 +18,7 @@
         {!!Form::label('firstname','Primer Nombre',['for'=>"first_name"])!!}
         </div>
         <div class="col s6 input-field">
-        {!!Form::text('segundoNombre,',null,['class'=> 'validate','id'=>'second_name','type'=>'text'])!!}
+        {!!Form::text('segundoNombre',null,['class'=> 'validate','id'=>'second_name','type'=>'text'])!!}
         {!!Form::label ('secondname','Segundo Nombre',['for'=>'second_name'])!!}
         </div>
         <div class="col s6 input-field">

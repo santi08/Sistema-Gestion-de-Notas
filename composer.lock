@@ -4,13 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "5c224c52d5ff51c72b3e9c10a74c62ac",
-    "content-hash": "fdb76276675694797e0c282f52a480aa",
-=======
     "hash": "9d36c0feae0cd75b57541904d66fad94",
     "content-hash": "b880833b7301d5d0fd5bf57abfba1b7c",
->>>>>>> 84b08412ba224ca238fddc2b2fc8e227254897ce
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -890,8 +885,6 @@
                 "storage"
             ],
             "time": "2016-10-19 20:38:46"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "maatwebsite/excel",
@@ -959,7 +952,6 @@
                 "laravel"
             ],
             "time": "2016-09-15 21:03:21"
->>>>>>> 84b08412ba224ca238fddc2b2fc8e227254897ce
         },
         {
             "name": "maximebf/debugbar",
@@ -1291,10 +1283,6 @@
             "time": "2016-03-18 20:34:03"
         },
         {
-<<<<<<< HEAD
-            "name": "psr/log",
-            "version": "1.0.2",
-=======
             "name": "phpoffice/phpexcel",
             "version": "1.8.1",
             "source": {
@@ -1354,7 +1342,6 @@
         {
             "name": "psr/http-message",
             "version": "1.0.1",
->>>>>>> 84b08412ba224ca238fddc2b2fc8e227254897ce
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
