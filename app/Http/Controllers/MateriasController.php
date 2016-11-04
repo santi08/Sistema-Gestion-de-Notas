@@ -18,31 +18,22 @@ class MateriasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-        $programas = Programaacademico::all(); 
+    {   
+        $programas = Programaacademico::all();
         $periodos = Periodoacademico::all();
-
-        $asignaturas =  Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10); 
-       
-        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);              
+        
+        $asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10); 
+        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
     }
 
     public function filterAjax(Request $request){
 
-        $asignaturas = Horario::asignaturas($request->get('programa'))->periodo($request->get('perido'))->paginate(10);
-
-        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas); 
-
+        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->paginate(10);
+        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);  
         if ($request->ajax()) {
             return response()->json($vista->render());
-        }  
-
+        } 
     }
-
-
-
-    
 
     /**
      * Show the form for creating a new resource.

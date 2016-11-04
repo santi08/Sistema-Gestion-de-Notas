@@ -52,7 +52,7 @@
 </div>
   
   
-      <ul id="slide-out" class="side-nav fixed gradient-side ">
+      <ul id="slide-out" class="side-nav fixed gradient-side" style="width: 217px;">
          <li class=""><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
         
 

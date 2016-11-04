@@ -5,7 +5,9 @@
         <title>@yield('title','default')</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
-         
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
+        
+         <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
         
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,10 +28,8 @@
         
         
         <div class="row">
-            <div class="col l4 m6  ">
-                
-            </div>
-            <div class="col l8 m12 s12 card-panel"> 
+            
+            <div class="col l10 m12 s12 card-panel" style="margin-left: 16.5%;"> 
                   @yield('content')
             </div>
 
@@ -43,12 +43,9 @@
             $( document ).ready(function(){
                 $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();
-                $('.dropdown-button').dropdown('open');
-                
+                $('.dropdown-button').dropdown('open');      
                 $('.tooltipped').tooltip({delay: 50});
-
-                $('select').material_select();
-                
+                $('select').material_select();      
 
             });
         </script>

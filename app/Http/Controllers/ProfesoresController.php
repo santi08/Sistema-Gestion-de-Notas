@@ -24,31 +24,35 @@ class ProfesoresController extends Controller
      */
     public function index()
     {
+        
+        $ProgramasAcademicos = Programaacademico::all(); 
+        $PeriodosAcademicos = Periodoacademico::all();
 
-
-
-           
-            $ProgramasAcademicos = Programaacademico::all(); 
-            $PeriodosAcademicos = Periodoacademico::all();
-
-           //$profesores = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->orderBy('usuario.Nombre','asc')->paginate(10);
-
-          $profesores = Horario::distinct()
+        $profesores = Horario::distinct()
                                 ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                   'programaacademico_asignatura.Id')
                                 ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
                                 ->join('usuario','horario.UsuarioID','=','usuario.Id')
                                 ->select('programaacademico.Id','usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
                                 ->orderBy('usuario.Nombre')->paginate(10);
 
-                                //dd($profesores);
-
-                
-
-
-
       return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
-       
+    
+    }
 
+     public function filterAjax(Request $request){
+
+         $profesores = Horario::distinct()
+                                ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                   'programaacademico_asignatura.Id')
+                                ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
+                                ->join('usuario','horario.UsuarioID','=','usuario.Id')
+                                ->select('programaacademico.Id','usuario.id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')->where('horario.PeriodoAcademicoId','=',$request->get('periodo'))->where('programaacademico_asignatura.programaacademicoId', '=', $request->get('programa'))
+                                ->orderBy('usuario.Nombre')->paginate(10);  
+                                
+        $vista = view('admin.profesores.partialTable')->with('profesores',$profesores); 
+         
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        } 
     }
 
 

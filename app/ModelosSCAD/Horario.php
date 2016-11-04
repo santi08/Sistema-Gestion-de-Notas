@@ -43,12 +43,21 @@ class Horario extends Model
         return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
-      public function scopePrograma ($query){
+    public function scopeProgramaprofesores($query,$periodo){
 
-       
+       if(!empty($periodo)){
+            $query->where('horario.PeriodoAcademicoId','=',$periodo);
+
+        }
     }
 
+    public function scopePeriodoprofesores($query,$programa){
 
+       if(!empty($periodo)){
+            $query->where('programaacademico_asignatura.programaacademicoId', '=', $programa);
+
+        }
+    }
    
     public function scopeAsignaturas($query,$programa)
     {
@@ -57,7 +66,7 @@ class Horario extends Model
             
                 $query->whereHas('programaAcademicoAsignatura', function ($query)  use($programa) {
                                 $query->where('programaacademicoId', '=', $programa);
-                })->get();
+                            })->get();
         }
 
     }
@@ -70,6 +79,5 @@ class Horario extends Model
         }
         
     }
-
         
 }

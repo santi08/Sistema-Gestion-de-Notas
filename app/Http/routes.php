@@ -74,9 +74,14 @@ Route::group( ['prefix'=>'admin'],function(){
       'as' => 'admin.estudiantes.editar'
     ]);
 
-    Route::get('filtros',[
+    Route::get('filtrosAsignaturas',[
      'uses' =>'MateriasController@filterAjax',
       'as' => 'admin.materiasIndex.filterAjax'
+    ]);
+
+    Route::get('filtrosProfesores',[
+     'uses' =>'ProfesoresController@filterAjax',
+      'as' => 'admin.profesoresIndex.filterAjax'
     ]);
 
   
