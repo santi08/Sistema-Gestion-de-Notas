@@ -35,10 +35,29 @@ class Estudiante extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function scopeCodigo($query,$codigo){
+    public function scopeCodigo($query,$usuario,$periodo){
 
-        $query->where('codigo','like',$codigo.'%');
+        if(empty($periodo)){
+          $query->where('codigo','like',$usuario.'%')
+              ->orwhere('primerNombre','like',$usuario.'%')
+              ->orwhere('segundoNombre','like',$usuario.'%')
+              ->orwhere('primerApellido','like',$usuario.'%')
+              ->orwhere('email','like',$usuario.'%');  
+        }else {
+             $query->join('matriculas','estudiantes.id','=','matriculas.estudiante_id')
+                                        ->join('univalle_docentes.horario','matriculas.horario_id','=','univalle_docentes.horario.id')
+                                        ->where('univalle_docentes.horario.PeriodoAcademicoId',$periodo)->get();
+        }
     }
+
+    public function scopePeriodo($query,$periodo){
+
+        $query->join('matriculas','estudiantes.id','=','matriculas.estudiante_id')
+                                        ->join('univalle_docentes.horario','matriculas.horario_id','=','univalle_docentes.horario.id')
+                                        ->where('univalle_docentes.horario.PeriodoAcademicoId',$periodo)->get();
+    }
+
+
 
      public function matriculas(){
 

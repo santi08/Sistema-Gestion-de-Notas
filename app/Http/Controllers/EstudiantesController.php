@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\ModelosNotas\Estudiante;
+use App\ModelosSCAD\Horario; 
+use App\ModelosSCAD\Periodoacademico; 
 use Auth;
 
 
@@ -18,17 +20,20 @@ use DB;
 
 class EstudiantesController extends Controller
 {
+   
     
     public function index(Request $requests){
 
-     $estudiantes= Estudiante::codigo($requests->get('valor'))->orderBy('id','ASC')->where('estado',1)
-                                    ->paginate(10);
+     $estudiantes= Estudiante::codigo($requests->get('valor'),$requests->get('ide'))->where('estado',1)->paginate(10);
 
+   // $estudiantes= Estudiante::Periodo($requests->get('id'))->paginate(2);
+     $periodosAcademicos = Periodoacademico::all();                               
+  
      if($requests->ajax()){
-       return response()->json(view('admin.usuarios.part.mostrar',compact('estudiantes'))->render());
+      return response()->json(view('admin.usuarios.part.mostrar',compact('estudiantes'))->render());
      }
 
-     return view('admin.usuarios.index')->with('estudiantes',$estudiantes);
+     return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('periodosAcademicos',$periodosAcademicos);
     }
 
 

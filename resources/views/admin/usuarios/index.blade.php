@@ -10,6 +10,19 @@
 
   <br> <br>
 <!--campo buscar y registrar-->
+ <div class="input-field col s12">
+ 
+    <select id="filtrarPeriodo">
+      <option id="" value="" >Todos Los Programas 
+        </option>
+      @foreach($periodosAcademicos as $periodos) 
+        <option id="periodo" value="{{$periodos->Id}}" >{{$periodos->Ano}} Periodo: {{$periodos-> Periodo}} 
+        </option>
+      @endforeach       
+    </select>
+    <label>periodo Academico</label>
+  </div>
+
 <div class="row">
 
   <div class="input-field col s3 ">
@@ -31,6 +44,8 @@
 </div>
 <!-- finaliza campo buscar y registrar -->
 <hr>
+
+<input type="hidden" id="idPeriodo">
 
 <div class="row" id="Estudiantes">
  	
@@ -63,7 +78,7 @@
 
 </div>
 
- {!! $estudiantes->render()!!}
+{!! $estudiantes->render()!!}
 
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante')
@@ -72,17 +87,40 @@
 @section('scripts')
 
 <script type="text/javascript">
- 
-function buscar(){
- 
+
+$('#filtrarPeriodo').change(function(){
+var ruta = "{{route('admin.estudiantes.index')}}";
+var ide = $(this).children(":selected").attr("value");
+$('#idPeriodo').val(ide);
+
+  $.ajax({
+      url:ruta,
+      type: 'get',
+      dataType:'json',
+      data:{ide:ide},
+      success:function(data){
+       $("#Estudiantes").html(data);
+        
+      }
+     });
+}); 
+
+
+/*$('#filtrarPeriodo').change(function(){
+    var idPeriodo=$(this).children(":selected").attr("value");
+     $('#idPeriodo').val(idPeriodo);
+   });*/
+
+function buscar(){ 
  var ruta = "{{ route('admin.estudiantes.index')}}";
  var valor = $('#search').val();
+ var ide = $('#idPeriodo').val();
  
   $.ajax({
       url:ruta,
       type: 'GET',
       dataType:'json',
-      data:{valor:valor},
+      data:{valor:valor,ide:ide},
       success:function(data){
         $("#Estudiantes").html(data);
         
@@ -95,7 +133,6 @@ function buscar(){
 function abrirModalEliminar(id){
     var ruta="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
     ruta = ruta.replace('%iduser%',id); 
-    var ide= id;
     
     $.get(ruta,function(res){
       var nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido;
