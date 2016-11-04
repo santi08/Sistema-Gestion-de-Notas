@@ -21,7 +21,7 @@ Route::get('login',function(){
 	return view('auth.login');
 });
 
-Route::group( ['prefix'=>'admin'],function(){
+Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
 
 
   Route::group( ['prefix'=>'secretario'],function(){
@@ -32,7 +32,7 @@ Route::group( ['prefix'=>'admin'],function(){
   Route::group( ['prefix'=>'coordinador'],function(){
 
   });
-  
+
 
   Route::group( ['prefix'=>'docente'],function(){
 
