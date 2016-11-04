@@ -190,6 +190,8 @@ $('.carousel.carousel-slider').carousel({full_width: true});
             
                 docente.style.display="block";
                 estudiante.style.display="none";
+                boxDocentes.style.backgroundColor = '#e0e0e0';
+                boxEstudiantes.style.backgroundColor = 'white';
 
            
         }
@@ -198,10 +200,32 @@ $('.carousel.carousel-slider').carousel({full_width: true});
             
                 docente.style.display="none";
                 estudiante.style.display="block";
+                boxEstudiantes.style.backgroundColor = '#e0e0e0';
+                boxDocentes.style.backgroundColor = 'white';
+                
 
            
         }
 
     </script>
+
+   <script type="text/javascript">
+      
+       $(document).ready(function() {
+             boxDocentes.style.backgroundColor = '#e0e0e0';
+             boxEstudiantes.style.backgroundColor = 'while';
+        });
+
+
+       $(document).ready(function(){
+
+        
+
+
+       });
+
+    </script>
+
+
 
 </html>

@@ -21,7 +21,7 @@
   </ul>
 
 
-<div class="navbar-fixed">
+<div class="navbar-fixed" >
   <nav class=" gradient  s12 m3 l12 ">
 
     <div class="nav-wrapper">
@@ -33,7 +33,8 @@
         
           @if (Auth::guard('admin')->check())
 
-            {{Auth::guard('admin')->user()->usuarios[0]->Nombre}}
+            {{Auth::guard('admin')->user()->usuarios[0]->Nombre}} 
+            {{Auth::guard('admin')->user()->usuarios[0]->Apellidos}}
         
           @elseif (Auth::check())
 
@@ -50,9 +51,15 @@
     </div>
   </nav>
 </div>
+
+
+
+
+
+
+
   
-  
-      <ul id="slide-out" class="side-nav fixed gradient-side ">
+      <ul id="slide-out" class="side-nav fixed gradient-side " style="width:210px;">
          <li class=""><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
         
 
