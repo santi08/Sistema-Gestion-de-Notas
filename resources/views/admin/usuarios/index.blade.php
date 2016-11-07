@@ -1,8 +1,6 @@
 
 @extends('layouts.app')
 @section('title','Estudiantes')
-
-
 @section('content')
 
 
@@ -12,16 +10,17 @@
 <!--campo buscar y registrar-->
  <div class="input-field col s12">
  
-    <select id="filtrarPeriodo">
-      <option id="" value="" >Todos Los Programas 
+    <select id="filtrarPrograma">
+      <option id="" value="" disabled selected>Seleccione un Programa 
         </option>
-      @foreach($periodosAcademicos as $periodos) 
-        <option id="periodo" value="{{$periodos->Id}}" >{{$periodos->Ano}} Periodo: {{$periodos-> Periodo}} 
+      @foreach($programas as $programa) 
+        <option id="periodo" value="{{$programa->Id}}" >{{$programa->NombrePrograma}} 
         </option>
       @endforeach       
     </select>
     <label>periodo Academico</label>
   </div>
+
 
 <div class="row">
 
@@ -39,23 +38,24 @@
   </div>
 
   <div>
-    @include('admin.usuarios.modals.crearEstudiante')
+    @include('admin.usuarios.modals.crearEstudiante',['programas' => $programas])
   </div>     
 </div>
 <!-- finaliza campo buscar y registrar -->
 <hr>
 
-<input type="hidden" id="idPeriodo">
+<input type="hidden" id="idPrograma">
 
 <div class="row" id="Estudiantes">
- 	
-  
+ 
+
 <table>
     <thead>
       <tr>
        <th data-field="id">Nombre Completo</th>
        <th data-field="name">codigo</th>
        <th data-field="email">correo</th>
+       <th data-field="programa">programa Academico</th>
        <th data-field="accion">Acciones</th>
       </tr>
     </thead>
@@ -65,7 +65,8 @@
         <tr>
           <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
           <td> {{ $estudiante->codigo }}</td>
-          <td> {{ $estudiante->email }}</td>
+          <td> {{ $estudiante->email}}</td>
+          <td> {{$estudiante->programaAcademico->NombrePrograma}} </td>
           <td>
            <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
            <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
@@ -83,23 +84,47 @@
 {!! $estudiantes->render()!!}
 
 @include('admin.usuarios.modals.eliminarEstudiante')
-@include('admin.usuarios.modals.editarEstudiante')
+@include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
 @overwrite
 
 @section('scripts')
+<!--abrir selectores-->
+<script type="text/javascript">
+ $(document).ready(function(){
+   $('#selectorPrograma1').material_select();
+   $('#filtrarPrograma').material_select();
+  
+  });
+</script>
+<!-- capturar selector crear -->
+<script type="text/javascript">
+   $('#selectorPrograma2').change(function() {
+     var opcion = $(this).children(":selected").attr("value");
+     $('#programaAcademico').val(opcion);
+   })
+ </script>
+<!-- capturar selector editar-->
+<script type="text/javascript">
+   $('#selectorPrograma2').change(function() {
+     var opcion = $(this).children(":selected").attr("value");
+     console.log(opcion);
+     $('#id_programaAcademico').val(opcion);
+   })
+</script> 
+
 
 <script type="text/javascript">
 
-$('#filtrarPeriodo').change(function(){
+$('#filtrarPrograma').change(function(){
 var ruta = "{{route('admin.estudiantes.index')}}";
-var ide = $(this).children(":selected").attr("value");
-$('#idPeriodo').val(ide);
-
+var idPrograma = $(this).children(":selected").attr("value");
+$('#idPrograma').val(idPrograma);
+console.log(idPrograma);
   $.ajax({
       url:ruta,
       type: 'get',
       dataType:'json',
-      data:{ide:ide},
+      data:{idPrograma :idPrograma},
       success:function(data){
        $("#Estudiantes").html(data);
         
@@ -178,17 +203,25 @@ function abrirModalEliminar(id){
     var ruta="{{route('admin.estudiantes.edit',['%iduser%'])}}" ;
     ruta = ruta.replace('%iduser%',id);
    
-   $.get(ruta,function(res){
-    $('#id').val(res.id);
-    nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido+" "+res.segundoApellido;
+   $.get(ruta,function(res){ 
+    $('#selectorPrograma2 option').remove();
+    $('#id').val(res[1].id);
+    nombre = res[1].primerNombre+" "+res[1].segundoNombre+" "+res[1].primerApellido+" "+res[1].segundoApellido;
     $('p').text(nombre);
-    $("#firstname").val(res.primerNombre);
-    $("#segundoNombre").val(res.segundoNombre);
-    $("#primerApellido").val(res.primerApellido);
-    $("#segundoApellido").val(res.segundoApellido);
-     $("#email").val(res.email);
-    $("#codigo2").val(res.codigo);
+    $("#firstname").val(res[1].primerNombre);
+    $("#segundoNombre").val(res[1].segundoNombre);
+    $("#primerApellido").val(res[1].primerApellido);
+    $("#segundoApellido").val(res[1].segundoApellido);
+    $("#email").val(res[1].email);
+    $("#codigo2").val(res[1].codigo);
+    
+    $('.selectorPrograma2').append('<option disable selected> Seleccione un programa</option>');
+    for (var i =0; i < res[0].length; i++) {
+    $('.selectorPrograma2').append('<option value='+res[0][i].Id+'>'+res[0][i].NombrePrograma +'</option>');
+     }
+
     $('#editarEstudiante').openModal();
+     $('#selectorPrograma2').material_select();
    });
     
   }

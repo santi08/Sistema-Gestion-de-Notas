@@ -71,7 +71,7 @@
                 
                 $('.tooltipped').tooltip({delay: 50});
 
-                $('select').material_select();
+               // $('select').material_select();
                 
 
             });
@@ -86,7 +86,7 @@
             });
 
             $(document).ready(function() {
-            $('select').material_select();
+            //$('select').material_select();
             });
 
         </script>

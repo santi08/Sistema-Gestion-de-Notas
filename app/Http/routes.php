@@ -45,10 +45,7 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
   Route::resource('estudiantes','EstudiantesController');
   Route::resource('notasIndex','NotasController');
   
-  Route::get('estudiantes/prueba',[
-    'uses' =>'EstudiantesController@prueba',
-    'as' => 'admin.estudiantes.prueba'
-    ]); 
+  
   //cargar informacion en el modal eliminar
   Route::GET('estudiantes/{id}/destroy',[
     'uses' =>'EstudiantesController@destroy',
@@ -77,6 +74,11 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
      'uses' =>'EstudiantesController@editar',
       'as' => 'admin.estudiantes.editar'
     ]);
+   //procesarArchivo
+   Route::POST('estudiantes/procesar',[
+    'uses' =>'EstudiantesController@procesarArchivo',
+    'as' => 'admin.estudiantes.procesarArchivo'
+    ]); 
 
     Route::get('materiasIndex/{programaid}/{periodoid}',[
      'uses' =>'MateriasController@filterAjax',
