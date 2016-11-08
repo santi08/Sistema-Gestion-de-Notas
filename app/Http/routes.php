@@ -80,9 +80,19 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
     'as' => 'admin.estudiantes.procesarArchivo'
     ]); 
 
-    Route::get('materiasIndex/{programaid}/{periodoid}',[
+    Route::get('filtrosAsignaturas',[
      'uses' =>'MateriasController@filterAjax',
       'as' => 'admin.materiasIndex.filterAjax'
+    ]);
+
+    Route::GET('filtrosProfesores',[
+     'uses' =>'ProfesoresController@filterAjax',
+      'as' => 'admin.profesoresIndex.filterAjax'
+    ]);
+
+    Route::GET('verProfesor/{id}',[
+     'uses' =>'ProfesoresController@ver',
+      'as' => 'admin.profesoresIndex.ver'
     ]);
 
   

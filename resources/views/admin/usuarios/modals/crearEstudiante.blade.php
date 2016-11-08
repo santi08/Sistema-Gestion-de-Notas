@@ -1,6 +1,6 @@
 <!--aqui esta el boton de crear Usuario-->
   <div class="row ">
-    <a onClick='openModalCrear()' class="col s3 offset-s3 green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante' >Registrar Estudiante</a> 
+    <a onClick='openModalCrear()' class="col s3 l3 m3 offset-s9 offset-l9 offset-m9 green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
   </div> 
  <!-- fin boton crear --> 
 
@@ -49,24 +49,37 @@
          
         <!-- fila botones -->
         <div class="row">
-          <div class="col s6 offset-s6 input-field">
+          <div class="col s5 l5 m5 offset-l6 offset-s6 input-field">
            <button type="submit" class="green btn"><i class="material-icons left">save</i>Registrar</button>
            {!! Form::close()!!}
           </div>
         </div> 
         <!-- fin fila botones-->
     </div>
+<<<<<<< HEAD
   <div class="col-md-4">
     <fieldset>  
+=======
+
+
+  <div class="col s12 m12 l12">
+    <fieldset >  
+>>>>>>> 9fc3595ffd7ddbce9061b6c54bcf464c70e23cf6
       <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
+
       <div id="RegistrarPorArchivo" class="collapse">
         {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method'=>'POST','files' => 'true']) !!}
         <div class="form-group">
           <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
+
          {!! Form::close() !!}
+         </div>
+
+
       </div>
+
      </fieldset>
 
   <!-- <fieldset>  
@@ -80,6 +93,7 @@
      </fieldset>-->
 
   </div>
+
         
   </div>
 </div>

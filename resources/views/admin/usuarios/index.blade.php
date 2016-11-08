@@ -2,7 +2,12 @@
 @extends('layouts.app')
 @section('title','Estudiantes')
 @section('content')
+<h3 class="center">Estudiantes</h3>
+<!--campo buscar y registrar-->
+ 
+     
 
+<!-- finaliza campo buscar y registrar -->
 
   <br> <br>
 
@@ -23,14 +28,12 @@
 
 
 <div class="row">
-
   <div class="input-field col s3 ">
     <nav class="blue">
      <div class="nav-wrapper">     
-        <div class="input-field" >
-          <input name="search" onkeyup="buscar()"  id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+        <div class="input-field">
+          <input name="search" onkeyup="buscar()"  id="search" type="search">
+          <label for="search"><i class="material-icons">search</i></label>       
         </div>
      </div>
     </nav>  
@@ -40,8 +43,8 @@
   <div>
     @include('admin.usuarios.modals.crearEstudiante',['programas' => $programas])
   </div>     
+
 </div>
-<!-- finaliza campo buscar y registrar -->
 <hr>
 
 <input type="hidden" id="idPrograma">
@@ -75,7 +78,7 @@
       @endforeach
 
     </tbody>
- {{Auth::guard('admin')->user()->sesionRoles }}
+ 
   </table>
 
 

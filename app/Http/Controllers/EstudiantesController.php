@@ -10,14 +10,9 @@ use App\ModelosSCAD\Horario;
 use App\ModelosSCAD\Periodoacademico; 
 use App\ModelosSCAD\Programaacademico;
 use Auth;
-
-
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-
-
-
 
 class EstudiantesController extends Controller
 {

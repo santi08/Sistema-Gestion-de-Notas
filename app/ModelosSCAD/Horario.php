@@ -24,33 +24,28 @@ class Horario extends Model
     ];
 
     protected $guarded = [];
-
+//relacion entre horario y periodoacademico
     public function periodoAcademico(){
         return $this->belongsTo('App\ModelosSCAD\Periodoacademico','PeriodoAcademicoId');
     }
 
+//reacion de horario con usuario
     public function usuario(){
         return $this->belongsTo('App\ModelosSCAD\Usuario', 'UsuarioID');
     }
-
+//relacion de horario con la tabla matricula de la base de datos de notas
     public function matriculas(){
 
         return $this->hasMany('App\ModelosNotas\Matricula');
     }
-
+//relacion de horario con la tabla pivote de programaacademico_asignatura
     public function programaAcademicoAsignatura(){
 
         return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
-      public function scopePrograma ($query){
-
-       $query = \DB::connection('docentes')->table('horario')->distinct('programaacademico.Id')->join('usuario', 'UsuarioID' ,'=' ,'usuario.Id')->join('programaacademico_asignatura', 'horario.AsignaturaId','=','programaacademico_asignatura.Id')->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id')->join('asignatura','programaacademico_asignatura.AsignaturaId','=','asignatura.Id')->select('usuario.id','usuario.nombre','usuario.Apellidos','programaacademico.NombrePrograma')->where('periodoacademicoId','=',5);
+    
        
-    }
-
-
-   
     public function scopeAsignaturas($query,$programa)
     {
         
@@ -67,10 +62,6 @@ class Horario extends Model
 
         if(!empty($periodo)){
             $query->where('PeriodoAcademicoId','=',$periodo);
-
-        }
-        
-    }
-
-        
+        }   
+    }        
 }
