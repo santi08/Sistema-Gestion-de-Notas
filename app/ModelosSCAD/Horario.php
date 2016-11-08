@@ -40,7 +40,7 @@ class Horario extends Model
 
     public function programaAcademicoAsignatura(){
 
-        return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
+        return $this->belongsTo('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
       public function scopePrograma ($query){

@@ -131,7 +131,7 @@ Route::post('login/docentes',[
   Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
   Route::post('password/reset', 'Auth\PasswordController@reset');
    
-  Route::get('archivo','ProfesoresController@cargarMateria');
+  Route::get('archivo','MatriculasController@matriculas');
 
   
 

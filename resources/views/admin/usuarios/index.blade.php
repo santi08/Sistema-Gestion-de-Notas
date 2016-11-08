@@ -59,8 +59,7 @@
       @endforeach
 
     </tbody>
- {{Auth::guard('admin')->user()->sesionRoles }}
-  </table>
+   </table>
 
 
 </div>
