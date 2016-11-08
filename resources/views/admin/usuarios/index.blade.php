@@ -64,7 +64,7 @@
       @foreach($estudiantes as $estudiante)
         <tr>
           <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
-          <td> {{ $estudiante->codigo }}</td>
+          <td> {{ $estudiante->codigo}}</td>
           <td> {{ $estudiante->email}}</td>
           <td> {{$estudiante->programaAcademico->NombrePrograma}} </td>
           <td>
@@ -85,6 +85,7 @@
 
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
+@include('admin.usuarios.modals.cargarEstudiante')
 @overwrite
 
 @section('scripts')
@@ -111,6 +112,13 @@
      $('#id_programaAcademico').val(opcion);
    })
 </script> 
+
+<script type="text/javascript">
+  function abrirCargarArchivo(){
+   // $('#crearEstudiante').closeModal();
+    $('#cargarEstudiante').openModal();
+  }
+</script>
 
 
 <script type="text/javascript">

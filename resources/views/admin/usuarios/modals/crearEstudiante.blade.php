@@ -40,7 +40,7 @@
         <div class="col s6 input-field">
         {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademico','type'=>'number','required'])!!}
          <select id="selectorPrograma1">
-          <option value="" disabled selected> Seleccione Programa Academico</option>
+          <option class="validate required" value="" disabled selected> Seleccione Programa Academico</option>
           @foreach ($programas as $programa)
           <option id="opcion" value="{{$programa->Id}}"> {{$programa->NombrePrograma}}</option>
           @endforeach
@@ -56,8 +56,6 @@
         </div> 
         <!-- fin fila botones-->
     </div>
-
-
   <div class="col-md-4">
     <fieldset>  
       <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
@@ -70,6 +68,16 @@
          {!! Form::close() !!}
       </div>
      </fieldset>
+
+  <!-- <fieldset>  
+      <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
+      <div id="RegistrarPorArchivo" class="collapse">
+        <div class="form-group">
+          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
+        </div>
+        <button onClick="abrirCargarArchivo()" data-target='#cargarEstudiante' class=" btn btn-primary modal-trigger">Enviar</button>
+      </div>
+     </fieldset>-->
 
   </div>
         

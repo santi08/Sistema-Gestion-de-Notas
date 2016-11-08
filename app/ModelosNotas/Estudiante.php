@@ -28,7 +28,7 @@ class Estudiante extends Authenticatable
 
      public function programaAcademico(){
 
-        return $this->belongsTo('App\ModelosSCAD\Programaacademico','id_programaAcademico');
+        return $this->belongsTo('App\ModelosSCAD\Programaacademico','id_programaAcademico','CodigoPrograma');
     }
     
 
