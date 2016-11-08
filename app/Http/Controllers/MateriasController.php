@@ -17,12 +17,18 @@ class MateriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
         $programas = Programaacademico::all();
         $periodos = Periodoacademico::all();
         
-        $asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10); 
+        $asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10);
+
+        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);
+
+        if ($request->ajax()) {
+            return response()->json($vista->render());
+        } 
         return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
     }
 
@@ -30,9 +36,12 @@ class MateriasController extends Controller
 
         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->paginate(10);
         $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);  
+
         if ($request->ajax()) {
             return response()->json($vista->render());
         } 
+
+        
     }
 
     /**

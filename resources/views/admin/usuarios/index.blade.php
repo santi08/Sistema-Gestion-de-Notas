@@ -4,32 +4,26 @@
 
 
 @section('content')
-
-
-  <br> <br>
-
-  <br> <br>
+<h3 class="center">Estudiantes</h3>
 <!--campo buscar y registrar-->
-<div class="row">
+  @include('admin.usuarios.modals.crearEstudiante')
+     
 
+<!-- finaliza campo buscar y registrar -->
+
+<div class="row">
   <div class="input-field col s3 ">
     <nav class="blue">
      <div class="nav-wrapper">     
-        <div class="input-field" >
-          <input name="search" onkeyup="buscar()"  id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+        <div class="input-field">
+          <input name="search" onkeyup="buscar()"  id="search" type="search">
+          <label for="search"><i class="material-icons">search</i></label>       
         </div>
      </div>
     </nav>  
 
   </div>
-
-  <div>
-    @include('admin.usuarios.modals.crearEstudiante')
-  </div>     
 </div>
-<!-- finaliza campo buscar y registrar -->
 <hr>
 
 <div class="row" id="Estudiantes">
@@ -39,8 +33,8 @@
     <thead>
       <tr>
        <th data-field="id">Nombre Completo</th>
-       <th data-field="name">codigo</th>
-       <th data-field="email">correo</th>
+       <th data-field="name">Código</th>
+       <th data-field="email">Correo</th>
        <th data-field="accion">Acciones</th>
       </tr>
     </thead>
@@ -59,7 +53,7 @@
       @endforeach
 
     </tbody>
- {{Auth::guard('admin')->user()->sesionRoles }}
+ 
   </table>
 
 

@@ -3,50 +3,45 @@
 
 @section('content')
 <div class="row">
-	<h4 class="center">Profesores</h4>
+	<h3 class="center">Profesores</h3>
 	<div class="col s12 m12 l12">
 		<div class="row">
 
-			<div class="input-fiel col s6">
-				<label>Programa Academico</label>
-				<select name="programas" id="programas">
+			<div class="input-field col s5 l4 m4">
+				
+				<select name="programas" id="programasProfesores">
+					<option value="" disabled selected>Seleccione un programa</option>
 
 						@foreach($ProgramasAcademicos as $ProgramaAcademico)
 							@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
 								<option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
 							@endif
 						@endforeach	
-				</select>	  			
+				</select>
+				<label>Programa Academico</label>	  			
 			</div>
 
-			<div class="input-fiel col s6">
-				<label>Periodo Academico</label>		
-				<select name="periodos" id="periodos">
+			<div class="input-field col s3 l3 m3">
+						
+				<select name="periodos" id="periodosProfesores">
 					
 					@foreach($PeriodosAcademicos as $PeriodoAcademico)
 				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
 					@endforeach						  			
-				</select>	  	
+				</select>	
+				<label>Periodo Academico</label>  	
 			</div>	
 
 		</div>
-
-		<div class="row">
-			<div class="col s4 m3 l4">
-				<div class="row">
-					<div class="col s12 m12 l12 input-field ">
-        					<i class="material-icons prefix">search</i>
-          					<input id="nombreBusqueda" type="search" class="validate" >
-          					<label for="icon_prefix">Buscar</label>
-        			</div>
-        		</div>
-			</div>
-		</div>
-
-<hr>
 	
-
+		<div class="row">		
+			<div class="input-field col s6 l3 m3">
+				<input id="nombreBusqueda" onkeypress="return buscar();" type="text" placeholder="Nombre del profesor" class="validate">	
+        	</div>    
+		</div>
+<hr>
 		<div class="row" id="tabla"> 
+		
 			<table class="striped">
 				<thead>
 					<tr>
@@ -65,7 +60,7 @@
 							<td>
 								<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
 
-								<a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
+								<a onClick="ver({{$profesor->Id}})" data-target='#ver' class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
 							</td>
 						</tr>
 					@endforeach
@@ -78,17 +73,44 @@
 	</div>
 </div>
 
-@endsection
+@include('admin.profesores.modales.ver')
+@overwrite
 
 @section('scripts')
 
 	<script type="text/javascript">
+    $(document).ready(function(){
+       
+            ruta="{{route('admin.profesoresIndex.index')}}";
+            var periodo = $('#periodosProfesores').val();
+            var id;
+                $.ajax({
+                    url:ruta,
+                    type:"GET",
+                    data:{periodo:periodo},
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                        $(data).each(function(key,value){
+                            //$('#periodosProfesores').val(value.Id);
+                            id=value.Id;
+                    
+                        });
+                        $('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
+                        //$('#periodosProfesores').val(id);
+                                            
+                    }
+                });
+            
+         
+        
+    });
 //si selecciona un programa academico envia la peticion 
-		$(document).ready(function(){
-			$("#programas").change(function() {
+		
+			$("#programasProfesores").change(function() {
 				
-				var programa = $('#programas').val();
-        		var periodo = $('#periodos').val();
+				var programa = $('#programasProfesores').val();
+        		var periodo = $('#periodosProfesores').val();
         		var nombreBusqueda = $('#nombreBusqueda').val();
         		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
         		
@@ -105,6 +127,7 @@
             		
             		success: function(data) {
                         $("#tabla").html(data);
+                        $('.tooltipped').tooltip({delay: 50});
 
                         //console.log("entro");
 
@@ -115,10 +138,10 @@
         	   });
                      			
 //si selecciona un periodo academico se envia la peticion 
-        	$("#periodos").change(function() {
+        	$("#periodosProfesores").change(function() {
 				
-				var programa = $('#programas').val();
-        		var periodo = $('#periodos').val();
+				var programa = $('#programasProfesores').val();
+        		var periodo = $('#periodosProfesores').val();
         		var nombreBusqueda = $('#nombreBusqueda').val();
         		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
         		
@@ -134,10 +157,11 @@
             		
             		success: function(data) {	
             			$("#tabla").html(data);	
+            			$('.tooltipped').tooltip({delay: 50});
             		}
         		});
         	});
-    	});
+    
 //paginacion sin recargar la pagina
 		$(document).ready(function(){
 
@@ -159,6 +183,74 @@
         	});
         	});
 
+		function buscar() {
+    		var nombreBusqueda = $("input#nombreBusqueda").val();
+    		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
+        		
+	
+    		if (nombreBusqueda != "") {
+    			$.ajax({
+            		type: "GET",
+            		url: ruta,
+            		data: {nombreBusqueda:nombreBusqueda},
+            		
+            		success: function(data) {	
+            			$("#tabla").html(data);	
+            			$('.tooltipped').tooltip({delay: 50});
+            		}
+        		});
+        		
+    		} else { 
+
+        		
+        		console.log("no hay nada ");
+			}
+		}
+
+        function ver(id){
+   
+            var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%'])}}";
+            var tablaAsignaturas = $("#tablaAsignaturas");
+            var programa = $('#programasProfesores').val();
+            var periodo = $('#periodosProfesores').val();
+           
+           $("#tablaAsignaturas td").remove();
+            
+            ruta = ruta.replace('%idprofesor%',id);
+
+            $.ajax({
+                    url:ruta,
+                    type:"GET",
+                    data: {programa:programa,periodo:periodo},
+                    dataType:'json',
+                    success:function(data){
+                        $(data).each(function(key,value){
+
+                            $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
+
+                            tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
+                    
+                        });
+
+                        $('#ver').openModal();
+                                              
+                    }
+                });
+   
+            /*$.get(ruta,function(res){
+                $('p').text(res.Apellidos); 
+                $(res).each(function(key,value){
+
+                $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
+                        tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
+                    
+                });
+               
+                
+
+            });*/
+    
+        }
 
 	</script>
 

@@ -24,41 +24,28 @@ class Horario extends Model
     ];
 
     protected $guarded = [];
-
+//relacion entre horario y periodoacademico
     public function periodoAcademico(){
         return $this->belongsTo('App\ModelosSCAD\Periodoacademico','PeriodoAcademicoId');
     }
 
+//reacion de horario con usuario
     public function usuario(){
         return $this->belongsTo('App\ModelosSCAD\Usuario', 'UsuarioID');
     }
-
+//relacion de horario con la tabla matricula de la base de datos de notas
     public function matriculas(){
 
         return $this->hasMany('App\ModelosNotas\Matricula');
     }
-
+//relacion de horario con la tabla pivote de programaacademico_asignatura
     public function programaAcademicoAsignatura(){
 
         return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
-    public function scopeProgramaprofesores($query,$periodo){
-
-       if(!empty($periodo)){
-            $query->where('horario.PeriodoAcademicoId','=',$periodo);
-
-        }
-    }
-
-    public function scopePeriodoprofesores($query,$programa){
-
-       if(!empty($periodo)){
-            $query->where('programaacademico_asignatura.programaacademicoId', '=', $programa);
-
-        }
-    }
-   
+    
+       
     public function scopeAsignaturas($query,$programa)
     {
         
@@ -75,9 +62,6 @@ class Horario extends Model
 
         if(!empty($periodo)){
             $query->where('PeriodoAcademicoId','=',$periodo);
-
-        }
-        
-    }
-        
+        }   
+    }        
 }

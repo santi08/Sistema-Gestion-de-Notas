@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ModelosNotas\Estudiante;
 use Auth;
-
-
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-
-
-
 
 class EstudiantesController extends Controller
 {

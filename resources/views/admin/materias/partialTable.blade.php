@@ -28,5 +28,8 @@
 						</tbody>
 				</table>
 				{!!$asignaturas->render()!!}	
+
+
+				
 	
 

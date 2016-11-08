@@ -79,9 +79,14 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
       'as' => 'admin.materiasIndex.filterAjax'
     ]);
 
-    Route::get('filtrosProfesores',[
+    Route::GET('filtrosProfesores',[
      'uses' =>'ProfesoresController@filterAjax',
       'as' => 'admin.profesoresIndex.filterAjax'
+    ]);
+
+    Route::GET('verProfesor/{id}',[
+     'uses' =>'ProfesoresController@ver',
+      'as' => 'admin.profesoresIndex.ver'
     ]);
 
   

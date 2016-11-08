@@ -4,10 +4,10 @@
 
 .gradient{
   background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left,#e53935 , grey); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #e53935, grey); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #e53935, grey); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #e53935, grey); /* Standard syntax (must be last) */
+    background: -webkit-linear-gradient(left,#d51b23 , grey); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #d51b23, grey); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #d51b23, grey); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #d51b23, grey); /* Standard syntax (must be last) */
 }
 
 .bordes{
@@ -23,10 +23,10 @@ i.icon-blue:focus {
 .gradient-side{
 
   background: red; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #e53935 , grey); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #e53935 , grey); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right,  #e53935 , grey); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, right #e53935 , grey); /* Standard syntax */
+  background: -webkit-linear-gradient(left top,#d51b23 , grey); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #d51b23 , grey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,  #d51b23 , grey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, right #d51b23 , grey); /* Standard syntax */
 
 }
 
@@ -52,7 +52,69 @@ hr {
   font-size: small;
 }
 
+@media screen only (min-width: 480px) and (max-width: 1122px){
 
+    #principalBox{
+
+      margin-left: 20%
+      background: black;
+    }
+
+
+}
+
+.micardpanel{
+
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 #b71c1c;
+
+}
+
+.pagination li.active {
+    background-color: #0089ec;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    font-size: 14px;
+    color: #26a69a;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+
+.select-wrapper input.select-dropdown {
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #26a69a;
+    outline: none;
+    height: 3rem;
+    line-height: 3rem;
+    width: 100%;
+    font-size: 0.9rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    display: block;
+}
+
+input:not([type]), input[type=text], input[type=password], 
+input[type=email], input[type=url], input[type=time], 
+input[type=date], input[type=datetime], input[type=datetime-local], 
+input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #26a69a;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
 
 
 
