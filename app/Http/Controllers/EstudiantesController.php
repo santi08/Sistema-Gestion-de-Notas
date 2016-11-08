@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\ModelosNotas\Estudiante;
+use App\ModelosSCAD\Horario; 
+use App\ModelosSCAD\Periodoacademico; 
+use App\ModelosSCAD\Programaacademico;
 use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
@@ -13,57 +16,50 @@ use DB;
 
 class EstudiantesController extends Controller
 {
-    
+  
     public function index(Request $requests){
 
-     $estudiantes= Estudiante::codigo($requests->get('valor'))->orderBy('id','ASC')->where('estado',1)
-                                    ->paginate(10);
+     
+     $programas= Programaacademico::all();
+     $estudiantes= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->where('estado',1)->paginate(10);
 
+   // $estudiantes= Estudiante::Periodo($requests->get('id'))->paginate(2);
+    // $periodosAcademicos = Periodoacademico::all();                               
+  
      if($requests->ajax()){
-       return response()->json(view('admin.usuarios.part.mostrar',compact('estudiantes'))->render());
+      return response()->json(view('admin.usuarios.part.mostrar',compact('estudiantes'))->render());
      }
 
-     return view('admin.usuarios.index')->with('estudiantes',$estudiantes);
+     return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
     }
 
+    public function encontrarProgramaAcademico(string $encontrar){
+         
+         $resultado;
+         for($i=0;$i<count($programa);$i++){
+          if($programa[$i]->Id == $encontrar){
+            $resultado = $programa[$i]->Id;
+          }  
+         }
 
-
-    public function create(){
-
-    	return view('admin.usuarios.index');
+         return $resultado ;
     }
 
-    public function store(Request $requests){
-    
-
-    $user= new Estudiante($requests->all());
-    $contrasena=$this->crearContrasena($user);
-    $user->password=bcrypt($contrasena);
-    //$user->password=$contraseña;
-    $user->save();
-     
-    return redirect(route('admin.estudiantes.index'));
-
-       
-    }
-
-    public function guardarEstudiante(Request $requests){
-
-      if($requests->file('file')->isValid()){
-           try{
-
-            $files = $requests->file('file');
+    public function procesarArchivo(Request $request)
+    {
+      set_time_limit(0);
+        if($request->file('file')->isValid()){
+          
+          try{
+            $files = $request->file('file');
             $file = fopen($files,"r");
             $users = array();
 
             while (!feof($file) ) {
-                
-             
                 $line=utf8_encode(fgets($file));
-                $line = str_replace('ÿþ', '',$line);
-                $parts = explode("\t", $line);
-
-                $parts = array_map('trim',$parts);
+                $line = str_replace('ÿþ','',$line); //caracteres inesperados;
+                $parts = explode("\t",$line); // tabulacion;
+                $parts = array_map('trim',$parts); // elimina espacios para guardar en BD;
                 $apellidos = array_map('mb_strtolower',explode(" ", $parts[2]));
                 $apellidos = array_map('trim',$apellidos);
                 $apellidos = array_map('ucfirst',$apellidos);
@@ -74,95 +70,96 @@ class EstudiantesController extends Controller
                     $user = array();
                     $parts[0]=substr($parts[0],4);
 
-                    $user['codigo']=trim(preg_replace('/\t+/', '', $parts[0]."-".$parts[1]));
+                    $user['codigo']=trim(preg_replace('/\t+/', '', $parts[0])."-".$parts[1]); //armo el codigo;
                     $user['codigo']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['codigo']);
 
-                    $user['firstname']=trim(preg_replace('/\t+/', '',$nombres[0]));
-                    $user['firstname']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$nombres[0]);
+                    //programaAcademico 
+                    $user['programa']=trim(preg_replace('/\t+/', '', $parts[1]));
+                    $user['programa']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['programa']);
+                    //encontrarProgramaAcademico();
+
+                    $user['primerNombre']=trim(preg_replace('/\t+/', '',$nombres[0]));
+                    $user['primerNombre']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$nombres[0]);
                     if(!empty($nombres[1])){
-                        $user['secondname']=$nombres[1];
+                        $user['segundoNombre']=$nombres[1];
                         if(!empty($nombres[2])){
 
-                            $user['secondname']=$user['secondname']. " ".$nombres[2];
+                            $user['segundoNombre']=$user['segundoNombre']." ".$nombres[2];
                         }
-                        $user['secondname']=trim(preg_replace('/\t+/', '',$user['secondname']));
-                        $user['secondname']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['secondname']);
+                        $user['segundoNombre']=trim(preg_replace('/\t+/','',$user['segundoNombre']));
+                        $user['segundoNombre']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['segundoNombre']);
                     }else{
-                        $user['secondname']="";
+                        $user['segundoNombre']="";
                     }
-                    $user['lastname']=trim(preg_replace('/\t+/', '',$apellidos[0]));
-                    $user['lastname']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['primerapellido']);
+                    $user['primerApellido']=trim(preg_replace('/\t+/','',$apellidos[0]));
+                    $user['primerApellido']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['primerApellido']);
                     if(!empty($apellidos[1])){
-                        $user['secondlastname']=trim(preg_replace('/\t+/', '',$apellidos[1]));
-                        $user['secondlastname']=(preg_replace('/[\x00-\x1F\x80-\xFF]/', '',$user['secondlastname']));
+                        $user['segundoApellido']=trim(preg_replace('/\t+/','',$apellidos[1]));
+                        $user['segundoApellido']=(preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['segundoApellido']));
                         if(!empty($apellidos[2])){
-                            $user['secondlastname']=$user['secondlastname']. " ".$apellidos[2];
+                            $user['segundoApellido']=$user['segundoApellido']." ".$apellidos[2];
                         }
 
                     }else{
-                        $user['secondlastname']="";
+                        $user['segundoApellido']="";
                     }
 
-                    $password="password";
+                    $password="contraseña";
+
                     if(!empty($parts[4])){
-                        $user['email']=trim(preg_replace('/\t+/', '',$parts[4]));
+                        $user['email']=trim(preg_replace('/\t+/','',$parts[4]));
                         $user['email']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['email']);
                     }
-                    $user['idrol']=3;
 
-                    $userDb = User::firstOrNew(["codigo"=>$user["codigo"]]);
+                    $userDb = Estudiante::firstOrNew(["codigo"=>$user["codigo"]]);
 
                     $userDb->fill($user);
-                    if(empty($userDb->id) and !empty($userDb->email)){
-                        $userDb->password=substr($userDb->primernombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerapellido, 0,1);
 
+
+                    if(empty($userDb->id) and !empty($userDb->email)){
+                        $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));
+                        
                         $users[] = $userDb;
+
+                      $userDb->save();      
+                        
                     }
 
-               }catch(\Exception $e){
+                    
+
+                }catch(\Exception $e){
 
                 }
 
             }
-            session()->put('users', $users);
-            session()->put('contrasena',bcrypt("contraseña"));
-            dd('se procesaron'.count($users));
+            
+            /*foreach ($users
+             as $u) {
+              echo($u).'<br>';# code...
+            };*/
+            //session()->put('users', $users);
+            //session()->put('contrasena',bcrypt("contraseña"));
             //Flash::success('Se procesaron '. count($users). 'exitosamente');
-            return view('admin.usuarios.index')->with('users',$users);
-          }catch(\Exception $e){
-            dd('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
-              //Flash::error('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
-              return redirect()->route('admin.estudiantes.index');
-          }
-        }else{
-
-        } 
-
-    
-    }
-
-    public function GuardarDatos(){
-        
-            $usuariosaprocesar = session('users');
-            set_time_limit(0);
+            
             $registrados=0;
             $actualizados=0;
             $errores=0;
-            foreach($usuariosaprocesar as $user){
+            foreach($users as $estudiantes){
                 try{
-                    if(empty($user->id)) {
-                        $user->password=bcrypt($user->password);
-                        $user->save();
+                    if(empty($estudiantes->id)) {
+                        $estudiantes->password=bcrypt($user->password);
+                        $estudiantes->save();
                         $registrados+=1;
                     }else{
                         $actualizados+=1;
-                        $user->save();
+                        $estudiantes->save();
                     }
 
                 }catch(\Exception $e){
                     $e->getMessage();
                 }
             }
+
             $mensaje="Se han procesado los datos exitosamente";
             if($registrados>0){
                 $mensaje.=", se han guardado ". $registrados ." usuarios";
@@ -174,14 +171,40 @@ class EstudiantesController extends Controller
                 $mensaje.=", no pudiero almacenarse ". $errores ." usuarios, lo mas probable es que estos no cuenten".
                 " con los campos obligatorios completos";
             }
-           // Flash::success($mensaje.".");
-        
+
+            dd($mensaje);
+            return view('admin.users.index')->with('users',$users);
+
+          }catch(\Exception $e){
+              //Flash::error('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
+            dd('se produjo un error');
+              return redirect()->route('admin.users.index');
+          }
+        }else{
+
+        }
+
     }
+
+    public function create(){
+
+    	return view('admin.usuarios.index');
+    }
+
+    public function store(Request $requests){
+    $user= new Estudiante($requests->all());
+    $contrasena=$this->crearContrasena($user);
+    $user->password=bcrypt($contrasena);
+    //$user->password=$contraseña;
+    $user->save();
+    return redirect(route('admin.estudiantes.index'));  
+    }
+
 
     public function destroy($id){
      $estudiante = Estudiante::find($id);
     
-     return response()->json(
+     return response()->json( 
         $estudiante->toArray()
      );
 
@@ -200,11 +223,14 @@ class EstudiantesController extends Controller
     } 
     
     public function edit($id){
-
+        $info=array();
+        $programas=Programaacademico::all(); 
         $estudiante=Estudiante::find($id);
 
+        $info[]=$programas;
+        $info[]=$estudiante;
         return response()->json(
-            $estudiante->toArray()
+            $info
             );
     } 
 
@@ -221,13 +247,11 @@ class EstudiantesController extends Controller
     }
 
     public function crearContrasena($user){
-
      $nombre = $user->primerNombre;
      $nombre = strtoupper($nombre); 
      $codigo = $user->codigo;
      $apellido= $user->primerApellido;
      $apellido= strtoupper($apellido);
-
      $contrasena= $nombre[0].$codigo.$apellido[0];
 
      return $contrasena;

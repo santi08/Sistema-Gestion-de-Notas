@@ -37,7 +37,16 @@
         {!!Form::number('codigo',null,['class'=>'validate','id'=>'codigo','type'=>'number','required'])!!}
         {!!Form::label ('codigo','codigo',['for'=> 'codigo'])!!}
         </div>
-       
+        <div class="col s6 input-field">
+        {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademico','type'=>'number','required'])!!}
+         <select id="selectorPrograma1">
+          <option value="" disabled selected> Seleccione Programa Academico</option>
+          @foreach ($programas as $programa)
+          <option id="opcion" value="{{$programa->Id}}"> {{$programa->NombrePrograma}}</option>
+          @endforeach
+         </select>
+        </div>
+         
         <!-- fila botones -->
         <div class="row">
           <div class="col s5 l5 m5 offset-l6 offset-s6 input-field">
@@ -52,20 +61,14 @@
   <div class="col s12 m12 l12">
     <fieldset >  
       <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
-      <div id="RegistrarPorArchivo" class="collapse row ">
-        <div class="col s9 m9 l9">
-        {!! Form::open(['route'=>'admin.estudiantes.guardarEstudiante','method'=>'POST','files' => 'true']) !!}
-        <div class="file-field input-field btn">
-          <span>File</span>
-          <input class="filestyle" type="file" accept=".txt" name="file" id="file" >
-        </div>
 
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+      <div id="RegistrarPorArchivo" class="collapse">
+        {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method'=>'POST','files' => 'true']) !!}
+        <div class="form-group">
+          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
         </div>
-        </div>
-        <div class="col s3 m3 l3 offset-l3">
-        <button type="submit" class="    btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+
          {!! Form::close() !!}
          </div>
 
@@ -81,3 +84,4 @@
 </div>
   
  <!--finaliza el boton crear-->
+

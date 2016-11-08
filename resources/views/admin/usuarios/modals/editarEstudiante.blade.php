@@ -37,6 +37,20 @@
         {!!Form::number('codigo',null,['placeholder'=>'','class'=>'validate','id'=>'codigo2','type'=>'number','required'])!!}
         {!!Form::label ('codigo','codigo',['for'=> 'codigo'])!!}
         </div>
+        <div class="col s6 input-field">
+        {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'programaAcademico','type'=>'number','required'])!!}
+
+        <select id="selectorPrograma2" class="selectorPrograma2">
+        <option value="" disabled selected> Seleccione Programa Academico</option> 
+        </select>
+       <!--  {!!Form::text('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademic  o','type'=>'number','required'])!!}
+         <select id="selectorPrograma2">
+          <option value="" disabled selected> Seleccione Programa Academico</option>
+          @foreach ($programas as $programa)
+          <option id="opcion" value="{{$programa->Id}}"> {{$programa->NombrePrograma}}</option>
+          @endforeach
+         </select>-->
+        </div>
     
 
  <!--finaliza el boton crear-->

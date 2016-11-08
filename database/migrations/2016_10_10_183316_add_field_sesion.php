@@ -13,9 +13,8 @@ class AddFieldSesion extends Migration
     public function up()
     {
         Schema::connection('docentes')->table('sesion', function (Blueprint $table) {
-            //
-            $table->rememberToken();
-            $table->timestamps();
+           // $table->rememberToken();
+            //$table->timestamps();
         });
     }
 
