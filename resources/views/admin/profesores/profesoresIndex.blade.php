@@ -60,7 +60,7 @@
 							<td>
 								<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
 
-								<a onClick="ver({{$profesor->Id}})" data-target='#ver' class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
+								<a onClick="ver({{$profesor->Id}},{{$profesor->idprograma}})" data-target='#ver' class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Ver"><i class="material-icons">visibility</i></a>
 							</td>
 						</tr>
 					@endforeach
@@ -185,6 +185,8 @@
 
 		function buscar() {
     		var nombreBusqueda = $("input#nombreBusqueda").val();
+            var programa = $('#programasProfesores').val();
+            var periodo = $('#periodosProfesores').val();
     		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
         		
 	
@@ -192,7 +194,7 @@
     			$.ajax({
             		type: "GET",
             		url: ruta,
-            		data: {nombreBusqueda:nombreBusqueda},
+            		data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},
             		
             		success: function(data) {	
             			$("#tabla").html(data);	
@@ -207,9 +209,9 @@
 			}
 		}
 
-        function ver(id){
+        function ver(id,idprograma){
    
-            var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%'])}}";
+            var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
             var tablaAsignaturas = $("#tablaAsignaturas");
             var programa = $('#programasProfesores').val();
             var periodo = $('#periodosProfesores').val();
@@ -217,6 +219,7 @@
            $("#tablaAsignaturas td").remove();
             
             ruta = ruta.replace('%idprofesor%',id);
+            ruta = ruta.replace('%idprograma%',idprograma);
 
             $.ajax({
                     url:ruta,
