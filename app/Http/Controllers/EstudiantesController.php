@@ -33,8 +33,9 @@ class EstudiantesController extends Controller
      return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
     }
 
-    public function encontrarProgramaAcademico(string $encontrar){
-         
+    public function encontrarProgramaAcademico($encontrar){
+        
+         $programa = Programaacademico::all();
          $resultado;
          for($i=0;$i<count($programa);$i++){
           if($programa[$i]->Id == $encontrar){
@@ -48,6 +49,8 @@ class EstudiantesController extends Controller
     public function procesarArchivo(Request $request)
     {
       set_time_limit(0);
+      $programa = Programaacademico::all();
+
         if($request->file('file')->isValid()){
           
           try{
@@ -74,9 +77,18 @@ class EstudiantesController extends Controller
                     $user['codigo']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['codigo']);
 
                     //programaAcademico 
-                    $user['programa']=trim(preg_replace('/\t+/', '', $parts[1]));
-                    $user['programa']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['programa']);
-                    //encontrarProgramaAcademico();
+                   $user['id_programaAcademico']=trim(preg_replace('/\t+/', '', $parts[1]));
+                   $user['id_programaAcademico']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['id_programaAcademico']);
+                  // $user['id_programaAcademico']=this.encontrarProgramaAcademico($user['id_programaAcademico']);
+
+                  /* for($i=1;$i<count($programa);$i++){
+                    if($programa[i]->CodigoPrograma == $user['id_programaAcademico']){
+                       $user['id_programaAcademico'] = $programa[i]->Id;
+                       break;
+                    }
+                   }*/
+
+                  
 
                     $user['primerNombre']=trim(preg_replace('/\t+/', '',$nombres[0]));
                     $user['primerNombre']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$nombres[0]);
@@ -111,8 +123,7 @@ class EstudiantesController extends Controller
                         $user['email']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['email']);
                     }
 
-                    $userDb = Estudiante::firstOrNew(["codigo"=>$user["codigo"]]);
-
+                    $userDb = Estudiante::firstOrNew(["codigo"=>$user["codigo"]]); 
                     $userDb->fill($user);
 
 
@@ -120,13 +131,12 @@ class EstudiantesController extends Controller
                         $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));
                         
                         $users[] = $userDb;
-
+                      
                       $userDb->save();      
                         
                     }
-
-                    
-
+                  
+                   
                 }catch(\Exception $e){
 
                 }
