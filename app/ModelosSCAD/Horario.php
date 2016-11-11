@@ -58,6 +58,22 @@ class Horario extends Model
 
     }
 
+
+    public function scopenombreAsignaturas($query,$nombre)
+    {
+        
+        if (!empty($nombre)) {
+            
+                $query->whereHas('programaAcademicoAsignatura', function ($query)  use($nombre) {
+                            $nombre2=$nombre;
+                                $query->whereHas('asignatura',function($query)use($nombre2){
+                                    $query->where('Nombre','like',$nombre2.'%');
+                                });
+                            })->get();
+        }
+
+    }
+
     public function scopePeriodo($query,$periodo){
 
         if(!empty($periodo)){

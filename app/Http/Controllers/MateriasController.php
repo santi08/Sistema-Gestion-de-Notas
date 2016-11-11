@@ -34,7 +34,7 @@ class MateriasController extends Controller
 
     public function filterAjax(Request $request){
 
-        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->paginate(10);
+        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
         $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);  
 
         if ($request->ajax()) {

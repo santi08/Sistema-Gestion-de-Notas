@@ -5,14 +5,9 @@
 	<h4 class="center">Asignaturas</h4>
     <br>
     <div class="row">
-
         <div class="col s12 m12 l12">
             
             <div class="row">
-
-            
-
-            
                 <div class="input-field col s6 l4 m4 fuentes" >
                     
                     <select id="programas" name="programas">
@@ -44,7 +39,7 @@
 
             <div class="row">       
                 <div class="input-field col s8 l3 m3">
-                    <input id="nombreBusqueda" onkeypress="buscar();" type="text" placeholder="Nombre del profesor" class="validate">   
+                    <input id="nombreBusqueda" onkeypress="buscar();" type="text" placeholder="Nombre de la Asignatura" class="validate">   
                 </div>    
             </div>
 
@@ -73,7 +68,7 @@
 
                               <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
 
-                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+                               <a onclick="return ver();" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
 
                             </td>                    
                         </tr>
@@ -96,9 +91,8 @@
 
 
 	
-
-@endsection
-
+@include('admin.materias.modales.verDatosMaterias')
+@overwrite
 @section('scripts')
 
 	<script type="text/javascript">
@@ -189,7 +183,7 @@
 
         function buscar() {
             var nombreBusqueda = $("input#nombreBusqueda").val();
-            ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
+            ruta = "{{route('admin.materiasIndex.filterAjax')}}";
                 
     
             if (nombreBusqueda != "") {
@@ -209,6 +203,54 @@
                 
                 console.log("no hay nada ");
             }
+        }
+
+
+        function ver(){
+            $('#verDatosMaterias').openModal();
+   
+            /*var ruta="{//{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
+            var tablaAsignaturas = $("#tablaAsignaturas");
+            var programa = $('#programasProfesores').val();
+            var periodo = $('#periodosProfesores').val();
+           
+           $("#tablaAsignaturas td").remove();
+            
+            ruta = ruta.replace('%idprofesor%',id);
+            ruta = ruta.replace('%idprograma%',idprograma);
+
+            $.ajax({
+                    url:ruta,
+                    type:"GET",
+                    data: {programa:programa,periodo:periodo},
+                    dataType:'json',
+                    success:function(data){
+                        $(data).each(function(key,value){
+
+                            $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
+
+                            tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
+                    
+                        });
+
+                        $('#ver').openModal();
+                                              
+                    }
+                });*/
+   
+            /*$.get(ruta,function(res){
+                $('p').text(res.Apellidos); 
+                $(res).each(function(key,value){
+
+                $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
+                        tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
+                    
+                });
+               
+                
+
+            });*/
+    
         }
 
 
