@@ -67,7 +67,7 @@ class Horario extends Model
                 $query->whereHas('programaAcademicoAsignatura', function ($query)  use($nombre) {
                             $nombre2=$nombre;
                                 $query->whereHas('asignatura',function($query)use($nombre2){
-                                    $query->where('Nombre','like',$nombre2.'%');
+                                    $query->where('Nombre','like',$nombre2.'%')->get();;
                                 });
                             })->get();
         }
