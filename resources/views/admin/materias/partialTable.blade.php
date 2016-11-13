@@ -8,22 +8,28 @@
 						</thead>
 
 						<tbody>
-							@foreach($horarios as $horario)
+							@foreach($asignaturas as $asignatura)
 								<tr>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-									<td>{{$horario->Grupo}}</td>
+									<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
+									<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
+									<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
+									<td>{{$asignatura->Grupo}}</td>
 									<td>
-										<a class="btn-floating red darken-1"><i class="material-icons">picture_as_pdf</i></a></li>
-										<a class="btn-floating light-blue darken-3"><i class="material-icons">insert_chart</i></a></li>
-										<a class="btn-floating grey darken-1"><i class="material-icons">visibility</i></a></li>
+										 <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+
+                              <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " onclick="matricular({{$asignatura->Id}})" data-target="#matricular" data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
+
+                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+
 									</td>
 								</tr>
 							@endforeach
 					
 						</tbody>
 				</table>
-				{!!$horarios->render()!!}	
+				{!!$asignaturas->render()!!}	
+
+
+				
 	
 

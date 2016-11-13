@@ -8,9 +8,15 @@ use App\Http\Requests;
 use App\ModelosNotas\Estudiante;
 use Maatwebsite\Excel\Facades\Excel;
 use App\ModelosNotas\Matricula;
+use App\ModelosSCAD\Horario;
+use Response;
+
 
 class MatriculasController extends Controller
 {
+
+    private $codigoEncabezado ="";
+    private $grupoEncabezado ="";
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +25,19 @@ class MatriculasController extends Controller
     public function index()
     {
         //
+        $estudiantes = Matricula::all();
+
+        foreach ($estudiantes as $estudiante) {
+            # code...
+            if ($estudiante->estado == true ) {
+                # code...
+                echo $estudiante->estudiante->primerNombre." ";
+                echo $estudiante->horario->programaAcademicoAsignatura->asignatura->Nombre."<br>";
+            }else{
+                echo $estudiante->estudiante->primerNombre."Sin Matricular"."<br>";
+            }
+            
+        }
     }
 
     /**
@@ -40,6 +59,21 @@ class MatriculasController extends Controller
     public function store(Request $request)
     {
         //
+        $codigo = $request->codigo;
+        $asignatura = $request->horario;
+
+        $estudiante = Estudiante::where('codigo',$codigo)->first();
+
+        $matricula = new Matricula();
+
+        $matricula->horario_id= $asignatura;
+        $matricula->estudiante_id= $estudiante->id;
+        $matricula->tipoMatricula= 'N';
+        $matricula->estado= 0;
+       // $ma
+
+
+                dd($asignatura);
     }
 
     /**
@@ -88,16 +122,69 @@ class MatriculasController extends Controller
     }
 
 
-      public function matricularEstudiantes(){
-
+      public function matricularEstudiantes(Request $request){
         
+        $id_horario = $request->horario;
+        $file = $request->file;
+        //dd($file);
+        $horario = Horario::find($id_horario);
+       
+
+        $codigoMateria = $horario->programaAcademicoAsignatura->asignatura->Codigo;
+        $grupoMateria = $horario->Grupo;
+
+
+
+       if ($this->leerEncabezado($codigoMateria,  $grupoMateria, $file )){
+
         config(['excel.import.startRow' => 4 ]);
 
-        Excel::selectSheetsByIndex(0)->load('public/listado.xls',function($archivo)
+        Excel::selectSheetsByIndex(0)->load($file,function($archivo) use ($id_horario)
         {
-        
+                    
             $estudiantes = $archivo->get();
-            dd($estudiantes);
+            //dd($estudiantes);
+
+
+            foreach ($estudiantes as $estudiante) {
+
+                # code...
+
+                if (!is_null($estudiante->codigo)) {
+
+                $codigo = substr($estudiante->codigo, 2).'-'.$estudiante->programa;
+                //dd($codigo);
+
+                $e = Estudiante::where('codigo',$codigo)->first();
+
+                  try {
+
+                        $nuevos=0;
+                        $actualizado = 0;
+
+                        $verificar_matricula = array(
+                            'horario_id' => $id_horario,
+                            'estudiante_id' => $e->id
+                            );
+
+                        $matricula = Matricula::firstOrNew($verificar_matricula);
+                        $matricula->estudiante_id= $e->id;
+                        $matricula->tipoMatricula = $estudiante->t_mat;
+                        $matricula->estado=1;
+                        $matricula->save();
+
+                      
+                  } catch (Exception $e) {
+
+                    dd($e);
+                      
+                  }
+                 
+                }
+              
+            }
+            //
+            
             //dd($estudiantes);
 
         //$archivo->each(array)
@@ -118,68 +205,112 @@ class MatriculasController extends Controller
 
         });
 
+        
+       }else{
+
+            dd('encabezado no valido');
+       }
+
+        
+
+       
+
+       
+
+
+        
+        
+        
         //$excel = Excel::load('public/listado.xls')->all()->toArray();
         //dd($excel);
 
     }
 
-    public function leerEncabezado(){
+    public function leerEncabezado( $codigoMateria, $grupoMateria, $file ){
 
-         Excel::selectSheetsByIndex(0)->load('public/listado.xls',function($archivo)
+        
+       global $codigoEncabezado, $grupoEncabezado;
+       
+              
+
+         Excel::selectSheetsByIndex(0)->load($file ,function($archivo) use ($codigoMateria,$grupoMateria)
         {
-
+            
+            global $codigoEncabezado, $grupoEncabezado;
+           
             $archivo->noHeading();
             $encabezado = $archivo->limit(3)->get();
-            //dd($encabezado);
-            $codigoMateria = $encabezado[1];
-            dd($codigoMateria[1]);
+           
+            $obtenerListado = $encabezado[1][1];
+                  
 
-            $estudiantes = Estudiante::join('matriculas','estudiantes.id','=','matriculas.estudiante_id')
-                                        ->join('horaios','matriculas.horario_id','=','horarios.id')
-                                        ->where('PeriodoAcademicoId',$variable)->get();
+            $procesarListado = explode(" ", $obtenerListado);
+            
+         // dd($procesarListado);
+           
 
+            for ($i=0;  $i<count($procesarListado) ; $i++) { 
+                # code...
+            
+                if($procesarListado[$i]=="ASIGNATURA:"){
+                    $codigoEncabezado = $procesarListado[$i+1];
+                }
 
+                
+
+                if($procesarListado[$i]=="Gr.:"){
+                   $grupoEncabezado = $procesarListado[$i+1];
+                }
+            }
         });
 
+         //dd($codigoMateria);
+         //dd($codigoEncabezado);
+         //dd($grupoEncabezado);
+         //dd($grupoMateria);
 
-    }
-
-     public function leerArchivo(){
-
-       //Extraer todo el contenido del fichero
-          /*  $ruta = 'C:\xampp\htdocs\SistemaNotas\public\Matriculados.txt';
-
-            $archivo = fopen($ruta, "r");
-            $x = 1;
-            $estudiantes = array();
-            while(!feof($archivo))
-            {
-               $estudiante = fgets($archivo);
-               array_push($estudiantes, $estudiante);
-            $x++;
-            }
-
-            fclose($archivo);
-         dd($estudiantes);
-         */
-
-          $lineas = file('C:\xampp\htdocs\SistemaNotas\public\Matriculados.txt');
-            $estudiantes = array();
+          if($codigoEncabezado == $codigoMateria && $grupoEncabezado == $grupoMateria){
 
                 
+                return true ;
 
-            foreach ($lineas as $linea) {
+            }else{
 
-                $estudiante = new Estudiante();
-                $datos = explode("\t",$linea);
-                echo $datos;
-
-               
-                //array_push($estudiantes, $estudiante); 
+                return false;
+                
             }
 
-                
+       
+           
+           
     }
+
+    public function autocomplete(Request $request){
+
+
+        if ($request->ajax()) {
+        
+        $codigo = $request->codigo);
+
+        
+
+        $estudiantes = Estudiante::where('estado', true)->where('codigo'. 'LIKE','%'.$codigo.'%')->select('codigo')
+        ->take(5)->get();
+
+        $results = array();
+
+        foreach ($estudiantes as $estudiante){
+
+            $results[] = [ 'codigo' => $estudiante->codigo, 'value'=> $estudiante->codigo ];
+        }
+
+        return response()->json($results);
+        }
+       
+    }
+
+
+    
 
     
 }

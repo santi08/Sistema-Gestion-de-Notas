@@ -3,161 +3,106 @@
 
 @section('content')
 	<h4 class="center">Asignaturas</h4>
+    <br>
+    <div class="row">
 
+        <div class="col s12 m12 l12">
+            
+            <div class="row">
 
-	<div class="row">
+            
 
-		<div class="col s12 m12 l12">
-				<div class="row">
+            
+                <div class="input-field col s6 l4 m4 fuentes" >
+                    
+                    <select id="programas" name="programas">
+                    <option value="" disabled selected>Seleccione un programa</option>
+                        @foreach($programas as $programa);
+                            @if($programa->NombrePrograma != 'GENERICO')
+                                <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                            @endif
+                        @endforeach
 
-			<div class="input-fiel col s3">
-				<label>Periodo Academico</label>		
-				<select>
-					<option value="1" disabled selected>Seleccione una opción</option>
-					@foreach($PeriodosAcademicos as $PeriodoAcademico)
-						  			
-				    <option value="{{ $PeriodoAcademico->Id}}">
-				    {{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
-				    </option>
+                    </select>
+                    <label>Programa academico</label>
+                    
+                </div>
 
-					@endforeach
-						  			
-				</select>
-					  	
-			</div>	
-			
+                <div class="input-field col s6 l3 m3">
+                    
+                    <select name="periodos" id="periodos">
+                    <option value="" disabled selected>Seleccione un periodo</option>
+                        @foreach($periodos as $periodo);
+                            <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
+                        @endforeach
+                    </select>
 
-			
-					<div class="input-fiel col s5">
-						<label>Programa Academico</label>
-						<select>
-							<option value="" disabled selected>Seleccione una opción</option>
+                    <label>Periodo Academico</label>
+                    
+                </div>         
+            </div>
 
-							@foreach($ProgramasAcademicos as $ProgramaAcademico)
-								@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-									<option value="{{$ProgramaAcademico->id}}">		
-									
-									{{ $ProgramaAcademico->NombrePrograma }}
-								</option>
-								@endif
-							@endforeach
-						
-						</select>
-						
-						  			
-					</div>
-  				
+            <div class="row">       
+                <div class="input-field col s8 l3 m3">
+                    <input id="nombreBusqueda" onkeypress="buscar();" type="text" placeholder="Nombre del profesor" class="validate">   
+                </div>    
+            </div>
 
-			
-		
-		</div>
-			<div class="row">
-
-			
-
-			{!!Form::model(Request::all(),['route'=>'admin.materiasIndex.index','method'=>'GET'])!!}
-				<div class="input-field col s5 l5 m4 fuentes" >
-					
-    				<select id="programas" name="programas">
-      					@foreach($programas as $programa);
-      						<option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
-      					@endforeach
-
-      				</select>
-    				<label>Programa academico</label>
-    				
-  				</div>
-
-				<div class="input-field col s3 l3 m3">
-					
-    				<select name="periodos" id="periodos">
-      					@foreach($periodos as $periodo);
-      						<option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
-      					@endforeach
-    				</select>
-
-    				<label>Periodo Academico</label>
-    				
-  				</div>
-
-  				{!!Form::close()!!}
-				
-				
-			</div>
-<br>
 <hr>
-			<div class="row">
-				<div id="tabla" class="col l12">
-					<table class="responsive-table striped bordered" id="asignaturas">
-						<thead >
-							<th>Código</th>
-							<th>Nombre</th>
-							<th>Creditos</th>
-							<th>Grupo</th>
-							<th>Acciones</th>
-						</thead>
 
-						@foreach ($asignaturas as $asignatura)
-						<tr>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-							<td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-							<td>{{ $asignatura->Grupo}}</td>
-							<td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+            <div class="row">
+                <div id="tabla" class="col l12 s12 m12">
+                    <table class="responsive-table striped bordered" id="asignaturas">
+                        <thead >
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Creditos</th>
+                            <th>Grupo</th>
+                            <th>Acciones</th>
+                        </thead>
 
-							  <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
+                        <tbody>
 
-							   <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+                            @foreach ($asignaturas as $asignatura)
+                        <tr>
+                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
+                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
+                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
+                            <td>{{ $asignatura->Grupo}}</td>
+                            <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
 
-							</td>
+                              <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
 
+                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes" ><i class="material-icons">visibility</i></a>
 
-								
-						</tr>
-						@endforeach
-						
+                            </td>                    
+                        </tr>
+                        @endforeach
+                    
+                        </tbody>
+                    </table>
 
-						<tbody>
+                    {{$asignaturas->render()}}
+                    
 
-							@foreach($horarios as $horario)
-								<tr>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-									<td>{{$horario->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-									<td>{{$horario->Grupo}}</td>
-									<td>
-										<a class="btn-floating red"><i class="material-icons">picture_as_pdf</i></a></li>
-										<a class="btn-floating light-blue darken-3"><i class="material-icons">insert_chart</i></a></li>
-										<a class="btn-floating  grey darken-1"><i class="material-icons">visibility</i></a></li>
-									</td>
-								</tr>
-							@endforeach
-					
-						</tbody>
-					</table>
+                </div>
+                    
+            </div>
 
-					<div>
-						{{ $asignaturas->render() }}
-					</div>
+            
+    
+        </div>
+
+    </div>
 
 
-					{!!$horarios->render()!!}
-
-
-				</div>
-					
-			</div>
-
-			
-	
-		</div>
-
-	</div>
-
+  <div>
+   
+  </div> 
 
 
 @endsection
-
+@include('admin.materias.modales.matricular')
 @section('scripts')
 
 	<script type="text/javascript">
@@ -167,32 +112,39 @@
 				
 				var programa = $('#programas').val();
         		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.materiasIndex.filterAjax',['%idprograma%','%idperiodo%'])}}";
-        		ruta=ruta.replace('%idprograma%',programa);
-        		ruta=ruta.replace('%idperiodo%',periodo);
+        		ruta = "{{route('admin.materiasIndex.filterAjax')}}";
+        		
         		console.log(ruta);
+                console.log(programa);
+                console.log(periodo);
         		
         		$.ajax({
             		type: "GET",
             		url: ruta,
             		data: {programa:programa,periodo:periodo},
             		
-            		success: function(data) {	
-            			$("#tabla").html(data);	
-            		}
+            		success: function(data) {
+                        $("#tabla").html(data);
+                        $('.tooltipped').tooltip({delay: 50});
+
+                        //console.log("entro");
+
+            		} 
             		
         		});
 
-        	});			
+        	   });
+                     			
 //si selecciona un periodo academico se envia la peticion 
         	$("#periodos").change(function() {
 				
 				var programa = $('#programas').val();
         		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.materiasIndex.filterAjax',['%idprograma%','%idperiodo%'])}}";
-        		ruta=ruta.replace('%idprograma%',programa);
-        		ruta=ruta.replace('%idperiodo%',periodo);
+        		ruta = "{{route('admin.materiasIndex.filterAjax')}}";
+        		
         		console.log(ruta);
+                console.log(programa);
+                console.log(periodo)
         		
         		$.ajax({
             		type: "GET",
@@ -201,41 +153,86 @@
             		
             		success: function(data) {	
             			$("#tabla").html(data);	
+                        $('.tooltipped').tooltip({delay: 50});
             		}
         		});
         	});
     	});
 //paginacion sin recargar la pagina
 		$(document).ready(function(){
+            console.log($("#programas").val());
+            
 
-			$(document).on('click','.pagination a',function(e){
-        		e.preventDefault();
-        		var page= $(this).attr('href').split('page=')[1];
+                $(document).on('click','.pagination a',function(e){
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
 
-        		ruta="{{route('admin.materiasIndex.index')}}"
-        		$.ajax({
-        			url:ruta,
-        			type:"GET",
-        			data:{page:page},
-        			dataType:'json',
-        			success:function(data){
-        				console.log(data);        				
-        			}
-        		});
-        		
-        	});
+                console.log(page);
+                if ($("#programas").val()!=null) {
+                    ruta="{{route('admin.materiasIndex.filterAjax')}}"
+                }else{
+                    ruta="{{route('admin.materiasIndex.index')}}"
+                }
+                console.log(ruta);
+                $.ajax({
+                    url:ruta,
+                    type:"GET",
+                    data:{page:page},
+                    dataType:'json',
+                    success:function(data){
+                        
+                        $("#tabla").html(data);   
+                        $('.tooltipped').tooltip({delay: 50});                      
+                    }
+                });
+                
+            });
 
 		});
 
 
+        function buscar() {
+            var nombreBusqueda = $("input#nombreBusqueda").val();
+            ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
+                
+    
+            if (nombreBusqueda != "") {
+                $.ajax({
+                    type: "GET",
+                    url: ruta,
+                    data: {nombreBusqueda:nombreBusqueda},
+                    
+                    success: function(data) {   
+                        $("#tabla").html(data); 
+                        $('.tooltipped').tooltip({delay: 50});
+                    }
+                });
+                
+            } else { 
 
+                
+                console.log("no hay nada ");
+            }
+        }
 
-			
+        function matricular(id){
+            
+            
 
-		
-
-
-
+            
+                 $('#codigo').autocomplete({
+                  source: "{{url('matricular/autocomplete')}}",
+                  minLength: 2,
+                  select: function(event, ui) {
+                    $('#codigo').val(ui.item.value);
+                  }
+                });
+                
+                $('#horario').val(id);
+                $('#matricular').openModal();
+            
+        }
 	</script>
 
+   
 @endsection

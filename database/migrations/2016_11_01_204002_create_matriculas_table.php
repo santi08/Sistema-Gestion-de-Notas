@@ -17,7 +17,8 @@ class CreateMatriculasTable extends Migration
             $table->integer('horario_id')->unsigned();;
             $table->integer('estudiante_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
-            $table->string('tipoMatricula'); 
+            $table->string('tipoMatricula');
+            $table->boolean('estado');
             $table->double('definitiva');
             $table->timestamps();
         });

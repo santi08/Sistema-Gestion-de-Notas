@@ -44,7 +44,8 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
 	Route::resource('informesIndex','InformesController');
   Route::resource('estudiantes','EstudiantesController');
   Route::resource('notasIndex','NotasController');
-   
+  
+  
   //cargar informacion en el modal eliminar
   Route::GET('estudiantes/{id}/destroy',[
     'uses' =>'EstudiantesController@destroy',
@@ -73,10 +74,25 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
      'uses' =>'EstudiantesController@editar',
       'as' => 'admin.estudiantes.editar'
     ]);
+   //procesarArchivo
+   Route::POST('estudiantes/procesar',[
+    'uses' =>'EstudiantesController@procesarArchivo',
+    'as' => 'admin.estudiantes.procesarArchivo'
+    ]); 
 
-    Route::get('materiasIndex/{programaid}/{periodoid}',[
+    Route::get('filtrosAsignaturas',[
      'uses' =>'MateriasController@filterAjax',
       'as' => 'admin.materiasIndex.filterAjax'
+    ]);
+
+    Route::GET('filtrosProfesores',[
+     'uses' =>'ProfesoresController@filterAjax',
+      'as' => 'admin.profesoresIndex.filterAjax'
+    ]);
+
+    Route::GET('verProfesor/{id}',[
+     'uses' =>'ProfesoresController@ver',
+      'as' => 'admin.profesoresIndex.ver'
     ]);
 
   
@@ -114,6 +130,19 @@ Route::post('login/docentes',[
 ]);
 
 
+Route::post('matricular/archivo',[
+  'uses' =>'MatriculasController@matricularEstudiantes',
+  'as' => 'matricular.archivo']);
+
+Route::post('matricular/estudiante',[
+  'uses' =>'MatriculasController@store',
+  'as' => 'matricular.estudiante']);
+
+Route::get('matricular/autocomplete','MatriculasController@autocomplete');
+
+Route::get('estudiantes','MatriculasController@index');
+
+
   
 
   //Route::get('/home', 'HomeController@index');
@@ -131,7 +160,9 @@ Route::post('login/docentes',[
   Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
   Route::post('password/reset', 'Auth\PasswordController@reset');
    
-  Route::get('archivo','MatriculasController@matriculas');
+  //Route::get('archivo','MatriculasController@matricularEstudiantes');
+  Route::get('encabezado','MatriculasController@leerEncabezado');
+  
 
   
 

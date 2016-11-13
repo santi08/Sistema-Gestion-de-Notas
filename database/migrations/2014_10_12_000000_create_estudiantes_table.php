@@ -20,8 +20,8 @@ class CreateEstudiantesTable extends Migration
             $table->string('segundoApellido');
             $table->string('codigo');
             $table->string('email')->nullable()->unique();
-            $table->integer('programaacademico_id')->unsigned();
             $table->string('password');
+            $table->integer('id_programaAcademico')->unsigned();
             $table->boolean('estado')->nullable()->default('1');
             $table->rememberToken();
             $table->timestamps();

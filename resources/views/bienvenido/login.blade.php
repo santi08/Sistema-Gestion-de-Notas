@@ -1,6 +1,6 @@
 <div class="row">
                     
-                    <div class="col s9 m7 l4 card-panel centrar offset-s1 offset-l4 offset-m3 z-depth-3 bordes " style="padding:none; ">
+                    <div class="col s12 m7 l4 card-panel centrar offset-s1 offset-l4 offset-m3 z-depth-3 bordes micarpanel" style="padding:none; ">
                         
                         <div class="row">
                             <div class="col s6 waves-light-red center waves-effect waves-teal card" onclick="mostrarDocente()" id="boxDocentes">
