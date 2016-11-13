@@ -39,7 +39,7 @@
 				<input id="nombreBusqueda" onkeypress="return buscar();" type="text" placeholder="Nombre del profesor" class="validate">	
         	</div>    
 		</div>
-<hr>
+<div class="divider  grey darken-1"></div>
 		<div class="row" id="tabla"> 
 		
 			<table class="striped">
@@ -78,184 +78,114 @@
 
 @section('scripts')
 
-	<script type="text/javascript">
-    $(document).ready(function(){
-       
-            ruta="{{route('admin.profesoresIndex.index')}}";
-            var periodo = $('#periodosProfesores').val();
-            var id;
-                $.ajax({
-                    url:ruta,
-                    type:"GET",
-                    data:{periodo:periodo},
-                    dataType:'json',
-                    success:function(data){
-                        console.log(data);
-                        $(data).each(function(key,value){
-                            //$('#periodosProfesores').val(value.Id);
-                            id=value.Id;
-                    
-                        });
-                        $('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
-                        //$('#periodosProfesores').val(id);
-                                            
-                    }
+<script type="text/javascript">
+    $(document).ready(function(){  
+        ruta="{{route('admin.profesoresIndex.index')}}";
+        var periodo = $('#periodosProfesores').val();
+        var id;
+        $.ajax({
+            url:ruta,
+            type:"GET",
+            data:{periodo:periodo},
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                $(data).each(function(key,value){
+                    id=value.Id;    
                 });
-            
-         
-        
+                $('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
+                        //$('#periodosProfesores').val(id);                                
+            }
+        });        
     });
-//si selecciona un programa academico envia la peticion 
-		
-			$("#programasProfesores").change(function() {
-				
-				var programa = $('#programasProfesores').val();
-        		var periodo = $('#periodosProfesores').val();
-        		var nombreBusqueda = $('#nombreBusqueda').val();
-        		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
-        		
-        		console.log(ruta);
-                console.log(programa);
-                console.log(periodo);
-                console.log(nombreBusqueda);
-               
-        		
-        		$.ajax({
-            		type: "GET",
-            		url: ruta,
-            		data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},
-            		
-            		success: function(data) {
-                        $("#tabla").html(data);
-                        $('.tooltipped').tooltip({delay: 50});
-
-                        //console.log("entro");
-
-            		} 
-            		
-        		});
-
-        	   });
+//si selecciona un programa academico envia la peticion 	
+    $("#programasProfesores").change(function() {		     
+		consultarProgramasPeridos();
+    });
                      			
 //si selecciona un periodo academico se envia la peticion 
-        	$("#periodosProfesores").change(function() {
-				
-				var programa = $('#programasProfesores').val();
-        		var periodo = $('#periodosProfesores').val();
-        		var nombreBusqueda = $('#nombreBusqueda').val();
-        		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
-        		
-        		console.log(ruta);
-                console.log(programa);
-                console.log(periodo);
-                console.log(nombreBusqueda);
-        		
-        		$.ajax({
-            		type: "GET",
-            		url: ruta,
-            		data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},
-            		
-            		success: function(data) {	
-            			$("#tabla").html(data);	
-            			$('.tooltipped').tooltip({delay: 50});
-            		}
-        		});
-        	});
+    $("#periodosProfesores").change(function() {
+		consultarProgramasPeridos();
+    });
     
 //paginacion sin recargar la pagina
-		$(document).ready(function(){
+	$(document).ready(function(){
+		$(document).on('click','.pagination a',function(e){
+        	e.preventDefault();
+        	var page= $(this).attr('href').split('page=')[1];
+        	var ruta="{{route('admin.profesoresIndex.index')}}"
+        	$.ajax({
+        		url:ruta,
+        		type:"GET",
+        		data:{page:page},
+        		dataType:'json',
+        		success:function(data){
+        			console.log(data);        				
+        		}
+        	});		
+        });
+    });
 
-			$(document).on('click','.pagination a',function(e){
-        		e.preventDefault();
-        		var page= $(this).attr('href').split('page=')[1];
-
-        		ruta="{{route('admin.profesoresIndex.index')}}"
-        		$.ajax({
-        			url:ruta,
-        			type:"GET",
-        			data:{page:page},
-        			dataType:'json',
-        			success:function(data){
-        				console.log(data);        				
-        			}
-        		});
-        		
+	function buscar() {
+    	var nombreBusqueda = $("input#nombreBusqueda").val();
+        var programa = $('#programasProfesores').val();
+        var periodo = $('#periodosProfesores').val();
+    	var ruta = "{{route('admin.profesoresIndex.filterAjax')}}";		
+    	if (nombreBusqueda != "") {
+    		$.ajax({
+            	type: "GET",
+            	url: ruta,
+            	data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},	
+            	success: function(data) {	
+            		$("#tabla").html(data);	
+            		$('.tooltipped').tooltip({delay: 50});
+            	}
         	});
-        	});
-
-		function buscar() {
-    		var nombreBusqueda = $("input#nombreBusqueda").val();
-            var programa = $('#programasProfesores').val();
-            var periodo = $('#periodosProfesores').val();
-    		ruta = "{{route('admin.profesoresIndex.filterAjax')}}";
         		
-	
-    		if (nombreBusqueda != "") {
-    			$.ajax({
-            		type: "GET",
-            		url: ruta,
-            		data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},
-            		
-            		success: function(data) {	
-            			$("#tabla").html(data);	
-            			$('.tooltipped').tooltip({delay: 50});
-            		}
-        		});
-        		
-    		} else { 
-
-        		
-        		console.log("no hay nada ");
-			}
+    	}else { 		
+        	console.log("no hay nada ");
 		}
+	}
 
-        function ver(id,idprograma){
-   
-            var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
-            var tablaAsignaturas = $("#tablaAsignaturas");
-            var programa = $('#programasProfesores').val();
-            var periodo = $('#periodosProfesores').val();
-           
-           $("#tablaAsignaturas td").remove();
-            
-            ruta = ruta.replace('%idprofesor%',id);
-            ruta = ruta.replace('%idprograma%',idprograma);
-
-            $.ajax({
-                    url:ruta,
-                    type:"GET",
-                    data: {programa:programa,periodo:periodo},
-                    dataType:'json',
-                    success:function(data){
-                        $(data).each(function(key,value){
-
-                            $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-
-                            tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
-                        });
-
-                        $('#ver').openModal();
-                                              
-                    }
+    function ver(id,idprograma){
+        var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
+        var tablaAsignaturas = $("#tablaAsignaturas");
+        var programa = $('#programasProfesores').val();
+        var periodo = $('#periodosProfesores').val();   
+        $("#tablaAsignaturas td").remove();      
+        ruta = ruta.replace('%idprofesor%',id);
+        ruta = ruta.replace('%idprograma%',idprograma);
+        $.ajax({
+            url:ruta,
+            type:"GET",
+            data: {programa:programa,periodo:periodo},
+            dataType:'json',
+            success:function(data){
+                $(data).each(function(key,value){
+                    $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
+                    tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");    
                 });
-   
-            /*$.get(ruta,function(res){
-                $('p').text(res.Apellidos); 
-                $(res).each(function(key,value){
+                $('#ver').openModal();                                  
+            }
+        });        
+    }
 
-                $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-                        tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
-                });
-               
-                
-
-            });*/
-    
-        }
-
-	</script>
+    function consultarProgramasPeridos(){
+        var programa = $('#programasProfesores').val();
+        var periodo = $('#periodosProfesores').val();
+        var nombreBusqueda = $('#nombreBusqueda').val();
+        ruta = "{{route('admin.profesoresIndex.filterAjax')}}";    
+        $.ajax({
+            type: "GET",
+            url: ruta,
+            data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},      
+            success: function(data) {   
+                $("#tabla").html(data); 
+                $('.tooltipped').tooltip({delay: 50});
+            }
+        });
+    }
+</script>
 
 @endsection
 

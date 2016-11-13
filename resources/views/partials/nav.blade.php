@@ -38,8 +38,8 @@
             <div class="background center" style="margin-top: 4%;">
                 <span class="white-text text-lighten-2 center"><i class="material-icons medium ">account_circle</i></span>
             </div>
-            <br> 
-            <p class="white-text text-lighten-2">@if (Auth::guard('admin')->check())
+            
+            <div><p class="white-text text-lighten-2" >@if (Auth::guard('admin')->check())
 
               {{Auth::guard('admin')->user()->usuarios[0]->Nombre}} 
               {{Auth::guard('admin')->user()->usuarios[0]->Apellidos}}
@@ -49,30 +49,30 @@
                 {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
            
               @endif
-            </p>
-
+            </p></div>
         </div>
 
         </li>
+        <li class="no-padding"><div class="divider"></div></li>
 
-          <li class=""><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
+          <li class="mihover"><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
         
 
-          <li class="no-padding"><div class="divider"></div></li>
+          
 
         
-          <li class="no-padding">
+          <li class="no-padding mihover">
             <a href="{{route('admin.materiasIndex.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Asignaturas</a>
           </li>
         
-          <li class="no-padding">
+          <li class="no-padding mihover">
             <a href="{{route('admin.profesoresIndex.index')}}" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
           </li>
 
-          <li class="no-padding">
+          <li class="no-padding mihover">
             <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
           </li>
-          <li class="no-padding">
+          <li class="no-padding mihover">
             <a href="{{route('admin.informesIndex.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
           </li>
 </ul>

@@ -56,7 +56,7 @@ hr {
 
     #principalBox{
 
-      margin-left: 20%
+      
       background: black;
     }
 
@@ -116,5 +116,24 @@ input[type=tel], input[type=number], input[type=search], textarea.materialize-te
     transition: all 0.3s;
 }
 
+.pagination li {
+    display: inline-block;
+    border-radius:none;
+    text-align: center;
+    vertical-align: top;
+    height: 25px;
+    width: 25px;
+}
+
+.mihover:hover a,i{
+    /*background: #b71c1c;*/
+     font-size: 16px;
+    
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    will-change: opacity, transform;
+    transition: all .3s ease-out;
+}
 
 
