@@ -36,7 +36,7 @@ class Programaacademico extends Model
     	return $this->hasMany('App\ModelosSCAD\ProgramaacademicoAsignatura','programaacademicoId');
     }
 
-     public function estudiante(){
+     public function estudiantes(){
         return $this->hasMany('App\ModelosNotas\Estudiante','id_programaAcademico');
     }
 

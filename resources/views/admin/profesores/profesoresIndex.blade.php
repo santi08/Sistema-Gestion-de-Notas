@@ -24,7 +24,7 @@
 			<div class="input-field col s3 l3 m3">
 						
 				<select name="periodos" id="periodosProfesores">
-					
+					<option value="" disabled selected>Seleccione un programa</option>
 					@foreach($PeriodosAcademicos as $PeriodoAcademico)
 				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
 					@endforeach						  			
@@ -77,6 +77,7 @@
 @endsection 
 
 @section('scripts')
+
 
 <script type="text/javascript">
     $(document).ready(function(){  

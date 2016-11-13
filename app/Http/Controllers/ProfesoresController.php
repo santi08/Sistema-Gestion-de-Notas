@@ -110,43 +110,7 @@ class ProfesoresController extends Controller
         //
     }
 
-    public function cargarMateria(){
-
-        Excel::selectSheetsByIndex(0)->load('public/listado.xls',function($archivo)
-        {
-
-            //$resultado = $archivo->limit(false,3);
-            $archivo->noHeading();
-            $archivo->skip(3);
-            $resultado = $archivo->toArray();
-           
-            dd($resultado);
-
-        //$archivo->each(array)
-
-
-
-            foreach ($resultado as $materias) {
-                # code...
-
-                echo $materias->codigo."<br>";
-
-               /* foreach ($materias as $materia) {
-                    # code...
-                    echo $materia->codigo."<br>";
-                }*/
-                
-            }
-
-        });
-
-        //$excel = Excel::load('public/listado.xls')->all()->toArray();
-        //dd($excel);
-    }
-
-
-
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

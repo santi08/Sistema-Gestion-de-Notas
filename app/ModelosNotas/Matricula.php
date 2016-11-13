@@ -9,12 +9,14 @@ class Matricula extends Model
     //
 
 	protected $table = 'matriculas';
+   // public $timestamps = false;
     
 
     protected $fillable = [
-        'id_horario',
-        'id_estudiante',
+        'horario_id',
+        'estudiante_id',
         'tipoMatricula',
+        'estado',
         'definitiva'
     ];
 

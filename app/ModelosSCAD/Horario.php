@@ -41,7 +41,7 @@ class Horario extends Model
 //relacion de horario con la tabla pivote de programaacademico_asignatura
     public function programaAcademicoAsignatura(){
 
-        return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
+        return $this->belongsTo('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
     

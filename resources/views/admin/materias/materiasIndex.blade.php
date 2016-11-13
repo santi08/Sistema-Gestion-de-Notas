@@ -64,11 +64,15 @@
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
                             <td>{{ $asignatura->Grupo}}</td>
-                            <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+                            <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
 
-                              <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
+                              <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
+
+
+                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes" ><i class="material-icons">visibility</i></a>
 
                                <a onclick="return ver();" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+
 
                             </td>                    
                         </tr>
@@ -76,6 +80,7 @@
                     
                         </tbody>
                     </table>
+
                     {{$asignaturas->render()}}
                     
 
@@ -90,9 +95,19 @@
     </div>
 
 
+
+  <div>
+   
+  </div> 
+
+
+@endsection
+@include('admin.materias.modales.matricular')
+
 	
 @include('admin.materias.modales.verDatosMaterias')
 @overwrite
+
 @section('scripts')
 
 <script type="text/javascript">
@@ -126,7 +141,6 @@
 			 consultarProgramasPeriodos()
         });
     });
-
 //paginacion sin recargar la pagina
 	$(document).ready(function(){
         console.log($("#programas").val());
@@ -167,52 +181,27 @@
         });            
     }
 
+        function matricular(id){
+            
+            
+
+
+            
+                 $('#codigo').autocomplete({
+                  source: "{{url('matricular/autocomplete')}}",
+                  minLength: 2,
+                  select: function(event, ui) {
+                    $('#codigo').val(ui.item.value);
+                  }
+                });
+                
+                $('#horario').val(id);
+                $('#matricular').openModal();
+            
+        }
 
         function ver(){
             $('#verDatosMaterias').openModal();
-   
-            /*var ruta="{//{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
-            var tablaAsignaturas = $("#tablaAsignaturas");
-            var programa = $('#programasProfesores').val();
-            var periodo = $('#periodosProfesores').val();
-           
-           $("#tablaAsignaturas td").remove();
-            
-            ruta = ruta.replace('%idprofesor%',id);
-            ruta = ruta.replace('%idprograma%',idprograma);
-
-            $.ajax({
-                    url:ruta,
-                    type:"GET",
-                    data: {programa:programa,periodo:periodo},
-                    dataType:'json',
-                    success:function(data){
-                        $(data).each(function(key,value){
-
-                            $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-
-                            tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
-                        });
-
-                        $('#ver').openModal();
-                                              
-                    }
-                });*/
-   
-            /*$.get(ruta,function(res){
-                $('p').text(res.Apellidos); 
-                $(res).each(function(key,value){
-
-                $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-                        tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
-                });
-               
-                
-
-            });*/
-    
         }
 
         function consultarProgramasPeriodos(){
@@ -235,7 +224,7 @@
             });
         }
 
-
 	</script>
 
+   
 @endsection

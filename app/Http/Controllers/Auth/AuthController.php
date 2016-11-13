@@ -33,7 +33,7 @@ class AuthController extends Controller
      */
     protected $redirectTo = '/admin/estudiantes';
     protected $username = 'codigo';
-    protected $loginView ='auth.loginUser';
+    protected $loginView ='bienvenido.bienvenido';
 
     /**
      * Create a new authentication controller instance.
