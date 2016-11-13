@@ -90,7 +90,7 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
       'as' => 'admin.profesoresIndex.filterAjax'
     ]);
 
-    Route::GET('verProfesor/{id}',[
+    Route::GET('verProfesor/{id}/{idprograma}',[
      'uses' =>'ProfesoresController@ver',
       'as' => 'admin.profesoresIndex.ver'
     ]);

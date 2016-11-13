@@ -64,6 +64,7 @@
             $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
                     
+
         <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
 
         @yield('scripts')
@@ -93,6 +94,7 @@
 
             $(document).ready(function() {
             //$('select').material_select();
+
 
             });
         });
