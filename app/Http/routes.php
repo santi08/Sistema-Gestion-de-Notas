@@ -79,7 +79,11 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
     'uses' =>'EstudiantesController@procesarArchivo',
     'as' => 'admin.estudiantes.procesarArchivo'
     ]); 
-
+   //paginador Ajax
+    Route::GET('estudiantes/indexAjax',[
+    'uses' =>'EstudiantesController@indexAjax',
+    'as' => 'admin.estudiantes.indexAjax'
+    ]); 
     Route::get('filtrosAsignaturas',[
      'uses' =>'MateriasController@filterAjax',
       'as' => 'admin.materiasIndex.filterAjax'

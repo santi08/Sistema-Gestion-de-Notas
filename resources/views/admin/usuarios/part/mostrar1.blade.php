@@ -12,7 +12,7 @@
         </thead>
 
         <tbody>
-          @foreach($e as $estudiante)
+          @foreach($estudiantes as $estudiante)
           
           <tr>
              <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
@@ -29,4 +29,4 @@
         </tbody>
       </table>
 
- {!! $e->render()!!}
+ {!! $estudiantes->render()!!}

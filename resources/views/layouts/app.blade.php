@@ -43,14 +43,14 @@
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
     <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
     @yield('scripts')
-<<<<<<< HEAD
+
     <script type="text/javascript">
     $( document ).ready(function(){
         $('.button-collapse').sideNav();
         $('.collapsible').collapsible();
         $('.dropdown-button').dropdown('open');      
         $('.tooltipped').tooltip({delay: 50});
-        $('select').material_select();      
+        //$('select').material_select();      
 
     });
     </script>
@@ -59,43 +59,10 @@
         $(document).ready(function(){
             $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-                    
-=======
 
-        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
-
-        @yield('scripts')
-
-
-        <script type="text/javascript">
-            $( document ).ready(function(){
-                $('.button-collapse').sideNav();
-                $('.collapsible').collapsible();
-                $('.dropdown-button').dropdown('open');
-                
-                $('.tooltipped').tooltip({delay: 50});
-
-               // $('select').material_select();
-                
-
-            });
-        </script>
-
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.collapsible').collapsible({
-                    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-                    
                 });
-            });
-
-            $(document).ready(function() {
-            //$('select').material_select();
->>>>>>> 7227445d4c3fa14bd2b572ea5be43143c37d12d5
-            });
-        });
+             });       
     </script>
-
 
     <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>
