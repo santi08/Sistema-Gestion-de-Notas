@@ -37,7 +37,7 @@ class AuthController extends Controller
     protected $connection= 'docentes';   
     protected $redirectTo = '/admin/estudiantes';
     protected $guard= 'admin';
-    protected $loginView ='auth.loginAdmin';
+    protected $loginView ='bienvenido.bienvenido';
     protected $username = 'UsuarioIdentificacion';
     
 

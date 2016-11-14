@@ -94,7 +94,7 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
       'as' => 'admin.profesoresIndex.filterAjax'
     ]);
 
-    Route::GET('verProfesor/{id}',[
+    Route::GET('verProfesor/{id}/{idprograma}',[
      'uses' =>'ProfesoresController@ver',
       'as' => 'admin.profesoresIndex.ver'
     ]);
@@ -134,6 +134,19 @@ Route::post('login/docentes',[
 ]);
 
 
+Route::post('matricular/archivo',[
+  'uses' =>'MatriculasController@matricularEstudiantes',
+  'as' => 'matricular.archivo']);
+
+Route::post('matricular/estudiante',[
+  'uses' =>'MatriculasController@store',
+  'as' => 'matricular.estudiante']);
+
+Route::get('matricular/autocomplete','MatriculasController@autocomplete');
+
+Route::get('estudiantes','MatriculasController@index');
+
+
   
 
   //Route::get('/home', 'HomeController@index');
@@ -151,7 +164,9 @@ Route::post('login/docentes',[
   Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
   Route::post('password/reset', 'Auth\PasswordController@reset');
    
-  Route::get('archivo','ProfesoresController@cargarMateria');
+  //Route::get('archivo','MatriculasController@matricularEstudiantes');
+  Route::get('encabezado','MatriculasController@leerEncabezado');
+  
 
   
 

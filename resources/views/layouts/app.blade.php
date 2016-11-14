@@ -12,6 +12,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
         
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{{ asset('plugins/jqueryui/jquery-ui.theme.min.css')}}" rel="stylesheet">
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
         
@@ -41,6 +43,8 @@
 
     <!-- JavaScripts  y jquery-->
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+    <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
+
     <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
     @yield('scripts')
 
@@ -59,9 +63,37 @@
         $(document).ready(function(){
             $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+<<<<<<< HEAD
+=======
+                    
+
+        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
+
+        @yield('scripts')
+
+
+        <script type="text/javascript">
+            $( document ).ready(function(){
+                $('.button-collapse').sideNav();
+                $('.collapsible').collapsible();
+                $('.dropdown-button').dropdown('open');
+                
+                $('.tooltipped').tooltip({delay: 50});
+>>>>>>> 2c633c36c1076e46e041da647f04215a2abd48be
 
                 });
+<<<<<<< HEAD
              });       
+=======
+            });
+
+            $(document).ready(function() {
+            //$('select').material_select();
+
+
+            });
+        });
+>>>>>>> 2c633c36c1076e46e041da647f04215a2abd48be
     </script>
 
     <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>

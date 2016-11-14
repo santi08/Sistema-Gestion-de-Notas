@@ -41,7 +41,7 @@ class Horario extends Model
 //relacion de horario con la tabla pivote de programaacademico_asignatura
     public function programaAcademicoAsignatura(){
 
-        return $this->belongsTo ('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
+        return $this->belongsTo('App\ModelosSCAD\ProgramaacademicoAsignatura', 'AsignaturaId');
     }
 
     
@@ -53,6 +53,22 @@ class Horario extends Model
             
                 $query->whereHas('programaAcademicoAsignatura', function ($query)  use($programa) {
                                 $query->where('programaacademicoId', '=', $programa);
+                            })->get();
+        }
+
+    }
+
+
+    public function scopenombreAsignaturas($query,$nombre)
+    {
+        
+        if (!empty($nombre)) {
+            
+                $query->whereHas('programaAcademicoAsignatura', function ($query)use($nombre) {
+                            $nombre2=$nombre;
+                                $query->whereHas('asignatura',function($query)use($nombre2){
+                                    $query->where('Nombre','like',$nombre2.'%');
+                                });
                             })->get();
         }
 
