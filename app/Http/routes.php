@@ -95,6 +95,12 @@ Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
       'as' => 'admin.profesoresIndex.ver'
     ]);
 
+    Route::GET('verMaterias/{id}',[
+     'uses' =>'MateriasController@verDatosMateria',
+      'as' => 'admin.materiasIndex.verDatosMateria'
+    ]);
+
+
   
 
 });

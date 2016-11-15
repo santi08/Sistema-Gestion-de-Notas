@@ -63,13 +63,13 @@
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-                            <td>{{ $asignatura->Grupo}}</td>
+                            <td>{{ $asignatura->Grupo}} {{$asignatura->Id}}</td>
                             <td> 
                                 <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
 
-                                <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
+                                <a data-target="#matricular" onclick="matricular({{$asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
 
-                               <a onclick="return ver();" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+                               <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
 
 
                             </td>                    
@@ -195,10 +195,29 @@
             
         }
 
-
-        function ver(){
-            $('#verDatosMaterias').openModal();
-        }
+    function ver(id){
+        var ruta="{{route('admin.materiasIndex.verDatosMateria',['%idhorario%'])}}";
+        var tablaAsignaturas = $("#tablaAsignaturas");
+        var programa = $('#programasProfesores').val();
+        var periodo = $('#periodosProfesores').val();   
+        $("#tablaAsignaturas td").remove();      
+        ruta = ruta.replace('%idhorario%',id);
+        
+        $.ajax({
+            url:ruta,
+            type:"GET",
+            data: {programa:programa,periodo:periodo},
+            dataType:'json',
+            success:function(data){
+                $(data).each(function(key,value){
+                    $("#nombreMateria").text(value.asignatura);
+                    tablaAsignaturas.append("<tr><td>"+value.nombre+" "+value.apellidos +"</td><td>"+value.programa+"</td><td></td></tr>");    
+                });
+                 $('#verDatosMaterias').openModal();                                  
+            }
+        });        
+    }
+        
 
 
     function consultarProgramasPeriodos(){

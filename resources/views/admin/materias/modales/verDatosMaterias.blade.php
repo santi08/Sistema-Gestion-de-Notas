@@ -8,7 +8,7 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5 class="center gradient darken-3 white-text" id="nombreProfesor"></h5>
+					<h5 class="center gradient darken-3 white-text" id="nombreMateria"></h5>
 				</div>
 			</div>
 
