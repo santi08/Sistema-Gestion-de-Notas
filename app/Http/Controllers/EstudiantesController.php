@@ -17,34 +17,54 @@ use DB;
 class EstudiantesController extends Controller
 {
   
+
+
+    
+
     public function index(Request $requests){
 
      
      $programas= Programaacademico::all();
-     $estudiantes= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->where('estado',1)->paginate(10);
 
-   // $estudiantes= Estudiante::Periodo($requests->get('id'))->paginate(2);
-    // $periodosAcademicos = Periodoacademico::all();                               
+     if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
+
+       $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+
+      if($requests->ajax()){
+      return response()->json(view('admin.usuarios.part.mostrar2',compact('e'))->render()); 
+
+      };
+
+    }
+
+    
+
+    if(!empty($requests->get('idPrograma')) and empty($requests->get('valor'))){
+
+       $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+
+      if($requests->ajax()){
+      return response()->json(view('admin.usuarios.part.mostrar',compact('e'))->render()); 
+
+      };
+
+    }else {
+      $estudiantes= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+
+      if($requests->ajax()){
+         return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
+      
+      }
+
+      return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
+    }
+      
   
-     if($requests->ajax()){
-      return response()->json(view('admin.usuarios.part.mostrar',compact('estudiantes'))->render());
-     }
+    
 
-     return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
+     
     }
 
-    public function encontrarProgramaAcademico($encontrar){
-        
-         $programa = Programaacademico::all();
-         $resultado;
-         for($i=0;$i<count($programa);$i++){
-          if($programa[$i]->Id == $encontrar){
-            $resultado = $programa[$i]->Id;
-          }  
-         }
-
-         return $resultado ;
-    }
 
     public function procesarArchivo(Request $request)
     {
@@ -79,17 +99,10 @@ class EstudiantesController extends Controller
                     //programaAcademico 
                    $user['id_programaAcademico']=trim(preg_replace('/\t+/', '', $parts[1]));
                    $user['id_programaAcademico']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['id_programaAcademico']);
-                  // $user['id_programaAcademico']=this.encontrarProgramaAcademico($user['id_programaAcademico']);
 
-                  /* for($i=1;$i<count($programa);$i++){
-                    if($programa[i]->CodigoPrograma == $user['id_programaAcademico']){
-                       $user['id_programaAcademico'] = $programa[i]->Id;
-                       break;
-                    }
-                   }*/
-
-                  
-
+                    $user['email']=trim(preg_replace('/\t+/','',$parts[4]));
+                    $user['email']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['email']);
+                
                     $user['primerNombre']=trim(preg_replace('/\t+/', '',$nombres[0]));
                     $user['primerNombre']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$nombres[0]);
                     if(!empty($nombres[1])){
@@ -118,24 +131,22 @@ class EstudiantesController extends Controller
 
                     $password="contraseña";
 
-                    if(!empty($parts[4])){
-                        $user['email']=trim(preg_replace('/\t+/','',$parts[4]));
-                        $user['email']=preg_replace('/[\x00-\x1F\x80-\xFF]/','',$user['email']);
-                    }
+                       
+                    
 
                     $userDb = Estudiante::firstOrNew(["codigo"=>$user["codigo"]]); 
                     $userDb->fill($user);
 
 
-                    if(empty($userDb->id) and !empty($userDb->email)){
-                        $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));
+                    if(empty($userDb->id)){
+                     $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));
                         
                         $users[] = $userDb;
                       
-                      $userDb->save();      
-                        
+                      $userDb->save();         
                     }
-                  
+                   
+                  $userDb->save();
                    
                 }catch(\Exception $e){
 
@@ -143,10 +154,7 @@ class EstudiantesController extends Controller
 
             }
             
-            /*foreach ($users
-             as $u) {
-              echo($u).'<br>';# code...
-            };*/
+          
             //session()->put('users', $users);
             //session()->put('contrasena',bcrypt("contraseña"));
             //Flash::success('Se procesaron '. count($users). 'exitosamente');
@@ -157,8 +165,6 @@ class EstudiantesController extends Controller
             foreach($users as $estudiantes){
                 try{
                     if(empty($estudiantes->id)) {
-                        $estudiantes->password=bcrypt($user->password);
-                        $estudiantes->save();
                         $registrados+=1;
                     }else{
                         $actualizados+=1;
@@ -170,7 +176,7 @@ class EstudiantesController extends Controller
                 }
             }
 
-            $mensaje="Se han procesado los datos exitosamente";
+            $mensaje="";
             if($registrados>0){
                 $mensaje.=", se han guardado ". $registrados ." usuarios";
             }
@@ -183,12 +189,12 @@ class EstudiantesController extends Controller
             }
 
             dd($mensaje);
-            return view('admin.users.index')->with('users',$users);
+            return redirect()->route('admin.usuarios.index');
 
           }catch(\Exception $e){
               //Flash::error('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
-            dd('se produjo un error');
-              return redirect()->route('admin.users.index');
+            dd($e);
+            return redirect()->route('admin.usuarios.index');
           }
         }else{
 

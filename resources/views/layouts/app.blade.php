@@ -47,11 +47,11 @@
         $('.collapsible').collapsible();
         $('.dropdown-button').dropdown('open');      
         $('.tooltipped').tooltip({delay: 50});
-        $('select').material_select();      
+        //$('select').material_select();      
 
     });
     </script>
-        
+
     <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
     </body>
 </html>

@@ -16,10 +16,10 @@
  <div class="input-field col s12">
  
     <select id="filtrarPrograma">
-      <option id="" value="" disabled selected>Seleccione un Programa 
+      <option id="periodo" value="" disabled selected>Seleccione un Programa 
         </option>
       @foreach($programas as $programa) 
-        <option id="periodo" value="{{$programa->Id}}" >{{$programa->NombrePrograma}} 
+        <option id="periodo" value="{{$programa->CodigoPrograma}}" >{{$programa->NombrePrograma}} 
         </option>
       @endforeach       
     </select>
@@ -82,10 +82,10 @@
  
   </table>
 
-
+{!! $estudiantes->render()!!}
 </div>
 
-{!! $estudiantes->render()!!}
+
 
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
@@ -93,6 +93,40 @@
 @overwrite
 
 @section('scripts')
+
+<!--- Paginador -->
+<script type="text/javascript">
+  $(document).on('click','.pagination a',function(e){
+    
+    // prevenir evento del paginador y asiganar el id de la pagina 
+    e.preventDefault();
+    var idPagina = $(this).attr('href').split('page=')[1];
+    var ruta = '?page='+idPagina;
+    
+    // campos de busqueda que han sido inicializados o activados
+    var idPrograma=$('#idPrograma').val();
+    var valor = $('#search').val();
+
+                        
+    $.ajax({
+     url:ruta,
+     data:{idPagina:idPagina,idPrograma:idPrograma,valor:valor},
+     type:'GET',
+     dataType:'json',
+     success:function(res){
+       console.log(res);
+       $("#Estudiantes").html(res);
+         
+
+     },error:function(xml,error,error2){
+        console.log(error);
+      }
+
+    });
+    
+  });
+
+</script>
 <!--abrir selectores-->
 <script type="text/javascript">
  $(document).ready(function(){
@@ -112,7 +146,6 @@
 <script type="text/javascript">
    $('#selectorPrograma2').change(function() {
      var opcion = $(this).children(":selected").attr("value");
-     console.log(opcion);
      $('#id_programaAcademico').val(opcion);
    })
 </script> 
@@ -134,12 +167,15 @@ $('#idPrograma').val(idPrograma);
 console.log(idPrograma);
   $.ajax({
       url:ruta,
-      type: 'get',
+      type:'GET',
       dataType:'json',
       data:{idPrograma :idPrograma},
       success:function(data){
        $("#Estudiantes").html(data);
+       console.log(data);
         
+      },error:function(xml,error,error2){
+        console.log(error);
       }
      });
 }); 
@@ -153,13 +189,13 @@ console.log(idPrograma);
 function buscar(){ 
  var ruta = "{{ route('admin.estudiantes.index')}}";
  var valor = $('#search').val();
- var ide = $('#idPeriodo').val();
+ var idPrograma=$('#idPrograma').val();
  
   $.ajax({
       url:ruta,
       type: 'GET',
       dataType:'json',
-      data:{valor:valor,ide:ide},
+      data:{valor:valor,idPrograma:idPrograma},
       success:function(data){
         $("#Estudiantes").html(data);
         
@@ -199,7 +235,6 @@ function abrirModalEliminar(id){
         
         window.location= "{{route('admin.estudiantes.index')}}";
 
-        
       }
      });
 
@@ -216,6 +251,7 @@ function abrirModalEliminar(id){
     ruta = ruta.replace('%iduser%',id);
    
    $.get(ruta,function(res){ 
+    $('#editarEstudiante').openModal();
     $('#selectorPrograma2 option').remove();
     $('#id').val(res[1].id);
     nombre = res[1].primerNombre+" "+res[1].segundoNombre+" "+res[1].primerApellido+" "+res[1].segundoApellido;
@@ -227,13 +263,13 @@ function abrirModalEliminar(id){
     $("#email").val(res[1].email);
     $("#codigo2").val(res[1].codigo);
     
-    $('.selectorPrograma2').append('<option disable selected> Seleccione un programa</option>');
+    $('#selectorPrograma2').append('<option disable selected> Seleccione un programa</option>');
     for (var i =0; i < res[0].length; i++) {
-    $('.selectorPrograma2').append('<option value='+res[0][i].Id+'>'+res[0][i].NombrePrograma +'</option>');
+    $('#selectorPrograma2').append('<option value='+res[0][i].Id+'>'+res[0][i].NombrePrograma +'</option>');
      }
 
-    $('#editarEstudiante').openModal();
-     $('#selectorPrograma2').material_select();
+    
+    $('#selectorPrograma2').material_select();
    });
     
   }
