@@ -56,15 +56,12 @@
         </div> 
         <!-- fin fila botones-->
     </div>
-<<<<<<< HEAD
-  <div class="col-md-4">
-    <fieldset>  
-=======
+
 
 
   <div class="col s12 m12 l12">
     <fieldset >  
->>>>>>> 9fc3595ffd7ddbce9061b6c54bcf464c70e23cf6
+
       <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
 
       <div id="RegistrarPorArchivo" class="collapse">

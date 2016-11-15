@@ -64,12 +64,10 @@
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
                             <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
                             <td>{{ $asignatura->Grupo}}</td>
-                            <td>  <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
+                            <td> 
+                                <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
 
-                              <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
-
-
-                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes" ><i class="material-icons">visibility</i></a>
+                                <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
 
                                <a onclick="return ver();" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
 
@@ -100,12 +98,8 @@
    
   </div> 
 
-
-@endsection
-@include('admin.materias.modales.matricular')
-
-	
 @include('admin.materias.modales.verDatosMaterias')
+@include('admin.materias.modales.matricular')
 @overwrite
 
 @section('scripts')
@@ -131,6 +125,7 @@
             }
         });        
     });
+
 //si selecciona un programa academico envia la peticion 
 	$(document).ready(function(){
 		$("#programas").change(function() {	 	
@@ -141,6 +136,7 @@
 			 consultarProgramasPeriodos()
         });
     });
+
 //paginacion sin recargar la pagina
 	$(document).ready(function(){
         console.log($("#programas").val());
@@ -165,6 +161,7 @@
             });     
         });
 	});
+
     function buscar() {
         var nombreBusqueda = $("input#nombreBusqueda").val();
         var programa = $('#programas').val();
@@ -181,13 +178,11 @@
         });            
     }
 
-        function matricular(id){
-            
-            
+    function matricular(id){
 
-
-            
-                 $('#codigo').autocomplete({
+        
+                
+        $('#codigo').autocomplete({
                   source: "{{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
@@ -200,11 +195,13 @@
             
         }
 
+
         function ver(){
             $('#verDatosMaterias').openModal();
         }
 
-        function consultarProgramasPeriodos(){
+
+    function consultarProgramasPeriodos(){
             var programa = $('#programas').val();
             var periodo = $('#periodos').val();
             ruta = "{{route('admin.materiasIndex.filterAjax')}}";   
