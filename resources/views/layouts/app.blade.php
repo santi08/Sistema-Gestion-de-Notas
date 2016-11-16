@@ -4,19 +4,14 @@
 
         <title>@yield('title','default')</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">
-        
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
-        
-         <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">    
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
-        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{{ asset('plugins/jqueryui/jquery-ui.theme.min.css')}}" rel="stylesheet">
-        
+        <link href="{{ asset('plugins/jqueryui/jquery-ui.theme.min.css')}}" rel="stylesheet"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
-        
+        <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
         
     </head>
 
@@ -44,6 +39,7 @@
     <!-- JavaScripts  y jquery-->
     <script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+<<<<<<< HEAD
 
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
     
@@ -51,6 +47,10 @@
     </script>
 
    
+=======
+    <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
+    @yield('scripts')
+>>>>>>> d932b7088f9e90f47d01d2c4651cc8243ad00024
 
     <script type="text/javascript">
     $( document ).ready(function(){
@@ -63,6 +63,7 @@
     });
     </script>
 
+<<<<<<< HEAD
    <!-- <script type="text/javascript">
         $(document).ready(function(){
             $('.collapsible').collapsible({
@@ -72,5 +73,8 @@
     
      @yield('scripts')
   
+=======
+    <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+>>>>>>> d932b7088f9e90f47d01d2c4651cc8243ad00024
     </body>
 </html>

@@ -32,6 +32,7 @@ class MateriasController extends Controller
         return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
     }
 
+
     public function filterAjax(Request $request){
 
         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
@@ -45,71 +46,17 @@ class MateriasController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function verDatosMateria(Request $request, $id){
+
+        $asignatura = Horario::find($id);
+
+        $aux[]=["nombre"=>$asignatura->usuario->Nombre,"programa"=>$asignatura->programaAcademicoAsignatura->programaAcademico->NombrePrograma,"apellidos"=>$asignatura->usuario->Apellidos,"asignatura"=> $asignatura->programaAcademicoAsignatura->asignatura->Nombre];
+
+         if ($request->ajax()) {
+            return response()->json($aux);
+        } 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
 
     

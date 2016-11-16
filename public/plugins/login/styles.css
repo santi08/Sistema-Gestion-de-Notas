@@ -3,9 +3,9 @@
 }
 
 .gradient{
-  background: red; /* For browsers that do not support gradients */
+  background: #d51b23; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left,#d51b23 , grey); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #d51b23, grey); /* For Opera 11.1 to 12.0 */
+    background: -o-linear-gradient(left, #d51b23, grey); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #d51b23, grey); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #d51b23, grey); /* Standard syntax (must be last) */
 }
@@ -22,11 +22,11 @@ i.icon-blue:focus {
 
 .gradient-side{
 
-  background: red; /* For browsers that do not support gradients */
+  background: #d51b23; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left top,#d51b23 , grey); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #d51b23 , grey); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right,  #d51b23 , grey); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, right #d51b23 , grey); /* Standard syntax */
+  background: -o-linear-gradient(right, #d51b23 , grey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient( right, top  #d51b23 , grey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(right, right #d51b23 , grey); /* Standard syntax */
 
 }
 

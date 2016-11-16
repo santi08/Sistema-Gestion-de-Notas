@@ -288,9 +288,9 @@ class MatriculasController extends Controller
     public function autocomplete(Request $request){
 
 
-        if ($request->ajax()) {
+        if ($request->ajax()){
         
-        $codigo = $request->codigo);
+        $codigo = $request->codigo;
 
         
 
