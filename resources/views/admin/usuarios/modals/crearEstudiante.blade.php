@@ -42,7 +42,7 @@
          <select id="selectorPrograma1">
           <option class="validate required" value="" disabled selected> Seleccione Programa Academico</option>
           @foreach ($programas as $programa)
-          <option id="opcion" value="{{$programa->Id}}"> {{$programa->NombrePrograma}}</option>
+          <option id="opcion" value="{{$programa->CodigoPrograma}}"> {{$programa->NombrePrograma}}</option>
           @endforeach
          </select>
         </div>
@@ -56,47 +56,33 @@
         </div> 
         <!-- fin fila botones-->
     </div>
-<<<<<<< HEAD
+
   <div class="col-md-4">
     <fieldset>  
-=======
 
 
-  <div class="col s12 m12 l12">
+
+ <div class="col s12 m12 l12">
     <fieldset >  
->>>>>>> 9fc3595ffd7ddbce9061b6c54bcf464c70e23cf6
-      <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
 
-      <div id="RegistrarPorArchivo" class="collapse">
-        {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method'=>'POST','files' => 'true']) !!}
-        <div class="form-group">
-          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
+    
+   <fieldset>  
+      <legend data-toggle="collapse" style="cursor: pointer" class="" >Registrar por archivo</legend>
+      <div class="row">
+       {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method' => 'POST','id'=>'formularioSubir','files'=>'true'])!!}
+        <div>
+          <input  class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-
-         {!! Form::close() !!}
-         </div>
-
-
+        <button type='submit' class="btn btn-primary">Enviar</button>
       </div>
-
-     </fieldset>
-
-  <!-- <fieldset>  
-      <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
-      <div id="RegistrarPorArchivo" class="collapse">
-        <div class="form-group">
-          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
-        </div>
-        <button onClick="abrirCargarArchivo()" data-target='#cargarEstudiante' class=" btn btn-primary modal-trigger">Enviar</button>
-      </div>
-     </fieldset>-->
+      {!! Form::close()!!}
+     </fieldset> 
 
   </div>
 
         
   </div>
-</div>
+</div> 
   
  <!--finaliza el boton crear-->
 

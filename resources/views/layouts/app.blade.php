@@ -27,7 +27,7 @@
                 @include('partials.nav')
         <!-- Page Layout here --> 
         </header>
-    
+       
         
         <main>
 
@@ -42,11 +42,15 @@
 
 
     <!-- JavaScripts  y jquery-->
+    <script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
-    <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
 
-    <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
-    @yield('scripts')
+    <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
+    
+    <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css">
+    </script>
+
+   
 
     <script type="text/javascript">
     $( document ).ready(function(){
@@ -59,43 +63,14 @@
     });
     </script>
 
-    <script type="text/javascript">
+   <!-- <script type="text/javascript">
         $(document).ready(function(){
             $('.collapsible').collapsible({
                     accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-<<<<<<< HEAD
-=======
-                    
-
-        <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
-
-        @yield('scripts')
-
-
-        <script type="text/javascript">
-            $( document ).ready(function(){
-                $('.button-collapse').sideNav();
-                $('.collapsible').collapsible();
-                $('.dropdown-button').dropdown('open');
-                
-                $('.tooltipped').tooltip({delay: 50});
->>>>>>> 2c633c36c1076e46e041da647f04215a2abd48be
-
-                });
-<<<<<<< HEAD
-             });       
-=======
-            });
-
-            $(document).ready(function() {
-            //$('select').material_select();
-
-
-            });
-        });
->>>>>>> 2c633c36c1076e46e041da647f04215a2abd48be
-    </script>
-
-    <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+    </script>-->
+   <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+    
+     @yield('scripts')
+  
     </body>
 </html>
