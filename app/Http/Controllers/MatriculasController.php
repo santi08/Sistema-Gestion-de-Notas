@@ -9,6 +9,7 @@ use App\ModelosNotas\Estudiante;
 use Maatwebsite\Excel\Facades\Excel;
 use App\ModelosNotas\Matricula;
 use App\ModelosSCAD\Horario;
+use App\ModelosSCAD\Periodoacademico;
 use Response;
 
 
@@ -22,22 +23,28 @@ class MatriculasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+        $guard= 'admin';
+        $id_periodo= $request->get('periodo');
         $estudiantes = Matricula::all();
+        $id_usuario = \Auth::guard($guard)->user()->UsuarioIdentificacion;
 
-        foreach ($estudiantes as $estudiante) {
-            # code...
-            if ($estudiante->estado == true ) {
-                # code...
-                echo $estudiante->estudiante->primerNombre." ";
-                echo $estudiante->horario->programaAcademicoAsignatura->asignatura->Nombre."<br>";
-            }else{
-                echo $estudiante->estudiante->primerNombre."Sin Matricular"."<br>";
-            }
-            
+        if ($request->ajax()) {
+           
+            $asignaturas = Horario::where('UsuarioID',$id_usuario)->where('PeriodoAcademicoId',$id_periodo)->get();
+
+            return response()->json(view('admin.matriculas.parts.lista',compact('asignaturas'))->render());
+
+        }else{
+             $asignaturas = Horario::where('UsuarioID',$id_usuario)->get();  
         }
+
+        
+
+
+         return view('admin.matriculas.index')->with('periodos',$periodos)->with('asignaturas',$asignaturas);
     }
 
     /**
@@ -59,21 +66,35 @@ class MatriculasController extends Controller
     public function store(Request $request)
     {
         //
+
+        try {
+
         $codigo = $request->codigo;
-        $asignatura = $request->horario;
+        $id_horario = $request->horario_estudiante;
 
         $estudiante = Estudiante::where('codigo',$codigo)->first();
 
-        $matricula = new Matricula();
+        $verificar_matricula = array(
+                            'horario_id' => $id_horario,
+                            'estudiante_id' => $estudiante->id
+                            );
+    
+        $matricula = Matricula::firstOrNew($verificar_matricula);
+                        $matricula->estudiante_id= $estudiante->id;
+                        $matricula->tipoMatricula = 'N';
+                        $matricula->estado= 0;
+                        $matricula->save();
 
-        $matricula->horario_id= $asignatura;
-        $matricula->estudiante_id= $estudiante->id;
-        $matricula->tipoMatricula= 'N';
-        $matricula->estado= 0;
-       // $ma
 
 
-                dd($asignatura);
+                echo "Se ha matriculado a".$estudiante->primerNombre.' '.$estudiante->primerApellido.' Exitosamente';
+            
+        } catch (Exception $e) {
+
+                dd('Se ha producido un error, intentelo de nuevo');
+            
+        }
+
     }
 
     /**
@@ -124,9 +145,8 @@ class MatriculasController extends Controller
 
       public function matricularEstudiantes(Request $request){
         
-        $id_horario = $request->horario;
+        $id_horario = $request->horario_archivo;
         $file = $request->file;
-        //dd($file);
         $horario = Horario::find($id_horario);
        
 
@@ -176,32 +196,14 @@ class MatriculasController extends Controller
                       
                   } catch (Exception $e) {
 
-                    dd($e);
+                     dd($e);
                       
                   }
                  
                 }
               
             }
-            //
-            
-            //dd($estudiantes);
-
-        //$archivo->each(array)
-
-
-
-           /* foreach ($resultado as $materias) {
-                # code...
-
-                echo $materias->codigo."<br>";
-
-               /* foreach ($materias as $materia) {
-                    # code...
-                    echo $materia->codigo."<br>";
-                }
-                
-            }*/
+           
 
         });
 
@@ -264,14 +266,8 @@ class MatriculasController extends Controller
             }
         });
 
-         //dd($codigoMateria);
-         //dd($codigoEncabezado);
-         //dd($grupoEncabezado);
-         //dd($grupoMateria);
-
           if($codigoEncabezado == $codigoMateria && $grupoEncabezado == $grupoMateria){
 
-                
                 return true ;
 
             }else{
@@ -285,12 +281,24 @@ class MatriculasController extends Controller
            
     }
 
+    public function materias(){
+
+        $guard= 'admin';
+        $usuario =\Auth::guard($guard)->user()->usuarios[0];
+        $asignaturas =  $usuario->horarios;
+
+       dd($asignaturas);
+
+     
+       
+    }
+
     public function autocomplete(Request $request){
 
 
         if ($request->ajax()) {
         
-        $codigo = $request->codigo);
+        $codigo = $request->codigo;
 
         
 

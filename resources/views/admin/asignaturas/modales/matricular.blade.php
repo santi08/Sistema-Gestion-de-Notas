@@ -28,9 +28,8 @@
 				{!! Form::open(['route'=>['matricular.estudiante'],'method' => 'POST', 'id'=> 'formEstudiante'])!!}
 					<label style="font-size: 1rem;">Codigo de estudiante</label>
 					<input type="text" id="codigo" name="codigo" class="autocomplete">
-					 {{ Form::text('q', '', ['id' =>  'q', 'placeholder' =>  'Enter name'])}}
 					<button class="waves-effect waves-light btn">Matricular</button>
-					<input type="hidden" id="horario" name="horario">
+					<input type="hidden" id="horario_estudiante" name="horario_estudiante">
 				
 				{!! Form::close()!!}
 				
@@ -57,7 +56,7 @@
 			        			<input class="file-path validate" type="text">
 			      			</div>
 	    				</div>
-	    				<input type="hidden" id="horario" name="horario">
+	    				<input type="hidden" id="horario_archivo" name="horario_archivo">
 	    				<div class="row">
 				          <div class="col s5 l5 m5 offset-l6 offset-s6 input-field">
 				           

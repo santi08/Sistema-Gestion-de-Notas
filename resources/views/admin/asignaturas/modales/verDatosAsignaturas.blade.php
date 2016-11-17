@@ -1,6 +1,6 @@
 @extends('layouts.modal')
 
-@section('id')'verDatosMaterias'
+@section('id')'verDatosAsignaturas'
 @overwrite
 
 @section('contenido')

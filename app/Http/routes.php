@@ -17,92 +17,154 @@ Route::get('/', function () {
 
 
 
-Route::get('login',function(){
-	return view('auth.login');
-});
 
-Route::group( ['prefix'=>'admin', 'middleware' => 'auth'],function(){
+Route::group(['middleware' => 'auth'],function(){
 
-
-  Route::group( ['prefix'=>'secretario'],function(){
-
+  Route::get('/index', function(){
+  return view('welcome');
   });
 
+  // Rutas para el administrador
+  Route::group( ['prefix'=>'admin', 'middleware' => 'administrador' ],function(){
 
-  Route::group( ['prefix'=>'coordinador'],function(){
+      Route::get('profesores',[
+          'uses' => 'ProfesoresController@index',
+          'as' => 'admin.profesores.index'
+        ]);
 
-  });
+      Route::get('asignaturas',[
+          'uses' => 'AsignaturasController@index',
+          'as' => 'admin.asignaturas.index'
+        ]);
+
+      Route::resource('informes','InformesController');
+      Route::resource('estudiantes','EstudiantesController');
+      Route::resource('notas','NotasController');
+      Route::resource('matriculas','MatriculasController');
+      
+      
+      //cargar informacion en el modal eliminar
+      Route::GET('estudiantes/{id}/destroy',[
+        'uses' =>'EstudiantesController@destroy',
+        'as' => 'admin.estudiantes.destroy'
+        ]);
+       // activa la accion eliminar en el modal
+       Route::put('estudiantes/{id}/destroyupdate',[
+         'uses' =>'EstudiantesController@destroyupdate',
+          'as' => 'admin.estudiantes.destroyupdate'
+        ]);
+       
+       //guardar Estudiantes
+       Route::post('estudiantes/guardar',[
+         'uses' =>'EstudiantesController@guardarEstudiante',
+          'as' => 'admin.estudiantes.guardarEstudiante'
+        ]);
+
+       //cargar informacion editarEstudiante
+       Route::get('estudiantes/editar/{id}',[
+         'uses' =>'EstudiantesController@edit',
+          'as' => 'admin.estudiantes.edit'
+        ]);
+
+       //editarEstudiante
+       Route::post('estudiantes/editar',[
+         'uses' =>'EstudiantesController@editar',
+          'as' => 'admin.estudiantes.editar'
+        ]);
+       //procesarArchivo
+       Route::POST('estudiantes/procesar',[
+        'uses' =>'EstudiantesController@procesarArchivo',
+        'as' => 'admin.estudiantes.procesarArchivo'
+        ]); 
+
+        Route::get('filtrosAsignaturas',[
+         'uses' =>'AsignaturasController@filterAjax',
+          'as' => 'admin.asignaturas.filterAjax'
+        ]);
+
+        Route::GET('filtrosProfesores',[
+         'uses' =>'ProfesoresController@filterAjax',
+          'as' => 'admin.profesores.filterAjax'
+        ]);
+
+        Route::GET('verProfesor/{id}/{idprograma}',[
+         'uses' =>'ProfesoresController@ver',
+          'as' => 'admin.profesores.ver'
+        ]);
+
+    });
+
+    // Rutas para el coordinador
+    Route::group(['prefix'=>'admin','middleware' => 'coordinador'], function(){
+
+       Route::get('profesores',[
+          'uses' => 'ProfesoresController@index',
+          'as' => 'admin.profesores.index'
+        ]);
+
+      Route::get('asignaturas',[
+          'uses' => 'AsignaturasController@index',
+          'as' => 'admin.asignaturas.index'
+        ]);
+
+      Route::resource('informes','InformesController');
+      Route::resource('estudiantes','EstudiantesController');
+      Route::resource('notas','NotasController');
+      Route::resource('matriculas','MatriculasController');
+      
+      
+      //cargar informacion en el modal eliminar
+      Route::GET('estudiantes/{id}/destroy',[
+        'uses' =>'EstudiantesController@destroy',
+        'as' => 'admin.estudiantes.destroy'
+        ]);
+       // activa la accion eliminar en el modal
+       Route::put('estudiantes/{id}/destroyupdate',[
+         'uses' =>'EstudiantesController@destroyupdate',
+          'as' => 'admin.estudiantes.destroyupdate'
+        ]);
+       
+       //guardar Estudiantes
+       Route::post('estudiantes/guardar',[
+         'uses' =>'EstudiantesController@guardarEstudiante',
+          'as' => 'admin.estudiantes.guardarEstudiante'
+        ]);
+
+       //cargar informacion editarEstudiante
+       Route::get('estudiantes/editar/{id}',[
+         'uses' =>'EstudiantesController@edit',
+          'as' => 'admin.estudiantes.edit'
+        ]);
+
+       //editarEstudiante
+       Route::post('estudiantes/editar',[
+         'uses' =>'EstudiantesController@editar',
+          'as' => 'admin.estudiantes.editar'
+        ]);
+       //procesarArchivo
+       Route::POST('estudiantes/procesar',[
+        'uses' =>'EstudiantesController@procesarArchivo',
+        'as' => 'admin.estudiantes.procesarArchivo'
+        ]); 
+
+        Route::get('filtrosAsignaturas',[
+         'uses' =>'AsignaturasController@filterAjax',
+          'as' => 'admin.asignaturas.filterAjax'
+        ]);
+
+        Route::GET('filtrosProfesores',[
+         'uses' =>'ProfesoresController@filterAjax',
+          'as' => 'admin.profesores.filterAjax'
+        ]);
+
+        Route::GET('verProfesor/{id}/{idprograma}',[
+         'uses' =>'ProfesoresController@ver',
+          'as' => 'admin.profesores.ver'
+        ]);
 
 
-  Route::group( ['prefix'=>'docente'],function(){
 
-  });
-
-
-	Route::resource('profesoresIndex','ProfesoresController');
-	Route::resource('materiasIndex','MateriasController');
-	Route::resource('informesIndex','InformesController');
-  Route::resource('estudiantes','EstudiantesController');
-  Route::resource('notasIndex','NotasController');
-  
-  
-  //cargar informacion en el modal eliminar
-  Route::GET('estudiantes/{id}/destroy',[
-    'uses' =>'EstudiantesController@destroy',
-    'as' => 'admin.estudiantes.destroy'
-    ]);
-   // activa la accion eliminar en el modal
-   Route::put('estudiantes/{id}/destroyupdate',[
-     'uses' =>'EstudiantesController@destroyupdate',
-      'as' => 'admin.estudiantes.destroyupdate'
-    ]);
-   
-   //guardar Estudiantes
-   Route::post('estudiantes/guardar',[
-     'uses' =>'EstudiantesController@guardarEstudiante',
-      'as' => 'admin.estudiantes.guardarEstudiante'
-    ]);
-
-   //cargar informacion editarEstudiante
-   Route::get('estudiantes/editar/{id}',[
-     'uses' =>'EstudiantesController@edit',
-      'as' => 'admin.estudiantes.edit'
-    ]);
-
-   //editarEstudiante
-   Route::post('estudiantes/editar',[
-     'uses' =>'EstudiantesController@editar',
-      'as' => 'admin.estudiantes.editar'
-    ]);
-   //procesarArchivo
-   Route::POST('estudiantes/procesar',[
-    'uses' =>'EstudiantesController@procesarArchivo',
-    'as' => 'admin.estudiantes.procesarArchivo'
-    ]); 
-
-    Route::get('filtrosAsignaturas',[
-     'uses' =>'MateriasController@filterAjax',
-      'as' => 'admin.materiasIndex.filterAjax'
-    ]);
-
-    Route::GET('filtrosProfesores',[
-     'uses' =>'ProfesoresController@filterAjax',
-      'as' => 'admin.profesoresIndex.filterAjax'
-    ]);
-
-    Route::GET('verProfesor/{id}/{idprograma}',[
-     'uses' =>'ProfesoresController@ver',
-      'as' => 'admin.profesoresIndex.ver'
-    ]);
-
-  
-
-});
-
-
-Route::group( ['prefix'=>'estudiante'],function(){
-
-
+    });
 
 });
 
@@ -147,7 +209,7 @@ Route::get('estudiantes','MatriculasController@index');
 
   //Route::get('/home', 'HomeController@index');
 
-  Route::auth();
+
 
    //Route::post('redirigir','autenticacionController@obtenerControlador');
    //Route::post('login','Admin\AdminAuthController@login');
@@ -162,6 +224,10 @@ Route::get('estudiantes','MatriculasController@index');
    
   //Route::get('archivo','MatriculasController@matricularEstudiantes');
   Route::get('encabezado','MatriculasController@leerEncabezado');
+
+  Route::get('materias/','MatriculasController@materias');
+
+
   
 
   

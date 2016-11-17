@@ -25,7 +25,7 @@ class Rol extends Model
 
     public function sesiones(){
 
-        return $this->belongsToMany('App\ModelosSCAD\Sesion');
+        return $this->belongsToMany('App\ModelosSCAD\Sesion','sesion_roles','RolesId', 'sesionId');
     }
 
     public function sesionRoles(){

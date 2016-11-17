@@ -10,7 +10,7 @@ use App\ModelosSCAD\Asignatura;
 use App\ModelosSCAD\ProgramaacademicoAsignatura;
 
 
-class MateriasController extends Controller
+class AsignaturasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,19 +24,19 @@ class MateriasController extends Controller
         
         $asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10);
 
-        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);
+        $vista = view('admin.asignaturas.partialTable')->with('asignaturas',$asignaturas);
 
         if ($request->ajax()) {
             return response()->json($vista->render());
         } 
-        return view('admin.materias.materiasIndex')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
+        return view('admin.asignaturas.index')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
     }
 
     public function filterAjax(Request $request){
 
         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
         
-        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);  
+        $vista = view('admin.asignaturas.partialTable')->with('asignaturas',$asignaturas);  
 
         if ($request->ajax()) {
             return response()->json($vista->render());

@@ -81,7 +81,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){  
-        ruta="{{route('admin.profesoresIndex.index')}}";
+        ruta="{{route('admin.profesores.index')}}";
         var periodo = $('#periodosProfesores').val();
         var id;
         $.ajax({
@@ -114,7 +114,7 @@
 		$(document).on('click','.pagination a',function(e){
         	e.preventDefault();
         	var page= $(this).attr('href').split('page=')[1];
-        	var ruta="{{route('admin.profesoresIndex.index')}}"
+        	var ruta="{{route('admin.profesores.index')}}"
         	$.ajax({
         		url:ruta,
         		type:"GET",
@@ -131,7 +131,7 @@
     	var nombreBusqueda = $("input#nombreBusqueda").val();
         var programa = $('#programasProfesores').val();
         var periodo = $('#periodosProfesores').val();
-    	var ruta = "{{route('admin.profesoresIndex.filterAjax')}}";		
+    	var ruta = "{{route('admin.profesores.filterAjax')}}";		
     	if (nombreBusqueda != "") {
     		$.ajax({
             	type: "GET",
@@ -149,7 +149,7 @@
 	}
 
     function ver(id,idprograma){
-        var ruta="{{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
+        var ruta="{{route('admin.profesores.ver',['%idprofesor%','%idprograma%'])}}";
         var tablaAsignaturas = $("#tablaAsignaturas");
         var programa = $('#programasProfesores').val();
         var periodo = $('#periodosProfesores').val();   
@@ -175,7 +175,7 @@
         var programa = $('#programasProfesores').val();
         var periodo = $('#periodosProfesores').val();
         var nombreBusqueda = $('#nombreBusqueda').val();
-        ruta = "{{route('admin.profesoresIndex.filterAjax')}}";    
+        ruta = "{{route('admin.profesores.filterAjax')}}";    
         $.ajax({
             type: "GET",
             url: ruta,

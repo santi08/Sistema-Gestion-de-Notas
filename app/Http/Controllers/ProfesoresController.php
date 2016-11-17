@@ -41,7 +41,7 @@ class ProfesoresController extends Controller
                                 ->orderBy('usuario.Nombre')->paginate(10);
 
 
-      return view('admin.profesores.profesoresIndex')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
+      return view('admin.profesores.index')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
     
     }
 
