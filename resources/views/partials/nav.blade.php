@@ -33,9 +33,6 @@
   </nav>
 </div>
 <div class="row">
-  <div col s6 offset-s6>
-     <input type="hidden" name="alerta" id="alert">
-  </div>
 </div>
  
 

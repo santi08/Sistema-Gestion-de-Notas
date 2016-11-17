@@ -13,17 +13,14 @@ use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-use Laracasts\Flash\Flash;
+use App\Alertas;
+
 class EstudiantesController extends Controller
 {
-  
-
-
-    
+    public $alerta;
 
     public function index(Request $requests){
 
-     
      $programas= Programaacademico::all();
 
      if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
@@ -37,7 +34,6 @@ class EstudiantesController extends Controller
 
     }
 
-    
 
     if(!empty($requests->get('idPrograma')) and empty($requests->get('valor'))){
 
@@ -55,22 +51,16 @@ class EstudiantesController extends Controller
          return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
       
       }
-      $mensaje="Materialize.toast('I am a toast!', 3000, 'rounded')"; 
-      session()->put('mensaje',$mensaje);
-     /// Flash::info("welcome"); 
+     
+      
       return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
     }
+
+ }
       
-  
-    
-
-     
-    }
-
-
     public function procesarArchivo(Request $request)
     {
-
+      $alerta= new alertas();
       set_time_limit(0);
       $programa = Programaacademico::all();
       
@@ -133,35 +123,20 @@ class EstudiantesController extends Controller
                     }else{
                         $user['segundoApellido']="";
                     }
-
                     $password="contraseña";
-                    $user['estado']=1;
-
-
-                       
-                    
-
-                    $userDb = Estudiante::firstOrNew(["codigo"=>$user["codigo"]]); 
+                 
+                    $userDb= Estudiante::firstOrNew(["codigo"=>$user["codigo"]]);
                     $userDb->fill($user);
 
-
                     if(empty($userDb->id)){
-                     $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));
-                        
-                        $users[] = $userDb;
-                      
-                          
+                     $userDb->password=Hash::make(substr($userDb->primerNombre, 0,1).substr($userDb->codigo, 0,7).substr($userDb->primerApellido, 0,1));   
                     }  
+                    $users[] = $userDb;
                 }catch(\Exception $e){
 
                 }
 
             }
-            
-          
-            //session()->put('users', $users);
-            //session()->put('contrasena',bcrypt("contraseña"));
-            //Flash::success('Se procesaron '. count($users). 'exitosamente');
             
             $registrados=0;
             $actualizados=0;
@@ -178,7 +153,6 @@ class EstudiantesController extends Controller
 
                 }catch(\Exception $e){
                     $e->getMessage();
-
                 }
             }
 
@@ -187,25 +161,19 @@ class EstudiantesController extends Controller
                 $mensaje.=", se han guardado ". $registrados ." usuarios";
             }
              if($actualizados>0){
-                    $mensaje.=", se han actualizado ". $actualizados ." usuarios";
+                $mensaje.=", se han actualizado ". $actualizados ." usuarios";
              }
             if($errores>0){
                 $mensaje.=", no pudiero almacenarse ". $errores ." usuarios, lo mas probable es que estos no cuenten".
                 " con los campos obligatorios completos";
             }
 
-           
-            
-            //return redirect()->route('admin.estudiantes.index');
+           $alerta->crearAlerta('success',$mensaje);
 
-            return response()->json(['mensaje'=>'procesamiento Correcto']); 
+            return response()->json(['mensaje'=>'procesamiento Correcto']);
 
           }catch(\Exception $e){
-              //Flash::error('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
-            //dd($e);
-            //return redirect()->route('admin.usuarios.index');
-                        
-                    
+           $alerta->crearAlerta('warning','el archivo no es legible');                   
           }
         }else{
 
@@ -222,8 +190,10 @@ class EstudiantesController extends Controller
     $user= new Estudiante($requests->all());
     $contrasena=$this->crearContrasena($user);
     $user->password=bcrypt($contrasena);
-    //$user->password=$contraseña;
     $user->save();
+    
+    $alerta= new alertas();
+    $alerta->crearAlerta('success','Estudiante Registrado');
 
     return redirect()->route('admin.estudiantes.index');  
     }
@@ -245,6 +215,8 @@ class EstudiantesController extends Controller
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
+     $alerta= new alertas();
+     $alerta->crearAlerta('success','Estudiante Editado con Exito');
      return redirect()->route('admin.estudiantes.index');
      
     } 
@@ -266,6 +238,8 @@ class EstudiantesController extends Controller
      $user->estado=0;
      $user->save();
      
+     $alerta= new alertas();
+     $alerta->crearAlerta('success','Estudiante Eliminado con Exito');
      return response()->json(["mensaje"=>"listo"]);
     }
 
