@@ -57,29 +57,8 @@
         <!-- fin fila botones-->
     </div>
 
-<<<<<<< HEAD
-  <div class="col-md-4">
-    <fieldset>  
 
-=======
-
-
-  <div class="col s12 m12 l12">
-    <fieldset >  
-
-      <legend data-toggle="collapse" style="cursor: pointer" class="" data-target="#RegistrarPorArchivo">Registrar por archivo</legend>
-
-      <div id="RegistrarPorArchivo" class="collapse">
-        {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method'=>'POST','files' => 'true']) !!}
-        <div class="form-group">
-          <input class="filestyle" type="file" accept=".txt" name="file" id="file" data-buttonText="Escoger archivo">
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
->>>>>>> d932b7088f9e90f47d01d2c4651cc8243ad00024
-
-
- <div class="col s12 m12 l12">
-    <fieldset >  
+ <div class="col s12 m12 l12"> 
 
     
    <fieldset>  

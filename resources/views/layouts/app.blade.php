@@ -39,18 +39,9 @@
     <!-- JavaScripts  y jquery-->
     <script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>
     <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
-<<<<<<< HEAD
 
-    <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
-    
-    <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css">
-    </script>
-
-   
-=======
     <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
     @yield('scripts')
->>>>>>> d932b7088f9e90f47d01d2c4651cc8243ad00024
 
     <script type="text/javascript">
     $( document ).ready(function(){
@@ -63,18 +54,6 @@
     });
     </script>
 
-<<<<<<< HEAD
-   <!-- <script type="text/javascript">
-        $(document).ready(function(){
-            $('.collapsible').collapsible({
-                    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    </script>-->
-   <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
-    
-     @yield('scripts')
-  
-=======
     <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
->>>>>>> d932b7088f9e90f47d01d2c4651cc8243ad00024
     </body>
 </html>

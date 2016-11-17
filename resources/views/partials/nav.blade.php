@@ -44,7 +44,7 @@
     <li>
         <div class="userView">
             <div class="background center" style="margin-top: 4%;">
-                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">account_circle</i></span>
+                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">person</i></span>
             </div>
             
             <div><p class="white-text text-lighten-2" >@if (Auth::guard('admin')->check())
