@@ -1,3 +1,4 @@
+
 <ul id="usuario" class="dropdown-content">
     <li>
       <a href="#!">Ver perfil</a></li>
@@ -15,6 +16,7 @@
 </ul>
 
 
+
 <div class="navbar-fixed" >
   <nav class=" gradient  s12 m3 l12 ">
 
@@ -30,7 +32,13 @@
     </div>
   </nav>
 </div>
-  
+<div class="row">
+  <div col s6 offset-s6>
+     <input type="hidden" name="alerta" id="alert">
+  </div>
+</div>
+ 
+
 <ul id="slide-out" class="side-nav fixed gradient-side" style="width: 217px;">
 
     <li>

@@ -15,8 +15,7 @@
         </div>
       </div>
 
-@endsection
-
+@overwrite
 @section('footer')
     <div class="row">
 
@@ -26,4 +25,4 @@
         
      </div> 
       
-@endsection
+@overwrite

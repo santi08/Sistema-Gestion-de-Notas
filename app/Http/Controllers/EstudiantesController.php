@@ -12,7 +12,7 @@ use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-
+use Laracasts\Flash\Flash;
 class EstudiantesController extends Controller
 {
   
@@ -51,7 +51,9 @@ class EstudiantesController extends Controller
          return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
       
       }
-
+      $mensaje="Materialize.toast('I am a toast!', 3000, 'rounded')"; 
+      session()->put('mensaje',$mensaje);
+     /// Flash::info("welcome"); 
       return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
     }
       
@@ -64,11 +66,14 @@ class EstudiantesController extends Controller
 
     public function procesarArchivo(Request $request)
     {
+
       set_time_limit(0);
       $programa = Programaacademico::all();
-
+      
         if($request->file('file')->isValid()){
           
+          DB::table('Estudiantes')->update(['estado'=> 0]);
+
           try{
             $files = $request->file('file');
             $file = fopen($files,"r");
@@ -126,6 +131,8 @@ class EstudiantesController extends Controller
                     }
 
                     $password="contraseña";
+                    $user['estado']=1;
+
 
                        
                     
@@ -139,11 +146,8 @@ class EstudiantesController extends Controller
                         
                         $users[] = $userDb;
                       
-                      $userDb->save();         
-                    }
-                   
-                  $userDb->save();
-                   
+                          
+                    }  
                 }catch(\Exception $e){
 
                 }
@@ -162,6 +166,7 @@ class EstudiantesController extends Controller
                 try{
                     if(empty($estudiantes->id)) {
                         $registrados+=1;
+                        $estudiantes->save();     
                     }else{
                         $actualizados+=1;
                         $estudiantes->save();
@@ -169,6 +174,7 @@ class EstudiantesController extends Controller
 
                 }catch(\Exception $e){
                     $e->getMessage();
+
                 }
             }
 
@@ -184,13 +190,18 @@ class EstudiantesController extends Controller
                 " con los campos obligatorios completos";
             }
 
-            dd($mensaje);
-            return redirect()->route('admin.usuarios.index');
+           
+            
+            //return redirect()->route('admin.estudiantes.index');
+
+            return response()->json(['mensaje'=>'procesamiento Correcto']); 
 
           }catch(\Exception $e){
               //Flash::error('Se produjo un error, el archivo a procesar parece no contener datos legibles por el sistema.');
-            dd($e);
-            return redirect()->route('admin.usuarios.index');
+            //dd($e);
+            //return redirect()->route('admin.usuarios.index');
+                        
+                    
           }
         }else{
 
@@ -209,7 +220,8 @@ class EstudiantesController extends Controller
     $user->password=bcrypt($contrasena);
     //$user->password=$contraseña;
     $user->save();
-    return redirect(route('admin.estudiantes.index'));  
+
+    return redirect()->route('admin.estudiantes.index');  
     }
 
 
@@ -229,8 +241,7 @@ class EstudiantesController extends Controller
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
-     
-     return redirect(route('admin.estudiantes.index'));
+     return redirect()->route('admin.estudiantes.index');
      
     } 
     
