@@ -17,8 +17,8 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Programa</th>
 								<th>Profesor</th>
+								<th>Programa</th>
 								<th>Estudiantes</th>		
 							</tr>
 						</thead>

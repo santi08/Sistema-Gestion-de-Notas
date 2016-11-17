@@ -20,10 +20,12 @@ class MateriasController extends Controller
     public function index(Request $request)
     {   
         $programas = Programaacademico::all();
-        $periodos = Periodoacademico::all();
+        $periodos = Periodoacademico::all(); 
         
-        $asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10);
+        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
 
+
+        //$asignaturas = Horario::with('programaAcademicoAsignatura')->orderBy('Id','ASC')->paginate(10);
         $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);
 
         if ($request->ajax()) {
@@ -35,13 +37,15 @@ class MateriasController extends Controller
 
     public function filterAjax(Request $request){
 
-        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
+
+
+        /*$asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
         
-        $vista = view('admin.materias.partialTable')->with('asignaturas',$asignaturas);  
+        $vista = view('admin.materias.modales.paginacion2')->with('asignaturas',$asignaturas);  
 
         if ($request->ajax()) {
             return response()->json($vista->render());
-        } 
+        } */
 
         
     }

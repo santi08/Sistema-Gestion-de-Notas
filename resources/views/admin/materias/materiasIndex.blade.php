@@ -78,35 +78,24 @@
                     
                         </tbody>
                     </table>
-
                     {{$asignaturas->render()}}
-                    
-
-                </div>
-                    
+                </div>            
             </div>
-
-            
-    
         </div>
-
     </div>
-
-
-
-  <div>
-   
-  </div> 
 
 @include('admin.materias.modales.verDatosMaterias')
 @include('admin.materias.modales.matricular')
+
 @overwrite
 
 @section('scripts')
 
 <script type="text/javascript">
 
-    $(document).ready(function(){  
+    $(document).ready(function(){ 
+        $("#programas").material_select();
+         $("#periodos").material_select(); 
         var ruta="{{route('admin.materiasIndex.index')}}";
         var periodo = $('#periodos').val();
         var id;
@@ -123,37 +112,39 @@
                 $('#periodos > option[value="'+id+'"]').attr('selected', 'selected');
                         //$('#periodosProfesores').val(id);                                
             }
-        });        
+        }); 
+//si selecciona un programa academico envia la peticion 
+        $("#programas").change(function() {     
+             consultas()    
+        });  
+//si selecciona un periodo academico se envia la peticion 
+
+         $("#periodos").change(function() {
+             consultas()
+        });     
     });
 
-//si selecciona un programa academico envia la peticion 
-	$(document).ready(function(){
-		$("#programas").change(function() {	 	
-			 consultarProgramasPeriodos()	
-        });                     			
-//si selecciona un periodo academico se envia la peticion 
-        $("#periodos").change(function() {
-			 consultarProgramasPeriodos()
-        });
-    });
 
 //paginacion sin recargar la pagina
 	$(document).ready(function(){
-        console.log($("#programas").val());
-            
+        console.log($("#programas").val());           
         $(document).on('click','.pagination a',function(e){
             e.preventDefault();
+
             var page = $(this).attr('href').split('page=')[1];
+            var programa = $('#programas').val();
+            var periodo = $('#periodos').val();
+            var nombreBusqueda = $("input#nombreBusqueda").val();
+
             console.log(page);
-            if ($("#programas").val()!=null) {
-                ruta='?page=' + page;
-            }else{
-                ruta='?page=' + page;
-            }
+           
+            var ruta='?page=' + page;
             console.log(ruta);
             $.ajax({
                 url:ruta,
+                type:"GET",
                 dataType:'json',
+                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
                 success:function(data){        
                     $("#tabla").html(data);   
                     $('.tooltipped').tooltip({delay: 50});                      
@@ -163,25 +154,11 @@
 	});
 
     function buscar() {
-        var nombreBusqueda = $("input#nombreBusqueda").val();
-        var programa = $('#programas').val();
-        var periodo = $('#periodos').val();
-        ruta = "{{route('admin.materiasIndex.filterAjax')}}";
-        $.ajax({
-            type: "GET",
-            url: ruta,
-            data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},       
-            success: function(data) {   
-                $("#tabla").html(data); 
-                $('.tooltipped').tooltip({delay: 50});
-            }
-        });            
+        consultas();
     }
 
     function matricular(id){
-
-        
-                
+          
         $('#codigo').autocomplete({
                   source: "{{url('matricular/autocomplete')}}",
                   minLength: 2,
@@ -191,9 +168,8 @@
                 });
                 
                 $('#horario').val(id);
-                $('#matricular').openModal();
-            
-        }
+                $('#matricular').openModal();        
+    }
 
     function ver(id){
         var ruta="{{route('admin.materiasIndex.verDatosMateria',['%idhorario%'])}}";
@@ -218,12 +194,12 @@
         });        
     }
         
-
-
-    function consultarProgramasPeriodos(){
+    function consultas(){
             var programa = $('#programas').val();
             var periodo = $('#periodos').val();
-            ruta = "{{route('admin.materiasIndex.filterAjax')}}";   
+            var nombreBusqueda = $("input#nombreBusqueda").val();
+
+            ruta = "{{route('admin.materiasIndex.index')}}";   
             console.log(ruta);
             console.log(programa);
             console.log(periodo)
@@ -231,7 +207,7 @@
             $.ajax({
                 type: "GET",
                 url: ruta,
-                data: {programa:programa,periodo:periodo},
+                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
                     
                 success: function(data) {   
                     $("#tabla").html(data); 

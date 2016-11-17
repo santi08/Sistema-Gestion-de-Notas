@@ -4,9 +4,6 @@
 @section('content')
 <h3 class="center">Estudiantes</h3>
 <!--campo buscar y registrar-->
- 
-     
-
 <!-- finaliza campo buscar y registrar -->
 
   <br> <br>
