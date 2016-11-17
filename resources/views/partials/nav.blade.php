@@ -1,3 +1,4 @@
+
 <ul id="usuario" class="dropdown-content">
     <li>
       <a href="#!">Ver perfil</a></li>
@@ -15,6 +16,7 @@
 </ul>
 
 
+
 <div class="navbar-fixed" >
   <nav class=" gradient  s12 m3 l12 ">
 
@@ -30,13 +32,19 @@
     </div>
   </nav>
 </div>
-  
+<div class="row">
+  <div col s6 offset-s6>
+     <input type="hidden" name="alerta" id="alert">
+  </div>
+</div>
+ 
+
 <ul id="slide-out" class="side-nav fixed gradient-side" style="width: 217px;">
 
     <li>
         <div class="userView">
             <div class="background center" style="margin-top: 4%;">
-                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">account_circle</i></span>
+                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">person</i></span>
             </div>
             
             <div><p class="white-text text-lighten-2" >@if (Auth::guard('admin')->check())

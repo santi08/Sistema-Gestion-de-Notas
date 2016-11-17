@@ -16,8 +16,7 @@ use Response;
 class MatriculasController extends Controller
 {
 
-    private $codigoEncabezado ="";
-    private $grupoEncabezado ="";
+    private $codigoEncabezado, $grupoEncabezado;
     /**
      * Display a listing of the resource.
      *
@@ -148,6 +147,7 @@ class MatriculasController extends Controller
         $id_horario = $request->horario_archivo;
         $file = $request->file;
         $horario = Horario::find($id_horario);
+
        
 
         $codigoMateria = $horario->programaAcademicoAsignatura->asignatura->Codigo;
@@ -163,7 +163,7 @@ class MatriculasController extends Controller
         {
                     
             $estudiantes = $archivo->get();
-            //dd($estudiantes);
+           
 
 
             foreach ($estudiantes as $estudiante) {
@@ -230,23 +230,28 @@ class MatriculasController extends Controller
 
     public function leerEncabezado( $codigoMateria, $grupoMateria, $file ){
 
-        
+       
        global $codigoEncabezado, $grupoEncabezado;
        
-              
+       
+            
 
-         Excel::selectSheetsByIndex(0)->load($file ,function($archivo) use ($codigoMateria,$grupoMateria)
+         Excel::selectSheetsByIndex(0)->load($file ,function($archivo) use ($codigoMateria,$grupoMateria, $file)
         {
             
             global $codigoEncabezado, $grupoEncabezado;
+            
            
             $archivo->noHeading();
             $encabezado = $archivo->limit(3)->get();
            
-            $obtenerListado = $encabezado[1][1];
+            $obtenerListado = $encabezado[1][0];
+
+           
                   
 
             $procesarListado = explode(" ", $obtenerListado);
+        
             
          // dd($procesarListado);
            
@@ -265,6 +270,7 @@ class MatriculasController extends Controller
                 }
             }
         });
+            
 
           if($codigoEncabezado == $codigoMateria && $grupoEncabezado == $grupoMateria){
 
@@ -296,7 +302,7 @@ class MatriculasController extends Controller
     public function autocomplete(Request $request){
 
 
-        if ($request->ajax()) {
+        if ($request->ajax()){
         
         $codigo = $request->codigo;
 

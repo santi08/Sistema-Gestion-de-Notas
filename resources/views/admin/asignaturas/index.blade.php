@@ -141,123 +141,74 @@
 @section('scripts')
 
 	<script type="text/javascript">
-//si selecciona un programa academico envia la peticion 
-		$(document).ready(function(){
-			$("#programas").change(function() {
-				
-				var programa = $('#programas').val();
-        		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.asignaturas.filterAjax')}}";
-        		
-        		console.log(ruta);
-                console.log(programa);
-                console.log(periodo);
-        		
-        		$.ajax({
-            		type: "GET",
-            		url: ruta,
-            		data: {programa:programa,periodo:periodo},
-            		
-            		success: function(data) {
-                        $("#tabla").html(data);
-                        $('.tooltipped').tooltip({delay: 50});
 
-                        //console.log("entro");
-
-            		} 
-            		
-        		});
-
-        	   });
-                     			
-//si selecciona un periodo academico se envia la peticion 
-        $("#periodos").change(function() {
-				
-				var programa = $('#programas').val();
-        		var periodo = $('#periodos').val();
-        		ruta = "{{route('admin.asignaturas.filterAjax')}}";
-        		
-        		console.log(ruta);
-                console.log(programa);
-                console.log(periodo)
-        		
-        		$.ajax({
-            		type: "GET",
-            		url: ruta,
-            		data: {programa:programa,periodo:periodo},
-            		
-            		success: function(data) {	
-            			$("#tabla").html(data);	
-                        $('.tooltipped').tooltip({delay: 50});
-            		}
-        		});
-        	});
-    	});
-//paginacion sin recargar la pagina
-		$(document).ready(function(){
-            console.log($("#programas").val());
-            
-
-                $(document).on('click','.pagination a',function(e){
-                e.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-
-                console.log(page);
-                if ($("#programas").val()!=null) {
-                    ruta="{{route('admin.asignaturas.filterAjax')}}"
-                }else{
-                    ruta="{{route('admin.asignaturas.index')}}"
-                }
-                console.log(ruta);
-                $.ajax({
-                    url:ruta,
-                    type:"GET",
-                    data:{page:page},
-                    dataType:'json',
-                    success:function(data){
-                        
-                        $("#tabla").html(data);   
-                        $('.tooltipped').tooltip({delay: 50});                      
-                    }
+    $(document).ready(function(){ 
+        $("#programas").material_select();
+         $("#periodos").material_select(); 
+        var ruta="{{route('admin.asignaturas.index')}}";
+        var periodo = $('#periodos').val();
+        var id;
+        $.ajax({
+            url:ruta,
+            type:"GET",
+            data:{periodo:periodo},
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                $(data).each(function(key,value){
+                    id=value.Id;    
                 });
-                
-            });
-
-		});
-
-
-        function buscar() {
-            var nombreBusqueda = $("input#nombreBusqueda").val();
-            ruta = "{{route('admin.asignaturas.filterAjax')}}";
-                
-    
-            if (nombreBusqueda != "") {
-                $.ajax({
-                    type: "GET",
-                    url: ruta,
-                    data: {nombreBusqueda:nombreBusqueda},
-                    
-                    success: function(data) {   
-                        $("#tabla").html(data); 
-                        $('.tooltipped').tooltip({delay: 50});
-                    }
-                });
-                
-            } else { 
-
-                
-                console.log("no hay nada ");
+                $('#periodos > option[value="'+id+'"]').attr('selected', 'selected');
+                        //$('#periodosProfesores').val(id);                                
             }
-        }
+        }); 
+//si selecciona un programa academico envia la peticion 
+        $("#programas").change(function() {     
+             consultas()    
+        });  
+//si selecciona un periodo academico se envia la peticion 
 
-        function matricular(id){
-            
-            
+         $("#periodos").change(function() {
+             consultas()
+        });     
+    });
 
-                $('#horario_archivo').val(id);
-                $('#horario_estudiante').val(id);
-            
-                 $('#codigo').autocomplete({
+
+//paginacion sin recargar la pagina
+    $(document).ready(function(){
+        console.log($("#programas").val());           
+        $(document).on('click','.pagination a',function(e){
+            e.preventDefault();
+
+            var page = $(this).attr('href').split('page=')[1];
+            var programa = $('#programas').val();
+            var periodo = $('#periodos').val();
+            var nombreBusqueda = $("input#nombreBusqueda").val();
+
+            console.log(page);
+           
+            var ruta='?page=' + page;
+            console.log(ruta);
+            $.ajax({
+                url:ruta,
+                type:"GET",
+                dataType:'json',
+                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
+                success:function(data){        
+                    $("#tabla").html(data);   
+                    $('.tooltipped').tooltip({delay: 50});                      
+                }
+            });     
+        });
+    });
+
+    function buscar() {
+        consultas();
+    }
+
+    function matricular(id){
+          
+        $('#codigo').autocomplete({
                   source: "{{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
@@ -265,67 +216,56 @@
                   }
                 });
                 
+                $('#horario_estudiante').val(id);
+                $('#horario_archivo').val(id);
+                $('#matricular').openModal();        
+    }
 
-                $('#matricular').openModal();
-            
-        }
-
-        function ver(){
-            $('#verDatosAsignaturas').openModal();
-   
-            /*var ruta="{//{route('admin.profesoresIndex.ver',['%idprofesor%','%idprograma%'])}}";
-            var tablaAsignaturas = $("#tablaAsignaturas");
-            var programa = $('#programasProfesores').val();
-            var periodo = $('#periodosProfesores').val();
-           
-           $("#tablaAsignaturas td").remove();
-            
-            ruta = ruta.replace('%idprofesor%',id);
-            ruta = ruta.replace('%idprograma%',idprograma);
-
-            $.ajax({
-                    url:ruta,
-                    type:"GET",
-                    data: {programa:programa,periodo:periodo},
-                    dataType:'json',
-                    success:function(data){
-                        $(data).each(function(key,value){
-
-                            $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-
-                            tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
-                        });
-
-                        $('#ver').openModal();
-                                              
-                    }
-                });*/
-   
-            /*$.get(ruta,function(res){
-                $('p').text(res.Apellidos); 
-                $(res).each(function(key,value){
-
-                $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-                        tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");
-                    
+    function ver(id){
+        var ruta="{{route('admin.asignaturas.verDatosAsignatura',['%idhorario%'])}}";
+        var tablaAsignaturas = $("#tablaAsignaturas");
+        var programa = $('#programasProfesores').val();
+        var periodo = $('#periodosProfesores').val();   
+        $("#tablaAsignaturas td").remove();      
+        ruta = ruta.replace('%idhorario%',id);
+        
+        $.ajax({
+            url:ruta,
+            type:"GET",
+            data: {programa:programa,periodo:periodo},
+            dataType:'json',
+            success:function(data){
+                $(data).each(function(key,value){
+                    $("#nombreMateria").text(value.asignatura);
+                    tablaAsignaturas.append("<tr><td>"+value.nombre+" "+value.apellidos +"</td><td>"+value.programa+"</td><td></td></tr>");    
                 });
-               
-                
+                 $('#verDatosAsignaturas').openModal();                                  
+            }
+        });        
+    }
+        
+    function consultas(){
+            var programa = $('#programas').val();
+            var periodo = $('#periodos').val();
+            var nombreBusqueda = $("input#nombreBusqueda").val();
 
-            });*/
-    
+            ruta = "{{route('admin.asignaturas.index')}}";   
+            console.log(ruta);
+            console.log(programa);
+            console.log(periodo)
+                
+            $.ajax({
+                type: "GET",
+                url: ruta,
+                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
+                    
+                success: function(data) {   
+                    $("#tabla").html(data); 
+                    $('.tooltipped').tooltip({delay: 50});
+                }
+            });
         }
 
-
-
-
-			
-
-		
-
-
-	</script>
-
+    </script>
    
 @endsection

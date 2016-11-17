@@ -24,8 +24,14 @@ Route::group(['middleware' => 'auth'],function(){
   return view('welcome');
   });
 
+
   // Rutas para el administrador
   Route::group( ['prefix'=>'admin', 'middleware' => 'administrador' ],function(){
+
+    Route::get('verDatosAsignatura/{id}',[
+        'uses' => 'AsignaturasController@verDatosAsignatura',
+        'as' => 'admin.asignaturas.verDatosAsignatura'
+      ]);
 
       Route::get('profesores',[
           'uses' => 'ProfesoresController@index',
@@ -102,6 +108,11 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.profesores.index'
         ]);
 
+        Route::get('verDatosAsignatura/{id}',[
+        'uses' => 'AsignaturasController@verDatosAsignatura',
+        'as' => 'admin.asignaturas.verDatosAsignatura'
+      ]);
+
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',
           'as' => 'admin.asignaturas.index'
@@ -165,6 +176,7 @@ Route::group(['middleware' => 'auth'],function(){
 
 
     });
+
 
 });
 
