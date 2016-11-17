@@ -4,14 +4,7 @@
 @section('content')
 <h3 class="center">Estudiantes</h3>
 <!--campo buscar y registrar-->
- 
-     
-
 <!-- finaliza campo buscar y registrar -->
-
-  <br> <br>
-
-  <br> <br>
  
 <!--campo buscar y registrar-->
  <div class="input-field col s12">
@@ -51,6 +44,8 @@
 <input type="hidden" id="idPrograma">
 
 <div class="row" id="Estudiantes">
+
+<div class="col s12 m12 l12">
  
 
 <table>
@@ -84,6 +79,8 @@
   </table>
 
 {!! $estudiantes->render()!!}
+
+</div>
 </div>
 
 

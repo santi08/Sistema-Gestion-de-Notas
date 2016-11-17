@@ -57,8 +57,9 @@
         <!-- fin fila botones-->
     </div>
 
-  <div class="col-md-4">
-    <fieldset>  
+ <div class="col s12 m12 l12"> 
+
+   <fieldset>  
       <legend data-toggle="collapse" style="cursor: pointer" class="" >Registrar por archivo</legend>
       <div class="row">
        {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method' => 'POST','id'=>'formularioSubir','files'=>'true'])!!}

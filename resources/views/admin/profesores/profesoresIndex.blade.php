@@ -24,7 +24,7 @@
 			<div class="input-field col s3 l3 m3">
 						
 				<select name="periodos" id="periodosProfesores">
-					<option value="" disabled selected>Seleccione un programa</option>
+					<!--<option value="" disabled selected>Seleccione un programa</option>-->
 					@foreach($PeriodosAcademicos as $PeriodoAcademico)
 				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
 					@endforeach						  			
@@ -81,6 +81,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){  
+         $("#programasProfesores").material_select();
+         $("#periodosProfesores").material_select(); 
         ruta="{{route('admin.profesoresIndex.index')}}";
         var periodo = $('#periodosProfesores').val();
         var id;
@@ -94,8 +96,8 @@
                 $(data).each(function(key,value){
                     id=value.Id;    
                 });
-                $('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
-                        //$('#periodosProfesores').val(id);                                
+                //$('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
+                $('select#periodosProfesores').val(id);                                
             }
         });        
     });

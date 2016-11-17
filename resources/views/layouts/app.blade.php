@@ -59,13 +59,11 @@
       {{session()->forget('alerta')}};
       Materialize.toast(mensaje,5000,color);
       }else {"no existe alerta "}
-
-  }
-   
-    
-    
- </script>
+    }
+       
+</script>
 
 <script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+
     </body>
 </html>

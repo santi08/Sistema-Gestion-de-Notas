@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use App\ModelosNotas\Estudiante;
 use App\ModelosSCAD\Horario; 
@@ -25,27 +24,23 @@ class EstudiantesController extends Controller
 
      if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
 
-       $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+       $e = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
 
       if($requests->ajax()){
-      return response()->json(view('admin.usuarios.part.mostrar2',compact('e'))->render()); 
-
+        return response()->json(view('admin.usuarios.part.mostrar2',compact('e'))->render()); 
       };
-
-    }
-
-
+     }
+     
     if(!empty($requests->get('idPrograma')) and empty($requests->get('valor'))){
 
        $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
 
       if($requests->ajax()){
-      return response()->json(view('admin.usuarios.part.mostrar',compact('e'))->render()); 
-
+        return response()->json(view('admin.usuarios.part.mostrar',compact('e'))->render()); 
       };
 
     }else {
-      $estudiantes= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+      $estudiantes = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
 
       if($requests->ajax()){
          return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
