@@ -57,10 +57,8 @@
         <!-- fin fila botones-->
     </div>
 
-
  <div class="col s12 m12 l12"> 
 
-    
    <fieldset>  
       <legend data-toggle="collapse" style="cursor: pointer" class="" >Registrar por archivo</legend>
       <div class="row">

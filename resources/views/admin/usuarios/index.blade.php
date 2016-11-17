@@ -125,18 +125,15 @@
   });
 
 </script>
+
 <!--abrir selectores-->
 <script type="text/javascript">
+ 
  $(document).ready(function(){
-   
    $('#selectorPrograma1').material_select();
    $('#filtrarPrograma').material_select();
+   alerta();
 
-   /*var mensaje= '{{session('mensaje')}}';
-   console.log(mensaje);
-   document.getElementById('alerta').onload = mensaje;
-   $('#alerta').attr('action',mensaje);*/
-  
   }); 
 </script>
 <!-- capturar selector crear -->
@@ -312,6 +309,7 @@ function showRequest(formData, jqForm, options) {
 
 function showResponse(data)  { 
       jsRemoveWindowLoad();
+      console.log(data);
       window.location="{{route('admin.estudiantes.index')}}";
 } 
 
