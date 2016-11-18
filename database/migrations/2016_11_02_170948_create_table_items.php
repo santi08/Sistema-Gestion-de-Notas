@@ -14,6 +14,8 @@ class CreateTableItems extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('matricula_id')->unsigned();
+            $table->foreign('matricula_id')->references('id')->on('matriculas');
             $table->integer('tipo_id')->unsigned();
             $table->foreign('tipo_id')->references('id')->on('tipo_items');
             $table->string('nombre', 100);

@@ -34,7 +34,7 @@ class Matricula extends Model
 
      public function items()
     {
-        return $this->belongsToMany('App\ModelosNotas\Item');
+        return $this->hasMany('App\ModelosNotas\Item');
     }
 
 }

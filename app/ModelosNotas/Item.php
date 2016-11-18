@@ -20,9 +20,9 @@ class Item extends Model
       ];
 
 
-    public function matriculas()
+    public function matricula()
     {
-        return $this->belongsToMany('App\ModelosNotas\Matricula');
+        return $this->belongsTo('App\ModelosNotas\Matricula');
     }
 
     public function tipoitem(){

@@ -5,24 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\ModelosNotas\Matricula;
-use App\ModelosSCAD\Horario;
 
-class NotasController extends Controller
+class ItemsCOntroller extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-
-
-        $asignatura = Horario::find($id);
-        $estudiantes = $asignatura->matriculas;
-
-        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura);
+        //
     }
 
     /**

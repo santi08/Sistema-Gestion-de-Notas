@@ -45,7 +45,6 @@ Route::group(['middleware' => 'auth'],function(){
 
       Route::resource('informes','InformesController');
       Route::resource('estudiantes','EstudiantesController');
-      Route::resource('notas','NotasController');
       Route::resource('matriculas','MatriculasController');
       
       
@@ -97,6 +96,12 @@ Route::group(['middleware' => 'auth'],function(){
          'uses' =>'ProfesoresController@ver',
           'as' => 'admin.profesores.ver'
         ]);
+
+        //Ruta index notas
+        Route::get('notas/{id}',[
+          'uses' => 'NotasController@index',
+          'as' => 'admin.notas.index'
+          ]);
 
     });
 
@@ -120,7 +125,6 @@ Route::group(['middleware' => 'auth'],function(){
 
       Route::resource('informes','InformesController');
       Route::resource('estudiantes','EstudiantesController');
-      Route::resource('notas','NotasController');
       Route::resource('matriculas','MatriculasController');
       
       
@@ -173,6 +177,10 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.profesores.ver'
         ]);
 
+         Route::get('notas/{id}',[
+          'uses' => 'NotasController@index',
+          'as' => 'admin.notas.index'
+          ]);
 
 
     });
