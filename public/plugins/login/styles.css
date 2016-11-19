@@ -48,6 +48,8 @@ hr {
   height: 3em;
 }
 
+.modal-asignaturas{ width: 35% !important ; max-height: 100% !important }
+
 .fuentes{
   font-size: small;
 }

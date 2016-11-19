@@ -225,7 +225,7 @@ class EstudiantesController extends Controller
         $info[]=$estudiante;
         return response()->json(
             $info
-            );
+        );
     } 
 
     public function destroyupdate(Request $requests,$id){

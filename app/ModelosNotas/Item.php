@@ -20,9 +20,10 @@ class Item extends Model
       ];
 
 
-    public function matricula()
+    public function matriculas()
     {
-        return $this->belongsTo('App\ModelosNotas\Matricula');
+        return $this->belongsToMany('App\ModelosNotas\Matricula')->withPivot('nota');
+
     }
 
     public function tipoitem(){

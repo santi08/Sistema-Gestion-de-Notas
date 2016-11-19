@@ -38,6 +38,16 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.profesores.index'
         ]);
 
+      Route::get('items',[
+        'uses' => 'ItemsController@index',
+        'as' => 'admin.items.index'
+      ]);
+
+      Route::post('item',[
+        'uses' => 'ItemsController@store',
+        'as' => 'admin.items.store'
+        ]);
+
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',
           'as' => 'admin.asignaturas.index'
@@ -117,6 +127,16 @@ Route::group(['middleware' => 'auth'],function(){
         'uses' => 'AsignaturasController@verDatosAsignatura',
         'as' => 'admin.asignaturas.verDatosAsignatura'
       ]);
+
+        Route::get('items',[
+        'uses' => 'ItemsController@index',
+        'as' => 'admin.items.index'
+        ]);
+
+          Route::post('item',[
+        'uses' => 'ItemsController@store',
+        'as' => 'admin.items.store'
+        ]);
 
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\ModelosNotas\Matricula;
 use App\ModelosSCAD\Horario;
+Use App\ModelosNotas\TipoItem;
+use App\ModelosNotas\Item;
 
 class NotasController extends Controller
 {
@@ -20,9 +22,10 @@ class NotasController extends Controller
 
 
         $asignatura = Horario::find($id);
+        $tipo_items=TipoItem::all(); 
         $estudiantes = $asignatura->matriculas;
 
-        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura);
+        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items);
     }
 
     /**

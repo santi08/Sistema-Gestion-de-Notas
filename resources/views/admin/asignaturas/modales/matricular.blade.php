@@ -2,7 +2,7 @@
 @extends('layouts.modal')
 
 @section('id')'matricular'
-@overwrite
+
 
 @section('contenido')
 		
@@ -77,5 +77,6 @@
 			</div>
 		</div>
 
-	</div>				
+	</div>
+@endsection				
 @overwrite
