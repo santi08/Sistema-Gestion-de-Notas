@@ -22,7 +22,7 @@ class Item extends Model
 
     public function matriculas()
     {
-        return $this->belongsToMany('App\ModelosNotas\Matricula')->withPivot('nota');
+        return $this->belongsToMany('App\ModelosNotas\Matricula')->withPivot('id','nota');
 
     }
 

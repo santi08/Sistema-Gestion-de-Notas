@@ -5,29 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\ModelosNotas\Matricula;
-use App\ModelosSCAD\Horario;
-Use App\ModelosNotas\TipoItem;
 use App\ModelosNotas\Item;
+use App\ModelosNotas\Subitem;
+use App\ModelosNotas\Matricula;
 
-class NotasController extends Controller
+class SubitemsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-
-
-        $asignatura = Horario::find($id);
-        $tipo_items=TipoItem::all(); 
-        $estudiantes = $asignatura->matriculas;
-
-
-
-        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items);
+        //
     }
 
     /**
@@ -49,17 +40,40 @@ class NotasController extends Controller
     public function store(Request $request)
     {
 
-         if ($request->ajax()) {
-           
-        $nota = $request->get('nota');
-        $id_matricula= $request->get('matricula');
-        $id_item= $request->get('item');
-
-        $matricula= Matricula::find($id_matricula);
-        $matricula->items()->updateExistingPivot($id_item, array('nota'=> $nota));
-
-        }
        
+        $id_item = $request->id_item;
+        $item = Item::find($id_item);
+        $estudiantes= $item->matriculas;
+
+
+
+       
+        $nombre_item = $request->nombre;
+        $porcetanje_subitem= $request->porcentaje;
+        $descripcion_subitem= $request->descripcion;
+
+        try {
+
+             $subitem = new Subitem();
+             $subitem->item_id = $id_item;
+             $subitem->nombre= $nombre_item;
+             $subitem->porcentaje= $porcetanje_subitem;
+             $subitem->descripcion = $descripcion_subitem;
+             $subitem->save();
+
+             foreach ($estudiantes as $estudiante) {
+
+                $estudiante->subitems()->attach($subitem->id);                
+
+            }
+
+            return redirect()->back();
+            
+        } catch (Exception $e) {
+
+            echo "Ocurrio un error";
+            
+        }
     }
 
     /**

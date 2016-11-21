@@ -18,7 +18,6 @@ class CreateTableSubitems extends Migration
             $table->foreign('item_id')->references('id')->on('items');
             $table->string('nombre', 100);
             $table->double('porcentaje');
-            $table->double('nota');
             $table->string('descripcion',255)->nullable();
             $table->timestamps();
         });

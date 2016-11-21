@@ -14,13 +14,17 @@ class Subitem extends Model
         'item_id',
         'nombre',
         'porcentaje',
-        'nota',
         'descripcion'
       ];
 
 
     public function item(){
-
     	return $this->belongsTo('App\Item');
+    }
+
+     public function matriculas()
+    {
+        return $this->belongsToMany('App\ModelosNotas\Matricula','subitem_matricula')->withPivot('id','nota');
+
     }
 }

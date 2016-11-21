@@ -43,8 +43,6 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         
         $id_horario = $request->horario;
         $asignatura = Horario::find($id_horario);
@@ -59,25 +57,20 @@ class ItemsController extends Controller
 
         try {
 
+             $item = new Item();
+             $item->tipo_id= $tipo_item;
+             $item->nombre= $nombre_item;
+             $item->porcentaje= $porcetanje_item;
+             $item->descripcion = $descripcion_item;
+             $item->save();
+
              foreach ($estudiantes as $estudiante) {
 
-           /* $verificar_item = array(
-                            'matricula_id' => $estudiante->id
-                            );
-            
-            $item = Item::firstOrNew($verificar_item);
-            */
-            $item = new Item();
-            $item->matricula_id = $estudiante->id;
-            $item->tipo_id= $tipo_item;
-            $item->nombre= $nombre_item;
-            $item->porcentaje= $porcetanje_item;
-            $item->descripcion = $descripcion_item;
-            $item->save();
+                $estudiante->items()->attach($item->id);                
 
             }
 
-            echo "Guardado con exito";
+            return redirect()->back();
             
         } catch (Exception $e) {
 
@@ -140,6 +133,52 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+
+        $matriculas = $item->matriculas;
+
+        if ($this->validarItemSinNotas($item)) {
+
+             try {
+
+                foreach ($matriculas as $matricula) {
+
+                    $item->matriculas()->detach($matricula->id);     
+                }
+
+                    $item->delete();
+            echo "Eliminado con exito";
+                 
+             } catch (Exception $e) {
+                 
+             }
+
+        }else{
+
+            dd('Item contiene notas, primero elimina las notas para eliminar el item');
+        }
+
+
+
+    }
+
+    public function validarItemSinNotas($item){
+
+         $estado = false;
+
+        foreach ($item->matriculas as $nota) {
+            
+            if (!is_null($nota->pivot->nota)) {
+
+                $estado = false;
+                break;
+            }else{
+                $estado = true;
+            }
+        }
+
+        return $estado;
+
+
     }
 }

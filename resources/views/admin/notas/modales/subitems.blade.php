@@ -1,6 +1,6 @@
 @extends('layouts.modal')
 
-@section('id')'insertarItem'
+@section('id')'insertarSubitem'
 @overwrite
 
 @section('contenido')
@@ -10,7 +10,7 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h4>Registrar Item</h4>
+					<h4>Registrar SubItem</h4>
 				</div>
 			</div>
 
@@ -23,21 +23,11 @@
 			<div class="row">
 
 				<div class="col s12 m12 l12">
-					{!! Form::open(['route'=>['admin.items.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
+					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
 						<div class="row">
 							<div class="col s6 m6 l6">
 								<label style="font-size: 1rem;">Nombre</label>
 								<input type="text" id="nombre" name="nombre" required>
-							</div>
-							<div class="col s6 m6 l6">
-								<select name="tipo_item" id="tipo_item" required>
-									<option value="" disabled selected>Seleccione un tipo</option>
-									  @foreach($tipo_items as $tipo);
-				                            <option value="{{$tipo->id}}" id="{{$tipo->Id}}">{{$tipo->nombre}}
-				                     </option>
-				                        @endforeach        				                        
-				        		</select>
-				        		<label>Seleccionte un tipo</label>
 							</div>
 						</div>
 						<div class="row">
@@ -52,7 +42,7 @@
 						</div> 					
 							
 						<div>
-						<input type="hidden" id="horario" name="horario">	
+						<input type="hidden" id="id_item" name="id_item">	
 						</div>
 
 						
@@ -73,4 +63,7 @@
 		</div>
 
 	</div>
-@overwrite		
+@overwrite
+
+@section ('footer')
+@overwrite				

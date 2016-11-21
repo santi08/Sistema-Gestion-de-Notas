@@ -38,15 +38,26 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.profesores.index'
         ]);
 
-      Route::get('items',[
-        'uses' => 'ItemsController@index',
-        'as' => 'admin.items.index'
-      ]);
 
       Route::post('item',[
         'uses' => 'ItemsController@store',
         'as' => 'admin.items.store'
         ]);
+
+      Route::post('subitem',[
+        'uses' => 'SubitemsController@store',
+        'as' => 'subitems.store'
+      ]);
+
+     Route::get('item/{id}/destroy',[
+        'uses' => 'ItemsController@destroy',
+        'as' => 'item.destroy'
+        ]);
+
+     Route::get('nota',[
+          'uses' => 'NotasController@store',
+          'as' => 'nota.store'
+          ]);
 
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',
@@ -133,10 +144,26 @@ Route::group(['middleware' => 'auth'],function(){
         'as' => 'admin.items.index'
         ]);
 
-          Route::post('item',[
+        
+      Route::post('item',[
         'uses' => 'ItemsController@store',
         'as' => 'admin.items.store'
         ]);
+
+       Route::post('subitem',[
+        'uses' => 'SubitemsController@store',
+        'as' => 'subitems.store'
+      ]);
+
+        Route::get('item/{id}/destroy',[
+        'uses' => 'ItemsController@destroy',
+        'as' => 'item.destroy'
+        ]);
+
+        Route::get('nota',[
+          'uses' => 'NotasController@store',
+          'as' => 'nota.store'
+          ]);
 
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',
