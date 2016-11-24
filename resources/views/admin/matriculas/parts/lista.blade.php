@@ -18,7 +18,7 @@
                             <td> 
 
                             	 @if (count($asignatura->matriculas)>0)
-                                     <a a href="{{route('admin.notas.index', $asignatura->Id)}}" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Gestionar Notas" ><i class="material-icons">assignment</i></a>
+                                     <a a href="{{route('notas.index', $asignatura->Id)}}" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Gestionar Notas" ><i class="material-icons">assignment</i></a>
                                  @endif
                                 
 

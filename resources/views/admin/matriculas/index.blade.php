@@ -41,7 +41,7 @@
 	$(document).ready(function(){
 	$('#periodos').material_select(); 
 
-	var ruta=  "{{ route('admin.matriculas.index') }}";
+	var ruta=  "{{ route('matriculas.index') }}";
 	var periodo= $('#periodos').val();
 
 	$('#periodos').change(function(){

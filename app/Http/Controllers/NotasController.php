@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Gate;
+use App\ModelosSCAD\Sesion;
+use App\ModelosSCAD\Usuario;
 use App\Http\Requests;
 use App\ModelosNotas\Matricula;
 use App\ModelosSCAD\Horario;
 Use App\ModelosNotas\TipoItem;
 use App\ModelosNotas\Item;
+use App\ModelosNotas\Subitem;
 
 class NotasController extends Controller
 {
@@ -26,6 +29,13 @@ class NotasController extends Controller
         $estudiantes = $asignatura->matriculas;
 
 
+       /* if (Gate::denies('registrar-notas', $asignatura)) {
+            
+        }*/
+
+       if (Gate::forUser(\Auth::guard('admin')->user())->denies('registrar-notas', $asignatura)) {
+            abort(403, 'Unauthorized action.');
+        }
 
         return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items);
     }
@@ -46,20 +56,73 @@ class NotasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeItem(Request $request)
     {
 
          if ($request->ajax()) {
            
-        $nota = $request->get('nota');
-        $id_matricula= $request->get('matricula');
-        $id_item= $request->get('item');
+            $nota = $request->get('nota');
+            $id_matricula= $request->get('matricula');
+            $id_item= $request->get('item');
 
-        $matricula= Matricula::find($id_matricula);
-        $matricula->items()->updateExistingPivot($id_item, array('nota'=> $nota));
+            if ($nota == "") {
+                $nota= null;
+            }
+
+            $matricula= Matricula::find($id_matricula);
+
+            $matricula->items()->updateExistingPivot($id_item, array('nota'=> $nota));
 
         }
        
+    }
+
+
+     public function storeSubitem(Request $request)
+    {
+
+         if ($request->ajax()) {
+           
+            $nota = $request->get('nota');
+            $id_matricula= $request->get('matricula');
+            $id_subitem= $request->get('subitem');
+
+            $subitem= Subitem::find($id_subitem);
+            $item = $subitem->item;
+
+            if ($nota == "") {
+                $nota= null;
+            }
+
+            $matricula= Matricula::find($id_matricula);
+
+            $matricula->subitems()->updateExistingPivot($id_subitem, array('nota'=> $nota));
+
+            $nota_item = $this->calcularNotaItem($matricula);
+            $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota_item));
+
+        }
+       
+    }
+
+
+    public function calcularNotaItem($matricula){
+
+        
+        $subitems= $matricula->subitems;
+
+        $nota=0;
+
+        foreach ($subitems as $subitem) {
+                
+                $nota_subitem = $subitem->pivot->nota;
+                $porcentaje = ($subitem->porcentaje)/100;
+                $nota_total= $nota_subitem * $porcentaje;
+
+                $nota+=$nota_total;
+        }
+            
+        return $nota;
     }
 
     /**

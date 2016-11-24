@@ -16,14 +16,14 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5>Asignatura:</h5><h5 id="nombreAsignatura"></h5>
+					<h5>Asignatura:</h5><h5>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
 				</div>
 			</div>
 
 			<div class="row">
 
 				<div class="col s12 m12 l12">
-					{!! Form::open(['route'=>['admin.items.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
+					{!! Form::open(['route'=>['items.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
 						<div class="row">
 							<div class="col s6 m6 l6">
 								<label style="font-size: 1rem;">Nombre</label>

@@ -24,6 +24,7 @@
                 @else
                      @include('partials.navEstudiantes')
                 @endif
+
         <!-- Page Layout here --> 
         </header>
        

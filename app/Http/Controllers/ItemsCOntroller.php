@@ -84,12 +84,7 @@ class ItemsController extends Controller
 
 
     }
-
-
-    public function calcularNotaItem($id_item){
-
-
-    }
+    
 
     /**
      * Display the specified resource.

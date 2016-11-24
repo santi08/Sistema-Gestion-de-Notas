@@ -60,7 +60,7 @@
         </li>
         <li class="no-padding"><div class="divider"></div></li>
 
-          <li class="mihover"><a href="{{url('/')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
+          <li class="mihover"><a href="{{url('/index')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
         
 
           
@@ -75,7 +75,7 @@
 
         <li class="no-padding mihover">
          
-            <a href="{{route('admin.matriculas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">assignment</i>Mis Asignaturas</a>
+            <a href="{{route('matriculas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">assignment</i>Mis Asignaturas</a>
           
             
           </li>
