@@ -21,33 +21,42 @@ class AsignaturasController extends Controller
     {   
         $programas = Programaacademico::all();
         $periodos = Periodoacademico::orderBy('Id','DESC')->get();
-        
-        $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
+        $id_programa="" ;
+        //traer ultimo Periodo
+        foreach ($periodos as $periodo) {
+            $periodo_id=$periodo->Id;  
+            break;
+        }
+        //traer id programa coordinador
+         if(\Auth::guard('admin')->user()->rolCoordinador()){
+            $id_programa=\Auth::guard('admin')->user()->usuarios[0]->programasAcademicos[0]->Id; 
+        }
 
+         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($id_programa)->periodo($periodo_id)->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);  
 
-
-        $vista = view('admin.asignaturas.partialTable')->with('asignaturas',$asignaturas);
-
-
-        if ($request->ajax()) {
-            return response()->json($vista->render());
-        } 
+        if($request->ajax()){
+         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate (10);
+         $vista = view('admin.asignaturas.partialTable')->with('asignaturas',$asignaturas);
+         return response()->json($vista->render());    
+        }
+             
         return view('admin.asignaturas.index')->with('programas',$programas)->with('periodos',$periodos)->with('asignaturas',$asignaturas);
+                   
     }
 
 
     public function filterAjax(Request $request){
 
-
-        
     }
     
 
-    public function verDatosAsignatura(Request $request, $id){
+    public function verDatosAsignatura(Request $request, $id){ 
 
         $asignatura = Horario::find($id);
+        $cantidadEstudiantes= $asignatura->matriculas;
 
-        $aux[]=["nombre"=>$asignatura->usuario->Nombre,"programa"=>$asignatura->programaAcademicoAsignatura->programaAcademico->NombrePrograma,"apellidos"=>$asignatura->usuario->Apellidos,"asignatura"=> $asignatura->programaAcademicoAsignatura->asignatura->Nombre];
+        $cantidad= count($cantidadEstudiantes);
+        $aux[]=["nombre"=>$asignatura->usuario->Nombre,"programa"=>$asignatura->programaAcademicoAsignatura->programaAcademico->NombrePrograma,"apellidos"=>$asignatura->usuario->Apellidos,"cantidadEstudiantes"=> $cantidad];
 
          if ($request->ajax()) {
             return response()->json($aux);
