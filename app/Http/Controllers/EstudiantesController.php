@@ -8,6 +8,7 @@ use App\ModelosNotas\Estudiante;
 use App\ModelosSCAD\Horario; 
 use App\ModelosSCAD\Periodoacademico; 
 use App\ModelosSCAD\Programaacademico;
+use App\ModelosNotas\Matricula;
 use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
@@ -18,9 +19,36 @@ class EstudiantesController extends Controller
 {
     public $alerta;
 
+    public function listarAsignaturas($id){
+       $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+        //array para guardar las materias del ultimo periodo academico
+        $asignaturasUltimoPeriodo=array();
+
+        //Capturar el ultimo Periodo para listarlo por defecto
+       foreach ($periodos as $periodo) {
+          $id_periodo = $periodo->Id;
+          break;
+        }
+
+      $estudiante= Estudiante::find($id);
+      $asignaturas=$estudiante->matriculas;
+
+       //Buscar las matriculas en el periodo Capturado
+        foreach ($asignaturas as $asignatura) {
+          if($asignatura->horario->PeriodoAcademicoId == $id_periodo){
+              $asignaturasUltimoPeriodo[]= $asignatura; 
+            }
+        }
+      $nombre = $estudiante->primerNombre." ".$estudiante->primerApellido;
+
+      return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturasUltimoPeriodo'),compact('nombre'))->render());
+
+    }
+
     public function index(Request $requests){
 
      $programas= Programaacademico::all();
+     
 
      if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
 
@@ -254,5 +282,42 @@ class EstudiantesController extends Controller
      $contrasena= $nombre[0].$codigo.$apellido[0];
 
      return $contrasena;
+    }
+
+    public function asignaturasEstudiante(Request $request){
+        $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+        $id_estudiante = \Auth::user()->id;
+        $matriculas= Matricula::where('estudiante_id',$id_estudiante)->get();
+        //array para guardar las materias en un determinado periodo academico
+        $asignaturas=array();
+        //array para guardar las materias en el ultimo periodo academico
+        $asignaturasUltimoPeriodo=array();
+
+        //Capturar el ultimo Periodo para listarlo por defecto
+       foreach ($periodos as $periodo) {
+          $id_periodo = $periodo->Id;
+          break;
+        }
+        //Buscar las matriculas en el periodo Capturado
+        foreach ($matriculas as $matricula) {
+          if($matricula->horario->PeriodoAcademicoId == $id_periodo){
+              $asignaturasUltimoPeriodo[]= $matricula; 
+            }
+        }
+        
+        if($request->ajax()){
+          
+          $id_periodo= $request->get('idPeriodo');
+
+          foreach ($matriculas as $matricula) {
+            if($matricula->horario->PeriodoAcademicoId == $id_periodo){
+              $asignaturas[]= $matricula; 
+            }
+          }
+          
+          return response()->json(view('admin.usuarios.part.asignaturasEstudiante',compact('asignaturas'))->render());  
+        }
+        
+    return view('admin.usuarios.asignaturas.asignaturasEstudiante')->with('periodos',$periodos)->with('asignaturas',$asignaturasUltimoPeriodo);
     }    
 }

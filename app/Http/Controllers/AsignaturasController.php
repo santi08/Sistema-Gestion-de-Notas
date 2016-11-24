@@ -20,7 +20,7 @@ class AsignaturasController extends Controller
     public function index(Request $request)
     {   
         $programas = Programaacademico::all();
-        $periodos = Periodoacademico::all(); 
+        $periodos = Periodoacademico::orderBy('Id','DESC')->get();
         
         $asignaturas = Horario::with('programaAcademicoAsignatura')->asignaturas($request->get('programa'))->periodo($request->get('periodo'))->nombreAsignaturas($request->get('nombreBusqueda'))->paginate(10);
 

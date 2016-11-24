@@ -19,13 +19,12 @@
 
         <header> 
             <!-- Navbar goes here -->
-               
-
-              
+                @if(Auth::guard('admin')->check())
                      @include('partials.nav')
-            
-                  
-            
+                @else
+                     @include('partials.navEstudiantes')
+                @endif
+
         <!-- Page Layout here --> 
         </header>
        

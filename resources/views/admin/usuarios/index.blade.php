@@ -68,7 +68,9 @@
           <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
           <td>
            <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
-           <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
+           <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></aX>
+           <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons">visibility</i></a>
+
           </td> 
         </tr>
       @endforeach
@@ -88,10 +90,33 @@
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
 @include('admin.usuarios.modals.cargarEstudiante')
+@include('admin.usuarios.modals.listarAsignaturas')
 @overwrite
 
 @section('scripts')
+<script type="text/javascript">
 
+  function listarAsignaturas(id){
+    var ruta= "{{route('admin.estudiantes.listarAsignaturas',['%id%'])}}";
+    ruta= ruta.replace('%id%',id); 
+    console.log(id);
+    console.log(ruta);
+
+    $.ajax({
+    url:ruta,
+    type:'GET',
+    dataType:'json',
+    data:{id:id},
+    success:function(res){
+     $('#listarAsignaturas').html(res);
+     $('#listarAsignaturas').openModal();
+    },error:function(error){
+      console.log(error);
+    }
+
+    });
+  }
+</script>
 <!--- Paginador -->
 <script type="text/javascript">
   $(document).on('click','.pagination a',function(e){
