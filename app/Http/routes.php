@@ -125,6 +125,7 @@ Route::group(['middleware' => 'auth'],function(){
           ]);
 
     });
+//fin middleware administrador
 
     // Rutas para el coordinador
     Route::group(['prefix'=>'admin','middleware' => 'coordinador'], function(){
@@ -173,7 +174,12 @@ Route::group(['middleware' => 'auth'],function(){
       Route::resource('informes','InformesController');
       Route::resource('estudiantes','EstudiantesController');
       Route::resource('matriculas','MatriculasController');
-      
+     
+      //cargar informacion en el modal listar asignaturas Estudiante
+      Route::GET('estudiantes/listarAsignaturas/{id}',[
+        'uses' =>'EstudiantesController@listarAsignaturas',
+        'as' => 'admin.estudiantes.listarAsignaturas'
+        ]); 
       
       //cargar informacion en el modal eliminar
       Route::GET('estudiantes/{id}/destroy',[
@@ -231,10 +237,20 @@ Route::group(['middleware' => 'auth'],function(){
 
 
     });
-
+//fin middleware coordinador
 
 });
 
+
+//rutas para el estudiante
+  Route::group(['prefix'=>'admin'], function(){
+    Route::get('asignaturasEstudiante',[
+          'uses' => 'EstudiantesController@asignaturasEstudiante',
+          'as' => 'admin.usuarios.asignaturasEstudiante'
+    ]);
+
+
+  });
 
 Route::get('login/estudiantes',[
  'uses' => 'Auth\AuthController@showLoginForm',
