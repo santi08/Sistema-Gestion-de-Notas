@@ -54,13 +54,6 @@ class AuthController extends Controller
     }
 
 
-     public function validateCredentials(UserContract $user, array $credentials)
-    {
-        $plain = $credentials['password'];
-
-        return $this->hasher->check($plain, $user->getAuthPassword());
-    }
-
     
      protected function getCredentials(Request $request)
     {

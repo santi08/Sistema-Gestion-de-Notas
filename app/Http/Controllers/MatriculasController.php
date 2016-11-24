@@ -81,7 +81,7 @@ class MatriculasController extends Controller
         $matricula = Matricula::firstOrNew($verificar_matricula);
                         $matricula->estudiante_id= $estudiante->id;
                         $matricula->tipoMatricula = 'N';
-                        $matricula->estado= 0;
+                        $matricula->estado= 1;
                         $matricula->save();
 
 

@@ -19,7 +19,13 @@
 
         <header> 
             <!-- Navbar goes here -->
-                @include('partials.nav')
+               
+
+              
+                     @include('partials.nav')
+            
+                  
+            
         <!-- Page Layout here --> 
         </header>
        

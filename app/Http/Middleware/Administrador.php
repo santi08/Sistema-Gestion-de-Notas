@@ -18,7 +18,7 @@ class Administrador
          $guard = 'admin';
         $usuario = \Auth::guard($guard)->user();
 
-        if ($usuario->rolAdministrador()) {
+        if ($usuario->rolAdministrador() || $usuario->rolCoordinador()) {
 
              return $next($request);
 

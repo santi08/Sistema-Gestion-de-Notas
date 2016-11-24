@@ -19,7 +19,7 @@ class Subitem extends Model
 
 
     public function item(){
-    	return $this->belongsTo('App\Item');
+    	return $this->belongsTo('App\ModelosNotas\Item');
     }
 
      public function matriculas()

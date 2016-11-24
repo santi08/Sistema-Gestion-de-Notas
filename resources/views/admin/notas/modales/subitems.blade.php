@@ -16,7 +16,8 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5>Asignatura:</h5><h5 id="nombreAsignatura"></h5>
+					<h5>Asignatura:</h5><h5>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
+					<h5>Asignatura:</h5><h5 id="nombre_item" name="nombre_item"></h5>
 				</div>
 			</div>
 

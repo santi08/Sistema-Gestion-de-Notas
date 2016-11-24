@@ -20,13 +20,14 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'],function(){
 
-  Route::get('/index', function(){
-  return view('welcome');
-  });
+   Route::get('/index', function(){
+      return view('welcome');
+    });
 
-
-  // Rutas para el administrador
+   // Rutas para el administrador
   Route::group( ['prefix'=>'admin', 'middleware' => 'administrador' ],function(){
+
+  
 
     Route::get('verDatosAsignatura/{id}',[
         'uses' => 'AsignaturasController@verDatosAsignatura',
@@ -41,7 +42,7 @@ Route::group(['middleware' => 'auth'],function(){
 
       Route::post('item',[
         'uses' => 'ItemsController@store',
-        'as' => 'admin.items.store'
+        'as' => 'items.store'
         ]);
 
       Route::post('subitem',[
@@ -55,9 +56,20 @@ Route::group(['middleware' => 'auth'],function(){
         ]);
 
      Route::get('nota',[
-          'uses' => 'NotasController@store',
-          'as' => 'nota.store'
-          ]);
+          'uses' => 'NotasController@storeItem',
+          'as' => 'nota.store.item'
+      ]);
+
+      Route::get('notaSubitem',[
+          'uses' => 'NotasController@storeSubitem',
+          'as' => 'nota.store.subitem'
+      ]);
+
+     Route::get('MisAsignaturas',[
+        'uses' => 'MatriculasController@index',
+        'as' => 'matriculas.index'
+
+      ]);
 
       Route::get('asignaturas',[
           'uses' => 'AsignaturasController@index',
@@ -66,7 +78,7 @@ Route::group(['middleware' => 'auth'],function(){
 
       Route::resource('informes','InformesController');
       Route::resource('estudiantes','EstudiantesController');
-      Route::resource('matriculas','MatriculasController');
+     
       
       
       //cargar informacion en el modal eliminar
@@ -121,112 +133,68 @@ Route::group(['middleware' => 'auth'],function(){
         //Ruta index notas
         Route::get('notas/{id}',[
           'uses' => 'NotasController@index',
-          'as' => 'admin.notas.index'
+          'as' => 'notas.index'
+        ]);
+
+        Route::post('matricular/archivo',[
+          'uses' =>'MatriculasController@matricularEstudiantes',
+          'as' => 'matricular.archivo'
+        ]);
+
+        Route::post('matricular/estudiante',[
+          'uses' =>'MatriculasController@store',
+          'as' => 'matricular.estudiante'
           ]);
 
     });
 
-    // Rutas para el coordinador
-    Route::group(['prefix'=>'admin','middleware' => 'coordinador'], function(){
+    Route::group(['prefix'=>'docente','middleware' => 'docente'],function(){
 
-       Route::get('profesores',[
-          'uses' => 'ProfesoresController@index',
-          'as' => 'admin.profesores.index'
-        ]);
-
-        Route::get('verDatosAsignatura/{id}',[
-        'uses' => 'AsignaturasController@verDatosAsignatura',
-        'as' => 'admin.asignaturas.verDatosAsignatura'
-      ]);
-
-        Route::get('items',[
-        'uses' => 'ItemsController@index',
-        'as' => 'admin.items.index'
-        ]);
-
-        
       Route::post('item',[
         'uses' => 'ItemsController@store',
-        'as' => 'admin.items.store'
+        'as' => 'items.store'
         ]);
 
-       Route::post('subitem',[
+      Route::post('subitem',[
         'uses' => 'SubitemsController@store',
         'as' => 'subitems.store'
       ]);
 
-        Route::get('item/{id}/destroy',[
+     Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
         ]);
 
-        Route::get('nota',[
-          'uses' => 'NotasController@store',
-          'as' => 'nota.store'
-          ]);
+     Route::get('nota',[
+          'uses' => 'NotasController@storeItem',
+          'as' => 'nota.store.item'
+      ]);
 
-      Route::get('asignaturas',[
-          'uses' => 'AsignaturasController@index',
-          'as' => 'admin.asignaturas.index'
-        ]);
 
-      Route::resource('informes','InformesController');
-      Route::resource('estudiantes','EstudiantesController');
-      Route::resource('matriculas','MatriculasController');
-      
-      
-      //cargar informacion en el modal eliminar
-      Route::GET('estudiantes/{id}/destroy',[
-        'uses' =>'EstudiantesController@destroy',
-        'as' => 'admin.estudiantes.destroy'
-        ]);
-       // activa la accion eliminar en el modal
-       Route::put('estudiantes/{id}/destroyupdate',[
-         'uses' =>'EstudiantesController@destroyupdate',
-          'as' => 'admin.estudiantes.destroyupdate'
-        ]);
-       
-       //guardar Estudiantes
-       Route::post('estudiantes/guardar',[
-         'uses' =>'EstudiantesController@guardarEstudiante',
-          'as' => 'admin.estudiantes.guardarEstudiante'
-        ]);
+      Route::get('notaSubitem',[
+          'uses' => 'NotasController@storeSubitem',
+          'as' => 'nota.store.subitem'
+      ]);
 
-       //cargar informacion editarEstudiante
-       Route::get('estudiantes/editar/{id}',[
-         'uses' =>'EstudiantesController@edit',
-          'as' => 'admin.estudiantes.edit'
-        ]);
+      Route::get('MisAsignaturas',[
+        'uses' => 'MatriculasController@index',
+        'as' => 'matriculas.index'
 
-       //editarEstudiante
-       Route::post('estudiantes/editar',[
-         'uses' =>'EstudiantesController@editar',
-          'as' => 'admin.estudiantes.editar'
-        ]);
-       //procesarArchivo
-       Route::POST('estudiantes/procesar',[
-        'uses' =>'EstudiantesController@procesarArchivo',
-        'as' => 'admin.estudiantes.procesarArchivo'
-        ]); 
+      ]);
 
-        Route::get('filtrosAsignaturas',[
-         'uses' =>'AsignaturasController@filterAjax',
-          'as' => 'admin.asignaturas.filterAjax'
-        ]);
-
-        Route::GET('filtrosProfesores',[
-         'uses' =>'ProfesoresController@filterAjax',
-          'as' => 'admin.profesores.filterAjax'
-        ]);
-
-        Route::GET('verProfesor/{id}/{idprograma}',[
-         'uses' =>'ProfesoresController@ver',
-          'as' => 'admin.profesores.ver'
-        ]);
-
-         Route::get('notas/{id}',[
+      Route::get('notas/{id}',[
           'uses' => 'NotasController@index',
-          'as' => 'admin.notas.index'
+          'as' => 'notas.index'
+        ]);
+
+        Route::post('matricular/archivo',[
+          'uses' =>'MatriculasController@matricularEstudiantes',
+          'as' => 'matricular.archivo'
+        ]);
+
+        Route::post('matricular/estudiante',[
+          'uses' =>'MatriculasController@store',
+          'as' => 'matricular.estudiante'
           ]);
 
 
@@ -258,14 +226,6 @@ Route::post('login/docentes',[
     'as' => 'admin.login'
 ]);
 
-
-Route::post('matricular/archivo',[
-  'uses' =>'MatriculasController@matricularEstudiantes',
-  'as' => 'matricular.archivo']);
-
-Route::post('matricular/estudiante',[
-  'uses' =>'MatriculasController@store',
-  'as' => 'matricular.estudiante']);
 
 Route::get('matricular/autocomplete','MatriculasController@autocomplete');
 
