@@ -36,7 +36,10 @@
 	
 		<div class="row">		
 			<div class="input-field col s6 l3 m3">
-				<input id="nombreBusqueda" onkeypress="return buscar();" type="text" placeholder="Nombre del profesor" class="validate">	
+              <input id="nombreBusqueda" type="search" onkeyup="buscar()" required>
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+			<!--	<input id="nombreBusqueda" onkeypress="return buscar();" type="text" placeholder="Nombre del profesor" class="validate">-->	
         	</div>    
 		</div>
 <div class="divider  grey darken-1"></div>
@@ -80,13 +83,15 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function(){  
+    $(document).ready(function(){
+       $('#programasProfesores').material_select();  
+       $('#periodosProfesores').material_select(); 
 
-        ruta="{{route('admin.profesores.index')}}";
+     /* ruta="{{route('admin.profesores.index')}}";
 
         var periodo = $('#periodosProfesores').val();
         var id;
-        $.ajax({
+       $.ajax({
             url:ruta,
             type:"GET",
             data:{periodo:periodo},
@@ -99,16 +104,16 @@
                 //$('#periodosProfesores > option[value="'+id+'"]').attr('selected', 'selected');
                 $('select#periodosProfesores').val(id);                                
             }
-        });        
+        });*/        
     });
 //si selecciona un programa academico envia la peticion 	
     $("#programasProfesores").change(function() {		     
-		consultarProgramasPeridos();
+		consultarProgramasPeriodos();
     });
                      			
 //si selecciona un periodo academico se envia la peticion 
     $("#periodosProfesores").change(function() {
-		consultarProgramasPeridos();
+		consultarProgramasPeriodos();
     });
     
 //paginacion sin recargar la pagina
@@ -117,6 +122,7 @@
         	e.preventDefault();
         	var page= $(this).attr('href').split('page=')[1];
         	var ruta="{{route('admin.profesores.index')}}"
+            console.log(page);
         	$.ajax({
         		url:ruta,
         		type:"GET",
@@ -173,7 +179,7 @@
         });        
     }
 
-    function consultarProgramasPeridos(){
+    function consultarProgramasPeriodos(){
         var programa = $('#programasProfesores').val();
         var periodo = $('#periodosProfesores').val();
         var nombreBusqueda = $('#nombreBusqueda').val();

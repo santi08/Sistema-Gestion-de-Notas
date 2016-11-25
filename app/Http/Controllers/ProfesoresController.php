@@ -25,21 +25,31 @@ class ProfesoresController extends Controller
     {
         
         $ProgramasAcademicos = Programaacademico::all(); 
-        $PeriodosAcademicos = Periodoacademico::all();
-
-        if ($request->ajax()) {
-            $ultimo=$PeriodosAcademicos->last();
-           return response()->json($ultimo->toArray());
-        }
-
-
+        $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
+        
+        $ultimo_Periodo= $PeriodosAcademicos->first();
+        $id_Periodo=$ultimo_Periodo->Id;    
+        
         $profesores = Horario::distinct()
+            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
+            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
+            ->join('usuario','horario.UsuarioID','=','usuario.Id')
+
+            ->select('usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','programaacademico.Id as idprograma')
+            ->where('horario.PeriodoAcademicoId','=',$id_Periodo)
+            ->orderBy('usuario.Nombre')->paginate(10);     
+
+        /*$profesores = Horario::distinct()
                                 ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,                   'programaacademico_asignatura.Id')
                                 ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
                                 ->join('usuario','horario.UsuarioID','=','usuario.Id')
                                 ->select('usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','programaacademico.Id as idprograma')
-                                ->orderBy('usuario.Nombre')->paginate(10);
+                                ->orderBy('usuario.Nombre')->paginate(10);*/
 
+         if($request->ajax()) {
+           $ultimo=$PeriodosAcademicos->first();
+           return response()->json($ultimo->toArray());
+        }
 
       return view('admin.profesores.index')->with('profesores',$profesores)->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
     
@@ -166,15 +176,5 @@ class ProfesoresController extends Controller
         //
     }
 
-    public function paginateArray($data, $perPage)
-    {
-        $page = Paginator::resolveCurrentPage();
-        $total = count($data);
-        $results = array_slice($data, ($page - 1) * $perPage, $perPage);
-
-        return new LengthAwarePaginator($results, $total, $perPage, $page, [
-            'path' => Paginator::resolveCurrentPath()
-        ]);
-    }
 
 }

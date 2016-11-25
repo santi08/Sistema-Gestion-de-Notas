@@ -21,12 +21,12 @@ class AsignaturasController extends Controller
     {   
         $programas = Programaacademico::all();
         $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+        $ultimo_periodo= $periodos->first();
+
         $id_programa="" ;
         //traer ultimo Periodo
-        foreach ($periodos as $periodo) {
-            $periodo_id=$periodo->Id;  
-            break;
-        }
+       
+        $periodo_id=$ultimo_periodo->Id;  
         //traer id programa coordinador
          if(\Auth::guard('admin')->user()->rolCoordinador()){
             $id_programa=\Auth::guard('admin')->user()->usuarios[0]->programasAcademicos[0]->Id; 

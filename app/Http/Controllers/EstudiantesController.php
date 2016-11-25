@@ -21,15 +21,13 @@ class EstudiantesController extends Controller
 
     public function listarAsignaturas($id){
        $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+       $ultimo_periodo=$periodos->first();
+       $id_periodo= $ultimo_periodo->Id;
         //array para guardar las materias del ultimo periodo academico
         $asignaturasUltimoPeriodo=array();
 
         //Capturar el ultimo Periodo para listarlo por defecto
-       foreach ($periodos as $periodo) {
-          $id_periodo = $periodo->Id;
-          break;
-        }
-
+          
       $estudiante= Estudiante::find($id);
       $asignaturas=$estudiante->matriculas;
 
@@ -288,16 +286,14 @@ class EstudiantesController extends Controller
         $periodos = Periodoacademico::orderBy('Id','DESC')->get();
         $id_estudiante = \Auth::user()->id;
         $matriculas= Matricula::where('estudiante_id',$id_estudiante)->get();
+
+        $ultimo_Periodo=$periodos->first();
+        $id_periodo=$ultimo_Periodo->Id;
         //array para guardar las materias en un determinado periodo academico
         $asignaturas=array();
         //array para guardar las materias en el ultimo periodo academico
         $asignaturasUltimoPeriodo=array();
 
-        //Capturar el ultimo Periodo para listarlo por defecto
-       foreach ($periodos as $periodo) {
-          $id_periodo = $periodo->Id;
-          break;
-        }
         //Buscar las matriculas en el periodo Capturado
         foreach ($matriculas as $matricula) {
           if($matricula->horario->PeriodoAcademicoId == $id_periodo){
