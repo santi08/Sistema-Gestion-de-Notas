@@ -15,9 +15,10 @@ class CreateTableSubitems extends Migration
         Schema::create('subitems', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('item_id')->unsigned();
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->string('nombre', 100);
             $table->double('porcentaje');
+            $table->boolean('asignadoPorUsuario');
             $table->string('descripcion',255)->nullable();
             $table->timestamps();
         });

@@ -21,6 +21,8 @@ class CreateMatriculasTable extends Migration
             $table->boolean('estado');
             $table->double('definitiva');
             $table->timestamps();
+            $table->index('horario_id', 'index_horario');
+            $table->index('estudiante_id', 'index_estudiante');
         });
     }
 

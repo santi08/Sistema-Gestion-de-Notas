@@ -54,6 +54,11 @@ Route::group(['middleware' => 'auth'],function(){
         'as' => 'item.destroy'
         ]);
 
+      Route::get('subitem/{id}/destroy',[
+        'uses' => 'SubitemsController@destroy',
+        'as' => 'subitem.destroy'
+        ]);
+
      Route::get('nota',[
           'uses' => 'NotasController@storeItem',
           'as' => 'nota.store.item'
@@ -158,6 +163,11 @@ Route::group(['middleware' => 'auth'],function(){
      Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
+        ]);
+
+      Route::get('subitem/{id}/destroy',[
+        'uses' => 'SubitemsController@destroy',
+        'as' => 'subitem.destroy'
         ]);
 
      Route::get('nota',[

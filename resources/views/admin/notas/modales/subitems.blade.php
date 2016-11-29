@@ -10,14 +10,12 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h4>Registrar SubItem</h4>
+					<h4>Registrar SubItem a<h4 id="nombreItem"></h4></h4>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col s12 m12 l12">
-					<h5>Asignatura:</h5><h5>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
-					<h5>Asignatura:</h5><h5 id="nombre_item" name="nombre_item"></h5>
+					<h5>Porcentaje disponible:</h5><h5 id="nombre_item" name="nombre_item"></h5>
 				</div>
 			</div>
 
@@ -34,7 +32,7 @@
 						<div class="row">
 							<div class="col s6 m6 l6">
 								<label style="font-size: 1rem;">Porcentaje</label>
-								<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje" required>
+								<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje">
 							</div>
 							 <div class="input-field col s6 m6 l6">
 					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>

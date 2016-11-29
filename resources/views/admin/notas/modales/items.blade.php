@@ -17,6 +17,7 @@
 			<div class="row">
 				<div class="col s12 m12 l12">
 					<h5>Asignatura:</h5><h5>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
+					<h4>Porcentaje disponible: {{$porcentajeDisponible}}</h4>
 				</div>
 			</div>
 
@@ -73,4 +74,5 @@
 		</div>
 
 	</div>
-@overwrite		
+@overwrite
+
