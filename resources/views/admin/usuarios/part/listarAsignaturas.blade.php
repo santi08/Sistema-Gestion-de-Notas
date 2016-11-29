@@ -9,7 +9,7 @@
  
 <div class="row">
 <div class="col s12 l12 m12">
-<table>
+<table class="responsive-table striped bordered">
   	  <thead>
   	  	<tr>
   	  	 <th>codigo</th>

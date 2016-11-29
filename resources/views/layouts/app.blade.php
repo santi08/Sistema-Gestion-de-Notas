@@ -32,19 +32,22 @@
         <main>
 
                 <div class="row">
+                    <div id="lado" class="col l2">
+                        
+                    </div>
         
-                    <div id="principalBox" class="col l10 m12 s12 card-panel" style="margin-left: 16.5%;"> 
+                    <div id="principalBox" class="col l10 m12 s12 card-panel"> 
                         @yield('content')
                     </div>
 
                 </div>
         </main>
     <script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>
-    <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
     <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css">
     </script>
     <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
+    <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
    @yield('scripts')
  <script type="text/javascript">
         
@@ -53,7 +56,6 @@
         $('.collapsible').collapsible();
         $('.dropdown-button').dropdown('open');      
         $('.tooltipped').tooltip({delay: 50});
-        
         //$('select').material_select();      
 
     });
@@ -66,6 +68,7 @@
       Materialize.toast(mensaje,5000,color);
       }else {"no existe alerta "}
     }
+
        
 </script>
 

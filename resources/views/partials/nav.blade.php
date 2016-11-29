@@ -18,17 +18,17 @@
 
 
 <div class="navbar-fixed" >
-  <nav class=" gradient  s12 m3 l12 ">
+  <nav class=" gradient  s12 m3 l12 " style="height: 8%; background: img/fon.png ">
 
     <div class="nav-wrapper">
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" >
+        <li><a href="" style="font-size: 1rem;">Ayuda<i class="material-icons left" style="font-size: 1.5rem;">help</i></a></li>
         <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">
 
-        <i class="material-icons prefix left">power_settings_new</i></a></li>
+        <i class="material-icons prefix left" style="font-size: 1.5rem;">power_settings_new</i></a></li>
       </ul>
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="slide-out" class="button-collapse" ><i class="material-icons" >menu</i></a>
     </div>
   </nav>
 </div>
@@ -36,15 +36,20 @@
 </div>
  
 
-<ul id="slide-out" class="side-nav fixed gradient-side" style="width: 217px;">
+<ul id="slide-out" class="side-nav fixed gradient-side" style="width: 216px; height: 97%; margin-top: 4%;">
 
     <li>
         <div class="userView">
-            <div class="background center" style="margin-top: 4%;">
-                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">person</i></span>
+            <div class="background" >
+
+              <img src="{{ asset('img/fondo2.jpg')}}">
+                
             </div>
             
-            <div><p class="white-text text-lighten-2" >@if (Auth::guard('admin')->check())
+            <div><p class="white-text text-lighten-2" style="font-size: 0.7rem; ">
+            <span class="white-text text-lighten-2"><i class="material-icons small ">person</i></span>
+
+            @if (Auth::guard('admin')->check())
 
               {{Auth::guard('admin')->user()->usuarios[0]->Nombre}} 
               {{Auth::guard('admin')->user()->usuarios[0]->Apellidos}}
@@ -58,7 +63,7 @@
         </div>
 
         </li>
-        <li class="no-padding"><div class="divider"></div></li>
+        <br>
 
           <li class="mihover"><a href="{{url('/index')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
         

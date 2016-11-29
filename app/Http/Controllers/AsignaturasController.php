@@ -55,10 +55,10 @@ class AsignaturasController extends Controller
         $asignatura = Horario::find($id);
         $cantidadEstudiantes= $asignatura->matriculas;
 
-        $cantidad= count($cantidadEstudiantes);
-        $aux[]=["nombre"=>$asignatura->usuario->Nombre,"programa"=>$asignatura->programaAcademicoAsignatura->programaAcademico->NombrePrograma,"apellidos"=>$asignatura->usuario->Apellidos,"cantidadEstudiantes"=> $cantidad];
+        $cantidad = count($cantidadEstudiantes);
+        $aux[]=["nombre"=>$asignatura->usuario->Nombre,"programa"=>$asignatura->programaAcademicoAsignatura->programaAcademico->NombrePrograma,"apellidos"=>$asignatura->usuario->Apellidos,"cantidadEstudiantes"=> $cantidad,"asignatura"=>$asignatura->programaAcademicoAsignatura->asignatura->Nombre];
 
-         if ($request->ajax()) {
+        if ($request->ajax()) {
             return response()->json($aux);
         } 
     }

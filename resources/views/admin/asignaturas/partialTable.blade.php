@@ -2,8 +2,8 @@
 	<thead >
 		<th>Código</th>
 		<th>Nombre</th>
-		<th>Creditos</th>
-		<th>Grupo</th>
+		<th class="center">Creditos</th>
+		<th class="center">Grupo</th>
 		<th>Acciones</th>
 	</thead>
 	<tbody>
@@ -11,8 +11,8 @@
 			<tr>
 				<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
 				<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-				<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-				<td>{{$asignatura->Grupo}} {{$asignatura->Id}}</td>
+				<td class="center">{{$asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
+				<td class="center">{{$asignatura->Grupo}}</td>
 				<td>
 					<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
 
@@ -24,7 +24,10 @@
 		@endforeach		
 	</tbody>
 </table>
-{!!$asignaturas->render()!!}	
+
+<div class="center">
+    {{$asignaturas->render()}}  
+</div>	
 
 
 				

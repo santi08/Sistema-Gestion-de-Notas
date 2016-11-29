@@ -16,10 +16,6 @@
 
 }
 
-i.icon-blue:focus {
-    color: blue;
-}
-
 .gradient-side{
 
   background: #d51b23; /* For browsers that do not support gradients */
@@ -41,34 +37,111 @@ hr {
   text-align: center;
 }
  
-.modal { width: 70% !important ; max-height: 100% !important }
+.modal { width: 70% !important ; max-height: 95% !important; border-radius: 15px 15px 15px 15px; }
+.modalEliminar { width: 40% !important ; max-height: 50% !important; border-radius: 15px 15px 15px 15px; }
+.modalDelaMateria{ width: 40% !important ; max-height: 70% !important; border-radius: 15px 15px 15px 15px;}
+.modalDetalleProfesor{ width: 60% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
+.modalMatricula{ width: 70% !important ; max-height: 80% !important;border-radius: 15px 15px 15px 15px; }
+
+.modalInsertarItem{ width: 58% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
+
+.modalInsertarSubItem{ width: 55% !important ; max-height: 77% !important;border-radius: 15px 15px 15px 15px; }
+
+
 
 .boton{
   width: 100%;
   height: 3em;
 }
 
-.modal-asignaturas{ width: 35% !important ; max-height: 100% !important }
+.modal-asignaturas{ width: 20% !important ;  }
 
 .fuentes{
   font-size: small;
 }
 
-@media screen only (min-width: 480px) and (max-width: 1122px){
-
-    #principalBox{
-
-      
-      background: black;
-    }
-
-
+@media (max-width: 1122px) {
+  #lado {
+    display: none;
+  }
+  #slide-out{
+    display: none;
+  }
 }
 
 .micardpanel{
 
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 #b71c1c;
 
+}
+
+/*css de materialize personalizado*/
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 2;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.input-field .prefix {
+    position: absolute;
+    width: 0.5rem;
+    font-size: 2rem;
+    transition: color .2s;
+}
+
+.input-field .prefix ~ input, 
+.input-field .prefix ~ textarea, 
+.input-field .prefix ~ label, 
+.input-field .prefix ~ 
+.validate ~ label, 
+.input-field .prefix ~ 
+.autocomplete-content {
+    margin-left: 2rem;
+    width: 92%;
+    width: calc(100% - 3rem);
+}
+
+.navbar-fixed {
+    position: relative;
+    height: 46px;
+    z-index: 998;
+}
+
+.input-field input[type=search] {
+    display: block;
+    line-height: inherit;
+    padding-left: 1px;
+    width: calc(100% - 2rem);
+}
+
+
+.busqueda label.active {
+  font-size: 0.8rem;
+  
+}
+
+.input-field input[type=search]:focus {
+  background-color: inherit; 
+  border: inherit;
+  box-shadow:inherit;
+  color: inherit;
+   border-bottom: 1px solid #26a69a;
+}
+
+
+i.icon-blue:focus {
+    color: blue;
 }
 
 .pagination li.active {

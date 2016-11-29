@@ -2,19 +2,31 @@
 @section('title','Notas')
 @section('content')
 <br>
+
+<fieldset class=" grey lighten-4">
 	<div class="row">
-		<div class="col s4"><h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5></div>
-		<div class="col s4">
+		<div class="col s12 m7 l6"><h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5></div>
+		<div class="col s12 m6 l4">
 			<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
 		</div>
-		<div class="col s4"><h5>Grupo: {{$asignatura->Grupo}}</h5></div>
+		<div class="col s12 m4 l2"><h5>Grupo: {{$asignatura->Grupo}}</h5></div>
 	</div>
 	<div class="row">
-		<div class=" col s6"><h5>Porcentaje Disponible: {{$porcentajeDisponible}}</h5></div>
-		<div class=" col s6"><h5>Porcentaje asignado: {{100 - $porcentajeDisponible}}</h5></div>
+		<div class=" col s6 m6 l3"><h6>Disponible: {{$porcentajeDisponible}}%</h6></div>
+		<div class=" col s6 m6 l3"><h6>Asignado: {{100 - $porcentajeDisponible}}%</h6></div>
+		<div class="col s12 m12 l3 ">
+			<!--<a data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn-floating btn-small waves-effect waves-light  modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Agregar item"><i class="material-icons large" >add_circle</i></a>-->			
+		</div>
 	</div>
-	 </h5>
-			<a data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn-floating btn-small waves-effect waves-light  modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Insertar item"><i class="material-icons large" >add_circle</i></a>
+</fieldset>
+<br>
+	<div class="row">
+		 <button data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect"><i class="material-icons large modal-trigger" >add_circle</i></a>Agregar Item</button>
+	</div>
+
+<div class="divider grey darken-1"></div>
+			
+
 <div class="row">
 		<div class="col s12">
 			<table border="1" class="bordered  centered responsive-table">
@@ -108,14 +120,15 @@
 	
 @endsection 
 
-
-
-
 @section('scripts')
 
 	
 
 	<script type="text/javascript">
+	 $(document).ready(function(){ 
+	 	$("#insertarItem").addClass("modalInsertarItem");
+	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+	 });
 		
 	function insertar_item(id){
    	

@@ -2,13 +2,13 @@
 @section('title','Profesores')
 
 @section('content')
+
+<h3 class="center">Profesores</h3>
 <div class="row">
-	<h3 class="center">Profesores</h3>
+
 	<div class="col s12 m12 l12">
 		<div class="row">
-
 			<div class="input-field col s5 l4 m4">
-				
 				<select name="programas" id="programasProfesores">
 					<option value="" disabled selected>Seleccione un programa</option>
 
@@ -21,10 +21,8 @@
 				<label>Programa Academico</label>	  			
 			</div>
 
-			<div class="input-field col s3 l3 m3">
-						
+			<div class="input-field col s3 l3 m3">					
 				<select name="periodos" id="periodosProfesores">
-					<!--<option value="" disabled selected>Seleccione un programa</option>-->
 					@foreach($PeriodosAcademicos as $PeriodoAcademico)
 				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
 					@endforeach						  			
@@ -35,13 +33,15 @@
 		</div>
 	
 		<div class="row">		
-			<div class="input-field col s6 l3 m3">
-              <input id="nombreBusqueda" type="search" required="" >
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-        	</div>    
+			<div class="col s8 l3 m3 ">
+            <div class="input-field">
+               <i class="material-icons prefix">search</i>
+               <input id="nombreBusqueda" type="search"   required placeholder="Buscar">           
+            </div>
+         </div>     
 		</div>
 <div class="divider  grey darken-1"></div>
+<br>
 		<div class="row" id="tabla"> 
 		
 		</div>
@@ -56,19 +56,23 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-     consulta(); 
-  $('#programasProfesores').material_select();  
-  $('#periodosProfesores').material_select();
+   
+   $("#ver").addClass("modalDetalleProfesor");
+      consulta(); 
+   $('#programasProfesores').material_select();  
+   $('#periodosProfesores').material_select();
 
-  $("#periodosProfesores").change(function() {
+   $("#periodosProfesores").change(function() {
         consulta();
-    });
-  $("#programasProfesores").change(function() {           
+   });
+   
+   $("#programasProfesores").change(function() {           
        consulta();
-    });
-  $("#nombreBusqueda").keyup(function(){
-    consulta();
-  });
+   });
+   
+   $("#nombreBusqueda").keyup(function(){
+      consulta();
+   });
      
 //paginacion ajax
     function consulta(){
