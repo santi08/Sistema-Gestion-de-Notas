@@ -53,6 +53,7 @@
         $('.collapsible').collapsible();
         $('.dropdown-button').dropdown('open');      
         $('.tooltipped').tooltip({delay: 50});
+        
         //$('select').material_select();      
 
     });

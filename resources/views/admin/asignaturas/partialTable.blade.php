@@ -18,7 +18,7 @@
 
                     <a href="#" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " onclick="matricular({{$asignatura->Id}})" data-target="#matricular" data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons">assignment_ind</i></a>
 
-                    <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias'  data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+                    <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosMaterias'  data-tooltip="Ver"><i class="material-icons">visibility</i></a>
 				</td>
 			</tr>
 		@endforeach		

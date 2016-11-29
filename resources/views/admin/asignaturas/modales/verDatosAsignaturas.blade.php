@@ -17,8 +17,7 @@
 						<thead>
 							<tr>
 								<th>Profesor</th>
-								<th>Programa</th>
-								<th>Estudiantes</th>		
+								<th>Cantidad de Estudiantes</th>		
 							</tr>
 						</thead>
 						<tbody id="tablaAsignaturas">			

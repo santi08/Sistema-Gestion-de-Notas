@@ -27,27 +27,14 @@
 
 
                 @elseif (Auth::guard('admin')->user()->rolCoordinador())
-
-                    @if (count( Auth::guard('admin')->user()->usuarios[0]->programasAcademicos) > 0)
-                        {{-- expr --}}
-                        <select id="programas" name="programas">
+                     <select id="programas" name="programas">
                         @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
                            
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             
                         @endforeach
 
-                    </select>
-                    @else
-                        <select disabled id="programas" name="programas">
-                        <option value="{{ Auth::guard('admin')->user()->usuarios[0]->programasAcademicos[0]->Id }}" disabled selected>
-                        {{ Auth::guard('admin')->user()->usuarios[0]->programasAcademicos[0]->NombrePrograma }}</option>
-                            
-                        </select>
-                        <label>Programa academico</label>
-                    @endif
-
-                    
+                    </select>                    
                 @endif
                     
                     
@@ -57,7 +44,7 @@
                 <div class="input-field col s6 l3 m3">
                     
                     <select name="periodos" id="periodos">
-                    <option value="" disabled selected>Seleccione un periodo</option>
+                    
                         @foreach($periodos as $periodo);
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
                         @endforeach
@@ -65,14 +52,23 @@
 
                     <label>Periodo Academico</label>
                     
-                </div>         
+                </div>
+                <div class="col ">
+    <div class="input-field">
+        <input id="nombreBusqueda" type="search" onkeyup="buscar()" required>
+        <label for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+    </div>
+</div>
+             
             </div>
 
-            <div class="row">       
+          <!--  <div class="row">       
                 <div class="input-field col s8 l3 m3">
                     <input id="nombreBusqueda" onkeypress="buscar();" type="text" placeholder="Nombre de la Asignatura" class="validate">   
                 </div>    
-            </div>
+            </div>-->
+
 
 <hr>
 
@@ -99,10 +95,7 @@
 
                               <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
 
-
-                               <a href="#" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Estudiantes" ><i class="material-icons">visibility</i></a>
-
-                               <a onclick="return ver();" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Estudiantes"><i class="material-icons">visibility</i></a>
+                               <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons">visibility</i></a>
 
 
                             </td>                    
@@ -154,7 +147,7 @@
             data:{periodo:periodo},
             dataType:'json',
             success:function(data){
-                console.log(data);
+                
                 $(data).each(function(key,value){
                     id=value.Id;    
                 });
@@ -235,9 +228,10 @@
             data: {programa:programa,periodo:periodo},
             dataType:'json',
             success:function(data){
+                console.log(data)
                 $(data).each(function(key,value){
                     $("#nombreMateria").text(value.asignatura);
-                    tablaAsignaturas.append("<tr><td>"+value.nombre+" "+value.apellidos +"</td><td>"+value.programa+"</td><td></td></tr>");    
+                    tablaAsignaturas.append("<tr><td>"+value.nombre+" "+value.apellidos +"</td><td>"+value.cantidadEstudiantes+"</td><td></td></tr>");    
                 });
                  $('#verDatosAsignaturas').openModal();                                  
             }
