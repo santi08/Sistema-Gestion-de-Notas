@@ -1,0 +1,15 @@
+To: harry.guarin@correounivalle.edu.co
+Subject: Your Password Reset Link
+Message-ID: <8bfba9cde5eadea34db26bed95dbc7e9@localhost>
+Date: Mon, 24 Oct 2016 21:48:08 +0000
+From: Harry Guarin <santiaristi_1994@hotmail.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Click here to reset your password: <a href=3D"http://localhost:8000/passwor=
+d/reset/3f5ab691c1b45ea57b7af6bb891782f1fc8200f221eb31715c00304c0e842615?em=
+ail=3Dharry.guarin%40correounivalle.edu.co"> http://localhost:8000/password=
+/reset/3f5ab691c1b45ea57b7af6bb891782f1fc8200f221eb31715c00304c0e842615?ema=
+il=3Dharry.guarin%40correounivalle.edu.co </a>
+

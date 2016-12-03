@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\ModelosNotas\Estudiante;
 use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,14 +24,16 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers,ThrottlesLogins; 
 
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/index';
+    protected $username = 'codigo';
+    protected $loginView ='bienvenido.bienvenido';
 
     /**
      * Create a new authentication controller instance.
@@ -46,11 +51,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+   
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:estudiantes',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -63,28 +71,29 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Estudiante::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
+
+      protected function getFailedLoginMessage()
+    {
+        return 'Código y/o contraseña incorrectos.';
+    }
+
+    protected function getLockoutErrorMessage($seconds)  {
+
+    return 'Ha superado el número de intentos. Reintente en'.$seconds.' seconds.';
+    
+    }
+
     protected function getLogin(){
-<<<<<<< HEAD
-        return view('auth.login');
+        return view('welcome');
     }
 
-    protected function postLogin(){
-        
-    }
-
-    protected function getLogout(){
-        
-=======
-        return view('home');
->>>>>>> Test
-    }
 
 
 }

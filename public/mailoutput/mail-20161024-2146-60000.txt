@@ -1,0 +1,15 @@
+To: s1at20131santiagoguarin@gmail.com
+Subject: Your Password Reset Link
+Message-ID: <03f1f40dbc948d73a8fc62a12c2a69f7@localhost>
+Date: Mon, 24 Oct 2016 21:46:49 +0000
+From: Harry Guarin <santiaristi_1994@hotmail.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Click here to reset your password: <a href=3D"http://localhost:8000/passwor=
+d/reset/8c8361789b01b9bd04d15e31164d41954d6d38b57f9fc01d827406170b222544?em=
+ail=3Ds1at20131santiagoguarin%40gmail.com"> http://localhost:8000/password/=
+reset/8c8361789b01b9bd04d15e31164d41954d6d38b57f9fc01d827406170b222544?emai=
+l=3Ds1at20131santiagoguarin%40gmail.com </a>
+

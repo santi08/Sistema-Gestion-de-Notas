@@ -26,6 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        $gate->define('registrar-notas',function($usuario, $asignatura){
+
+            return $usuario->UsuarioIdentificacion == $asignatura->UsuarioID;
+
+        });
+
         //
     }
 }
