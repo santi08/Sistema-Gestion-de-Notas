@@ -4,6 +4,8 @@
 @section('content')
 	<h4 class="center">Asignaturas</h4>
     <br>
+
+    
     <div class="row">
         <div class="col s12 m12 l12">   
             <div class="row">
@@ -40,11 +42,11 @@
                     <label>Periodo Academico</label>
                 </div>
 
-                <div class="col s8 l3 m3 ">
-                    <div class="input-field">
-                        <i class="material-icons prefix">search</i>
-                        <input id="nombreBusqueda" type="search"  onkeyup="buscar()" required placeholder="Buscar">   
-                    </div>
+                <div class="col col s8 l3 m3 ">
+                    <div class="header-search-wrapper grey ">
+                <i class="mdi-action-search"></i>
+                <input id="nombreBusqueda" type="search"  class="header-search-input z-depth-2" placeholder="Buscar Asignatura">
+     </div>
                 </div>
             </div>
 
@@ -69,11 +71,11 @@
                                     <td class="center">{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
                                     <td class="center">{{ $asignatura->Grupo}}</td>
                                     <td>  
-                                        <a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
+                                        <a href="#" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons red-text">picture_as_pdf</i></a>
 
-                                        <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
+                                        <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text" >assignment_ind</i></a>
 
-                                        <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons">visibility</i></a>
+                                        <a onclick="return ver({{$asignatura->Id}});" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons blue-text ">visibility</i></a>
                                     </td>                    
                                 </tr>
                             @endforeach                    

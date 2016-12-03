@@ -63,11 +63,11 @@
                   <td> {{ $estudiante->email}}</td>
                   <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
                   <td>
-                     <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="  btn-floating btn-tiny  modal-trigger transparent"><i class="material-icons grey-text transparent">edit</i></a> 
+                     <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons teal-text">edit</i></a> 
 
-                     <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class=" btn-floating modal-trigger transparent"><i class="material-icons grey-text" style="font-size: 1.5rem;">delete</i></aX>
+                     <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons teal-text" style="font-size: 1.5rem;">delete</i></aX>
 
-                     <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped transparent" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons grey-text">visibility</i></a>
+                     <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat " data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons teal-text">visibility</i></a>
                   </td> 
                </tr>
 

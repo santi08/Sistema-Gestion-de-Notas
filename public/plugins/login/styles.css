@@ -60,14 +60,6 @@ hr {
   font-size: small;
 }
 
-@media (max-width: 1122px) {
-  #lado {
-    display: none;
-  }
-  #slide-out{
-    display: none;
-  }
-}
 
 .micardpanel{
 
@@ -76,6 +68,19 @@ hr {
 }
 
 /*css de materialize personalizado*/
+
+.btn-flat {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 3px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
 
 .material-icons {
     font-family: 'Material Icons';
