@@ -11,9 +11,15 @@
 |
 */
 
+
 Route::get('/',['middleware' => 'guest',function () {
     return view('bienvenido.bienvenido');
 }] );
+
+
+Route::get('/',['middleware' => 'guest', function () {
+    return view('bienvenido.bienvenido');
+}]);
 
 
 
@@ -53,6 +59,11 @@ Route::group(['middleware' => 'auth'],function(){
      Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
+        ]);
+
+      Route::get('subitem/{id}/destroy',[
+        'uses' => 'SubitemsController@destroy',
+        'as' => 'subitem.destroy'
         ]);
 
      Route::get('nota',[
@@ -159,6 +170,11 @@ Route::group(['middleware' => 'auth'],function(){
      Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
+        ]);
+
+      Route::get('subitem/{id}/destroy',[
+        'uses' => 'SubitemsController@destroy',
+        'as' => 'subitem.destroy'
         ]);
 
      Route::get('nota',[

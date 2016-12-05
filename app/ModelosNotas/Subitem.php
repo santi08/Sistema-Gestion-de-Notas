@@ -14,6 +14,7 @@ class Subitem extends Model
         'item_id',
         'nombre',
         'porcentaje',
+        'asignadoPorUsuario',
         'descripcion'
       ];
 

@@ -64,7 +64,7 @@ class ItemsController extends Controller
              $item->descripcion = $descripcion_item;
              $item->save();
 
-             foreach ($estudiantes as $estudiante) {
+            foreach ($estudiantes as $estudiante) {
 
                 $estudiante->items()->attach($item->id);                
 
@@ -77,12 +77,6 @@ class ItemsController extends Controller
             echo "Ocurrio un error";
             
         }
-
-
-       
-
-
-
     }
     
 
@@ -136,13 +130,9 @@ class ItemsController extends Controller
 
              try {
 
-                foreach ($matriculas as $matricula) {
-
-                    $item->matriculas()->detach($matricula->id);     
-                }
-
-                    $item->delete();
-            echo "Eliminado con exito";
+             $item->delete();
+          
+          return redirect()->back();
                  
              } catch (Exception $e) {
                  
@@ -173,7 +163,6 @@ class ItemsController extends Controller
         }
 
         return $estado;
-
-
     }
+
 }

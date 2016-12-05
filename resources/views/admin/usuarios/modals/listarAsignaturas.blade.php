@@ -4,10 +4,9 @@
 @section('contenido')
 
 	<div class="row" >
-	 <div id='listarAsignaturas'>
+		<div class="col s12 l12 m12" id='listarAsignaturas'>
 	 	
-	 </div>
-		
+		</div>
 	</div>
   	
 @overwrite

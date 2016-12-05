@@ -40,7 +40,7 @@ class SubitemsController extends Controller
     public function store(Request $request)
     {
 
-       
+      
         $id_item = $request->id_item;
         $item = Item::find($id_item);
         $estudiantes= $item->matriculas;
@@ -49,8 +49,17 @@ class SubitemsController extends Controller
 
        
         $nombre_item = $request->nombre;
-        $porcetanje_subitem= $request->porcentaje;
+        
         $descripcion_subitem= $request->descripcion;
+
+        if($request->porcentaje==""){
+
+            $asignadoPorUsuario= false;
+            $porcetanje_subitem =0;
+        }else{
+            $porcetanje_subitem= $request->porcentaje;
+            $asignadoPorUsuario= true;
+        }
 
         try {
 
@@ -58,13 +67,17 @@ class SubitemsController extends Controller
              $subitem->item_id = $id_item;
              $subitem->nombre= $nombre_item;
              $subitem->porcentaje= $porcetanje_subitem;
+             $subitem->asignadoPorUsuario = $asignadoPorUsuario;
              $subitem->descripcion = $descripcion_subitem;
              $subitem->save();
-
              foreach ($estudiantes as $estudiante) {
 
                 $estudiante->subitems()->attach($subitem->id);                
 
+            }
+
+            if($request->porcentaje==""){
+               $this->actualizarPorcentajes($item);
             }
 
             return redirect()->back();
@@ -73,6 +86,45 @@ class SubitemsController extends Controller
 
             echo "Ocurrio un error";
             
+        }
+    }
+
+    public function actualizarPorcentajes($item){
+
+        $subitems = $item->subitems()->where('asignadoPorUsuario',false)->get();
+        $porcentajeSinAsignar = $this->porcentajeAsignadoItem($item);
+        $subitemsSinAsignar = count($subitems);
+
+        foreach ($subitems as $subitem) {
+                $subitem->porcentaje = $porcentajeSinAsignar/$subitemsSinAsignar;
+                $subitem->save();
+        }
+
+    }
+
+    public function porcentajeAsignadoItem($item){
+
+        $porcentajeTotal = 100;
+
+        if(count($item->subitems)>0){
+
+             $porcentajeUtilizado=0;
+
+            foreach ($item->subitems as $subitem) {
+
+                if($subitem->asignadoPorUsuario == true){
+                   $porcentajeUtilizado+= $subitem->porcentaje; 
+                }
+                
+            }
+
+            $porcentajeDisponible= $porcentajeTotal - $porcentajeUtilizado;
+
+            return $porcentajeDisponible;
+
+        }else{
+
+            return $porcentajeTotal;
         }
     }
 
@@ -118,6 +170,40 @@ class SubitemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subitem = Subitem::find($id);
+         if ($this->validarSubitemSinNotas($subitem)) {
+
+             try {
+
+            $subitem->delete();
+            
+            return redirect()->back();
+                 
+             } catch (Exception $e) {
+                 
+             }
+
+        }else{
+
+            dd('Subitem contiene notas, primero elimina las notas para eliminar el item');
+        }
+    }
+
+     public function validarSubitemSinNotas($subitem){
+
+         $estado = false;
+
+        foreach($subitem->matriculas as $nota) {
+            
+            if (!is_null($nota->pivot->nota)) {
+
+                $estado = false;
+                break;
+            }else{
+                $estado = true;
+            }
+        }
+
+        return $estado;
     }
 }

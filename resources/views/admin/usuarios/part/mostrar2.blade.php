@@ -1,33 +1,33 @@
-
- 
-
- 	<table class="col highlight responsive-table bordered">
-        <thead>
-          <tr>
-              <th data-field="id">Nombre Completo</th>
-              <th data-field="name">codigo</th>
-              <th data-field="email">correo</th>
-              <th data-field="accion">Acciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          @foreach($e as $estudiante)
-          
-          <tr>
-             <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
-             <td> {{ $estudiante->codigo }}</td>
-             <td> {{ $estudiante->email }}</td>
-             <td>
-             <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons">edit</i></a> 
-             <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="waves-effect waves-light btn-floating btn-small modal-trigger"><i class="material-icons red">delete</i></a>
-             <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons">visibility</i></a>
+<table class="col highlight responsive-table striped bordered">
+   <thead>
+      <tr>
+         <th data-field="name">Código</th>
+         <th data-field="id">Nombre Completo</th>       
+         <th data-field="email">Correo</th>
+         <th data-field="programa">Programa</th>
+         <th data-field="accion">Acciones</th>
+      </tr>
+   </thead>
+   <tbody>
+      @foreach($e as $estudiante)   
+         <tr>
+            <td> {{ $estudiante->codigo }}</td>
+            <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
+            <td> {{ $estudiante->email }}</td>
+            <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
+            <td>
+               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger"><i class="material-icons orange-text text-darken-1">edit</i></a> 
              
-             </td> 
-          </tr>
-          @endforeach
+               <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat modal-trigger"><i class="material-icons teal-text">delete</i></a>
+             
+               <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text">visibility</i></a> 
+            </td> 
+         </tr>
+      @endforeach
+   </tbody>
+</table>
 
-        </tbody>
-      </table>
-
- {!! $e->render()!!}
+<div class="center">
+   {!! $e->render()!!}
+</div>
+ 

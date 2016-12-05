@@ -27,17 +27,13 @@ class NotasController extends Controller
         $asignatura = Horario::find($id);
         $tipo_items=TipoItem::all(); 
         $estudiantes = $asignatura->matriculas;
-
-
-       /* if (Gate::denies('registrar-notas', $asignatura)) {
-            
-        }*/
+        $porcentajeDisponible = $this->porcentajeDisponible($asignatura->matriculas[0]);
 
        if (Gate::forUser(\Auth::guard('admin')->user())->denies('registrar-notas', $asignatura)) {
             abort(403, 'Unauthorized action.');
         }
 
-        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items);
+        return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items)->with('porcentajeDisponible', $porcentajeDisponible);
     }
 
     /**
@@ -73,6 +69,13 @@ class NotasController extends Controller
 
             $matricula->items()->updateExistingPivot($id_item, array('nota'=> $nota));
 
+            $matricula->definitiva = $nota_estudiante= $this->calcularNotaEstudiante($matricula);
+            $matricula->save();
+
+            $arreglo=array();
+            $arreglo=['id_matricula' => $id_matricula, 'nota' => $nota_estudiante];
+
+            return response()->json($arreglo);
         }
        
     }
@@ -101,6 +104,15 @@ class NotasController extends Controller
             $nota_item = $this->calcularNotaItem($matricula);
             $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota_item));
 
+            $matricula->definitiva = $nota_estudiante= $this->calcularNotaEstudiante($matricula);
+            $matricula->save();
+
+
+            $arreglo=array();
+            $arreglo=['id_matricula' => $id_matricula, 'nota' => $nota_estudiante];
+
+            return response()->json($arreglo);
+
         }
        
     }
@@ -121,9 +133,51 @@ class NotasController extends Controller
 
                 $nota+=$nota_total;
         }
-            
+
         return $nota;
     }
+
+    public function calcularNotaEstudiante($matricula){
+
+        $items = $matricula->items;
+        $nota= 0;
+
+        foreach ($items as $item) {
+
+            $nota_item= $item->pivot->nota;
+            $porcentaje = ($item->porcentaje)/100;
+            $nota_total= $nota_item * $porcentaje;
+
+           $nota+=$nota_total;
+
+        }
+
+        return $nota;
+    }
+
+    public function porcentajeDisponible ($matricula){
+
+        $porcentajeTotal = 100;
+
+        if(count($matricula->items)>0){
+
+            $porcentajeUtilizado=0;
+
+            foreach ($matricula->items as $item) {
+                
+                $porcentajeUtilizado+=$item->porcentaje;
+            }
+
+            $porcentajeDisponible = $porcentajeTotal - $porcentajeUtilizado;
+
+            return $porcentajeDisponible;
+        }else{
+
+            return $porcentajeTotal;
+        }
+        
+    }
+
 
     /**
      * Display the specified resource.

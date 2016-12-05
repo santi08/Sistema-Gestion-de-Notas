@@ -1,4 +1,4 @@
-<table class="responsive-table striped bordered" >
+<table class="responsive-table bordered" >
     <thead >
         <th>Código</th>
         <th>Nombre</th>
@@ -16,7 +16,7 @@
                 <td>{{$asignatura->horario->Grupo}}</td>
                 <td>{{$asignatura->horario->usuario->Nombre}}{{$asignatura->horario->usuario->Apellidos}}</td>
                 <td> 
-                   	 <a onClick="" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="Ver Notas"><i class="material-icons">visibility</i></a>
+                   	 <a onClick="" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="Ver Notas"><i class="material-icons blue-text">visibility</i></a>
 
                 </td>                    
             </tr>

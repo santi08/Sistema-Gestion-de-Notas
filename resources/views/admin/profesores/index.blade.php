@@ -2,12 +2,16 @@
 @section('title','Profesores')
 
 @section('content')
-<div class="row">
-	<h3 class="center">Profesores</h3>
-	<div class="col s12 m12 l12">
-		<div class="row">
 
-			<div class="input-field col s5 l4 m4">
+<h3 class="center">Profesores</h3>
+<br>
+<div class="row">
+	<div class="col s12 m12 l12">
+
+        <fieldset class="grey lighten-4">
+              <div class="row">
+
+      <div class="input-field col s5 l4 m4">
 
         @if ( Auth::guard('admin')->user()->rolAdministrador())
           <select name="programas" id="programasProfesores">
@@ -29,33 +33,43 @@
              </select>
               <label>Programa Academico</label> 
         @endif
-				  			
-			</div>
+                
+      </div>
 
-			<div class="input-field col s3 l3 m3">
-						
-				<select name="periodos" id="periodosProfesores">
-					<!--<option value="" disabled selected>Seleccione un programa</option>-->
-					@foreach($PeriodosAcademicos as $PeriodoAcademico)
-				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
-					@endforeach						  			
-				</select>	
-				<label>Periodo Academico</label>  	
-			</div>	
+      <div class="input-field col s3 l3 m3">
+            
+        <select name="periodos" id="periodosProfesores">
+          <!--<option value="" disabled selected>Seleccione un programa</option>-->
+          @foreach($PeriodosAcademicos as $PeriodoAcademico)
+              <option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
+          @endforeach                   
+        </select> 
+        <label>Periodo Academico</label>    
+      </div>  
 
-		</div>
+    </div>
+        </fieldset>
+<br>
 	
 		<div class="row">		
-			<div class="input-field col s6 l3 m3">
-              <input id="nombreBusqueda" type="search" required="" >
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-        	</div>    
+            <div class="col s12 l12 m12 ">
+                <div class="header-search-wrapper teal darken-1 ">
+                    <i class="mdi-action-search"></i>
+                    <input id="nombreBusqueda" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Profesor">
+                </div>
+            </div>  
 		</div>
-<div class="divider  grey darken-1"></div>
-		<div class="row" id="tabla"> 
-		
+
+        <br>            
+            <div class="divider  grey darken-1"></div>
+        <br>
+
+		<div class="row" >
+            <div class="col s12 m12 l12 " id="tabla">
+                
+            </div> 
 		</div>
+
 	</div>
 </div>
 
@@ -67,19 +81,23 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-     consulta(); 
-  $('#programasProfesores').material_select();  
-  $('#periodosProfesores').material_select();
+   
+   $("#ver").addClass("modalDetalleProfesor");
+      consulta(); 
+   $('#programasProfesores').material_select();  
+   $('#periodosProfesores').material_select();
 
-  $("#periodosProfesores").change(function() {
+   $("#periodosProfesores").change(function() {
         consulta();
-    });
-  $("#programasProfesores").change(function() {           
+   });
+   
+   $("#programasProfesores").change(function() {           
        consulta();
-    });
-  $("#nombreBusqueda").keyup(function(){
-    consulta();
-  });
+   });
+   
+   $("#nombreBusqueda").keyup(function(){
+      consulta();
+   });
      
 //paginacion ajax
     function consulta(){
