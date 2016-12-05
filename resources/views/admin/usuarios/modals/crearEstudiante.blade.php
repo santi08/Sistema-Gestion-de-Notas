@@ -1,8 +1,3 @@
-<!--aqui esta el boton de crear Usuario-->
-  <div class="row ">
-    <a onClick='openModalCrear()' class="col s6 l3 m3  offset-l9 offset-m9 green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
-  </div> 
- <!-- fin boton crear --> 
 
 <!-- Estructura Modal -->
 <div id="crearEstudiante" class="modal">

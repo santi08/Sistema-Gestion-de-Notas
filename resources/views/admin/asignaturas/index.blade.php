@@ -2,59 +2,63 @@
 @section('title','Asignaturas')
 
 @section('content')
-	<h4 class="center">Asignaturas</h4>
+	<h3 class="center">Asignaturas</h3>
     <br>
 
-    
     <div class="row">
-        <div class="col s12 m12 l12">   
-            <div class="row">
-                <div class="input-field col s6 l4 m4 fuentes" >
-                    @if (Auth::guard('admin')->user()->rolAdministrador())
-                        <select id="programas" name="programas">
-                            <option value="" disabled selected>Seleccione un programa</option>
-                            @foreach($programas as $programa);
-                                @if($programa->NombrePrograma != 'GENERICO')
+        <div class="col s12 m12 l12"> 
+            <fieldset class="grey lighten-4">  
+                <div class="row">
+                    <div class="input-field col s6 l4 m4 fuentes" >
+                        @if (Auth::guard('admin')->user()->rolAdministrador())
+                            <select id="programas" name="programas">
+                                <option value="" disabled selected>Seleccione un programa</option>
+                                @foreach($programas as $programa);
+                                    @if($programa->NombrePrograma != 'GENERICO')
+                                        <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <label>Programa Académico</label>
+                        @elseif (Auth::guard('admin')->user()->rolCoordinador())
+                            <select id="programas" name="programas">
+                                @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                           
                                     <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
-                                @endif
+                            
+                                @endforeach
+
+                            </select> 
+                            <label>Programa Académico</label>                   
+                        @endif            
+                    </div>
+
+                    <div class="input-field col s6 l3 m3">   
+                        <select name="periodos" id="periodos">
+                            @foreach($periodos as $periodo);
+                                <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
                             @endforeach
                         </select>
-                        <label>Programa academico</label>
-
-                    @elseif (Auth::guard('admin')->user()->rolCoordinador())
-                        <select id="programas" name="programas">
-                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
-                           
-                                <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
-                            
-                            @endforeach
-
-                        </select>                    
-                    @endif            
+                        <label>Periodo Académico</label>
+                    </div>
                 </div>
-
-                <div class="input-field col s6 l3 m3">   
-                    <select name="periodos" id="periodos">
-                        @foreach($periodos as $periodo);
-                            <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
-                        @endforeach
-                    </select>
-                    <label>Periodo Academico</label>
-                </div>
-
-                <div class="col col s8 l3 m3 ">
-                    <div class="header-search-wrapper grey ">
-                <i class="mdi-action-search"></i>
-                <input id="nombreBusqueda" type="search"  class="header-search-input z-depth-2" placeholder="Buscar Asignatura">
-     </div>
-                </div>
+            </fieldset>
+<br>
+            <div class="row">
+                <div class="col s12 l12 m12 ">
+                    <div class="header-search-wrapper teal darken-1 ">
+                        <i class="mdi-action-search"></i>
+                        <input id="nombreBusqueda" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Asignatura">
+                    </div>
+                </div>               
             </div>
 
-<div class="divider grey darken-1"></div>
+<br>        
+<div class="divider  grey darken-1"></div>
 <br>
             <div class="row">
                 <div id="tabla" class="col l12 s12 m12">
-                    <table class="responsive-table striped bordered" id="asignaturas">
+                    <table class="responsive-table  bordered" id="asignaturas">
                         <thead >
                             <th>Código</th>
                             <th>Nombre</th>
@@ -73,7 +77,7 @@
                                     <td>  
                                         <a href="#" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons red-text">picture_as_pdf</i></a>
 
-                                        <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text" >assignment_ind</i></a>
+                                        <a data-target="#matricular" onclick=" return matricular({{ $asignatura->Id }});" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text" >assignment_ind</i></a>
 
                                         <a onclick="return ver({{$asignatura->Id}});" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons blue-text ">visibility</i></a>
                                     </td>                    
@@ -81,11 +85,13 @@
                             @endforeach                    
                         </tbody>
                     </table>
+
                     <div class="center">
                         {{$asignaturas->render()}}  
                     </div> 
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -164,13 +170,13 @@
 
     function matricular(id){
           
-        $('#codigo').autocomplete({
+       /* $('#codigo').autocomplete({
                   source: "{{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
                     $('#codigo').val(ui.item.value);
                   }
-                });
+                });*/
                 
                 $('#horario_estudiante').val(id);
                 $('#horario_archivo').val(id);

@@ -4,47 +4,56 @@
 @section('content')
 
 <h3 class="center">Profesores</h3>
+<br>
 <div class="row">
-
 	<div class="col s12 m12 l12">
-		<div class="row">
-			<div class="input-field col s5 l4 m4">
-				<select name="programas" id="programasProfesores">
-					<option value="" disabled selected>Seleccione un programa</option>
+        <fieldset class="grey lighten-4">
+            <div class="row">
 
-						@foreach($ProgramasAcademicos as $ProgramaAcademico)
-							@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-								<option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
-							@endif
-						@endforeach	
-				</select>
-				<label>Programa Academico</label>	  			
-			</div>
+                <div class="input-field col s5 l4 m4">
+				    <select name="programas" id="programasProfesores">
+					   <option value="" disabled selected>Seleccione un programa</option>
 
-			<div class="input-field col s3 l3 m3">					
-				<select name="periodos" id="periodosProfesores">
-					@foreach($PeriodosAcademicos as $PeriodoAcademico)
-				    	<option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
-					@endforeach						  			
-				</select>	
-				<label>Periodo Academico</label>  	
-			</div>	
-
-		</div>
+                            @foreach($ProgramasAcademicos as $ProgramaAcademico)
+						      	@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
+								    <option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
+                                @endif
+                            @endforeach	
+				    </select>
+				    <label>Programa Academico</label>	  			
+                </div>
+        
+                <div class="input-field col s3 l3 m3">					
+				    <select name="periodos" id="periodosProfesores">
+                        @foreach($PeriodosAcademicos as $PeriodoAcademico)
+				    	   <option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
+                        @endforeach						  			
+				    </select>	
+				    <label>Periodo Academico</label>  	
+                </div>	
+            </div>
+        </fieldset>
+<br>
 	
 		<div class="row">		
-			<div class="col s8 l3 m3 ">
-            <div class="input-field">
-               <i class="material-icons prefix">search</i>
-               <input id="nombreBusqueda" type="search"   required placeholder="Buscar">           
-            </div>
-         </div>     
+            <div class="col s12 l12 m12 ">
+                <div class="header-search-wrapper teal darken-1 ">
+                    <i class="mdi-action-search"></i>
+                    <input id="nombreBusqueda" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Profesor">
+                </div>
+            </div>  
 		</div>
-<div class="divider  grey darken-1"></div>
-<br>
-		<div class="row" id="tabla"> 
-		
+
+        <br>            
+            <div class="divider  grey darken-1"></div>
+        <br>
+
+		<div class="row" >
+            <div class="col s12 m12 l12 " id="tabla">
+                
+            </div> 
 		</div>
+
 	</div>
 </div>
 

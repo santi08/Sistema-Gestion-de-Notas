@@ -28,9 +28,11 @@
       </li>
 
       <li class="mihover bold active"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
-      <li class="li-hover"><div class="divider"></div></li>            
-      @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
-           <li class="">
+      <br>
+
+      <li class="li-hover "><div class="divider"></div></li>            
+        @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
+           <li class="bold active">
             <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-av-my-library-books"></i>Asignaturas</a>
           </li>
         @endif

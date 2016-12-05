@@ -56,11 +56,20 @@
             <div class="navbar-fixed" >
                 <nav class=" gradient  s12 m3 l12 ">
                     <div class="nav-wrapper">
-
-                        <ul id="nav-mobile" class="right hide-on-med-and-down" >
+                        <div class="row">
+                        <div class="col s6 m6 l6">
+                                
+                            </div>
+                            <div class="col s6 l6 m6">
+                                <ul id="nav-mobile" class="right hide-on-med-and-down" >
                             <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
                             <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario"><i class="material-icons prefix left">power_settings_new</i></a></li>
                         </ul>
+                            </div>
+
+                            
+                        </div>
+                        
                     </div>
                 </nav>
             </div>
@@ -69,8 +78,8 @@
         <div id="main">    
             <div class="wrapper">       
                 <section id="content">
-                    <div class="container">
-                        <div class="row">
+                    <div class="container card-panel">
+                        
                             @if(Auth::guard('admin')->check())
                                 @include('partials.nav')
                             @else
@@ -78,7 +87,7 @@
                             @endif
                     
                             @yield('content')
-                        </div>       
+                               
                     </div>
                 </section>
             </div>

@@ -1,4 +1,4 @@
-<table class="responsive-table striped bordered" id="asignaturas">
+<table class="responsive-table  bordered" id="asignaturas">
 	<thead >
 		<th>Código</th>
 		<th>Nombre</th>

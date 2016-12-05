@@ -8944,8 +8944,8 @@ input[type=search].invalid,
 input[type=search]:focus.invalid,
 textarea.materialize-textarea.invalid,
 textarea.materialize-textarea:focus.invalid {
-  border-bottom: 1px solid #FF1744;
-  box-shadow: 0 1px 0 0 #FF1744;
+  border-bottom: 1px solid #00897b;
+  box-shadow: 0 1px 0 0 #00897b;
 }
 
 input[type=text].invalid + label:after,
@@ -8971,7 +8971,7 @@ input[type=search]:focus.invalid + label:after,
 textarea.materialize-textarea.invalid + label:after,
 textarea.materialize-textarea:focus.invalid + label:after {
   content: attr(data-error);
-  color: #FF1744;
+  color: #00897b;
   opacity: 1;
 }
 

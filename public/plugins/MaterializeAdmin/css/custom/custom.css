@@ -51,8 +51,8 @@ hr {
 .modal { width: 70% !important ; max-height: 95% !important; border-radius: 15px 15px 15px 15px; }
 .modalEliminar { width: 40% !important ; max-height: 50% !important; border-radius: 15px 15px 15px 15px; }
 .modalDelaMateria{ width: 40% !important ; max-height: 70% !important; border-radius: 15px 15px 15px 15px;}
-.modalDetalleProfesor{ width: 60% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
-.modalMatricula{ width: 70% !important ; max-height: 80% !important;border-radius: 15px 15px 15px 15px; }
+.modalDetalleProfesor{ width: 45% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
+.modalMatricula{ width: 65% !important ; max-height: 90% !important;border-radius: 15px 15px 15px 15px; }
 
 .modalInsertarItem{ width: 58% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
 
@@ -207,6 +207,13 @@ i.icon-blue:focus {
     z-index: 1;
     will-change: opacity, transform;
     transition: all .3s ease-out;
+}
+
+input.header-search-input:focus {
+  color: #009688;
+  background: #fff;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 

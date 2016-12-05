@@ -3,34 +3,38 @@
 
 @section('content')
 
-<h4 class="center">Mis Asignaturas</h4>
-    <br>
+    <h4 class="center">Mis Asignaturas</h4>
+<br>
+    <div class="row">
+        <div class="col s12 m12 l12">
+        <fieldset class="grey lighten-4">
+            <div class="row">
+                
+                <div class="input-field col s12 l3 m3">                
+				    <select name="periodos" id="periodos">
+				                        
+				        @foreach($periodos as $periodo);
+    				        <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano."-".$periodo->Periodo}}</option>
+				        @endforeach
+				    </select>
+                    <label>Periodo Académico</label>
+                </div>
 
-		<div class="row">
-			<div class="col s12 m12 l12">
-				<div class="row">
-					<div class="input-field col s12 l3 m3">
-			                    
-				        <select name="periodos" id="periodos">
-				                    
-				                        @foreach($periodos as $periodo);
-				                            <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano."-".$periodo->Periodo}}
-				                     </option>
-				                        @endforeach
-				        </select>
-
-				                    <label>Periodo Academico</label>
-                    
-                	</div>
-				</div>
-			</div>		
-		</div>
-		<div class="row">
-			<table class="responsive-table striped bordered" id="asignaturas">
+            </div>
+        </fieldset> 
+<br>
+<div class="divider grey darken-1"></div>
+<br>
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <table class="responsive-table  bordered" id="asignaturas">
                      
-            </table>
-		</div>
-		@include('admin.asignaturas.modales.matricular')
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+@include('admin.asignaturas.modales.matricular')
 @endsection
 
 

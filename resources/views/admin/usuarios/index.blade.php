@@ -4,83 +4,85 @@
 @section('content')
 
 <h3 class="center">Estudiantes</h3>
- 
+ <br>
 <!--campo buscar y registrar-->
+   <div class="row">
+      <div class="col s12 m12 l12">
+         <fieldset class="grey lighten-4"> 
+            <div class="row">
+            
+               <div class="col s12 l4 m4">
+                  <div class="input-field">
+                     <select id="filtrarPrograma">
+                        <option id="periodo" value="" disabled selected>Seleccione un Programa</option>
+                           @foreach($programas as $programa) 
+                              <option id="periodo" value="{{$programa->CodigoPrograma}}" >{{$programa->NombrePrograma}}</option>
+                           @endforeach       
+                     </select>
+                     <label>Periodo Académico</label>
+                  </div>
+               </div>
 
-<div class="row">
-   <div class="col s12 m12 l12">
-      @include('admin.usuarios.modals.crearEstudiante',['programas' => $programas])
-   </div>   
-</div>
+               <div class="col s12 m5 l3 offset-l5">
+                  <a onClick='openModalCrear()' class=" green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
+               </div>    
+            </div>
+         </fieldset>
+<br>
+         <div class="row">
+            <div class="col s12 l12 m12">
+               <div class="header-search-wrapper teal darken-1 ">
+                  <i class="mdi-action-search"></i>
+                     <input id="search" name="search" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Estudiante">
+               </div>
+            </div>
+         </div>
 
-<div class="row">
-
-   <div class="col s12 l4 m4">
-      <div class="input-field">
-         <select id="filtrarPrograma">
-            <option id="periodo" value="" disabled selected>Seleccione un Programa</option>
-               @foreach($programas as $programa) 
-                  <option id="periodo" value="{{$programa->CodigoPrograma}}" >{{$programa->NombrePrograma}}</option>
-               @endforeach       
-         </select>
-         <label>periodo Academico</label>
-      </div>
-   </div>
-
-   <div class="col s12 l3 m3">
-      <div class="input-field">
-         <i class="material-icons prefix">search</i>
-         <input name="search" onkeyup="buscar()"  placeholder="Buscar" id="search" type="search">           
-      </div>
-   </div>
-
-
-</div>
 <input type="hidden" id="idPrograma">
 
 <div class="divider grey darken-1"></div>
 <br>
-<div class="row" id="Estudiantes">
 
-   <div class="col s12 m12 l12">
-      <table class="responsive-table striped bordered">
-         <thead>
-            <tr>
-               <th data-field="id">Nombre Completo</th>
-               <th data-field="name">Código</th>
-               <th data-field="email">Correo</th>
-               <th data-field="programa">Programa Académico</th>
-               <th data-field="accion">Acciones</th>
-            </tr>
-         </thead>
+         <div class="row" >
+            <div class="col s12 m12 l12" id="Estudiantes">
+               <table class="responsive-table  bordered">
+                  <thead>
+                     <tr>
+                        <th data-field="name">Código</th>
+                        <th data-field="id">Nombre Completo</th>
+                        <th data-field="email">Correo</th>
+                        <th data-field="programa">Programa</th>
+                        <th data-field="accion">Acciones</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     @foreach($estudiantes as $estudiante)
+                        <tr>
+                           <td> {{$estudiante->codigo}}</td>
+                           <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
+                           <td> {{ $estudiante->email}}</td>
+                           <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
+                           <td>  
+                              <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons orange-text text-darken-1">edit</i></a> 
 
-         <tbody>
-            @foreach($estudiantes as $estudiante)
+                              <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons teal-text">delete</i></aX>
 
-               <tr>
-                  <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
-                  <td> {{$estudiante->codigo}}</td>
-                  <td> {{ $estudiante->email}}</td>
-                  <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
-                  <td>
-                     <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons teal-text">edit</i></a> 
+                              <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat " data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text">visibility</i></a>
+                           </td> 
+                        </tr>
+                     @endforeach
+                  </tbody>
+               </table>
 
-                     <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons teal-text" style="font-size: 1.5rem;">delete</i></aX>
-
-                     <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat " data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons teal-text">visibility</i></a>
-                  </td> 
-               </tr>
-
-            @endforeach
-         </tbody>
-      </table>
-
-      <div class="center">
-         {!! $estudiantes->render()!!}
+               <div class="center">
+                  {!! $estudiantes->render()!!}
+               </div>
+         </div>
       </div>
    </div>
-</div>
-
+ </div>     
+      
+@include('admin.usuarios.modals.crearEstudiante',['programas' => $programas])
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
 @include('admin.usuarios.modals.cargarEstudiante')
