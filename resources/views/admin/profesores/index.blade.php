@@ -8,17 +8,28 @@
 		<div class="row">
 
 			<div class="input-field col s5 l4 m4">
-				
-				<select name="programas" id="programasProfesores">
-					<option value="" disabled selected>Seleccione un programa</option>
 
-						@foreach($ProgramasAcademicos as $ProgramaAcademico)
-							@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-								<option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
-							@endif
-						@endforeach	
-				</select>
-				<label>Programa Academico</label>	  			
+        @if ( Auth::guard('admin')->user()->rolAdministrador())
+          <select name="programas" id="programasProfesores">
+            <option value="" disabled selected>Seleccione un programa</option>
+              @foreach($ProgramasAcademicos as $ProgramaAcademico)
+                @if($ProgramaAcademico->NombrePrograma != 'GENERICO')
+                      <option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
+                @endif
+              @endforeach 
+          </select>
+              <label>Programa Academico</label> 
+        @elseif (Auth::guard('admin')->user()->rolCoordinador())
+            <select name="programas" id="programasProfesores">
+              @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $ProgramaAcademico)
+                @if($ProgramaAcademico->NombrePrograma != 'GENERICO')
+                      <option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
+                @endif
+              @endforeach 
+             </select>
+              <label>Programa Academico</label> 
+        @endif
+				  			
 			</div>
 
 			<div class="input-field col s3 l3 m3">

@@ -11,16 +11,16 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/',['middleware' => 'guest',function () {
     return view('bienvenido.bienvenido');
-});
+}] );
 
 
 
 
 Route::group(['middleware' => 'auth'],function(){
 
-   Route::get('/index', function(){
+   Route::get('/index',function(){
       return view('welcome');
     });
 
