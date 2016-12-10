@@ -53,7 +53,7 @@
 					
 				<div class="row">
 					<div class="col s12 m12 l12">
-						<button class="waves-effect waves-light btn" style="width: 100%">Guardar</button>
+						<button class="waves-effect waves-light btn teal lighten-2" style="width: 100%">Guardar</button>
 					</div>
 				</div>
 					

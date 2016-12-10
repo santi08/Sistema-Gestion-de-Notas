@@ -10,7 +10,13 @@ NOTE:
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 .centrar{
-	margin-top: 6%;
+	margin-top: 5%;
+ margin-left: 45%;
+}
+
+.correr{
+  margin-left: 75%;
+
 }
 
 .gradient{
@@ -214,6 +220,42 @@ input.header-search-input:focus {
   background: #fff;
   border-bottom: none !important;
   box-shadow: none !important;
+}
+
+.success {
+  color: #3c763d;
+  background-color: #43a047;
+  border-color: #d6e9c6;
+}
+.success hr {
+  border-top-color: #c9e2b3;
+}
+
+.info {
+  color: #31708f;
+  background-color: #039be5 ;
+  border-color: #bce8f1;
+}
+.info hr {
+  border-top-color: #a6e1ec;
+}
+
+.warning {
+  color: #8a6d3b;
+  background-color: #fb8c00 ;
+  border-color: #faebcc;
+}
+.warning hr {
+  border-top-color: #f7e1b5;
+}
+
+.danger {
+  color: #a94442;
+  background-color: #e53935;
+  border-color: #ebccd1;
+}
+.danger hr {
+  border-top-color: #e4b9c0;
 }
 
 

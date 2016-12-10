@@ -182,22 +182,22 @@ class EstudiantesController extends Controller
 
             $mensaje="";
             if($registrados>0){
-                $mensaje.=", se han guardado ". $registrados ." usuarios";
+                $mensaje.="Han sido registrados ". $registrados ." Estudiantes";
             }
              if($actualizados>0){
-                $mensaje.=", se han actualizado ". $actualizados ." usuarios";
+                $mensaje.="Han sido actualizados ". $actualizados ."Estudiantes";
              }
             if($errores>0){
-                $mensaje.=", no pudiero almacenarse ". $errores ." usuarios, lo mas probable es que estos no cuenten".
+                $mensaje.="No pudieron ser registrados ". $errores ." Estudiantes, es probable que no cuenten".
                 " con los campos obligatorios completos";
             }
-
-           $alerta->crearAlerta('success',$mensaje);
-
-            return response()->json(['mensaje'=>'procesamiento Correcto']);
+             flash($mensaje, 'success');
+          
+            return redirect()->route('admin.estudiantes.index');
 
           }catch(\Exception $e){
-           $alerta->crearAlerta('warning','el archivo no es legible');                   
+           flash('El archivo no se pudo procesar, por favor escoge el archivo adecuado', 'warning'); 
+           return redirect()->route('admin.estudiantes.index');                  
           }
         }else{
 
@@ -216,8 +216,7 @@ class EstudiantesController extends Controller
     $user->password=bcrypt($contrasena);
     $user->save();
     
-    $alerta= new alertas();
-    $alerta->crearAlerta('success','Estudiante Registrado');
+    flash('Estudiante registrado satisfactoriamente', 'success');
 
     return redirect()->route('admin.estudiantes.index');  
     }
@@ -239,9 +238,8 @@ class EstudiantesController extends Controller
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
-     $alerta= new alertas();
-     $alerta->crearAlerta('success','Estudiante Editado con Exito');
-     return redirect()->route('admin.estudiantes.index');
+    flash('Estudiante editado exitosamente', 'success');
+    return redirect()->route('admin.estudiantes.index');
      
     } 
     
@@ -262,9 +260,8 @@ class EstudiantesController extends Controller
      $user->estado=0;
      $user->save();
      
-     $alerta= new alertas();
-     $alerta->crearAlerta('success','Estudiante Eliminado con Exito');
-     return response()->json(["mensaje"=>"listo"]);
+      flash('Estudiante eliminado con exito', 'success');
+      return response()->json(["mensaje"=>"listo"]);
     }
 
     public function show(Request $requests){

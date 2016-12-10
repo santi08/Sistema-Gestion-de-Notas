@@ -46,7 +46,7 @@
 <br>
             <div class="row">
                 <div class="col s12 l12 m12 ">
-                    <div class="header-search-wrapper teal darken-1 ">
+                    <div class="header-search-wrapper teal">
                         <i class="mdi-action-search"></i>
                         <input id="nombreBusqueda" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Asignatura">
                     </div>
@@ -77,9 +77,9 @@
                                     <td>  
                                         <a href="#" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons red-text">picture_as_pdf</i></a>
 
-                                        <a data-target="#matricular" onclick=" return matricular({{ $asignatura->Id }});" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text" >assignment_ind</i></a>
+                                        <a data-target="#matricular" onclick=" return matricular({{ $asignatura->Id }});" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text text-darken-1" >assignment_ind</i></a>
 
-                                        <a onclick="return ver({{$asignatura->Id}});" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons blue-text ">visibility</i></a>
+                                        <a onclick="return ver({{$asignatura->Id}});" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons blue-text text-darken-3">visibility</i></a>
                                     </td>                    
                                 </tr>
                             @endforeach                    
@@ -171,7 +171,7 @@
     function matricular(id){
           
        /* $('#codigo').autocomplete({
-                  source: "{{url('matricular/autocomplete')}}",
+                  source: "{/{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
                     $('#codigo').val(ui.item.value);

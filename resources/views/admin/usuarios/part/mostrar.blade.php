@@ -19,9 +19,9 @@
             <td>
                <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger"><i class="material-icons orange-text text-darken-1">edit</i></a> 
              
-               <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat modal-trigger"><i class="material-icons teal-text">delete</i></a>
+               <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat modal-trigger"><i class="material-icons red-text">delete</i></a>
              
-               <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text">visibility</i></a> 
+               <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a> 
             </td> 
          </tr>
       @endforeach

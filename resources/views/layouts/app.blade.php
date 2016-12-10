@@ -40,31 +40,20 @@
         </div>
 
         <header> 
-            <ul id="usuario" class="dropdown-content">
-                <li><a href="#!">Ver perfil</a></li>
-                <li>
-                    @if (Auth::guard('admin')->check())
-                        <a href="{{url('/logoutdo')}}">
-                    @elseif (Auth::check())
-                        <a href="{{ url('/logoutes') }}">   
-                    @endif
-                    Cerrar Sesión</a>
-                </li>
-                <li class="divider"></li>
-            </ul>
-
+            
             <div class="navbar-fixed" >
                 <nav class=" gradient  s12 m3 l12 ">
                     <div class="nav-wrapper">
                         <div class="row">
-                        <div class="col s6 m6 l6">
-                                
+                            <div class="col s6 m6 l6">
+                                <img src="{{ asset('img/logo.png')}}"> 
                             </div>
-                            <div class="col s6 l6 m6">
-                                <ul id="nav-mobile" class="right hide-on-med-and-down" >
-                            <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
-                            <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario"><i class="material-icons prefix left">power_settings_new</i></a></li>
-                        </ul>
+                            <div class="col s1 l1 m1 offset-l5">
+                               
+                            <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
+
+                              data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="material-icons prefix left">power_settings_new</i></a>
+                        
                             </div>
 
                             

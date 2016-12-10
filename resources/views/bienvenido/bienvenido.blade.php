@@ -3,14 +3,18 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Bienvenido</title>
+	<title>Iniciar Sesión</title>
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href= "{{asset('plugins/bienvenido/css/animate.css')}}">
 	<link rel="stylesheet" href="{{asset('plugins/bienvenido/css/style.css')}}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+   <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+
+	
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
     
 </head>
@@ -18,14 +22,14 @@
 <body>
 
 <div class="row">
- <div class="login col s12">
+   <div class="login col s12">
 	<div class="top">
 		<h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
 	</div>
 	<div class="login-box animated fadeInUp">
-       <div class="row">          
+               
          @include('bienvenido.login')
-	   </div> 
+	   
     </div>
   </div>
 </div>
@@ -71,27 +75,6 @@
     </div>
  </div>   
 
- <!--  <div class="carousel carousel-slider center" data-indicators="true">
-    <div class="carousel-fixed-item center">
-      <a class="btn waves-effect white grey-text darken-text-2">button</a>
-    </div>
-    <div class="carousel-item red white-text" href="#one!">
-      <h2>First Panel</h2>
-      <p class="white-text">This is your first panel</p>
-    </div>
-    <div class="carousel-item amber white-text" href="#two!">
-      <h2>Second Panel</h2>
-      <p class="white-text">This is your second panel</p>
-    </div>
-    <div class="carousel-item green white-text" href="#three!">
-      <h2>Third Panel</h2>
-      <p class="white-text">This is your third panel</p>
-    </div>
-    <div class="carousel-item blue white-text" href="#four!">
-      <h2>Fourth Panel</h2>
-      <p class="white-text">This is your fourth panel</p>
-    </div>
-  </div>-->
 
    <div class="slider">
     <ul class="slides">
@@ -156,7 +139,7 @@
 </body>
 <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
 <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
 <script>
 
 
@@ -220,7 +203,9 @@ $('.carousel.carousel-slider').carousel({full_width: true});
        $(document).ready(function(){
 
         
-
+        $('#codigo').keyup(function (){
+          this.value = (this.value + '').replace(/[^0-9^-]/g, '');
+        });
 
        });
 

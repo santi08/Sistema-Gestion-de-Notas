@@ -24,10 +24,26 @@
                </div>
 
                <div class="col s12 m5 l3 offset-l5">
-                  <a onClick='openModalCrear()' class=" green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
+                  <a onClick='openModalCrear()' class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
                </div>    
             </div>
          </fieldset>
+
+         @if (session()->has('flash_notification.message'))
+            <div id="card-alert" class="card {{ session('flash_notification.level') }}" style="height: 2%">
+                  <div class="card-content white-text">
+                        <p>
+                       
+                           {!! session('flash_notification.message') !!}
+
+                       
+                        </p>
+                  </div>
+                      
+            </div>
+         @endif
+         
+         
 <br>
          <div class="row">
             <div class="col s12 l12 m12">
@@ -65,9 +81,9 @@
                            <td>  
                               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons orange-text text-darken-1">edit</i></a> 
 
-                              <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons teal-text">delete</i></aX>
+                              <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons red-text">delete</i></aX>
 
-                              <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat " data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text">visibility</i></a>
+                              <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat tooltiped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a>
                            </td> 
                         </tr>
                      @endforeach
@@ -113,6 +129,9 @@
             }
          });
       }
+
+
+      
    </script>
 
 <!--- Paginador sin recarga -->

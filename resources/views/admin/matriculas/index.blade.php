@@ -22,6 +22,20 @@
 
             </div>
         </fieldset> 
+        @if (session()->has('flash_notification.message'))
+            <div id="card-alert" class="card {{ session('flash_notification.level') }}" style="height: 2%">
+                  <div class="card-content white-text">
+                        <p>
+                       
+                           {!! session('flash_notification.message') !!}
+
+                       
+                        </p>
+                  </div>
+                      
+            </div>
+         @endif
+         
 <br>
 <div class="divider grey darken-1"></div>
 <br>
@@ -97,13 +111,13 @@
                 $('#horario_archivo').val(id);
                 $('#horario_estudiante').val(id);
             
-                 $('#codigo').autocomplete({
-                  source: "{{url('matricular/autocomplete')}}",
+                 /*$('#codigo').autocomplete({
+                  source: "{/{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
                     $('#codigo').val(ui.item.value);
                   }
-                });
+                });*/
                 
 
                 $('#matricular').openModal();

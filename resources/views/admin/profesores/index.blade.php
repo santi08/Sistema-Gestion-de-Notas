@@ -37,7 +37,7 @@
 	
 		<div class="row">		
             <div class="col s12 l12 m12 ">
-                <div class="header-search-wrapper teal darken-1 ">
+                <div class="header-search-wrapper teal">
                     <i class="mdi-action-search"></i>
                     <input id="nombreBusqueda" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Profesor">
                 </div>
@@ -101,7 +101,8 @@ $(document).ready(function(){
         dataType:'json',
         success:function(data){
         console.log(data);    
-        $('#tabla').html(data);                     
+        $('#tabla').html(data); 
+         $('.tooltipped').tooltip({delay: 50});                    
          }
       }); 
 
@@ -119,7 +120,8 @@ $(document).ready(function(){
                 dataType:'json',
                 success:function(data){
                     console.log(data);
-                    $('#tabla').html(data);                     
+                    $('#tabla').html(data); 
+                     $('.tooltipped').tooltip({delay: 50});                    
                 }
             });     
         }); 

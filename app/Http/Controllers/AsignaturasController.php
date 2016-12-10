@@ -45,11 +45,6 @@ class AsignaturasController extends Controller
     }
 
 
-    public function filterAjax(Request $request){
-
-    }
-    
-
     public function verDatosAsignatura(Request $request, $id){ 
 
         $asignatura = Horario::find($id);

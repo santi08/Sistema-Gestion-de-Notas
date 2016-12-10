@@ -16,7 +16,7 @@ use Response;
 class MatriculasController extends Controller
 {
 
-    private $codigoEncabezado, $grupoEncabezado;
+    private $codigoEncabezado, $grupoEncabezado, $alerta;
     /**
      * Display a listing of the resource.
      *
@@ -86,13 +86,17 @@ class MatriculasController extends Controller
 
 
 
-                echo "Se ha matriculado a".$estudiante->primerNombre.' '.$estudiante->primerApellido.' Exitosamente';
+                $mensaje= "El estudiante ".$estudiante->primerNombre." ".$estudiante->primerApellido." con exito";
+                 flash($mensaje, 'success');
+                 return redirect()->route('matriculas.index');
             
         } catch (Exception $e) {
-
-                dd('Se ha producido un error, intentelo de nuevo');
+               flash('Se ha producido un error, por favor intenta realizar la matricula nuevamente', 'danger');
+               
             
         }
+
+    return redirect()->route('matriculas.index');
 
     }
 
@@ -152,10 +156,11 @@ class MatriculasController extends Controller
 
         $codigoMateria = $horario->programaAcademicoAsignatura->asignatura->Codigo;
         $grupoMateria = $horario->Grupo;
-
+         global $alerta;
 
 
        if ($this->leerEncabezado($codigoMateria,  $grupoMateria, $file )){
+         
 
         config(['excel.import.startRow' => 4 ]);
 
@@ -163,6 +168,7 @@ class MatriculasController extends Controller
         {
                     
             $estudiantes = $archivo->get();
+              global $alerta;
            
 
 
@@ -192,11 +198,11 @@ class MatriculasController extends Controller
                         $matricula->tipoMatricula = $estudiante->t_mat;
                         $matricula->estado=1;
                         $matricula->save();
-
+                        $alerta =true;
                       
                   } catch (Exception $e) {
 
-                     dd($e);
+                    $alerta =false;
                       
                   }
                  
@@ -206,26 +212,22 @@ class MatriculasController extends Controller
            
 
         });
+        if($alerta){
 
+         flash("Los estudiantes han sido matriculados con exito", 'success');
+         return redirect()->route('matriculas.index');
+        }
         
        }else{
 
-            dd('encabezado no valido');
+            flash("El encabezado del archivo no es valido, intenta de nuevo. Por favor revisa que los datos correspondan a la asignatura", 'danger');
+            return redirect()->route('matriculas.index');
        }
 
         
-
-       
-
-       
-
-
-        
-        
-        
         //$excel = Excel::load('public/listado.xls')->all()->toArray();
         //dd($excel);
-
+        return redirect()->route('matriculas.index');
     }
 
     public function leerEncabezado( $codigoMateria, $grupoMateria, $file ){
