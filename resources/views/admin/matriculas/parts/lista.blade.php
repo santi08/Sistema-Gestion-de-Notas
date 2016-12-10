@@ -24,7 +24,7 @@
 
                             	 <a data-target="#matricular" onclick="matricular({{ $asignatura->Id}})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
 
-                            	<a href="#" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
+                            	<a href="{{route('admin.informes.pdfAsignatura',$asignatura->Id)}}" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
 
                             </td>                    
                         </tr>

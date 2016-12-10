@@ -1,0 +1,166 @@
+<div id="tablaAsignatura" >
+ <table width="100%" class="tabla" >
+	<thead>
+		<tr>
+			<th colspan="2">ASIGNATURA</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		    <th>Nombre :</th>
+			<td>{{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
+		</tr>
+		<tr>
+		  <th>Codigo :</th>
+		  <td>{{$asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>	
+		</tr>
+		<tr>
+		  <th>Grupo :</th>
+		  <td>{{$asignatura->Grupo}}</td>	
+		</tr>
+		<tr>
+		  <th>Profesor :</th>
+		  <td>{{$asignatura->usuario->Nombre}} {{$asignatura->usuario->Apellidos}}</td>	
+		</tr>
+	</tbody>
+</table>	
+</div>
+<div id="tablaMatriculados">
+ <table  width="100%" class="tabla"  >
+	<thead >
+		<tr >
+			<th colspan="3" >ESTUDIANTES MATRICULADOS</th>
+		</tr>
+		<tr>
+			<th >NUEVOS</th>
+			<th >REPITENTES</th>
+			<th >TOTAL :</th> 
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{count($asignatura->matriculas()->where('tipoMatricula','=','N')->get())}}</td> 
+		    <td >{{count($asignatura->matriculas()->where('tipoMatricula','!=','N')->get())}}</td>
+		    <td>{{count($estudiantes)}}</td>	
+		</tr>
+	</tbody>
+  </table>	
+</div>
+
+<div id="tablaCriterios">
+  <table width="100%" class="tabla" style="border-style: hidden;">
+		<tr>
+			<th colspan="3" align="center">CRITERIO DE EVALUACION</th>
+	    </tr> 		
+	    <tr>
+	     	<th style="border-style: hidden;">Criterios</th>
+	     	@foreach($asignatura->matriculas[0]->items as $item)
+	        <th>{{$item->nombre}}</th>   	
+		    @endforeach
+         </tr>
+         <tr>
+         	<th style="border-style: hidden;">Porcentaje</th>
+			@foreach($asignatura->matriculas[0]->items as $item)
+		      <td align="center">{{$item->porcentaje}} %</td>		   	
+	     	@endforeach
+         </tr>			
+  </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div align="center"> 
+  <table border="1" class="tablaSinBorde">
+ 	<thead>
+ 	    <tr>
+ 	    	<th colspan="4"> </th>
+ 	    	@foreach($itemsPerdidos as $perdidos)
+ 	    	<th>
+ 	    		{{$perdidos['cantidad']}}
+ 	    	</th>
+ 			@endforeach
+ 	    </tr>
+ 		<tr>
+ 			<th>codigo</th>
+ 			<th>nombre</th>
+ 			<th>tipo Matricula</th>
+ 			<th>Definitiva</th>
+ 			@foreach($asignatura->matriculas[0]->items as $item)
+		     <th>{{$item->nombre}}</th>
+		    @endforeach
+ 		</tr>
+ 	</thead>
+ 	<tbody>
+ 	@foreach($estudiantes as $estudiante) 
+ 		@if($estudiante->definitiva >3)
+ 	 		<tr>
+ 				<td>{{$estudiante->estudiante->codigo}}</td>
+				<td>{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</td>
+				<td>{{$estudiante->tipoMatricula}}</td>
+				<td>{{$estudiante->definitiva}}</td>
+		@else
+			<tr>
+ 				<td class="definitivaPerdida">{{$estudiante->estudiante->codigo}}</td>
+				<td class="definitivaPerdida">{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</td>
+				<td class="definitivaPerdida">{{$estudiante->tipoMatricula}}</td>
+				<td class="definitivaPerdida">{{$estudiante->definitiva}}</td>
+		@endif		
+
+		@foreach($estudiante->items as $item)
+		 @if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
+		   <td>{{$item->pivot->nota}}</td>
+		 @elseif($item->pivot->nota == "")
+           <td class="itemSinNota">{{$item->pivot->nota}}</td>
+		 @else  
+           <td class="itemPerdido">{{$item->pivot->nota}}</td> 
+		 @endif
+		@endforeach
+ 	 </tr>
+ 	@endforeach
+ 	</tbody>
+ </table>	
+</div>
+<style type="text/css">
+#tablaAsignatura{
+	margin: auto;
+	width: 50%;
+}
+#tablaMatriculados{
+	float:left;
+	width: 50%;
+}
+#tablaCriterios{
+	float:left;
+    width: 50%	
+}	
+.tablaSinBorde{
+	border-collapse: collapse;
+}
+
+.tabla { font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
+
+.tabla th{
+  font-size: 13px;     font-weight: normal;          background: #b9c9fe;
+    border-top: 4px solid #aabcfe;   color: #039; 
+    text-align:center;	
+}    
+
+.tabla td{     background: #e8edff;
+    color: #669; border-top: 1px solid transparent;
+    text-align: center;     }
+
+.itemPerdido {
+   background-color: #FE6100;
+}   
+.itemSinNota{
+	background-color: yellow;
+} 
+
+.definitivaPerdida{
+	background-color: #FF2727;	
+}
+</style>

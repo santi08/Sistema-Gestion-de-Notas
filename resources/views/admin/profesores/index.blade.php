@@ -55,8 +55,18 @@
 
 
 <script type="text/javascript">
+function generarPdf(idProfesor,idPrograma,idHorario){
+    var periodo = $('#periodosProfesores').val();
+    var url="{{route('admin.informes.pdfProfesor',['profesor','periodo','programa'])}}";
+    url=url.replace('profesor',idProfesor);
+    url=url.replace('periodo',periodo);
+    url=url.replace('programa',idPrograma);
+   window.location.assign(url);
+  }
+
 $(document).ready(function(){
-     consulta(); 
+
+  consulta(); 
   $('#programasProfesores').material_select();  
   $('#periodosProfesores').material_select();
 
@@ -113,28 +123,7 @@ $(document).ready(function(){
      };
 });
 
-	/*function buscar() {
-    	var nombreBusqueda = $("input#nombreBusqueda").val();
-        var programa = $('#programasProfesores').val();
-        var periodo = $('#periodosProfesores').val();
-    	var ruta = "{{route('admin.profesores.filterAjax')}}";		
-    	if (nombreBusqueda != "") {
-    		$.ajax({
-            	type: "GET",
-            	url: ruta,
-            	data: {programa:programa,periodo:periodo,nombreBusqueda:nombreBusqueda},	
-            	success: function(data) {	
-            		$("#tabla").html(data);	
-            		$('.tooltipped').tooltip({delay: 50});
-            	}
-        	});
-        		
-    	}else { 		
-        	console.log("no hay nada ");
-		}
-	}*/
-
-    function ver(id,idprograma){
+ function ver(id,idprograma){
         var ruta="{{route('admin.profesores.ver',['%idprofesor%','%idprograma%'])}}";
         var tablaAsignaturas = $("#tablaAsignaturas");
         var programa = $('#programasProfesores').val();

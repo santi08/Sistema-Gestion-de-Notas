@@ -163,6 +163,9 @@ return [
        
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+         //libreria PDF DomPdf
+        Barryvdh\DomPDF\ServiceProvider::class,
+
 
     ],
 
@@ -222,6 +225,9 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        //libreria PDF DomPdf
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     
 
 

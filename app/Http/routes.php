@@ -81,6 +81,20 @@ Route::group(['middleware' => 'auth'],function(){
         ]);
 
       Route::resource('informes','InformesController');
+
+
+      //reporte Asignatura
+      Route::get('informes/pdfAsignatura/{idHorario}',[
+        'uses'=>'InformesController@ejecutarReporteAsignatura',
+        'as'=>'admin.informes.pdfAsignatura'
+        ]);
+      //reporte Profesores
+      Route::get('informes/pdfProfesor/{idProfesor}/{idPeriodo}/{idPrograma}',[
+        'uses'=>'InformesController@crearReporteProfesor',
+        'as'=>'admin.informes.pdfProfesor'
+        ]);
+            
+
       Route::resource('estudiantes','EstudiantesController');
      
         //cargar informacion en el modal listar asignaturas Estudiante
