@@ -22,19 +22,23 @@
 
             </div>
         </fieldset> 
-        @if (session()->has('flash_notification.message'))
-            <div id="card-alert" class="card {{ session('flash_notification.level') }}" style="height: 2%">
-                  <div class="card-content white-text">
-                        <p>
-                       
-                           {!! session('flash_notification.message') !!}
-
-                       
-                        </p>
-                  </div>
-                      
-            </div>
-         @endif
+       @if (session()->has('flash_notification.message'))
+                <div id="card-alert" class="card {{ session('flash_notification.level') }}" style="height: 1%">
+                    <div class="card-content white-text">
+                        <p> @if(session('flash_notification.level')=='success')
+                                <i class="mdi-navigation-check"></i>
+                            @elseif(session('flash_notification.level')=='danger')
+                                <i class="mdi-alert-error"></i> 
+                            @elseif(session('flash_notification.level')=='warning')
+                                <i class="mdi-alert-warning"></i> 
+                            @elseif(session('flash_notification.level')=='info')
+                                <i class="mdi-action-info-outline"></i> 
+                            @endif
+                        {!! session('flash_notification.message') !!}</p>
+              
+                    </div>
+                </div>
+            @endif
          
 <br>
 <div class="divider grey darken-1"></div>
