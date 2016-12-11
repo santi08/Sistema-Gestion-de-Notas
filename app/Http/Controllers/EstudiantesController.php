@@ -17,70 +17,46 @@ use DB;
 
 class EstudiantesController extends Controller
 {
-    public $alerta;
 
     public function listarAsignaturas($id){
-       $periodos = Periodoacademico::orderBy('Id','DESC')->get();
-       $ultimo_periodo=$periodos->first();
-       $id_periodo= $ultimo_periodo->Id;
-        //array para guardar las materias del ultimo periodo academico
-        $asignaturasUltimoPeriodo=array();
+      $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+      $ultimo_periodo=$periodos->first();
+      $id_periodo= $ultimo_periodo->Id;
+      //array para guardar las materias del ultimo periodo academico
+      $asignaturasUltimoPeriodo=array();
 
-        //Capturar el ultimo Periodo para listarlo por defecto
+      //Capturar el ultimo Periodo para listarlo por defecto
           
       $estudiante= Estudiante::find($id);
       $asignaturas=$estudiante->matriculas;
 
-       //Buscar las matriculas en el periodo Capturado
-        foreach ($asignaturas as $asignatura) {
-          if($asignatura->horario->PeriodoAcademicoId == $id_periodo){
-              $asignaturasUltimoPeriodo[]= $asignatura; 
-            }
-        }
+      //Buscar las matriculas en el periodo Capturado
+      foreach ($asignaturas as $asignatura) {
+        if($asignatura->horario->PeriodoAcademicoId == $id_periodo){
+            $asignaturasUltimoPeriodo[]= $asignatura; 
+          }
+      }
       $nombre = $estudiante->primerNombre." ".$estudiante->primerApellido;
 
       return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturasUltimoPeriodo'),compact('nombre'))->render());
 
     }
 
-    public function index(Request $requests){
+    public function index(Request $request){
 
-     $programas= Programaacademico::all();
-     
+      $programas= Programaacademico::all();
 
-     if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
+      if($request->ajax()){
+        $estudiantes = Estudiante::Programa($request->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->get();
 
-       $e = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
+        $vista=view('admin.usuarios.part.mostrar',compact('estudiantes'));  
 
-      if($requests->ajax()){
-        return response()->json(view('admin.usuarios.part.mostrar2',compact('e'))->render()); 
-      };
-     }
-     
-    if(!empty($requests->get('idPrograma')) and empty($requests->get('valor'))){
-
-       $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
-
-      if($requests->ajax()){
-        return response()->json(view('admin.usuarios.part.mostrar',compact('e'))->render()); 
-      };
-
-    }else {
-      $estudiantes = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
-
-      if($requests->ajax()){
-         return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
-      
+        return response()->json($vista->render());       
       }
-     
-      
-      return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
+
+      return view('admin.usuarios.index')->with('programas',$programas);
+
     }
-
- 
-
-
- }
       
     public function procesarArchivo(Request $request)
     {
@@ -206,9 +182,9 @@ class EstudiantesController extends Controller
     }
 
     public function create(){
-
     	return view('admin.usuarios.index');
     }
+
 
    public function store(Request $requests){
 
@@ -220,48 +196,48 @@ class EstudiantesController extends Controller
         'id_programaAcademico' => 'required',
       ]);
 
+
       $user= new Estudiante($requests->all());
       $contrasena=$this->crearContrasena($user);
       $user->password=bcrypt($contrasena);
       $user->save();
     
 
+
       flash('Estudiante registrado con exito', 'success');
       return redirect()->route('admin.estudiantes.index');  
    }
 
 
-    public function destroy($id){
-     $estudiante = Estudiante::find($id);
-    
-     return response()->json( 
-        $estudiante->toArray()
-     );
 
+    public function destroy($id){
+      $estudiante = Estudiante::find($id);
+    
+      return response()->json( 
+        $estudiante->toArray()
+      );
     }
 
    
-
     public function editar(Request $requests){
      
+
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
     flash('Estudiante editado con exito', 'success');
     return redirect()->route('admin.estudiantes.index');
      
+
     } 
     
     public function edit($id){
         $info=array();
         $programas=Programaacademico::all(); 
         $estudiante=Estudiante::find($id);
-
         $info[]=$programas;
         $info[]=$estudiante;
-        return response()->json(
-            $info
-        );
+        return response()->json($info);
     } 
 
     public function destroyupdate(Request $requests,$id){
