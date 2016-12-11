@@ -46,7 +46,7 @@
                <div class="row">
                   <div class="col s6 m6 l6 input-field">
                      {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademico','type'=>'number','required'])!!}
-                     <select id="selectorPrograma1">
+                     <select id="selectorPrograma1" >
                         <option class="validate required" value="" disabled selected> Seleccione Programa Academico</option>
                         @foreach ($programas as $programa)
                            <option id="opcion" value="{{$programa->CodigoPrograma}}"> {{$programa->NombrePrograma}}</option>

@@ -210,16 +210,25 @@ class EstudiantesController extends Controller
     	return view('admin.usuarios.index');
     }
 
-    public function store(Request $requests){
-    $user= new Estudiante($requests->all());
-    $contrasena=$this->crearContrasena($user);
-    $user->password=bcrypt($contrasena);
-    $user->save();
-    
-    flash('Estudiante registrado satisfactoriamente', 'success');
+   public function store(Request $requests){
 
-    return redirect()->route('admin.estudiantes.index');  
-    }
+      $this->validate($requests, [
+        'primerNombre' => 'required',
+        'primerApellidor' => 'required',
+        'email' => 'required',
+        'codigo' => 'required',
+        'id_programaAcademico' => 'required',
+      ]);
+
+      $user= new Estudiante($requests->all());
+      $contrasena=$this->crearContrasena($user);
+      $user->password=bcrypt($contrasena);
+      $user->save();
+    
+
+      flash('Estudiante registrado con exito', 'success');
+      return redirect()->route('admin.estudiantes.index');  
+   }
 
 
     public function destroy($id){
@@ -238,7 +247,7 @@ class EstudiantesController extends Controller
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
-    flash('Estudiante editado exitosamente', 'success');
+    flash('Estudiante editado con exito', 'success');
     return redirect()->route('admin.estudiantes.index');
      
     } 

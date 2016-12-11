@@ -85,7 +85,7 @@
                            <td>  
                               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons orange-text text-darken-1">edit</i></a> 
 
-                              <a onclick="eliminar({{$estudiante->id}});" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons red-text">delete</i></aX>
+                              <a onclick="eliminar({{$estudiante->id}});" id="{{$estudiante->id}}" class="btn-flat "><i class="material-icons red-text">delete</i></aX>
 
                               <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat tooltiped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a>
                            </td> 

@@ -270,6 +270,20 @@ Route::get('estudiantes','MatriculasController@index');
   Route::get('materias/','MatriculasController@materias');
 
 
+  Route::get('error',function($exception){
+    abort(404);
+  });
+  Route::get('error',function($exception){
+    abort(403);
+  });
+  Route::get('error',function($exception){
+    abort(401);
+  });
+  Route::get('error',function($exception){
+    abort(500);
+  });
+
+
   
 
   
