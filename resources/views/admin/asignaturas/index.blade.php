@@ -2,127 +2,66 @@
 @section('title','Asignaturas')
 
 @section('content')
-	<h4 class="center">Asignaturas</h4>
-    <br>
-    <div class="row">
-        <div class="col s12 m12 l12">
-            
+<h3 class="center">Asignaturas</h3>
+<br>
+<div class="row">
+    <div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper"> 
+        <fieldset class="grey lighten-4">  
             <div class="row">
-                
                 <div class="input-field col s6 l4 m4 fuentes" >
-
-                @if (Auth::guard('admin')->user()->rolAdministrador())
-                    {{-- expr --}}
-
-                    <select id="programas" name="programas">
-                    <option value="" disabled selected>Seleccione un programa</option>
-                        @foreach($programas as $programa);
-                            @if($programa->NombrePrograma != 'GENERICO')
-                                <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
-                            @endif
-                        @endforeach
-
-                    </select>
-                    <label>Programa academico</label>
-
-
-                @elseif (Auth::guard('admin')->user()->rolCoordinador())
-                     <select id="programas" name="programas">
-                        @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                    @if (Auth::guard('admin')->user()->rolAdministrador())
+                        <select id="programas" name="programas">
+                            <option value="" disabled selected>Seleccione un programa</option>
+                            @foreach($programas as $programa);
+                                @if($programa->NombrePrograma != 'GENERICO')
+                                    <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                            <label>Programa Académico</label>
+                    @elseif (Auth::guard('admin')->user()->rolCoordinador())
+                        <select id="programas" name="programas">
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
                            
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             
-                        @endforeach
+                            @endforeach
 
-                    </select>                    
-                @endif
-                    
-                    
-                    
+                        </select> 
+                        <label>Programa Académico</label>                   
+                    @endif            
                 </div>
 
-                <div class="input-field col s6 l3 m3">
-                    
+                <div class="input-field col s6 l3 m3">   
                     <select name="periodos" id="periodos">
-                    
                         @foreach($periodos as $periodo);
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
-                        @endforeach
+                            @endforeach
                     </select>
-
-                    <label>Periodo Academico</label>
-                    
+                    <label>Periodo Académico</label>
                 </div>
-                <div class="col ">
-    <div class="input-field">
-        <input id="nombreBusqueda" type="search" onkeyup="buscar()" required>
-        <label for="search"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-    </div>
-</div>
-             
             </div>
-
-          <!--  <div class="row">       
-                <div class="input-field col s8 l3 m3">
-                    <input id="nombreBusqueda" onkeypress="buscar();" type="text" placeholder="Nombre de la Asignatura" class="validate">   
-                </div>    
+        </fieldset>
+<br>
+            <!--<div class="row">
+                <div class="col s12 l12 m12 ">
+                    <div id="data-table-simple_filter" class="header-search-wrapper teal dataTables_filter" >
+                        <i class="mdi-action-search"></i>
+                        <input type="search"  class="header-search-input z-depth-2" placeholder="Buscar Asignatura" aria-controls="data-table-simple">
+                    </div>
+                </div>               
             </div>-->
 
-
-<hr>
-
-            <div class="row">
-                <div id="tabla" class="col l12 s12 m12">
-                    <table class="responsive-table striped bordered" id="asignaturas">
-                        <thead >
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Creditos</th>
-                            <th>Grupo</th>
-                            <th>Acciones</th>
-                        </thead>
-
-                        <tbody>
-
-                            @foreach ($asignaturas as $asignatura)
-                        <tr>
-                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Codigo}}</td>
-                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</td>
-                            <td>{{ $asignatura->programaAcademicoAsignatura->asignatura->Creditos}}</td>
-                            <td>{{ $asignatura->Grupo}}</td>
-                            <td>  <a href="{{route('admin.informes.pdfAsignatura',$asignatura->Id)}}" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons">picture_as_pdf</i></a>
-
-                              <a data-target="#matricular" onclick="matricular({{ $asignatura->Id }})" class="btn-floating btn-small waves-effect waves-light green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons" >assignment_ind</i></a>
-
-                               <a onclick="return ver({{$asignatura->Id}});" class="btn-floating btn-small waves-effect waves-light blue modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons">visibility</i></a>
-
-
-                            </td>                    
-                        </tr>
-                        @endforeach
-                    
-                        </tbody>
-                    </table>
-
-                    {{$asignaturas->render()}}
-                    
-
-                </div>
-                    
+<br>        
+<div class="divider  grey darken-1"></div>
+<br>   
+        <div class="row">
+            <div id="tabla" class="col l12 s12 m12">
+                
             </div>
-
-            
-    
         </div>
-
     </div>
-
-
-
-  <div>
-   
-  </div> 
+</div>
 
 
 
@@ -130,84 +69,31 @@
 @include('admin.asignaturas.modales.verDatosAsignaturas')
 @overwrite
 
-
 @section('scripts')
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
-    $(document).ready(function(){ 
-        $("#programas").material_select();
-         $("#periodos").material_select(); 
-        var ruta="{{route('admin.asignaturas.index')}}";
-        var periodo = $('#periodos').val();
-        var id;
-        $.ajax({
-            url:ruta,
-            type:"GET",
-            data:{periodo:periodo},
-            dataType:'json',
-            success:function(data){
-                
-                $(data).each(function(key,value){
-                    id=value.Id;    
-                });
-                $('#periodos > option[value="'+id+'"]').attr('selected', 'selected');
-                        //$('#periodosProfesores').val(id);                                
-            }
-        }); 
-//si selecciona un programa academico envia la peticion 
-        $("#programas").change(function() {     
-             consultas()    
-        });  
-//si selecciona un periodo academico se envia la peticion 
-
-         $("#periodos").change(function() {
-             consultas()
-        });     
-    });
-
-
-//paginacion sin recargar la pagina
     $(document).ready(function(){
-        console.log($("#programas").val());           
-        $(document).on('click','.pagination a',function(e){
-            e.preventDefault();
+        consulta();
 
-            var page = $(this).attr('href').split('page=')[1];
-            var programa = $('#programas').val();
-            var periodo = $('#periodos').val();
-            var nombreBusqueda = $("input#nombreBusqueda").val();
+    $("#periodos").change(function() {
+             consulta()
+        });    
+    $("#programas").change(function() {     
+             consulta()    
+        });  
 
-            console.log(page);
-           
-            var ruta='?page=' + page;
-            console.log(ruta);
-            $.ajax({
-                url:ruta,
-                type:"GET",
-                dataType:'json',
-                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
-                success:function(data){        
-                    $("#tabla").html(data);   
-                    $('.tooltipped').tooltip({delay: 50});                      
-                }
-            });     
-        });
     });
-
-    function buscar() {
-        consultas();
-    }
 
     function matricular(id){
           
-        $('#codigo').autocomplete({
-                  source: "{{url('matricular/autocomplete')}}",
+       /* $('#codigo').autocomplete({
+                  source: "{/{url('matricular/autocomplete')}}",
                   minLength: 2,
                   select: function(event, ui) {
                     $('#codigo').val(ui.item.value);
                   }
-                });
+                });*/
                 
                 $('#horario_estudiante').val(id);
                 $('#horario_archivo').val(id);
@@ -238,28 +124,54 @@
         });        
     }
         
-    function consultas(){
+    function consulta(){
             var programa = $('#programas').val();
             var periodo = $('#periodos').val();
-            var nombreBusqueda = $("input#nombreBusqueda").val();
-
             ruta = "{{route('admin.asignaturas.index')}}";   
             console.log(ruta);
             console.log(programa);
-            console.log(periodo)
-                
+            console.log(periodo);
+
+            $('#data-table-simple').DataTable({
+                retrieve:true
+            }).destroy();
+
             $.ajax({
                 type: "GET",
                 url: ruta,
-                data: {nombreBusqueda:nombreBusqueda,programa:programa,periodo:periodo},
-                    
+                data: {programa:programa,periodo:periodo},     
                 success: function(data) {   
-                    $("#tabla").html(data); 
+                    $("#tabla").html(data);
+                    $('#data-table-simple').DataTable({
+                        "language":{
+                            "sProcessing":     "Procesando...",
+                            "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            }
+                        }
+                    });
+
                     $('.tooltipped').tooltip({delay: 50});
                 }
             });
         }
-
     </script>
-   
 @endsection

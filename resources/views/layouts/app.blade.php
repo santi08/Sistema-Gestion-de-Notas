@@ -3,48 +3,109 @@
     <head>
 
         <title>@yield('title','default')</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/Materialize/css/materialize.css')}}">    
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/fonts/style.css')}}">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{{ asset('plugins/jqueryui/jquery-ui.theme.min.css')}}" rel="stylesheet"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
-        <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+        <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection" >
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">    
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
+        
+        <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         
     </head>
 
     <body id="app-layout">
+        <div id="loader-wrapper">
+            <div id="loader"></div>        
+            <div class="loader-section section-left grey darken-1"></div>
+            <div class="loader-section section-right grey darken-1"></div>
+        </div>
 
         <header> 
-            <!-- Navbar goes here -->
-                @if(Auth::guard('admin')->check())
-                     @include('partials.nav')
-                @else
-                     @include('partials.navEstudiantes')
-                @endif
+            
+            <div class="navbar-fixed" >
+                <nav class=" gradient  s12 m3 l12 ">
+                    <div class="nav-wrapper">
+                        <div class="row">
+                            <div class="col s6 m6 l6">
+                                <img src="{{ asset('img/logo.png')}}"> 
+                            </div>
+                            <div class="col s1 l1 m1 offset-l5">
+                               
+                            <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
-        <!-- Page Layout here --> 
+                              data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="material-icons prefix left">power_settings_new</i></a>
+                        
+                            </div>
+
+                            
+                        </div>
+                        
+                    </div>
+                </nav>
+            </div>
         </header>
        
-        
-        <main>
-
-                <div class="row">
-        
-                    <div id="principalBox" class="col l10 m12 s12 card-panel" style="margin-left: 16.5%;"> 
-                        @yield('content')
+        <div id="main">    
+            <div class="wrapper">       
+                <section id="content">
+                    <div class="container card-panel">
+                        
+                            @if(Auth::guard('admin')->check())
+                                @include('partials.nav')
+                            @else
+                                @include('partials.navEstudiantes')
+                            @endif
+                    
+                            @yield('content')
+                               
                     </div>
+                </section>
+            </div>
+        </div>
+    
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/jquery-1.11.2.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/data-tables-script.js')}}"> </script>
+    
 
-                </div>
-        </main>
-    <script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>
-    <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
+    <!--<script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
-    <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css">
-    </script>
-    <script src="{{asset('plugins/jqueryui/jquery-ui.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script> 
+
+    <!-- chartist -->
+    <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.js')}}"></script> -->  
+
+    <!-- chartjs -->
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart.min.js')}}"></script>
+    <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart-script.js')}}"></script>-->
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/js/jquery.dataTables.min.js')}}"></script>
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sparkline/sparkline-script.js')}}"></script>
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins.js')}}"></script>
+    <!--custom-script.js - Add your own theme custom JS-->
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
+
+    <!--<script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script> --> 
+    
+
    @yield('scripts')
  <script type="text/javascript">
         
@@ -53,23 +114,22 @@
         $('.collapsible').collapsible();
         $('.dropdown-button').dropdown('open');      
         $('.tooltipped').tooltip({delay: 50});
-        
         //$('select').material_select();      
 
     });
     
-    function alerta(){
+    /*function alerta(){
       if({{session()->has('alerta')}}){
       var color = "{{session('alerta.color')}}";
       var mensaje = "{{session('alerta.mensaje')}}";
       {{session()->forget('alerta')}};
       Materialize.toast(mensaje,5000,color);
       }else {"no existe alerta "}
-    }
-       
+    }*/
+  
 </script>
 
-<script src="{{asset('plugins/Materialize/js/materialize.js')}}"></script>
+
 
     </body>
 </html>

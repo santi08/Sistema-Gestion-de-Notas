@@ -13,7 +13,10 @@
         "ignasbernotas/laravel-model-generator": "^1",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "maatwebsite/excel": "~2.1.0",
-        "barryvdh/laravel-dompdf": "^0.7.0"
+        "barryvdh/laravel-dompdf": "^0.7.0",
+
+        "laracasts/flash": "^2.0"
+
 
     },
     "require-dev": {

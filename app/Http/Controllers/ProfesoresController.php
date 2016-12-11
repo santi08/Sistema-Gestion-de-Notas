@@ -39,75 +39,8 @@ class ProfesoresController extends Controller
         $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
         $profesores=array();   
           
-        // periodo activo, programa desactivo,nombreBusqueda desactivo
-       /* if(!empty($request->get('periodo')) and empty($request->get('programa')) and empty($request->get('nombreBusqueda')) and $request->ajax()) {
-
-            $profesores=Horario::distinct()
-            ->join('usuario','horario.UsuarioID',"=","usuario.Id")
-            ->join('programaacademico_asignatura','horario.AsignaturaId',"=","programaacademico_asignatura.Id")
-            ->join('programaacademico','programaacademico_asignatura.programaacademicoId','=','programaacademico.Id') 
-            ->select('usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','programaacademico.Id as idprograma')
-            ->where('horario.PeriodoAcademicoId','=',$request->get('periodo'))  
-            ->orderBy('usuario.Apellidos','ASC')->get()->toArray();
-
-            $profesores= $this->paginateArray($profesores,10);
-           
-           return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());    
-        }
-        //periodo activo, programa activo,nombre desactivo
-        if(!empty($request->get('periodo')) and !empty($request->get('programa')) and empty($request->get('nombreBusqueda')) ){
-             $profesores = Horario::distinct()
-            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
-            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
-            ->join('usuario','horario.UsuarioID','=','usuario.Id')
-
-            ->select('usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','programaacademico.Id as idprograma')
-            ->where('horario.PeriodoAcademicoId','=',$request->get('periodo'))
-            ->where('programaacademico_asignatura.programaacademicoId','=',$request->get('programa'))->orderBy('usuario.Apellidos')->get()->toArray();   
-           $profesores= $this->paginateArray($profesores,10);
-           
-           return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());
-        };
-
-        if(!empty($request->get('periodo')) and empty($request->get('programa')) and !empty($request->get('nombreBusqueda')) ){
-
-             $profesores = Horario::distinct()
-            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
-            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
-            ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
-            ->where('horario.PeriodoAcademicoId','=',$request->get('periodo'))
-            ->where(function($q)use($request){
-            $q->where('usuario.Nombre','like',$request->get('nombreBusqueda').'%')
-            ->orWhere('usuario.Apellidos','like',$request->get('nombreBusqueda').'%');
-            })->orderBy('usuario.Apellidos')->get()->toArray();
-               
-           $profesores= $this->paginateArray($profesores,10);
-           
-           return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());
-        };
-
-        if(!empty($request->get('periodo')) and !empty($request->get('programa')) and !empty($request->get('nombreBusqueda')) ){
-
-             $profesores = Horario::distinct()
-            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
-            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
-            ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
-            ->where('horario.PeriodoAcademicoId','=',$request->get('periodo'))
-            ->where('programaacademico_asignatura.programaacademicoId','=',$request->get('programa'))
-            ->where(function($q)use($request){
-            $q->where('usuario.Nombre','like',$request->get('nombreBusqueda').'%')
-            ->orWhere('usuario.Apellidos','like',$request->get('nombreBusqueda').'%');
-            })->orderBy('usuario.Apellidos')->get()->toArray();
-               
-           $profesores= $this->paginateArray($profesores,10);
-           
-           return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());
-        };*/
-
        if($request->ajax()){
-         $profesores = Horario::distinct()
+         /*$profesores = Horario::distinct()
             ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
             ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
             ->join('usuario','horario.UsuarioID','=','usuario.Id')
@@ -117,12 +50,21 @@ class ProfesoresController extends Controller
             ->where(function($q)use($request){
             $q->where('usuario.Nombre','like',$request->get('nombreBusqueda').'%')
             ->orWhere('usuario.Apellidos','like',$request->get('nombreBusqueda').'%');
-            })->orderBy('usuario.Apellidos')->get()->toArray();
+            })->orderBy('usuario.Apellidos')->get();*/
                
-           $profesores= $this->paginateArray($profesores,10);
+           //$profesores= $this->paginateArray($profesores,10);
+           $profesores = Horario::distinct()
+            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
+            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
+            ->join('usuario','horario.UsuarioID','=','usuario.Id')
+            ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")
+            ->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")
+            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','horario.Id as idHorario' )
+            ->orderBy('usuario.Apellidos')->get();
 
+            $vista=view('admin.profesores.partialTable',compact('profesores'));
            
-           return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());
+           return response()->json($vista->render());
        }
 
 

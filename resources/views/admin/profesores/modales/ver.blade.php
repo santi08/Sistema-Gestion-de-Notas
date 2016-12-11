@@ -14,7 +14,7 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<table>
+					<table class="responsive-table striped bordered">
 						<thead>
 							<tr>
 								<th>Código</th>
@@ -27,17 +27,6 @@
 					</table>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col s12 m12 l12">
-					
-				</div>
-			</div>
-
 		</div>
-
-
 	</div>
-
-
 @overwrite

@@ -8,23 +8,26 @@
      <div class="row">
       <div>
         <a >
-          <i class="material-icons left medium red-text"> warning</i><h4 class="red-text">¡Esta Accion no tiene retroceso!</h4>
+          <i class="material-icons left medium red-text"> warning</i><h6 class="red-text">¡Esta Accion no tiene retroceso!</h6>
         </a>
       </div>
       <br>
       <div> 
         <a>
-          <center><h4>Eliminara a: <p class="black-text"> </p> </h4></center>
+          <center><h5>Eliminara a: <p class="black-text"> </p> </h5></center>
         </a>
       </div>
     </div> 
-@endsection
-@section('footer')
-  <div class="modal-footer">
+
+     <div class="col s12 m12 l12">
     <a href="#!" class="modal-action modal-close waves-effect waves-red green btn-flat">Cancelar</a>
 
     {!!link_to('#',$tittle='Eliminar',$attributes= ['id'=>'eliminar','class'=>'modal-action modal-close waves-effect waves-red red btn-flat btn-primary'],$secure=null)!!}
       
    </div> 
 
-@overwrite
+@endsection
+
+
+ 
+

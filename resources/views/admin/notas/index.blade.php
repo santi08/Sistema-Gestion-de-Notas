@@ -2,56 +2,93 @@
 @section('title','Notas')
 @section('content')
 <br>
-	<div class="row">
-		<div class="col s4"><h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5></div>
-		<div class="col s4">
-			<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
-		</div>
-		<div class="col s4"><h5>Grupo: {{$asignatura->Grupo}}</h5></div>
-	</div>
-	<div class="row">
-		<div class=" col s6"><h5>Porcentaje Disponible: {{$porcentajeDisponible}}</h5></div>
-		<div class=" col s6"><h5>Porcentaje asignado: {{100 - $porcentajeDisponible}}</h5></div>
-	</div>
-	 </h5>
-			<a data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn-floating btn-small waves-effect waves-light  modal-trigger btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Insertar item"><i class="material-icons large" >add_circle</i></a>
-<div class="row">
-		<div class="col s12">
-			<table border="1" class="bordered  centered responsive-table">
-					<thead>
-						<th rowspan="2" style="height:105px;">Codigo</th>
-						<th rowspan="2">Nombre Completo</th>
-						<th rowspan="2">T. Mat.</th>
-						<th rowspan="2">DEF</th>
-						@if (count($estudiantes[0]->items)>0)
-							@foreach ($estudiantes[0]->items as $item)
-								@if (count($item->subitems)>0)
-									<th colspan="{{count($item->subitems)}}">{{$item->nombre}} {{$item->porcentaje}} %
-									
-										<a data-target="#insertarSubitem" 
-										onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-floating tiny waves-effect waves-light 	green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons small" >add</i></a>
 
-										<a href="{{route('item.destroy', $item->id)}}" class="btn-floating tiny waves-effect waves-light 	red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons small" >delete</i></a>
+<div class="row">
+	<div class="col s12 m12 l12">
+			<fieldset class=" grey lighten-4">
+				<div class="row">
+					<div class="col s12 m7 l6">
+						<h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
+					</div>
+					<div class="col s12 m6 l4">
+						<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
+					</div>
+					<div class="col s12 m4 l2">
+						<h5>Grupo: {{$asignatura->Grupo}}</h5></div>
+					</div>
+					<div class="row">
+						<div class=" col s6 m6 l3">
+							<h6>Disponible: {{$porcentajeDisponible}}%</h6>
+						</div>
+						<div class=" col s6 m6 l3">
+							<h6>Asignado: {{100 - $porcentajeDisponible}}%</h6>
+						</div>
+					</div>
+				
+			</fieldset>
+			@if (session()->has('flash_notification.message'))
+            	<div id="card-alert" class="card {{ session('flash_notification.level') }}" >
+                  	<div class="card-content white-text" style="height: 1%""> 
+                        <p>	@if(session('flash_notification.level')=='success')
+                        		<i class="mdi-navigation-check"></i>
+                        	@elseif(session('flash_notification.level')=='danger')
+                        		<i class="mdi-alert-error"></i> 
+                        	@elseif(session('flash_notification.level')=='warning')
+                        		<i class="mdi-alert-warning"></i> 
+                        	@elseif(session('flash_notification.level')=='info')
+                        		<i class="mdi-action-info-outline"></i> 
+                        	@endif
+      					{!! session('flash_notification.message') !!}</p>
+              
+                  	</div>
+            	</div>
+         	@endif
+<br>
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<button data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="material-icons large modal-trigger" >add_circle</i> Agregar Item</button>
+				</div>	
+			</div>
+<br>
+<div class="divider grey darken-1"></div>
+			
+			<div class="row">
+				<div class="col s12">
+					<table border="1" class="bordered  centered responsive-table">
+						<thead>
+							<th rowspan="2" style="height:105px;">Codigo</th>
+							<th rowspan="2">Nombre Completo</th>
+							<th rowspan="2">T. Mat.</th>
+							<th rowspan="2">DEF</th>
+							@if (count($estudiantes[0]->items)>0)
+								@foreach ($estudiantes[0]->items as $item)
+									@if (count($item->subitems)>0)
+										<th colspan="{{count($item->subitems)}}">{{$item->nombre}} {{$item->porcentaje}} %
+									
+											<a data-target="#insertarSubitem" 
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
+
+											<a href="{{route('item.destroy', $item->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" >delete</i></a>
 
 										</th>
 
 										
-								@else
-									<th rowspan="2">{{$item->nombre}} {{$item->porcentaje}} %
-										<a data-target="#insertarSubitem" 
-										onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-floating tiny waves-effect waves-light 	green modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons small" >add</i></a>
-										<a href="{{route('item.destroy', $item->id)}}" class="btn-floating tiny waves-effect waves-light 	red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons small" >delete</i></a>
-									</th>
+									@else
+										<th rowspan="2">{{$item->nombre}} {{$item->porcentaje}} %
+											<a data-target="#insertarSubitem" 
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="modal-trigger btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
+											<a href="{{route('item.destroy', $item->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" >delete</i></a>
+										</th>
 
-								@endif
-							@endforeach
-						@endif
-						<tr>
+									@endif
+								@endforeach
+							@endif
+							<tr>
 							@foreach ($estudiantes[0]->items as $item)			
 								@if (count($item->subitems)>0)			
 									@foreach ($item->subitems as $subitem)
 										<th>{{$subitem->nombre}}
-										<a href="{{route('subitem.destroy', $subitem->id)}}" class="btn-floating tiny waves-effect waves-light 	red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons small" >delete</i></a>
+										<a href="{{route('subitem.destroy', $subitem->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
 										</th>
 									@endforeach		
 								@endif	
@@ -100,7 +137,9 @@
 					</tbody>
 			</table>
 		</div>
-		
+	</div>
+
+	</div>
 	</div>
 
 	@include('admin.notas.modales.subitems')
@@ -108,14 +147,15 @@
 	
 @endsection 
 
-
-
-
 @section('scripts')
 
 	
 
 	<script type="text/javascript">
+	 $(document).ready(function(){ 
+	 	$("#insertarItem").addClass("modalInsertarItem");
+	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+	 });
 		
 	function insertar_item(id){
    	

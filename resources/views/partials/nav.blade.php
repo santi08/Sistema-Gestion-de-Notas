@@ -1,73 +1,58 @@
 
-<ul id="usuario" class="dropdown-content">
-    <li>
-      <a href="#!">Ver perfil</a></li>
-    <li>
-    
-      @if (Auth::guard('admin')->check())
-          <a href="{{url('/logoutdo')}}">
-      @elseif (Auth::check())
-          <a href="{{ url('/logoutes') }}">   
-      @endif
-        Cerrar Sesión
-          </a>
-    </li>
-    <li class="divider"></li>
-</ul>
+<aside id="left-sidebar-nav">
+   <ul id="slide-out" class="side-nav fixed leftside-navigation gradient-side">
 
-
-
-<div class="navbar-fixed" >
-  <nav class=" gradient  s12 m3 l12 ">
-
-    <div class="nav-wrapper">
-
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">Ayuda<i class="material-icons left">help</i></a></li>
-        <li><a class="dropdown-button" href="#!" data-constrainwidth="false" data-activates="usuario">
-
-        <i class="material-icons prefix left">power_settings_new</i></a></li>
-      </ul>
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-</div>
-<div class="row">
-</div>
- 
-
-<ul id="slide-out" class="side-nav fixed gradient-side" style="width: 217px;">
-
-    <li>
-        <div class="userView">
-            <div class="background center" style="margin-top: 4%;">
-                <span class="white-text text-lighten-2 center"><i class="material-icons medium ">person</i></span>
-            </div>
-            
-            <div><p class="white-text text-lighten-2" >@if (Auth::guard('admin')->check())
-
-              {{Auth::guard('admin')->user()->usuarios[0]->Nombre}} 
-              {{Auth::guard('admin')->user()->usuarios[0]->Apellidos}}
-
-              @elseif (Auth::check())
-
-                {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
-           
-              @endif
-            </p></div>
-        </div>
-
-        </li>
-        <li class="no-padding"><div class="divider"></div></li>
-
-          <li class="mihover"><a href="{{url('/index')}}"  class="white-text text-lighten-2 waves-effect">Inicio<i class="material-icons left white-text text-lighten-4">home</i></a></li>
+      <li class="user-details cyan darken-2">
         
+         <div class="row">
+            <div class="col  s4 m4 l4">
+                  
+            </div>
+            <div class="col col s8 m8 l8">
 
-          
+                 
+               <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" style="font-size: 15px;" data-activates="profile-dropdown">
+                        
+                  @if (Auth::guard('admin')->check())
 
+                     {{Auth::guard('admin')->user()->usuarios[0]->Nombre}} 
+                     {{Auth::guard('admin')->user()->usuarios[0]->Apellidos}}
+
+                  @elseif (Auth::check())
+
+                     {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
+                  @endif
+                  </a>
+                  <p class="user-roal white-text">
+                  @if (Auth::guard('admin')->check())
+
+                     @if(Auth::guard('admin')->user()->rolAdministrador())
+                              Administrador
+
+                     @elseif(Auth::guard('admin')->user()->rolCoordinador())
+                              Coordinador
+
+                     @elseif(Auth::guard('admin')->user()->rolDocente())
+                              Docente
+                     @endif
+                     
+                     
+
+                  @elseif (Auth::check())
+
+                     Estudiante
+                  @endif
+                  </p>
+            </div>
+         </div>   
+      </li>
+
+      <li class="mihover bold active"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
+      <li class="li-hover "><div class="divider"></div></li>
+      <br>            
         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
-           <li class="no-padding mihover">
-            <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">library_books</i>Asignaturas</a>
+           <li>
+            <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-av-my-library-books"></i>Asignaturas</a>
           </li>
         @endif
 
@@ -75,7 +60,7 @@
 
         <li class="no-padding mihover">
          
-            <a href="{{route('matriculas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">assignment</i>Mis Asignaturas</a>
+            <a href="{{route('matriculas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-notification-folder-special"></i>Mis Asignaturas</a>
           
             
           </li>
@@ -87,13 +72,13 @@
          
          @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
           <li class="no-padding mihover">
-            <a href="{{route('admin.profesores.index')}}" class="white-text text-lighten-2 waves-effect"><i class="material-icons white-text text-lighten-2">supervisor_account</i>Profesores</a>
+            <a href="{{route('admin.profesores.index')}}" class="white-text text-lighten-2 waves-effect"><i class="mdi-social-people"></i>Profesores</a>
           </li>
           @endif
 
           @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
             <li class="no-padding mihover">
-            <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><span style="font-size: 2em; margin-right: 1em; margin-top: 4px;" class="icon-graduation-cap"></span>Estudiantes</a>
+            <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><i class="mdi-social-school"></i>Estudiantes</a>
           </li>
           @endif
          
@@ -101,6 +86,7 @@
             <a href="{{route('admin.informes.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
           </li>
 </ul>
-      
+<a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+</aside>      
     
   

@@ -8,21 +8,22 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5 class="center gradient darken-3 white-text" id="nombreMateria"></h5>
-				</div>
+					<h5 class="center" id="nombreMateria"></h5>
 			</div>
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<table>
+					<fieldset class="grey lighten-3">
+					<table class="bordered">
 						<thead>
 							<tr>
 								<th>Profesor</th>
-								<th>Cantidad de Estudiantes</th>		
+								<th>Estudiantes Matriculados</th>		
 							</tr>
 						</thead>
 						<tbody id="tablaAsignaturas">			
 						</tbody>
 					</table>
+					</fieldset>
 				</div>
 			</div>
 
