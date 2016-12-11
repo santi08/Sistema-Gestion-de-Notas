@@ -5,7 +5,7 @@
 
 @section('contenido')
 <input type="hidden" name="_token" value="{{csrf_token()}}" id="token2">
-<h4 class="center  red gradient darken-3 white-text"><p></p></h4>
+<h4 class="center  red gradient darken-3 white-text" id="nombreEditar"></h4>
  
 
   <!-- inicio fila formulario -->

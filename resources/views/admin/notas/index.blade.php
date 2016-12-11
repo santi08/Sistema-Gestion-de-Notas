@@ -45,9 +45,10 @@
          	@endif
 <br>
 			<div class="row">
-				<div class="col s12 m12 l12">
+				<div class="col s6 m6 l6">
 					<button data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="material-icons large modal-trigger" >add_circle</i> Agregar Item</button>
-				</div>	
+				</div>
+
 			</div>
 <br>
 <div class="divider grey darken-1"></div>
@@ -66,9 +67,9 @@
 										<th colspan="{{count($item->subitems)}}">{{$item->nombre}} {{$item->porcentaje}} %
 									
 											<a data-target="#insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="material-icons green-text" >add</i></a>
 
-											<a href="{{route('item.destroy', $item->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" >delete</i></a>
+											<a  onclick="eliminar({{$item->id}});"  class="modal-trigger btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
 
 										</th>
 
@@ -77,7 +78,8 @@
 										<th rowspan="2">{{$item->nombre}} {{$item->porcentaje}} %
 											<a data-target="#insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="modal-trigger btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
-											<a href="{{route('item.destroy', $item->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" >delete</i></a>
+
+											<a  onclick="eliminar({{$item->id}});" class="modal-trigger btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
 										</th>
 
 									@endif
@@ -88,7 +90,7 @@
 								@if (count($item->subitems)>0)			
 									@foreach ($item->subitems as $subitem)
 										<th>{{$subitem->nombre}}
-										<a href="{{route('subitem.destroy', $subitem->id)}}" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+										<a  onclick="eliminarSubitem({{$subitem->id}});" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
 										</th>
 									@endforeach		
 								@endif	
@@ -179,27 +181,29 @@
 		
 		if(nota<0 || nota>5){
 
-			alert("error");
+			swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
+		}else{
+
+			var ruta= "{{route('nota.store.item')}}";
+
+			$.ajax({
+
+				url:ruta,
+				type: 'get',
+				dataType: 'json',
+				data: {matricula:matricula, item:item, nota:nota},
+				success:function(data){
+					$('#matricula-'+data.id_matricula).html(data.nota);
+					console.log(data.nota);
+				},error:function(error){
+	        		console.log(error);
+      			}
+			});	
+
 		}	
 
 		
-		var ruta= "{{route('nota.store.item')}}";
-
-		$.ajax({
-
-			url:ruta,
-			type: 'get',
-			dataType: 'json',
-			data: {matricula:matricula, item:item, nota:nota},
-			success:function(data){
-				$('#matricula-'+data.id_matricula).html(data.nota);
-				console.log(data.nota);
-			},error:function(error){
-        		console.log(error);
-      		}
-
-
-		});	
+		
 	}
 
 		function insertarNotaSubitem(id, matricula, subitem){
@@ -209,29 +213,88 @@
 		
 		if(nota<0 || nota>5){
 
-			alert("error");
-		}
+			swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
+		}else{
 
-		
-		var ruta= "{{route('nota.store.subitem')}}";
+			var ruta= "{{route('nota.store.subitem')}}";
 
-		$.ajax({
+			$.ajax({
 
-			url:ruta,
-			type: 'get',
-			dataType: 'json',
-			data: {matricula:matricula, subitem:subitem, nota:nota},
-			success:function(data){
-				$('#matricula-'+data.id_matricula).html(data.nota);
-			},error:function(error){
+				url:ruta,
+				type: 'get',
+				dataType: 'json',
+				data: {matricula:matricula, subitem:subitem, nota:nota},
+				success:function(data){
+					$('#matricula-'+data.id_matricula).html(data.nota);
+				},error:function(error){
         		console.log(error);
-      		}
+      			}
 
 
 		});	
+		}
+
+		
+		
 	}
 
+	function eliminar(iditem){
+		
+		swal({
+        		title: "¿Estas seguro de eliminar el item?",
+        		text: "¡No podras recuperar este item!",
+        		type: "warning",
+        		showCancelButton: true,
+        		 cancelButtonColor:'#388E3C',
+               	confirmButtonColor: '#E53935',
+        		confirmButtonText: 'Si, Eliminarlo',
+        		cancelButtonText: "Cancelar",
+        		closeOnConfirm: false,
+        		closeOnCancel: false
+        	},
+        	function(isConfirm){
+            	if (isConfirm){
+              		
+              		var ruta = "{{route('item.destroy', ['%iditem%'])}}";
+              		ruta=ruta.replace('%iditem',iditem);
+              		location.href=ruta;
+            	} else {
+              		swal("Cancelado", "El item esta a salvo", "error");
+              		location.reload();
+            	}
+        	});
+	}
 
+	function eliminarSubitem(idsubitem){
+		
+		swal({
+        		title: "¿Estas seguro de eliminar el subitem?",
+        		text: "¡No podras recuperar este subitem!",
+        		type: "warning",
+        		showCancelButton: true,
+        		cancelButtonColor:'#388E3C',
+               	confirmButtonColor: '#E53935',
+        		confirmButtonText: 'Si, Eliminarlo',
+        		cancelButtonText: "Cancelar",
+        		closeOnConfirm: false,
+        		closeOnCancel: false
+        	},
+        	function(isConfirm){
+            	if (isConfirm){
+              		
+              		var ruta = "{{route('subitem.destroy', ['%idsubitem%'])}}";
+              		ruta=ruta.replace('%idsubitem',idsubitem);
+              		location.href=ruta;
+            	} else {
+              		swal("Cancelado", "El subitem esta a salvo", "error");
+              		location.reload();
+            	}
+        	});
+	}
+
+	
+
+        
 	
 
 

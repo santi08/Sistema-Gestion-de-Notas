@@ -38,7 +38,7 @@
 							
 							 <div class="input-field col s12 m12 l12">
 					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>
-					          <label for="textarea1">Textarea</label>
+					          <label for="descripcion">Descripción</label>
 					        </div>	
 						</div> 					
 							

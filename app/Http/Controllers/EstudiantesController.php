@@ -13,7 +13,7 @@ use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-use App\Alertas;
+
 
 class EstudiantesController extends Controller
 {
