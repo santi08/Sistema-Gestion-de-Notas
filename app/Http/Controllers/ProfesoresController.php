@@ -37,30 +37,15 @@ class ProfesoresController extends Controller
         
         $ProgramasAcademicos = Programaacademico::all(); 
         $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
-        $profesores=array();   
-          
+        $profesores=array();
+
        if($request->ajax()){
-         /*$profesores = Horario::distinct()
-            ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
-            ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
-            ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','horario.Id as idHorario' )
-            ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")
-            ->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")
-            ->where(function($q)use($request){
-            $q->where('usuario.Nombre','like',$request->get('nombreBusqueda').'%')
-            ->orWhere('usuario.Apellidos','like',$request->get('nombreBusqueda').'%');
-            })->orderBy('usuario.Apellidos')->get();*/
-               
-           //$profesores= $this->paginateArray($profesores,10);
            $profesores = Horario::distinct()
             ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
             ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
             ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")
-            ->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma','horario.Id as idHorario' )
-            ->orderBy('usuario.Apellidos')->get();
+            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
+            ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")->get();
 
             $vista=view('admin.profesores.partialTable',compact('profesores'));
            
