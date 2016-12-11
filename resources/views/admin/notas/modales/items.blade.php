@@ -17,8 +17,9 @@
 			{!! Form::open(['route'=>['items.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
 				<div class="row">
 					<div class="col s6 m6 l6 input-field">
-						<label for="nombre">Nombre</label>
+						
 						<input type="text" id="nombre" name="nombre" required>
+						<label for="nombre">Nombre</label>
 
 					</div>
 					
@@ -41,8 +42,10 @@
 					</div>
 					
 					<div class="input-field col s6 m6 l6">
+						
 					    <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>
-					    <label for="textarea1">Textarea</label>
+					    <label for="descripcion">Descripción</label>
+					    
 					</div>	
 				</div> 					
 							

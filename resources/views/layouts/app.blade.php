@@ -15,7 +15,9 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">    
+
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
         
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
@@ -81,11 +83,11 @@
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/data-tables-script.js')}}"> </script>
     
-
     <!--<script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script> 
+    <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>     
+    <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.min.js')}}"></script>
 
     <!-- chartist -->
     <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.js')}}"></script> -->  
@@ -94,7 +96,6 @@
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart.min.js')}}"></script>
     <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart-script.js')}}"></script>-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/js/jquery.dataTables.min.js')}}"></script>
-
     <!-- sparkline -->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sparkline/sparkline-script.js')}}"></script>
@@ -105,7 +106,6 @@
 
     <!--<script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script> --> 
     
-
    @yield('scripts')
  <script type="text/javascript">
         
@@ -118,15 +118,6 @@
 
     });
     
-    /*function alerta(){
-      if({{session()->has('alerta')}}){
-      var color = "{{session('alerta.color')}}";
-      var mensaje = "{{session('alerta.mensaje')}}";
-      {{session()->forget('alerta')}};
-      Materialize.toast(mensaje,5000,color);
-      }else {"no existe alerta "}
-    }*/
-  
 </script>
 
 

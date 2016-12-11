@@ -85,7 +85,7 @@
                            <td>  
                               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons orange-text text-darken-1">edit</i></a> 
 
-                              <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons red-text">delete</i></aX>
+                              <a onclick="eliminar({{$estudiante->id}});" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons red-text">delete</i></aX>
 
                               <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat tooltiped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a>
                            </td> 
@@ -174,7 +174,7 @@
          $("#eliminarEstudiante").addClass("modalEliminar");
          $('#selectorPrograma1').material_select();
          $('#filtrarPrograma').material_select();
-         alerta();
+         
       });
    </script>
 
@@ -247,36 +247,48 @@
          });
       }     
 
-      function abrirModalEliminar(id){
-         var ruta="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
-         ruta = ruta.replace('%iduser%',id); 
-    
-         $.get(ruta,function(res){
+      
+      function eliminar(id){
+         var rutaBusqueda="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
+         rutaBusqueda = rutaBusqueda.replace('%iduser%',id); 
+         $.get(rutaBusqueda,function(res){
             var nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido;
-            $("#nombre").val(res.id);
-            $('p').text(nombre);
-            $('#eliminarEstudiante').openModal();
+            swal({
+               title: "¿Estas seguro de eliminar el Estudiante?",
+               text: nombre ,
+               type: "warning",
+               showCancelButton: true,
+               cancelButtonColor:'#388E3C',
+               confirmButtonColor: '#E53935',
+               confirmButtonText: 'Si, Eliminarlo',
+               cancelButtonText: "Cancelar",
+               closeOnConfirm: false,
+               closeOnCancel: false
+            },
+            function(isConfirm){
+               if (isConfirm){
+                  
+                  var rutaEliminar="{{route('admin.estudiantes.destroyupdate',['%iduser%'])}}" ;
+                  rutaEliminar = rutaEliminar.replace('%iduser%',id);
+                  var token = $('#token').val();
+                  $.ajax({
+                     url:rutaEliminar,
+                     headers:{'X-CSRF-TOKEN': token},
+                     type: 'PUT',
+                     dataType:'json',
+                     data:{id},
+                     success:function(){
+                        window.location= "{{route('admin.estudiantes.index')}}";
+                     }
+                  });
+
+               }else {
+                  swal("Cancelado", "El Estudiante no se ha eliminado", "error");
+                  location.reload();
+               }
+            });
          }); 
       }
-    
-      $('#eliminar').click(function(){
-
-         var valor= $("#nombre").val();
-         var ruta2="{{route('admin.estudiantes.destroyupdate',['%iduser%'])}}" ;
-         ruta2 = ruta2.replace('%iduser%',valor);
-         var token = $('#token').val();
-         $.ajax({
-            url:ruta2,
-            headers:{'X-CSRF-TOKEN': token},
-            type: 'PUT',
-            dataType:'json',
-            data:{valor},
-            success:function(){
-               window.location= "{{route('admin.estudiantes.index')}}";
-            }
-         });
-      }); 
-  
     
       function openModalCrear() {
          $('#crearEstudiante').openModal();
@@ -291,7 +303,7 @@
             $('#selectorPrograma2 option').remove();
             $('#id').val(res[1].id);
             nombre = res[1].primerNombre+" "+res[1].segundoNombre+" "+res[1].primerApellido+" "+res[1].segundoApellido;
-            $('p').text(nombre);
+            $("#nombreEditar").text(nombre);
             $("#firstname").val(res[1].primerNombre);
             $("#segundoNombre").val(res[1].segundoNombre);
             $("#primerApellido").val(res[1].primerApellido);
