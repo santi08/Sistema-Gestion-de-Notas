@@ -37,8 +37,8 @@
 						<div class="row">
 							
 							 <div class="input-field col s12 m12 l12">
-					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>
-					          <label for="textarea1">Textarea</label>
+					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" rows="4" cols="50"></textarea>
+					          <label for="textarea1">Descripción(Opcional)</label>
 					        </div>	
 						</div> 					
 							

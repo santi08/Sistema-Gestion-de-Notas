@@ -95,17 +95,7 @@
             
 
                 $('#horario_archivo').val(id);
-                $('#horario_estudiante').val(id);
-            
-                 $('#codigo').autocomplete({
-                  source: "{{url('matricular/autocomplete')}}",
-                  minLength: 2,
-                  select: function(event, ui) {
-                    $('#codigo').val(ui.item.value);
-                  }
-                });
-                
-
+                $('#horario_estudiante').val(id);           
                 $('#matricular').openModal();
             
      }

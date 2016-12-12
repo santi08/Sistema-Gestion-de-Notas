@@ -105,6 +105,7 @@ class ProfesoresController extends Controller
            
            return response()->json(view('admin.profesores.partialTable',compact('profesores'))->render());
         };*/
+           
 
        if($request->ajax()){
          $profesores = Horario::distinct()

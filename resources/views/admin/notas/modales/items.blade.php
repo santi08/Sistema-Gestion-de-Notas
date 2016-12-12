@@ -41,8 +41,9 @@
 					</div>
 					
 					<div class="input-field col s6 m6 l6">
-					    <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>
-					    <label for="textarea1">Textarea</label>
+					    <textarea id="descripcion" name="descripcion" class="materialize-textarea" rows="4" cols="50"></textarea>
+					    <label for="textarea1">Descripción (Opcional) </label>
+					  
 					</div>	
 				</div> 					
 							

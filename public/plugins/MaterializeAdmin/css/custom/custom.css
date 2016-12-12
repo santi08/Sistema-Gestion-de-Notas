@@ -217,3 +217,24 @@ input.header-search-input:focus {
 }
 
 
+table.table-notas {
+  width: 100%;
+  display: table;
+  border: 1px solid black;
+  font-size: 1rem;
+}
+
+table.table-notas > thead > th, 
+table.table-notas > tbody > tr,td,th {
+  border: 1px solid black;
+}
+
+table.table-notas > tr,td{
+
+  padding: 0;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
