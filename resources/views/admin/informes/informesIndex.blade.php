@@ -8,8 +8,7 @@
 	<div class="row">
 		<div class="input-field col s5">
 							
-			<select>
-				<option value="1" disabled selected>Seleccione una opción</option>
+			<select id='periodos'>
 				@foreach($PeriodosAcademicos as $PeriodoAcademico)
 					  			
 			    <option value="{{ $PeriodoAcademico->Id}}">
@@ -23,7 +22,7 @@
 		</div>
 
 		<div class="input-field col s5">
-			<select>
+			<select id="programas">
 			<option value="" >Seleccione una opción</option>
 
 			@foreach($ProgramasAcademicos as $ProgramaAcademico)
@@ -56,7 +55,7 @@
         </div>
 
         <div class="input-field col s5">
-			<select>
+			<select id='tipoMatricula'>
 			<option value="" >Seleccione una opción</option>
 			<option value="1">TODOS</option>
 			<option value="2">REPITENTES</option>
@@ -98,9 +97,43 @@
 		</div> -->  
 
     <div class="row col s12 ">
-    	 <a class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
+    	 <a href="#" class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
     	 GENERAR REPORTE</a>
     </div>
+
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#periodos').material_select();
+ $('#programas').material_select();
+ $('#tipoMatricula').material_select();
+/*
+ $('#periodos').change(function(){
+ 	reporte();
+ });
+
+ function reporte(){
+ 	var periodo= $("#periodos").val();
+    var ruta= "";
+    alert(ruta);
+     
+     $.get(ruta);
+    /*$.ajax({
+    	url:ruta,
+    	type:'GET',
+    	dataType:'json',
+    	data: {periodo:periodo},
+    	success:function(res){
+
+    	}
+
+    });
+
+ }*/
+});
+	
+</script>
+@endsection
 	      
 	      
 

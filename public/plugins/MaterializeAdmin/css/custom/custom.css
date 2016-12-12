@@ -10,7 +10,13 @@ NOTE:
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 .centrar{
-	margin-top: 6%;
+	margin-top: 5%;
+ margin-left: 45%;
+}
+
+.correr{
+  margin-left: 75%;
+
 }
 
 .gradient{
@@ -216,25 +222,41 @@ input.header-search-input:focus {
   box-shadow: none !important;
 }
 
-
-table.table-notas {
-  width: 100%;
-  display: table;
-  border: 1px solid black;
-  font-size: 1rem;
+.success {
+  color: #3c763d;
+  background-color: #43a047;
+  border-color: #d6e9c6;
+}
+.success hr {
+  border-top-color: #c9e2b3;
 }
 
-table.table-notas > thead > th, 
-table.table-notas > tbody > tr,td,th {
-  border: 1px solid black;
+.info {
+  color: #31708f;
+  background-color: #039be5 ;
+  border-color: #bce8f1;
+}
+.info hr {
+  border-top-color: #a6e1ec;
 }
 
-table.table-notas > tr,td{
-
-  padding: 0;
-  display: table-cell;
-  text-align: left;
-  vertical-align: middle;
-  border-radius: 2px;
+.warning {
+  color: #8a6d3b;
+  background-color: #fb8c00 ;
+  border-color: #faebcc;
 }
+.warning hr {
+  border-top-color: #f7e1b5;
+}
+
+.danger {
+  color: #a94442;
+  background-color: #e53935;
+  border-color: #ebccd1;
+}
+.danger hr {
+  border-top-color: #e4b9c0;
+}
+
+
 

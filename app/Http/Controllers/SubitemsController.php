@@ -44,9 +44,6 @@ class SubitemsController extends Controller
         $id_item = $request->id_item;
         $item = Item::find($id_item);
         $estudiantes= $item->matriculas;
-
-
-
        
         $nombre_item = $request->nombre;
         
@@ -79,12 +76,13 @@ class SubitemsController extends Controller
             if($request->porcentaje==""){
                $this->actualizarPorcentajes($item);
             }
-
+            flash('EL subitem se registro con exito', 'success');
             return redirect()->back();
             
         } catch (Exception $e) {
 
-            echo "Ocurrio un error";
+            flash('Ocurrio un error por favor intenta de nuevo', 'danger');
+            return redirect()->back();
             
         }
     }
@@ -176,7 +174,7 @@ class SubitemsController extends Controller
              try {
 
             $subitem->delete();
-            
+            flash('EL subitem ha sido eliminado con exito', 'success');
             return redirect()->back();
                  
              } catch (Exception $e) {
@@ -185,7 +183,9 @@ class SubitemsController extends Controller
 
         }else{
 
-            dd('Subitem contiene notas, primero elimina las notas para eliminar el item');
+            flash('El subitem contiene notas registradas, primero elimina las notas para eliminar el subitem', 'warning');
+            return redirect()->back();
+            
         }
     }
 

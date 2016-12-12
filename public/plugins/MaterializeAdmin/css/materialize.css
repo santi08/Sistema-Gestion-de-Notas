@@ -8853,8 +8853,8 @@ input[type=tel]:focus:not([readonly]),
 input[type=number]:focus:not([readonly]),
 input[type=search]:focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #ff4081;
-  box-shadow: 0 1px 0 0 #ff4081;
+  border-bottom: 1px solid #40bdb1;
+  box-shadow: 0 1px 0 0 #40bdb1;
 }
 
 input[type=text]:focus:not([readonly]) + label,
@@ -8868,7 +8868,7 @@ input[type=tel]:focus:not([readonly]) + label,
 input[type=number]:focus:not([readonly]) + label,
 input[type=search]:focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #ff4081;
+  color: #40bdb1;
 }
 
 input[type=text].valid, input[type=text]:focus.valid,

@@ -69,12 +69,12 @@ class ItemsController extends Controller
                 $estudiante->items()->attach($item->id);                
 
             }
-
+            flash('El item ha sido registrado con exito', 'success');
             return redirect()->back();
             
         } catch (Exception $e) {
 
-            echo "Ocurrio un error";
+            flash('Ha ocurrido un error, intenta una vez más', 'danger');
             
         }
     }
@@ -131,7 +131,7 @@ class ItemsController extends Controller
              try {
 
              $item->delete();
-          
+          flash('El item ha sido eliminado con exito', 'success');
           return redirect()->back();
                  
              } catch (Exception $e) {
@@ -139,8 +139,8 @@ class ItemsController extends Controller
              }
 
         }else{
-
-            dd('Item contiene notas, primero elimina las notas para eliminar el item');
+            flash('El item contiene notas o subitems asociados, primero elimina las notas o los subitems para poder eliminar el item', 'warning');
+           return redirect()->back();
         }
 
 

@@ -9,8 +9,9 @@
                   
             </div>
             <div class="col col s8 m8 l8">
+
                  
-               <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">
+               <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" style="font-size: 15px;" data-activates="profile-dropdown">
                         
                   @if (Auth::guard('admin')->check())
 
@@ -21,18 +22,36 @@
 
                      {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
                   @endif
-                  <i class="mdi-navigation-arrow-drop-down right"></i></a>
-                  <p class="user-roal">Administrator</p>
+                  </a>
+                  <p class="user-roal white-text">
+                  @if (Auth::guard('admin')->check())
+
+                     @if(Auth::guard('admin')->user()->rolAdministrador())
+                              Administrador
+
+                     @elseif(Auth::guard('admin')->user()->rolCoordinador())
+                              Coordinador
+
+                     @elseif(Auth::guard('admin')->user()->rolDocente())
+                              Docente
+                     @endif
+                     
+                     
+
+                  @elseif (Auth::check())
+
+                     Estudiante
+                  @endif
+                  </p>
             </div>
          </div>   
       </li>
 
       <li class="mihover bold active"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
-      <br>
-
-      <li class="li-hover "><div class="divider"></div></li>            
+      <li class="li-hover "><div class="divider"></div></li>
+      <br>            
         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
-           <li class="bold active">
+           <li>
             <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-av-my-library-books"></i>Asignaturas</a>
           </li>
         @endif

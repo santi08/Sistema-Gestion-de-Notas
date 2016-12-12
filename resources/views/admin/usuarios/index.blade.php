@@ -24,60 +24,47 @@
                </div>
 
                <div class="col s12 m5 l3 offset-l5">
-                  <a onClick='openModalCrear()' class=" green waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
+                  <a onClick='openModalCrear()' class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
                </div>    
             </div>
          </fieldset>
-<br>
-         <div class="row">
+
+         @if (session()->has('flash_notification.message'))
+               <div id="card-alert" class="card {{ session('flash_notification.level') }}" style="height: 1%">
+                     <div class="card-content white-text">
+                        <p>   @if(session('flash_notification.level')=='success')
+                              <i class="mdi-navigation-check"></i>
+                           @elseif(session('flash_notification.level')=='danger')
+                              <i class="mdi-alert-error"></i> 
+                           @elseif(session('flash_notification.level')=='warning')
+                              <i class="mdi-alert-warning"></i> 
+                           @elseif(session('flash_notification.level')=='info')
+                              <i class="mdi-action-info-outline"></i> 
+                           @endif
+                     {!! session('flash_notification.message') !!}</p>
+              
+                     </div>
+               </div>
+            @endif
+         <br>
+         <!--<div class="row">
             <div class="col s12 l12 m12">
                <div class="header-search-wrapper teal darken-1 ">
                   <i class="mdi-action-search"></i>
                      <input id="search" name="search" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Estudiante">
                </div>
             </div>
-         </div>
+         </div>-->
 
-<input type="hidden" id="idPrograma">
+         <input type="hidden" id="idPrograma">
 
-<div class="divider grey darken-1"></div>
-<br>
+         <div class="divider grey darken-1"></div>
+         <br>
 
          <div class="row" >
             <div class="col s12 m12 l12" id="Estudiantes">
-               <table class="responsive-table  bordered">
-                  <thead>
-                     <tr>
-                        <th data-field="name">Código</th>
-                        <th data-field="id">Nombre Completo</th>
-                        <th data-field="email">Correo</th>
-                        <th data-field="programa">Programa</th>
-                        <th data-field="accion">Acciones</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     @foreach($estudiantes as $estudiante)
-                        <tr>
-                           <td> {{$estudiante->codigo}}</td>
-                           <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
-                           <td> {{ $estudiante->email}}</td>
-                           <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
-                           <td>  
-                              <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat"><i class="material-icons orange-text text-darken-1">edit</i></a> 
 
-                              <a onClick="abrirModalEliminar({{$estudiante->id}})" id="{{$estudiante->id}}" data-target='#eliminarEstudiante' class="btn-flat "><i class="material-icons teal-text">delete</i></aX>
-
-                              <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat " data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text">visibility</i></a>
-                           </td> 
-                        </tr>
-                     @endforeach
-                  </tbody>
-               </table>
-
-               <div class="center">
-                  {!! $estudiantes->render()!!}
-               </div>
-         </div>
+            </div>
       </div>
    </div>
  </div>     
@@ -91,103 +78,80 @@
 @overwrite
 
 @section('scripts')
-   <script type="text/javascript">
+<script type="text/javascript">
+   function listarAsignaturas(id){
+      var ruta= "{{route('admin.estudiantes.listarAsignaturas',['%id%'])}}";
+      ruta= ruta.replace('%id%',id); 
+      console.log(id);
+      console.log(ruta);
 
-      function listarAsignaturas(id){
-         var ruta= "{{route('admin.estudiantes.listarAsignaturas',['%id%'])}}";
-         ruta= ruta.replace('%id%',id); 
-         console.log(id);
-         console.log(ruta);
-
-         $.ajax({
-            url:ruta,
-            type:'GET',
-            dataType:'json',
-            data:{id:id},
-            success:function(res){
-               $('#listarAsignaturas').html(res);
-               $('#listarAsignaturas').openModal();
-            },
-            error:function(error){
-               console.log(error);
-            }
-         });
-      }
-   </script>
-
-<!--- Paginador sin recarga -->
-   <script type="text/javascript">
-      $(document).on('click','.pagination a',function(e){
-    
-         // prevenir evento del paginador y asiganar el id de la pagina 
-         e.preventDefault();
-         var idPagina = $(this).attr('href').split('page=')[1];
-         var ruta = '?page='+idPagina;
-    
-         // campos de busqueda que han sido inicializados o activados
-         var idPrograma=$('#idPrograma').val();
-         var valor = $('#search').val();
-                        
-         $.ajax({
-            url:ruta,
-            data:{idPagina:idPagina,idPrograma:idPrograma,valor:valor},
-            type:'GET',
-            dataType:'json',
-            success:function(res){
-               console.log(res);
-               $("#Estudiantes").html(res);
-            },
-            error:function(xml,error,error2){
-               console.log(error);
-            }  
-         });
+      $.ajax({
+         url:ruta,
+         type:'GET',
+         dataType:'json',
+         data:{id:id},
+         success:function(res){
+         $('#listarAsignaturas').html(res);
+         $('#listarAsignaturas').openModal();
+         },
+         error:function(error){
+            console.log(error);
+         }
       });
-   </script>
+   }
+</script>
 
 <!--abrir selectores-->
-   <script type="text/javascript">
- 
-      $(document).ready(function(){
-         $("#eliminarEstudiante").addClass("modalEliminar");
-         $('#selectorPrograma1').material_select();
-         $('#filtrarPrograma').material_select();
-         alerta();
+<script type="text/javascript"> 
+   $(document).ready(function(){
+      consulta();
+      $("#eliminarEstudiante").addClass("modalEliminar");
+      $('#selectorPrograma1').material_select();
+      $('#filtrarPrograma').material_select();
+         
       });
    </script>
 
 <!-- capturar selector crear -->
-   <script type="text/javascript">
-      $('#selectorPrograma2').change(function() {
-         var opcion = $(this).children(":selected").attr("value");
-         $('#programaAcademico').val(opcion);
-      });
-   </script>
+<script type="text/javascript">
+   $('#selectorPrograma2').change(function() {
+      var opcion = $(this).children(":selected").attr("value");
+      $('#programaAcademico').val(opcion);
+   });
+</script>
 
 <!-- capturar selector editar-->
-   <script type="text/javascript">
-      $('#selectorPrograma1').change(function() {
-         var opcion = $(this).children(":selected").attr("value");
-         $('#id_programaAcademico').val(opcion);
-      });
-   </script> 
+<script type="text/javascript">
+   $('#selectorPrograma1').change(function() {
+      var opcion = $(this).children(":selected").attr("value");
+      $('#id_programaAcademico').val(opcion);
+   });
+</script> 
 
-   <script type="text/javascript">
-      function abrirCargarArchivo(){
-         console.log('si');
+<script type="text/javascript">
+   function abrirCargarArchivo(){
+      console.log('si');
          // $('#crearEstudiante').closeModal();
          //window.location= "{{route('admin.estudiantes.index')}}";
-         $('#cargarEstudiante').openModal();
-         $('#cargarEstudiante').openModal();
-      }
-   </script>
+      $('#cargarEstudiante').openModal();
+      $('#cargarEstudiante').openModal();
+   }
+</script>
 
    <script type="text/javascript">
 
       $('#filtrarPrograma').change(function(){
+         consulta();
+      });
+
+      function consulta(){
          var ruta = "{{route('admin.estudiantes.index')}}";
-         var idPrograma = $(this).children(":selected").attr("value");
-         $('#idPrograma').val(idPrograma);
-         console.log(idPrograma);
+         var idPrograma = $('#filtrarPrograma').val();
+         //$('#idPrograma').val(idPrograma);
+         //alert(idPrograma);
+         $('#data-table-estudiante').DataTable({
+                retrieve:true
+            }).destroy();
          $.ajax({
             url:ruta,
             type:'GET',
@@ -196,64 +160,82 @@
             success:function(data){
                $("#Estudiantes").html(data);
                console.log(data);
+               $('#data-table-estudiante').DataTable({
+            "language":{
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            }
+                        }
+                    });
             },
             error:function(xml,error,error2){
                console.log(error);
             }
          });
-      }); 
-/*$('#filtrarPeriodo').change(function(){
-    var idPeriodo=$(this).children(":selected").attr("value");
-     $('#idPeriodo').val(idPeriodo);
-   });*/
+      } 
+   
 
-      function buscar(){ 
-         var ruta = "{{ route('admin.estudiantes.index')}}";
-         var valor = $('#search').val();
-         var idPrograma=$('#idPrograma').val();
- 
-         $.ajax({
-            url:ruta,
-            type: 'GET',
-            dataType:'json',
-            data:{valor:valor,idPrograma:idPrograma},
-            success:function(data){
-               $("#Estudiantes").html(data);
-        
-            }
-         });
-      }     
-
-      function abrirModalEliminar(id){
-         var ruta="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
-         ruta = ruta.replace('%iduser%',id); 
-    
-         $.get(ruta,function(res){
+      
+      function eliminar(id){
+         var rutaBusqueda="{{route('admin.estudiantes.destroy',['%iduser%'])}}" ;
+         rutaBusqueda = rutaBusqueda.replace('%iduser%',id); 
+         $.get(rutaBusqueda,function(res){
             var nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido;
-            $("#nombre").val(res.id);
-            $('p').text(nombre);
-            $('#eliminarEstudiante').openModal();
+            swal({
+               title: "¿Estas seguro de eliminar el Estudiante?",
+               text: nombre ,
+               type: "warning",
+               showCancelButton: true,
+               cancelButtonColor:'#388E3C',
+               confirmButtonColor: '#E53935',
+               confirmButtonText: 'Si, Eliminarlo',
+               cancelButtonText: "Cancelar",
+               closeOnConfirm: false,
+               closeOnCancel: false
+            },
+            function(isConfirm){
+               if (isConfirm){
+                  
+                  var rutaEliminar="{{route('admin.estudiantes.destroyupdate',['%iduser%'])}}" ;
+                  rutaEliminar = rutaEliminar.replace('%iduser%',id);
+                  var token = $('#token').val();
+                  $.ajax({
+                     url:rutaEliminar,
+                     headers:{'X-CSRF-TOKEN': token},
+                     type: 'PUT',
+                     dataType:'json',
+                     data:{id},
+                     success:function(){
+                        window.location= "{{route('admin.estudiantes.index')}}";
+                     }
+                  });
+
+               }else {
+                  swal("Cancelado", "El Estudiante no se ha eliminado", "error");
+                  location.reload();
+               }
+            });
          }); 
       }
-    
-      $('#eliminar').click(function(){
-
-         var valor= $("#nombre").val();
-         var ruta2="{{route('admin.estudiantes.destroyupdate',['%iduser%'])}}" ;
-         ruta2 = ruta2.replace('%iduser%',valor);
-         var token = $('#token').val();
-         $.ajax({
-            url:ruta2,
-            headers:{'X-CSRF-TOKEN': token},
-            type: 'PUT',
-            dataType:'json',
-            data:{valor},
-            success:function(){
-               window.location= "{{route('admin.estudiantes.index')}}";
-            }
-         });
-      }); 
-  
     
       function openModalCrear() {
          $('#crearEstudiante').openModal();
@@ -268,7 +250,7 @@
             $('#selectorPrograma2 option').remove();
             $('#id').val(res[1].id);
             nombre = res[1].primerNombre+" "+res[1].segundoNombre+" "+res[1].primerApellido+" "+res[1].segundoApellido;
-            $('p').text(nombre);
+            $("#nombreEditar").text(nombre);
             $("#firstname").val(res[1].primerNombre);
             $("#segundoNombre").val(res[1].segundoNombre);
             $("#primerApellido").val(res[1].primerApellido);
