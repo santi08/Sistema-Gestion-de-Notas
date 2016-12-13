@@ -109,11 +109,9 @@
 
 
 	
-	 function matricular(id){
-            
-
-                $('#horario_archivo').val(id);
-                $('#horario_estudiante').val(id);
+	function matricular(id){
+         $('#horario_archivo').val(id);
+         $('#horario_estudiante').val(id);           
             
                  /*$('#codigo').autocomplete({
                   source: "{/{url('matricular/autocomplete')}}",
@@ -122,11 +120,9 @@
                     $('#codigo').val(ui.item.value);
                   }
                 });*/
-                
 
-                $('#matricular').openModal();
-            
-     }
+        $('#matricular').openModal();       
+    }
 
 </script>
 @endsection

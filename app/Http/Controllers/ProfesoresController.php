@@ -32,8 +32,8 @@ class ProfesoresController extends Controller
             'path' => Paginator::resolveCurrentPath()
         ]);
     }
-    public function index(Request $request)
-    {
+    
+    public function index(Request $request){
         
         $ProgramasAcademicos = Programaacademico::all(); 
         $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
