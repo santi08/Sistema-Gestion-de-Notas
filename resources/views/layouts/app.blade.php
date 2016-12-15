@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
 
         <title>@yield('title','default')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,6 +18,7 @@
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
 
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/gips.css')}}" type="text/css">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
         
@@ -25,7 +27,8 @@
 
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-     
+
+
     </head>
 
     <body id="app-layout">
@@ -41,10 +44,10 @@
                 <nav class=" gradient  s12 m3 l12 ">
                     <div class="nav-wrapper">
                         <div class="row">
-                            <div class="col s6 m6 l6">
+                            <div class="col s6 m6 l6 hide-on-small-only ">
                                 <img src="{{ asset('img/logo.png')}}"> 
                             </div>
-                            <div class="col s1 l1 m1 offset-l5">
+                            <div class="col s1 l1 m1 offset-l5 offset-s10">
                                
                             <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
@@ -82,6 +85,7 @@
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/data-tables-script.js')}}"> </script>
+     <script type="text/javascript" src="{{asset('plugins/jquery/gips.js')}}"></script>
     
     <!--<script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
@@ -117,6 +121,14 @@
         //$('select').material_select();      
 
     });
+   
+        $(document).ready(function () {
+            $('button#purple').gips({ 'theme': 'purple', autoHide: true, text: 'This is purple tooltip, auto hide after pausess time elapses.' });
+            $('input#green').gips({ 'theme': 'green', placement: 'left' });
+            $('input#yellow').gips({ 'theme': 'yellow', autoHide: true, placement: 'right' });
+            $('input#red').gips({ 'theme': 'red', placement: 'bottom' });
+        });
+
     
 </script>
 

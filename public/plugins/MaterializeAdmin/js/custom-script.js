@@ -13,3 +13,4 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT I
 setTimeout(function() {
         $("#card-alert").fadeOut(1500);
 },6000);
+
