@@ -15,7 +15,7 @@
             <td> {{ $estudiante->codigo }}</td>
             <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
             <td> {{ $estudiante->email }}</td>
-             <td> {{$estudiante->programaAcademico->NombrePrograma}}</td>
+             <td>{!! $resultado = str_replace("TECNOLOGIA", "TEC.", $estudiante->programaAcademico->NombrePrograma); !!}</td>
             <td>
                <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger"><i class="material-icons orange-text text-darken-1">edit</i></a> 
              

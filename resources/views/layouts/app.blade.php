@@ -13,12 +13,17 @@
         <link href="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection" >
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">       
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
+         <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
+
+
+
+
         
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
@@ -29,12 +34,6 @@
     </head>
 
     <body id="app-layout">
-        <div id="loader-wrapper">
-            <div id="loader"></div>        
-            <div class="loader-section section-left grey darken-1"></div>
-            <div class="loader-section section-right grey darken-1"></div>
-        </div>
-
         <header> 
             
             <div class="navbar-fixed" >
@@ -83,18 +82,18 @@
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/data-tables-script.js')}}"> </script>
     
-    <!--<script src="{{asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
+    <!--<script src="{ {asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>     
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.min.js')}}"></script>
 
     <!-- chartist -->
-    <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.js')}}"></script> -->  
+    <!--<script type="text/javascript" src="{ {asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.js')}}"></script> -->  
 
     <!-- chartjs -->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart.min.js')}}"></script>
-    <!--<script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart-script.js')}}"></script>-->
+    <!--<script type="text/javascript" src="{ {asset('plugins/MaterializeAdmin/js/plugins/chartjs/chart-script.js')}}"></script>-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/js/jquery.dataTables.min.js')}}"></script>
     <!-- sparkline -->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -104,7 +103,12 @@
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
 
-    <!--<script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script> --> 
+    <!-- Tabla Editable -->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/numeric-input-example.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/mindmup-editabletable.js')}}"></script>
+    <!-- Tabla Flotante -->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead-slim.min.js') }}"></script>
     
    @yield('scripts')
  <script type="text/javascript">
