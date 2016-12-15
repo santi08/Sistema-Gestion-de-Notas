@@ -24,8 +24,9 @@ class Docente
              return $next($request);
 
         }else{
-
-           abort(403, 'Unauthorized action.');
+            
+             abort(403);
+           
         }
     }
 }

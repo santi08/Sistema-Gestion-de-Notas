@@ -66,6 +66,16 @@ class AuthController extends Controller
         return $request->only($this->loginUsername(), 'password');
     }
 
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        
+        return redirect()->back()
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
+
 
 
     /**
@@ -98,5 +108,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
 
 }

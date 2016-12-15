@@ -12,12 +12,12 @@ class TipoItem extends Model
 
   protected $fillable = [
         'nombre'
-      ];
+  ];
 
 
   public function items(){
 
-  	return $this->hasMany('App\Item');
+  	return $this->hasMany('App\ModelosNotas\Item');
   }
 
 }

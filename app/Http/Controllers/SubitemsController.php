@@ -37,20 +37,16 @@ class SubitemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){   
       
         $id_item = $request->id_item;
         $item = Item::find($id_item);
         $estudiantes= $item->matriculas;
-       
         $nombre_item = $request->nombre;
         
         $descripcion_subitem= $request->descripcion;
 
         if($request->porcentaje==""){
-
             $asignadoPorUsuario= false;
             $porcetanje_subitem =0;
         }else{
@@ -58,7 +54,8 @@ class SubitemsController extends Controller
             $asignadoPorUsuario= true;
         }
 
-        try {
+        if ($this->porcentajeAsignadoItem($item) - $request->porcentaje >=0) {
+            try {
 
              $subitem = new Subitem();
              $subitem->item_id = $id_item;
@@ -67,24 +64,27 @@ class SubitemsController extends Controller
              $subitem->asignadoPorUsuario = $asignadoPorUsuario;
              $subitem->descripcion = $descripcion_subitem;
              $subitem->save();
-             foreach ($estudiantes as $estudiante) {
+                 foreach ($estudiantes as $estudiante) {
 
-                $estudiante->subitems()->attach($subitem->id);                
+                    $estudiante->subitems()->attach($subitem->id);                
 
-            }
+                }
 
-            if($request->porcentaje==""){
-               $this->actualizarPorcentajes($item);
-            }
-            flash('EL subitem se registro con exito', 'success');
-            return redirect()->back();
+                if($request->porcentaje==""){
+                   $this->actualizarPorcentajes($item);
+                }
+                flash('EL subitem se registro con exito', 'success');
+                return redirect()->back();
             
-        } catch (Exception $e) {
-
-            flash('Ocurrio un error por favor intenta de nuevo', 'danger');
-            return redirect()->back();
-            
+            } catch (Exception $e) {
+                flash('Ocurrio un error por favor intenta de nuevo', 'danger');
+                return redirect()->back();
+            }
+        }else{
+            flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
+            return redirect()->back(); 
         }
+             
     }
 
     public function actualizarPorcentajes($item){

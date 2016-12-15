@@ -28,7 +28,8 @@ class Item extends Model
 
     public function tipoitem(){
 
-    	return $this->belongsTo('App\ModelosNotas\TipoItem');
+    	return $this->belongsTo('App\ModelosNotas\TipoItem','tipo_id');
+
     }
 
     public function subitems(){

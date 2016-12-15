@@ -1,8 +1,6 @@
 @extends('layouts.modal')
 @section('id')'listarAsignaturas'
 @overwrite
-@section('class')listarAsignaturas
-@overwrite
 @section('contenido')
 <div class="row" >
     <div class="col s12 m12 l12">
@@ -34,4 +32,8 @@
 @overwrite 
 @section('footer')
 
+	<div class="row card-panel" id='listarAsignaturas'  >
+		
+	</div>
+  
 @overwrite

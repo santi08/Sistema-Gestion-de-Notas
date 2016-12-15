@@ -1,5 +1,4 @@
 
-
 <div class="row">
    <div class="">
       <h5 id="nombreEstudiante" class="center gradient darken-3 white-text" id="nombreMateria">{{$nombre}} </h5>
@@ -31,3 +30,5 @@
       </table>
    </div>
 </div>
+
+

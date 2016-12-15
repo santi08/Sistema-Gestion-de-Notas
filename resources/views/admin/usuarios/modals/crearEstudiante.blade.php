@@ -12,33 +12,35 @@
                <!-- inicio fila formulario -->
                <div class="row">
                   <div class="col s6 m6 l6 input-field">
-                     {!!Form::text('primerNombre',null,['class'=>'validate','id'=>'first_name','type'=>'text','required','placeholder'=>'Primer Nombre' ])!!}
-                    
+                     {!!Form::text('primerNombre',null,['class'=>'validate','id'=>'first_name','type'=>'text','required'])!!}
+                    {!!Form::label('firstname','Primer Nombre',['class'=>'active', 'for'=>"first_name"])!!}
                   </div>
                   <div class="col s6 m6 l6 input-field">
-                     {!!Form::text('segundoNombre',null,['class'=> 'validate','id'=>'second_name','type'=>'text' ,'placeholder'=>'Segundo Nombre' ])!!}
-                     
+                     {!!Form::text('segundoNombre',null,['class'=> 'validate','id'=>'second_name','type'=>'text'])!!}
+                     {!!Form::label ('secondname','Segundo Nombre',['for'=>'second_name'])!!}
                   </div>
                </div>
 
                <div class="row">
                   <div class="col s6 m6 l6 input-field">
-                     {!!Form::text('primerApellido',null,['class'=>'validate','id'=>'last_name','type'=>'text','required','placeholder'=>'Primer Apellido' ])!!}
-                     
+                     {!!Form::text('primerApellido',null,['class'=>'validate','id'=>'last_name','type'=>'text','required'])!!}
+                     {!!Form::label ('lastname','Primer Apellido',['for'=> 'last_name'])!!}
                   </div>
                   <div class="col s6 m6 l6 input-field">
-                     {!!Form::text('segundoApellido',null,['class'=>'validate','id'=>'secondlast_name','type'=>'text','required','placeholder'=>'Segundo Apellido' ])!!}
+                     {!!Form::text('segundoApellido',null,['class'=>'validate','id'=>'secondlast_name','type'=>'text','required'])!!}
+                     {!!Form::label ('secondlastname','Segundo Apellido',['for'=>'secondlast_name'])!!}
                      
                   </div>
                </div>
 
                <div class="row">
                   <div class="col s6 m6 l6  input-field">
-                     
-                     {!!Form::email('email',null,['class'=>'validate','id'=>'secondlast_name','type'=>'email','required','placeholder'=>'Correo Electrónico' ])!!}
+                      {!!Form::label ('email','Correo Electronico',['for'=>'email'])!!}
+                     {!!Form::email('email',null,['class'=>'validate','id'=>'secondlast_name','type'=>'email','required'])!!}
                   </div>
                   <div class="col s6 m6 l6 input-field">
-                     {!!Form::number('codigo',null,['class'=>'validate','id'=>'codigo','type'=>'number','required','placeholder'=>'Código' ])!!}
+                     {!!Form::number('codigo',null,['class'=>'validate','id'=>'codigo','type'=>'number','required'])!!}
+                     {!!Form::label ('codigo','codigo',['for'=> 'codigo'])!!}
                      
                   </div> 
                </div>  
@@ -46,7 +48,7 @@
                <div class="row">
                   <div class="col s6 m6 l6 input-field">
                      {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademico','type'=>'number','required'])!!}
-                     <select id="selectorPrograma1">
+                     <select id="selectorPrograma1" >
                         <option class="validate required" value="" disabled selected> Seleccione Programa Academico</option>
                         @foreach ($programas as $programa)
                            <option id="opcion" value="{{$programa->CodigoPrograma}}"> {{$programa->NombrePrograma}}</option>
@@ -75,9 +77,9 @@
                {!! Form::open(['route'=>'admin.estudiantes.procesarArchivo','method' => 'POST','id'=>'formularioSubir','files'=>'true'])!!}
       
                   <div class="file-field input-field">
-                     <div class="btn teal ">
-                        <span>Elegir Archivo</span>
-                        <input type="file" accept=".txt" name="file" id="file">
+                     <div class="btn blue-grey darken-1">
+                        <span class="">Elegir Archivo</span>
+                        <input type="file" accept=".txt" name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
                      </div>
                      <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
@@ -86,7 +88,7 @@
             </div>
 
             <div class="col s3 m3 l3 input-field">
-               <button type='submit' class="btn teal">Enviar</button>
+               <button type='submit' class="btn teal">Enviar<i class="mdi-content-send small left"></i></button>
             </div>
          </div>
                {!! Form::close()!!}

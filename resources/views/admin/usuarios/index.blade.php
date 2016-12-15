@@ -35,8 +35,8 @@
                     @endif            
                 </div>
 
-               <div class="col s12 m5 l3 offset-l5">
-                  <a onClick='openModalCrear()' class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
+               <div class="col s12 m5 l3 offset-l5" style="padding-top: 25px;">
+                  <a onClick='openModalCrear()'  class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
                </div>    
             </div>
          </fieldset>
@@ -68,7 +68,25 @@
          <div class="row" >
             <div class="col s12 m12 l12" id="Estudiantes">
 
-            </div>
+               <table class="responsive-table  bordered">
+                  <thead>
+                     <tr>
+                        <th data-field="name">Código</th>
+                        <th data-field="id">Nombre Completo</th>
+                        <th data-field="email">Correo</th>
+                        <th data-field="programa">Programa</th>
+                        <th data-field="accion">Acciones</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     
+                 
+                  </tbody>
+               </table>
+
+              
+         </div>
+
       </div>
    </div>
  </div>     
@@ -139,6 +157,7 @@
    $(document).ready(function(){
       consulta();
       $("#eliminarEstudiante").addClass("modalEliminar");
+      $("#listarAsignaturas").addClass("modalAsignaturaEstudiantes");
       $('#selectorPrograma1').material_select();
       $('#programas').material_select();
          
@@ -260,6 +279,7 @@
                   });
 
                }else {
+                  
                   swal("Cancelado", "El Estudiante no se ha eliminado", "error");
                   location.reload();
                }

@@ -15,7 +15,7 @@
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
   <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-  <title>503</title>
+  <title>500</title>
 
   <!-- Favicons-->
   <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
@@ -59,19 +59,19 @@
                <div class="content">
                   <div class="row">
                      <div id="site-layout-example-top" class="col s12">
-                        <p class="flat-text-logo center white-text caption-uppercase">Estamos trabajando para mejorar</p>
+                        <p class="flat-text-logo center white-text caption-uppercase">!UPS¡, esto es embarazoso</p>
                      </div>
                      
                      <div id="site-layout-example-right" class="col s12 m12 l12">
                         <div class="row center">
-                           <h1 class="text-long-shadow col s12">503</h1>
+                           <h1 class="text-long-shadow col s12">500</h1>
                         </div>
                         
                      </div>
 
                      <div class="row center">
-                           <p class="center  col s12">La pagina esta en mantenimiento vuelve mas tarde.</p>
-                           
+                           <p class="center  col s12">Algo ha salido mal vuelve atras o al inicio</p>
+                           <p class="center s12"><button onclick="goBack()" class="btn teal waves-effect waves-light">Atras</button> <a href="{{url('/')}}" class="btn teal waves-effect waves-light">Inicio</a></p>
                         
                         </div>
                   </div>
