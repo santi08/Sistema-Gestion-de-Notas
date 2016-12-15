@@ -44,14 +44,7 @@
             
         </div>
 <br>
-            <!--<div class="row">
-                <div class="col s12 l12 m12 ">
-                    <div id="data-table-simple_filter" class="header-search-wrapper teal dataTables_filter" >
-                        <i class="mdi-action-search"></i>
-                        <input type="search"  class="header-search-input z-depth-2" placeholder="Buscar Asignatura" aria-controls="data-table-simple">
-                    </div>
-                </div>               
-            </div>-->
+            
 
 <br>        
 <div class="divider  grey darken-1"></div>
