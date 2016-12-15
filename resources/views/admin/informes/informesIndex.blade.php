@@ -65,11 +65,6 @@
 			<label>Tipo de matricula</label>
 			  			
 		</div>
-
-		
-
-
-
 	</div>
 
 
@@ -80,21 +75,6 @@
       		<label>Rango de notas</label>
     	  </p>
     </div>
-
-		<!-- <div id="slider-start" class="noUi-target noUi-ltr noUi-horizontal">
-			<div class="noUi-base">
-			|	<div class="noUi-origin" style="left: 13.9024%;">
-					<div class="noUi-handle" data-handle="0" style="z-index: 5;">
-					
-					</div>
-				</div>
-				<div class="noUi-origin" style="left: 80%;">
-					<div class="noUi-handle" data-handle="1" style="z-index: 4;">
-			
-					</div>
-				</div>
-			</div>
-		</div> -->  
 
     <div class="row col s12 ">
     	 <a href="#" class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
@@ -107,7 +87,7 @@ $(document).ready(function(){
  $('#periodos').material_select();
  $('#programas').material_select();
  $('#tipoMatricula').material_select();
-/*
+
  $('#periodos').change(function(){
  	reporte();
  });
@@ -117,7 +97,7 @@ $(document).ready(function(){
     var ruta= "";
     alert(ruta);
      
-     $.get(ruta);
+
     /*$.ajax({
     	url:ruta,
     	type:'GET',

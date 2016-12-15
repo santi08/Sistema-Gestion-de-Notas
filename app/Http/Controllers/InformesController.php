@@ -146,6 +146,10 @@ class InformesController extends Controller
       $vista= \View::make($vistaurlReporte,compact('string','hora'))->render();
 
        return $this->crearPdf($vista);
-    }  
+    } 
+
+    public function crearReporteGeneral(){
+
+    } 
       
 }
