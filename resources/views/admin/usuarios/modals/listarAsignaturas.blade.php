@@ -30,10 +30,3 @@
   </div>
 </div>	
 @overwrite 
-@section('footer')
-
-	<div class="row card-panel" id='listarAsignaturas'  >
-		
-	</div>
-  
-@overwrite

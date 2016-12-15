@@ -21,7 +21,7 @@
 				<td>{{$profesor['NombrePrograma']}}</td>
                 <td>
 
-                    <a onclick="generarPdf({{$profesor['Id']}},{{$profesor['idprograma']}})" class="btn-floating btn-small waves-effect waves-light red modal-trigger btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">picture_as_pdf</i></a>
+                    <a onclick="generarPdf({{$profesor['Id']}},{{$profesor['idprograma']}})" class="btn-flat modal-trigger tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons red-text">picture_as_pdf</i></a>
                     
                    	<a onclick="ver({{$profesor['Id']}},{{$profesor['idprograma']}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Ver" data-target="#ver"><i class="material-icons blue-text text-darken-3">visibility</i></a>				
 				</td>

@@ -18,11 +18,13 @@
         <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">
          
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
         <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
-
 
 
 
@@ -32,7 +34,7 @@
 
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/gips.css')}}" type="text/css">
+        
 
 
     </head>
@@ -85,7 +87,7 @@
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/data-tables-script.js')}}"> </script>
-     <script type="text/javascript" src="{{asset('plugins/jquery/gips.js')}}"></script>
+     
     
     <!--<script src="{ {asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
     <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
@@ -108,6 +110,12 @@
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
 
+    <!-- Custom functions file -->
+    <script src="{{asset('plugins/tooltip/functions.js')}}"></script>
+
+    <!-- html5tooltips script -->
+    <script src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
+
     <!-- Tabla Editable -->
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/numeric-input-example.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/mindmup-editabletable.js')}}"></script>
@@ -129,13 +137,6 @@
 
     });
    
-        $(document).ready(function () {
-            $('a#purple').gips({ 'theme': 'purple', autoHide: true, text: 'en esta pagina encontraras informacion de las asignaturas' });
-            $('input#green').gips({ 'theme': 'green', placement: 'left' });
-            $('input#yellow').gips({ 'theme': 'yellow', autoHide: true, placement: 'right' });
-            $('input#red').gips({ 'theme': 'red', placement: 'bottom' });
-        });
-
     
 </script>
 

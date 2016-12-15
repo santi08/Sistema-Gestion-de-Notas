@@ -13,6 +13,8 @@
    <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">
 
 	
 	
@@ -67,9 +69,12 @@
 <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
 <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
 <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
-<script>
+ <!-- Custom functions file -->
+    <script src="{{asset('plugins/tooltip/functions.js')}}"></script>
 
-
+    <!-- html5tooltips script -->
+    <script src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
+<script type="text/javascript" >
      
 $('.carousel.carousel-slider').carousel({full_width: true});
 	$(document).ready(function () {
