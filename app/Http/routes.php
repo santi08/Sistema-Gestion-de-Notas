@@ -99,6 +99,12 @@ Route::group(['middleware' => 'auth'],function(){
         'uses'=>'InformesController@crearReporteEstudiante',
         'as'=>'admin.informes.pdfEstudiante'
         ]);
+
+      //reporte General
+      Route::get('informes/pdfEstudiante',[
+        'uses'=>'InformesController@crearReporteGeneral',
+        'as'=>'admin.informes.pdfGeneral'
+        ]);
             
 
       Route::resource('estudiantes','EstudiantesController');
@@ -172,7 +178,7 @@ Route::group(['middleware' => 'auth'],function(){
       //reporte Asignatura
       Route::get('informes/pdfAsignatura/{idHorario}',[
         'uses'=>'InformesController@crearReporteAsignatura',
-        'as'=>'admin.informes.pdfAsignatura'
+        'as'=>'docente.informes.pdfAsignatura'
         ]);
 
       Route::post('item',[
@@ -236,6 +242,7 @@ Route::group(['middleware' => 'auth'],function(){
 
 //rutas para el estudiante
   Route::group(['prefix'=>'admin'], function(){
+
     Route::get('asignaturasEstudiante',[
           'uses' => 'EstudiantesController@asignaturasEstudiante',
           'as' => 'admin.usuarios.asignaturasEstudiante'
@@ -246,6 +253,7 @@ Route::group(['middleware' => 'auth'],function(){
         'uses'=>'InformesController@crearReporteEstudiante',
         'as'=>'admin.informes.pdfEstudiante'
         ]);
+
 
 
   });

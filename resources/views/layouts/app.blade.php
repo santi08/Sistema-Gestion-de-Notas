@@ -40,8 +40,13 @@
     </head>
 
     <body id="app-layout">
+
+        <div id="loader-wrapper">
+      <div id="loader"></div>        
+      <div class="loader-section section-left grey"></div>
+      <div class="loader-section section-right grey"></div>
+  </div>
         <header> 
-            
             <div class="navbar-fixed" >
                 <nav class=" gradient  s12 m3 l12 ">
                     <div class="nav-wrapper">
