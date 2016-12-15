@@ -18,43 +18,37 @@ use DB;
 class EstudiantesController extends Controller
 {
 
-    public function listarAsignaturas($id){
-      $periodos = Periodoacademico::orderBy('Id','DESC')->get();
-      $ultimo_periodo=$periodos->first();
-      $id_periodo= $ultimo_periodo->Id;
-      //array para guardar las materias del ultimo periodo academico
-      $asignaturasUltimoPeriodo=array();
-
-      //Capturar el ultimo Periodo para listarlo por defecto
-          
-      $estudiante= Estudiante::find($id);
-      $asignaturas=$estudiante->matriculas;
-
-      //Buscar las matriculas en el periodo Capturado
-      foreach ($asignaturas as $asignatura) {
-        if($asignatura->horario->PeriodoAcademicoId == $id_periodo){
-            $asignaturasUltimoPeriodo[]= $asignatura; 
-          }
-      }
+    public function listarAsignaturas($idEstudiante,$idPeriodo){
+      
+      $estudiante= Estudiante::find($idEstudiante);
+      
       $nombre = $estudiante->primerNombre." ".$estudiante->primerApellido;
+      $matriculas =$estudiante->matriculas;
 
-      return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturasUltimoPeriodo'),compact('nombre'))->render());
+      $asignaturas = array();
+      foreach ($matriculas as $matricula) {
+        if ($matricula->horario->PeriodoAcademicoId == $idPeriodo) {
+        array_push($asignaturas,$matricula->horario);
+        }        
+      }
 
+      return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturas','nombre','estudiante'))->render());
+      
     }
 
     public function index(Request $request){
 
       $programas= Programaacademico::all();
+      $periodos= Periodoacademico::orderBy('Id','DESC')->get();
 
       if($request->ajax()){
         $estudiantes = Estudiante::Programa($request->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->get();
 
         $vista=view('admin.usuarios.part.mostrar',compact('estudiantes'));  
-
         return response()->json($vista->render());       
       }
 
-      return view('admin.usuarios.index')->with('programas',$programas);
+      return view('admin.usuarios.index')->with('programas',$programas)->with('periodos',$periodos);
 
     }
       

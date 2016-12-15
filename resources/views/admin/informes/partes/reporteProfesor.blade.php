@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Reporte Profesor</title>
-</head>
-<body>
 
-<CENTER><h1>SISTEMA CONTROL ACADEMICO UNIVERSITARIO</h1></CENTER>
-<br>
-<br>
 <div id="detalleProfesores" width="100%">
 	 <table width="100%" class="tabla" >
 		<thead>
@@ -43,23 +34,10 @@
 		</tbody>
 	</table>	
 </div>
-{!!$string!!}
-</body>
-</html>
+{!! $string !!}
 
 <style type="text/css">
-/*#tablaAsignatura{
-	margin: auto;
-	width: 50%;
-}
-#tablaMatriculados{
-	float:left;
-	width: 50%;
-}
-#tablaCriterios{
-	float:left;
-    width: 50%	
-}*/	
+
 .tablaSinBorde{
 	border-collapse: collapse;
 }
@@ -68,13 +46,13 @@
     font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
 
 .tabla th{
-  font-size: 13px;     font-weight: normal;          background: #b9c9fe;
-    border-top: 4px solid #aabcfe;   color: #039; 
+  font-size: 13px; font-weight: normal; background: #FF6C6C;
+    border-top: 4px solid #515151;   color: #000; 
     text-align:center;	
 }    
 
-.tabla td{     background: #e8edff;
-    color: #669; border-top: 1px solid transparent;
+.tabla td{     background: #daadad;
+    color: #000000; border-top: 1px solid transparent;
     text-align: center;     }
 
 .itemPerdido {

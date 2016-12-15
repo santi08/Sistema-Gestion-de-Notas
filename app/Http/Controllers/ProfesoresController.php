@@ -35,7 +35,7 @@ class ProfesoresController extends Controller
     
     public function index(Request $request){
         
-        $ProgramasAcademicos = Programaacademico::all(); 
+        $programas = Programaacademico::all(); 
         $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
         $profesores=array();
 
@@ -44,7 +44,7 @@ class ProfesoresController extends Controller
             ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
             ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
             ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
+            ->select('programaacademico.Id as idprograma','usuario.Id' ,'usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
             ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")->get();
 
             $vista=view('admin.profesores.partialTable',compact('profesores'));
@@ -53,7 +53,7 @@ class ProfesoresController extends Controller
        }
 
 
-      return view('admin.profesores.index')->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
+      return view('admin.profesores.index')->with('programas',$programas)->with('PeriodosAcademicos',$PeriodosAcademicos);
     
     }
 

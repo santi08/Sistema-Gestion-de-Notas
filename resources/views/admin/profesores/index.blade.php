@@ -10,45 +10,42 @@
 <div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper">
 
         <fieldset class="grey lighten-4">
-              <div class="row">
 
-      <div class="input-field col s5 l4 m4">
+            <div class="row">
+                <div class="input-field col s6 l4 m4 fuentes" >
+                    @if (Auth::guard('admin')->user()->rolAdministrador())
+                        <select id="programas" name="programas">
+                            <option value="" disabled selected>Seleccione un programa</option>
+                            @foreach($programas as $programa);
+                                @if($programa->NombrePrograma != 'GENERICO')
+                                    <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                            <label>Programa Académico</label>
+                    @elseif (Auth::guard('admin')->user()->rolCoordinador())
+                        <select id="programas" name="programas">
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                           
+                                <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                            
+                            @endforeach
 
-        @if ( Auth::guard('admin')->user()->rolAdministrador())
-          <select name="programas" id="programasProfesores">
-            <option value="" disabled selected>Seleccione un programa</option>
-              @foreach($ProgramasAcademicos as $ProgramaAcademico)
-                @if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-                      <option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
-                @endif
-              @endforeach 
-          </select>
-              <label>Programa Academico</label> 
-        @elseif (Auth::guard('admin')->user()->rolCoordinador())
-            <select name="programas" id="programasProfesores">
-              @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $ProgramaAcademico)
-                @if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-                      <option value="{{$ProgramaAcademico->Id}}">{{ $ProgramaAcademico->NombrePrograma }}</option>
-                @endif
-              @endforeach 
-             </select>
-              <label>Programa Academico</label> 
-        @endif
-                
-      </div>
+                        </select> 
+                        <label>Programa Académico</label>                   
+                    @endif            
+                </div>
 
-      <div class="input-field col s3 l3 m3">
-            
-        <select name="periodos" id="periodosProfesores">
-          <!--<option value="" disabled selected>Seleccione un programa</option>-->
-          @foreach($PeriodosAcademicos as $PeriodoAcademico)
-              <option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
-          @endforeach                   
-        </select> 
-        <label>Periodo Academico</label>    
-      </div>  
+                <div class="input-field col s3 l3 m3">					
+				    <select name="periodos" id="periodosProfesores">
+                        @foreach($PeriodosAcademicos as $PeriodoAcademico)
+				    	   <option value="{{ $PeriodoAcademico->Id}}">{{$PeriodoAcademico->Ano}}-{{ $PeriodoAcademico->Periodo}}</option>
+                        @endforeach						  			
+				    </select>	
+				    <label>Periodo Academico</label>  	
+                </div>	
+            </div>
 
-    </div>
         </fieldset>
 <br>
 	
@@ -79,30 +76,31 @@
 
 @section('scripts')
 
-
 <script type="text/javascript">
-    function generarPdf(idProfesor,idPrograma,idHorario){
+   
+    function generarPdf(idProfesor,idPrograma){ 
         var periodo = $('#periodosProfesores').val();
         var url="{{route('admin.informes.pdfProfesor',['profesor','periodo','programa'])}}";
         url=url.replace('profesor',idProfesor);
         url=url.replace('periodo',periodo);
         url=url.replace('programa',idPrograma);
-        window.location.assign(url);
+
+        window.open(url);    
+          
   }
 
 $(document).ready(function(){
     consulta(); 
-    $('#programasProfesores').material_select();  
+    $('#programas').material_select();  
     $('#periodosProfesores').material_select();
     $("#ver").addClass("modalDetalleProfesor");
-   // consulta(); 
     $("#periodosProfesores").change(function() {
         consulta();
     });
    
-   $("#programasProfesores").change(function() {           
+    $("#programas").change(function() {           
        consulta();
-   });
+    });
    
    /*$("#nombreBusqueda").keyup(function(){
       consulta();
@@ -111,11 +109,7 @@ $(document).ready(function(){
 //paginacion ajax
     function consulta(){
      var periodo = $('#periodosProfesores').val();
-     var programa=$('#programasProfesores').val();
-     var nombreBusqueda = $("#nombreBusqueda").val();
-     console.log(periodo);
-     console.log(programa);
-     console.log(nombreBusqueda);
+     var programa=$('#programas').val();
      var ruta="{{route('admin.profesores.index')}}";
 
      $('#data-table').DataTable({
@@ -125,10 +119,9 @@ $(document).ready(function(){
      $.ajax({
         url:ruta,
         type:"GET",
-        data:{periodo:periodo,programa:programa,nombreBusqueda:nombreBusqueda},
+        data:{periodo:periodo,programa:programa},
         dataType:'json',
-        success:function(data){
-        console.log(data);    
+        success:function(data){    
         $('#tabla').html(data);
         $('#data-table').DataTable({
             "language":{
@@ -167,7 +160,7 @@ $(document).ready(function(){
  function ver(id,idprograma){
         var ruta="{{route('admin.profesores.ver',['%idprofesor%','%idprograma%'])}}";
         var tablaAsignaturas = $("#tablaAsignaturas");
-        var programa = $('#programasProfesores').val();
+        var programa = $('#programas').val();
         var periodo = $('#periodosProfesores').val();   
         $("#tablaAsignaturas td").remove();      
         ruta = ruta.replace('%idprofesor%',id);
