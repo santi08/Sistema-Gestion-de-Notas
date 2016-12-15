@@ -1,6 +1,6 @@
 
 <div class="row">                
-   <div class="col s12 m7 l3 card-panel  bordes micarpanel" style="margin-left:37.3%; height: 60%;">  
+   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">  
       
          
                    
@@ -102,7 +102,5 @@
             </fieldset>
          </div>
       </div>
-
-    
    </div>          
 </div>

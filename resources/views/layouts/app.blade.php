@@ -18,10 +18,10 @@
         <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/gips.css')}}" type="text/css">
+         
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
-         <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
 
 
 
@@ -32,6 +32,7 @@
 
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/gips.css')}}" type="text/css">
 
 
     </head>
@@ -43,10 +44,10 @@
                 <nav class=" gradient  s12 m3 l12 ">
                     <div class="nav-wrapper">
                         <div class="row">
-                            <div class="col s6 m6 l6 hide-on-small-only ">
+                            <div class="col s6 m6 l6 hide-on-small-only hide-on-med-only">
                                 <img src="{{ asset('img/logo.png')}}"> 
                             </div>
-                            <div class="col s1 l1 m1 offset-l5 offset-s10">
+                            <div class="col s1 l1 m1 offset-l5 offset-m11 offset-s10">
                                
                             <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
@@ -129,7 +130,7 @@
     });
    
         $(document).ready(function () {
-            $('button#purple').gips({ 'theme': 'purple', autoHide: true, text: 'This is purple tooltip, auto hide after pausess time elapses.' });
+            $('a#purple').gips({ 'theme': 'purple', autoHide: true, text: 'en esta pagina encontraras informacion de las asignaturas' });
             $('input#green').gips({ 'theme': 'green', placement: 'left' });
             $('input#yellow').gips({ 'theme': 'yellow', autoHide: true, placement: 'right' });
             $('input#red').gips({ 'theme': 'red', placement: 'bottom' });

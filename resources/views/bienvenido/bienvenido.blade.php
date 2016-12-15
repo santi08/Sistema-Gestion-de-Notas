@@ -15,7 +15,7 @@
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
 
 	
-	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
+	
     
 </head>
 

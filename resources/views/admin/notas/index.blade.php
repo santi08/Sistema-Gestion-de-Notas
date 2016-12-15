@@ -161,16 +161,18 @@
 		$('#mainTable').floatThead({
    		 	position: 'fixed',
 			top:64,
-		});			
+		});	
+
+		$(document).ready(function(){ 
+
+		$("#insertarItem").addClass("modalInsertarItem");
+	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+		});		
 
 	 	$(document).ready(function(){ 
-
+	 		
      	var m= $('mainTable #td').text();
-	 	$("#insertarItem").addClass("modalInsertarItem");
-	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
 	 	console.log(m);
-	 	"use strict";
-
 	 	});
 		
 	function insertar_item(id){
