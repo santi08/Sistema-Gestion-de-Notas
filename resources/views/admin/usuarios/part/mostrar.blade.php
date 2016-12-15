@@ -14,7 +14,7 @@
          <th data-field="id">Nombre Completo</th>
          <th data-field="email">Correo</th>
          <th data-field="programa">Programa</th>
-         <th data-field="accion">Acciones</th>
+         <th data-field="accion" >Acciones</th>
       </tr>
    </tfoot>
 
@@ -27,7 +27,7 @@
 
              <td>{!! $resultado = str_replace("TECNOLOGIA", "TEC.", $estudiante->programaAcademico->NombrePrograma); !!}</td>
 
-            <td>
+            <td nowrap>
                 <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a> 
 
                <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger"><i class="material-icons yellow-text text-darken-4">edit</i></a> 
