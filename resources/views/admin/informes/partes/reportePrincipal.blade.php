@@ -47,11 +47,13 @@ body,header,footer {
          margin: 2px 8px 2px 8px;
         }
 #header{
-	background-color:#FF6C6C;
-		 
+	background: #d51b23; /* For browsers that do not support gradients */
+	color: #fff;
+    
 }
 #footer{
-	background-color:#FF6C6C; 
+	background: #d51b23; /* For browsers that do not support gradients */
+	color: #fff;
 	width: auto;
     margin-top:auto;
     -webkit-box-sizing:border-box;

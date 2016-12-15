@@ -8,10 +8,6 @@
 		</thead>
 		<tbody>
 			<tr>
-		    	<th>Identificacion :</th>
-				<td>{{$profesor->Identificacion}}</td>
-			</tr>
-			<tr>
 		  		<th>Nombre Completo:</th>
 		  		<td>{{$profesor->Nombre}} {{$profesor->Apellidos}}</td>	
 			</tr>
