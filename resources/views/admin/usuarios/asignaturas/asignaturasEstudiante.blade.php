@@ -22,6 +22,10 @@
                      <label>Periodo Academico</label>
                     
                   </div>
+                  <div class="col s4 m4 l4 offset-l5 offset-m5 offset-s2" style="padding-top: 25px;">
+                    <a onclick="generarPdf({{Auth::user()->id}})" class="waves-effect red-text text-darken-1 waves-light btn-flat "><i class="material-icons left red-text text-darken-1">picture_as_pdf</i>
+                    Generar reporte</a>
+                  </div>
                </div>
                </fieldset>
               
@@ -40,7 +44,7 @@
                   <th class="center">Créditos</th>
                   <th class="center">Grupo</th>
                   <th>Profesor</th>
-                  <th class="center">Acciones</th>
+                  
                </thead>
                <tbody>
 
@@ -50,13 +54,7 @@
                         <td>{{ $asignatura->horario->programaAcademicoAsignatura->asignatura->Nombre}}</td>
                         <td class="center">{{ $asignatura->horario->programaAcademicoAsignatura->asignatura->Creditos}}</td>
                         <td class="center">{{$asignatura->horario->Grupo}}</td>
-                        <td>{{$asignatura->horario->usuario->Nombre}} {{$asignatura->horario->usuario->Apellidos}}</td>
-                        <td class="center"> 
-
-                               <a onClick="" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="Ver Notas"><i class="material-icons blue-text text-darken-3">visibility</i></a>
-
-
-                        </td>                    
+                        <td>{{$asignatura->horario->usuario->Nombre}} {{$asignatura->horario->usuario->Apellidos}}</td>                    
                      </tr>
                   @endforeach
                     
@@ -77,8 +75,15 @@
 	$(document).ready(function(){
      $('#periodos').material_select();
 	});
-//capturas id periodo
 
+function generarPdf(idEstudiante){
+    idPeriodo=$('#periodos').val();
+    var url="{{route('admin.informes.pdfEstudiante',['id','idPeriodo'])}}"
+    url=url.replace('id',idEstudiante);
+    url=url.replace('idPeriodo',idPeriodo);
+
+    window.open(url);
+   }
 
 $('#periodos').change(function (){
     var idPeriodo =$('#periodos').val();

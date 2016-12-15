@@ -24,13 +24,62 @@
 			</tr>
 			<tr>
 				<th>Cantidad Asignaturas {{$periodo->Ano}}-{{$periodo->Periodo}}</th>
-				<td></td>	
+				<td>{{count($asignaturas)}}</td>	
 			</tr>
 		</tbody>
+	</table>
+
+@foreach($matriculasPorPeriodo as $matricula)
+	<table border="1" class="tabla" id="asignaturasEstudiantes" align="center">
+		<thead>
+				<tr >
+					<th colspan="{{count($matricula->items)}}"> {{$matricula->horario->programaAcademicoAsignatura->asignatura->Nombre}}
+					</th>
+				</tr>
+				<tr >
+					<th colspan="{{(count($matricula->items))}}">Porfesor: {{$matricula->horario->usuario->Nombre}}
+					</th>
+				</tr>
+				<tr >
+					@if($matricula->definitiva > 3)
+						<td colspan="{{(count($matricula->items))}}">
+							Definitiva: {{$matricula->definitiva}}
+						</td>
+					@else
+						<td colspan="{{(count($matricula->items))}}" class="definitivaPerdida">
+							Definitiva: {{$matricula->definitiva}}
+						</td>
+					@endif
+				</tr>	
+		</thead>
+		<tbody> 
+ 			<tr>
+					@foreach($matricula->items as $item)
+					<th> {{$item->nombre}}</th>
+					@endforeach
+			</tr>
+				
+				@foreach($matricula->items as $item)
+					@if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
+			   			<td>{{$item->pivot->nota}}</td>
+			 		@elseif($item->pivot->nota == "")
+	           			<td class="itemSinNota">{{$item->pivot->nota}}</td>
+			 		@else   
+	           			<td class="itemPerdido">{{$item->pivot->nota}}</td> 
+			 		@endif
+				@endforeach	
+		</tbody>
 	</table>	
+	<br>
+@endforeach
+
+
 </div>
 <style type="text/css">
-
+#asignaturasEstudiante{
+	margin-left: auto;
+    margin-right: auto;
+}
 
 .tablaSinBorde{
 	border-collapse: collapse;
@@ -59,4 +108,11 @@
 .definitivaPerdida{
 	background-color: #FF2727;	
 }
+
+.itemPerdido {
+   background-color: #FE6100;
+}   
+.itemSinNota{
+	background-color: yellow;
+} 
 </style>

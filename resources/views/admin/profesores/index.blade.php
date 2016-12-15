@@ -12,7 +12,7 @@
         <fieldset class="grey lighten-4">
 
             <div class="row">
-                <div class="input-field col s6 l4 m4 fuentes" >
+                <div class="input-field col s8 l4 m4 " >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>

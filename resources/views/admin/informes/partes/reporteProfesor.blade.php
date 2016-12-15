@@ -42,12 +42,12 @@
     font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
 
 .tabla th{
-  font-size: 13px; font-weight: normal; background: #FF6C6C;
-    border-top: 4px solid #515151;   color: #000; 
+  font-size: 13px; font-weight: normal; background: #cfd8dc;
+    border-top: 1.5px solid #515151;   color: #000; 
     text-align:center;	
 }    
 
-.tabla td{     background: #daadad;
+.tabla td{     background: #f5f5f5;
     color: #000000; border-top: 1px solid transparent;
     text-align: center;     }
 

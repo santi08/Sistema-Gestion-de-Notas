@@ -130,14 +130,17 @@ class InformesController extends Controller
       $vistaurlestudiante="admin.informes.partes.reporteEstudiante";
       $vistaurlReporte="admin.informes.partes.reportePrincipal";
       $matriculas=$estudiante->matriculas;
+      $matriculasPorPeriodo=array();
       $asignaturas = array();
+
       foreach ($matriculas as $matricula) {
         if ($matricula->horario->PeriodoAcademicoId == $idPeriodo) {
         array_push($asignaturas,$matricula->horario);
+        array_push($matriculasPorPeriodo,$matricula);
         }        
       }
       
-      $string= \View::make($vistaurlestudiante,compact('periodo','asignaturas','estudiante'))->render();
+      $string= \View::make($vistaurlestudiante,compact('periodo','asignaturas','estudiante','matriculasPorPeriodo'))->render();
 
       $hora=new Carbon();
       $vista= \View::make($vistaurlReporte,compact('string','hora'))->render();

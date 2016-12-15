@@ -8,7 +8,7 @@
     <div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper"> 
         <fieldset class="grey lighten-4">  
             <div class="row">
-                <div class="input-field col s6 l4 m4 fuentes" >
+                <div class="input-field col s9 l4 m4 fuentes" >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
@@ -30,7 +30,7 @@
                     @endif            
                 </div>
 
-                <div class="input-field col s6 l3 m3">   
+                <div class="input-field col s3 l3 m3">   
                     <select name="periodos" id="periodos">
                         @foreach($periodos as $periodo);
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>

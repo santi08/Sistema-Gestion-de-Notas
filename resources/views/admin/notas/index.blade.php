@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appNota')
 @section('title','Notas')
 @section('content')
 <br>

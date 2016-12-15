@@ -169,6 +169,11 @@ Route::group(['middleware' => 'auth'],function(){
 //fin middleware administrador
 
     Route::group(['prefix'=>'docente','middleware' => 'docente'],function(){
+      //reporte Asignatura
+      Route::get('informes/pdfAsignatura/{idHorario}',[
+        'uses'=>'InformesController@crearReporteAsignatura',
+        'as'=>'admin.informes.pdfAsignatura'
+        ]);
 
       Route::post('item',[
         'uses' => 'ItemsController@store',
@@ -235,6 +240,12 @@ Route::group(['middleware' => 'auth'],function(){
           'uses' => 'EstudiantesController@asignaturasEstudiante',
           'as' => 'admin.usuarios.asignaturasEstudiante'
     ]);
+
+    //reporte Estudiante
+      Route::get('informes/pdfEstudiante/{idEstudiante}/{idPrograma}',[
+        'uses'=>'InformesController@crearReporteEstudiante',
+        'as'=>'admin.informes.pdfEstudiante'
+        ]);
 
 
   });

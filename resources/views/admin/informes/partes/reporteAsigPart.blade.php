@@ -79,7 +79,7 @@
 <br>
 <br>
 <div align="center"> 
-  <table border="1" class="tablaSinBorde" id="tablaEstudiantes">
+  <table border="1" class="tablaSinBorde " id="tablaEstudiantes">
  	<thead>
  		<tr>
  			<th colspan="3">Aprobaron </th>
@@ -126,16 +126,17 @@
 				<td >{{$estudiante->tipoMatricula}}</td>
 				<td class="definitivaPerdida">{{$estudiante->definitiva}}</td>
 		@endif		
-
-		@foreach($estudiante->items as $item)
-			@if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
-		   		<td>{{$item->pivot->nota}}</td>
-		 	@elseif($item->pivot->nota == "")
-           		<td class="itemSinNota">{{$item->pivot->nota}}</td>
-		 	@else  
-           		<td class="itemPerdido">{{$item->pivot->nota}}</td> 
-		 	@endif
-		@endforeach
+		@if(count($asignatura->items) > 0)
+			@foreach($asignaturas->items as $item)
+				@if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
+			   		<td>{{$item->pivot->nota}}</td>
+			 	@elseif($item->pivot->nota == "")
+	           		<td class="itemSinNota">{{$item->pivot->nota}}</td>
+			 	@else   
+	           		<td class="itemPerdido">{{$item->pivot->nota}}</td> 
+			 	@endif
+			@endforeach
+		@endif	
  	 		</tr>
  	@endforeach
  	</tbody>
@@ -166,12 +167,12 @@
     font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
 
 .tabla th{
-  font-size: 13px; font-weight: normal; background: #FF6C6C;
-    border-top: 4px solid #515151;   color: #000; 
+  font-size: 13px; font-weight: normal; background: #cfd8dc;
+    border-top: 1.5px solid #515151;   color: #000; 
     text-align:center;	
 }    
 
-.tabla td{     background: #daadad;
+.tabla td{     background: #f5f5f5;
     color: #000000; border-top: 1px solid transparent;
     text-align: center;     }
 
