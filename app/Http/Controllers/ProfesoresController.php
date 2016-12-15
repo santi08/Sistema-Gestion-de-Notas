@@ -44,7 +44,7 @@ class ProfesoresController extends Controller
             ->join('programaacademico_asignatura', 'horario.AsignaturaId' ,'=' ,'programaacademico_asignatura.Id')
             ->join('programaacademico', 'programaacademico_asignatura.programaacademicoId', '=' ,'programaacademico.Id')
             ->join('usuario','horario.UsuarioID','=','usuario.Id')
-            ->select('programaacademico.Id as idprograma', 'usuario.Id','usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
+            ->select('programaacademico.Id as idprograma','usuario.Id' ,'usuario.Nombre','usuario.Apellidos','programaacademico.NombrePrograma')
             ->where('horario.PeriodoAcademicoId','like',$request->get('periodo')."%")->where('programaacademico_asignatura.programaacademicoId','like',$request->get('programa')."%")->get();
 
             $vista=view('admin.profesores.partialTable',compact('profesores'));

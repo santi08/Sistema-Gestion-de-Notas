@@ -42,9 +42,7 @@ hr {
 .modalDelaMateria{ width: 40% !important ; max-height: 70% !important; border-radius: 15px 15px 15px 15px;}
 .modalDetalleProfesor{ width: 60% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
 .modalMatricula{ width: 70% !important ; max-height: 80% !important;border-radius: 15px 15px 15px 15px; }
-
 .modalInsertarItem{ width: 58% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
-
 .modalInsertarSubItem{ width: 55% !important ; max-height: 77% !important;border-radius: 15px 15px 15px 15px; }
 
 

@@ -1,3 +1,4 @@
+<hr>
 <div id="tablaAsignatura" >
  <table width="100%" class="tabla" >
 	<thead>
@@ -25,7 +26,10 @@
 	</tbody>
 </table>	
 </div>
+<br>
+
 <div id="tablaMatriculados">
+
  <table  width="100%" class="tabla"  >
 	<thead >
 		<tr >
@@ -44,7 +48,8 @@
 		    <td>{{count($estudiantes)}}</td>	
 		</tr>
 	</tbody>
-  </table>	
+  </table>
+  	
 </div>
 
 <div id="tablaCriterios">
@@ -66,6 +71,7 @@
          </tr>			
   </table>
 </div>
+
 <br>
 <br>
 <br>
@@ -73,13 +79,23 @@
 <br>
 <br>
 <div align="center"> 
-  <table border="1" class="tablaSinBorde">
+  <table border="1" class="tablaSinBorde" id="tablaEstudiantes">
  	<thead>
+ 		<tr>
+ 			<th colspan="3">Aprobaron </th>
+ 			<th>{{$ponderadoDefinitiva['aprobados']}} </th>
+ 			@foreach($itemsPerdidos as $perdidos)
+ 	    	<th>
+ 	    		{{$perdidos['aprobados']}}
+ 	    	</th>
+ 			@endforeach
+ 		</tr>
  	    <tr>
- 	    	<th colspan="4"> </th>
+ 	    	<th colspan="3">Reprobaron  </th>
+ 	    	<th>{{$ponderadoDefinitiva['reprobados']}} </th>
  	    	@foreach($itemsPerdidos as $perdidos)
  	    	<th>
- 	    		{{$perdidos['cantidad']}}
+ 	    		{{$perdidos['reprobados']}}
  	    	</th>
  			@endforeach
  	    </tr>
@@ -94,8 +110,10 @@
  		</tr>
  	</thead>
  	<tbody>
- 	@foreach($estudiantes as $estudiante) 
- 		@if($estudiante->definitiva >3)
+ 	
+ 	@foreach($estudiantes as $estudiante)
+ 		
+ 		@if($estudiante->definitiva > 3)
  	 		<tr>
  				<td>{{$estudiante->estudiante->codigo}}</td>
 				<td>{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</td>
@@ -103,27 +121,31 @@
 				<td>{{$estudiante->definitiva}}</td>
 		@else
 			<tr>
- 				<td class="definitivaPerdida">{{$estudiante->estudiante->codigo}}</td>
-				<td class="definitivaPerdida">{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</td>
-				<td class="definitivaPerdida">{{$estudiante->tipoMatricula}}</td>
+ 				<td >{{$estudiante->estudiante->codigo}}</td>
+				<td >{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</td>
+				<td >{{$estudiante->tipoMatricula}}</td>
 				<td class="definitivaPerdida">{{$estudiante->definitiva}}</td>
 		@endif		
 
 		@foreach($estudiante->items as $item)
-		 @if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
-		   <td>{{$item->pivot->nota}}</td>
-		 @elseif($item->pivot->nota == "")
-           <td class="itemSinNota">{{$item->pivot->nota}}</td>
-		 @else  
-           <td class="itemPerdido">{{$item->pivot->nota}}</td> 
-		 @endif
+			@if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
+		   		<td>{{$item->pivot->nota}}</td>
+		 	@elseif($item->pivot->nota == "")
+           		<td class="itemSinNota">{{$item->pivot->nota}}</td>
+		 	@else  
+           		<td class="itemPerdido">{{$item->pivot->nota}}</td> 
+		 	@endif
 		@endforeach
- 	 </tr>
+ 	 		</tr>
  	@endforeach
  	</tbody>
  </table>	
 </div>
 <style type="text/css">
+#tablaEstudiantes{
+	margin-left: auto;
+    margin-right: auto;
+}
 #tablaAsignatura{
 	margin: auto;
 	width: 50%;
@@ -144,23 +166,23 @@
     font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
 
 .tabla th{
-  font-size: 13px;     font-weight: normal;          background: #b9c9fe;
-    border-top: 4px solid #aabcfe;   color: #039; 
+  font-size: 13px; font-weight: normal; background: #FF6C6C;
+    border-top: 4px solid #515151;   color: #000; 
     text-align:center;	
 }    
 
-.tabla td{     background: #e8edff;
-    color: #669; border-top: 1px solid transparent;
+.tabla td{     background: #daadad;
+    color: #000000; border-top: 1px solid transparent;
     text-align: center;     }
 
 .itemPerdido {
-   background-color: #FE6100;
+   background-color: #FF6C6C;
 }   
 .itemSinNota{
 	background-color: yellow;
 } 
 
 .definitivaPerdida{
-	background-color: #FF2727;	
+	background-color: #DA8B8B;	
 }
 </style>

@@ -8,6 +8,15 @@
          <th data-field="accion">Acciones</th>
       </tr>
    </thead>
+   <tfoot>
+      <tr>
+         <th data-field="name">Código</th>
+         <th data-field="id">Nombre Completo</th>
+         <th data-field="email">Correo</th>
+         <th data-field="programa">Programa</th>
+         <th data-field="accion">Acciones</th>
+      </tr>
+   </tfoot>
 
    <tbody>
       @foreach($estudiantes as $estudiante)    
@@ -28,4 +37,4 @@
 
    </tbody>
 </table>
- 
+
