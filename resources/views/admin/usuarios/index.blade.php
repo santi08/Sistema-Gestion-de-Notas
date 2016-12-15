@@ -11,17 +11,29 @@
          <fieldset class="grey lighten-4"> 
             <div class="row">
             
-               <div class="col s12 l4 m4">
-                  <div class="input-field">
-                     <select id="filtrarPrograma">
-                        <option id="periodo" value="" disabled selected>Seleccione un Programa</option>
-                           @foreach($programas as $programa) 
-                              <option id="periodo" value="{{$programa->CodigoPrograma}}" >{{$programa->NombrePrograma}}</option>
-                           @endforeach       
-                     </select>
-                     <label>Periodo Académico</label>
-                  </div>
-               </div>
+               <div class="input-field col s6 l4 m4 fuentes" >
+                    @if (Auth::guard('admin')->user()->rolAdministrador())
+                        <select id="programas" name="programas">
+                            <option value="" disabled selected>Seleccione un programa</option>
+                            @foreach($programas as $programa);
+                                @if($programa->NombrePrograma != 'GENERICO')
+                                    <option value="{{$programa->CodigoPrograma}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                            <label>Programa Académico</label>
+                    @elseif (Auth::guard('admin')->user()->rolCoordinador())
+                        <select id="programas" name="programas">
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                           
+                                <option value="{{$programa->CodigoPrograma}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                            
+                            @endforeach
+
+                        </select> 
+                        <label>Programa Académico</label>                   
+                    @endif            
+                </div>
 
                <div class="col s12 m5 l3 offset-l5" style="padding-top: 25px;">
                   <a onClick='openModalCrear()'  class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
@@ -47,14 +59,6 @@
                </div>
             @endif
          <br>
-         <!--<div class="row">
-            <div class="col s12 l12 m12">
-               <div class="header-search-wrapper teal darken-1 ">
-                  <i class="mdi-action-search"></i>
-                     <input id="search" name="search" type="search" onkeyup="buscar();" class="header-search-input z-depth-2" placeholder="Buscar Estudiante">
-               </div>
-            </div>
-         </div>-->
 
          <input type="hidden" id="idPrograma">
 
@@ -91,26 +95,55 @@
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
 @include('admin.usuarios.modals.cargarEstudiante')
-@include('admin.usuarios.modals.listarAsignaturas')
+@include('admin.usuarios.modals.listarAsignaturas',['periodos'=>$periodos])
 
 @overwrite
 
 @section('scripts')
-<script type="text/javascript">
-   function listarAsignaturas(id){
-      var ruta= "{{route('admin.estudiantes.listarAsignaturas',['%id%'])}}";
-      ruta= ruta.replace('%id%',id); 
-      console.log(id);
-      console.log(ruta);
 
+<script type="text/javascript">
+
+   function listarAsignaturas(id){
+    $('#periodos').material_select();
+    $('#listarAsignaturas').openModal();
+    $('#idEstudiantehidden').remove();
+      consultaModalListar(id);
+   }
+   function generarPdf(){
+    idEstudiante=$('#idEstudiantehidden').val();
+    idPeriodo=$('#periodos').val();
+    var url="{{route('admin.informes.pdfEstudiante',['id','idPeriodo'])}}"
+    url=url.replace('id',idEstudiante);
+    url=url.replace('idPeriodo',idPeriodo);
+
+    window.open(url);
+   }
+
+   $('#periodos').change(function(){
+    consultaModalListar();
+   })
+
+   function consultaModalListar(id){
+    var idEstudiante;
+    idPeriodo=$('#periodos').val();
+
+    if(typeof($('#idEstudiantehidden').val()) === "undefined"){
+      idEstudiante=id;
+    }else{idEstudiante=$('#idEstudiantehidden').val(); }
+
+     var ruta= "{{route('admin.estudiantes.listarAsignaturas',['idEstudiante','idPeriodo'])}}";
+     ruta=ruta.replace('idEstudiante',idEstudiante);
+     ruta=ruta.replace('idPeriodo',idPeriodo);
+      
       $.ajax({
          url:ruta,
          type:'GET',
          dataType:'json',
-         data:{id:id},
+         data:{idEstudiante:idEstudiante,idPeriodo:idPeriodo},
          success:function(res){
-         $('#listarAsignaturas').html(res);
-         $('#listarAsignaturas').openModal();
+          console.log(res);
+          $('#divListarAsignaturas').empty();
+          $('#divListarAsignaturas').append(res);     
          },
          error:function(error){
             console.log(error);
@@ -126,7 +159,7 @@
       $("#eliminarEstudiante").addClass("modalEliminar");
       $("#listarAsignaturas").addClass("modalAsignaturaEstudiantes");
       $('#selectorPrograma1').material_select();
-      $('#filtrarPrograma').material_select();
+      $('#programas').material_select();
          
       });
    </script>
@@ -159,15 +192,13 @@
 
    <script type="text/javascript">
 
-      $('#filtrarPrograma').change(function(){
+      $('#programas').change(function(){
          consulta();
       });
 
       function consulta(){
          var ruta = "{{route('admin.estudiantes.index')}}";
-         var idPrograma = $('#filtrarPrograma').val();
-         //$('#idPrograma').val(idPrograma);
-         //alert(idPrograma);
+         var idPrograma = $('#programas').val();
          $('#data-table-estudiante').DataTable({
                 retrieve:true
             }).destroy();
@@ -178,7 +209,6 @@
             data:{idPrograma :idPrograma},
             success:function(data){
                $("#Estudiantes").html(data);
-               console.log(data);
                $('#data-table-estudiante').DataTable({
             "language":{
                 "sProcessing":     "Procesando...",

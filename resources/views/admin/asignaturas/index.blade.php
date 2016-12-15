@@ -41,13 +41,7 @@
             </div>
         </fieldset>
         <div class="col s12 m12 l12">
-            <div>
-                
-            </div>
-            <div>
             
-                <input type="text" value="Purple Tooltip Here." id="purple" >
-            </div>
         </div>
 <br>
             <!--<div class="row">

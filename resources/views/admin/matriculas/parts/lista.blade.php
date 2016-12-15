@@ -21,11 +21,17 @@
                     @endif        
                         <a data-target="#matricular" onclick="matricular({{ $asignatura->Id}})" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text text-darken-1" >assignment_ind</i></a>
 
+                     @if (count($asignatura->matriculas)>0)    
+                         <a href="{{route('admin.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-floating btn-small waves-effect waves-light red btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">
+                        picture_as_pdf</i></a
+                    @endif 
 
-                        <a href="{{route('admin.informes.pdfAsignatura',$asignatura->Id)}}" class="btn-flat  waves-effect  modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes" ><i class="material-icons  red-text">picture_as_pdf</i></a>
                 </td>                    
             </tr>
         @endforeach
     </tbody>
 </table>
-
+<script type="text/javascript">
+    $('.pdf').dropdown('open');
+    $('.tooltipped').tooltip({delay: 50});
+</script>
