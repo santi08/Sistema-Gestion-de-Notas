@@ -6,8 +6,11 @@
 <h3 class="center">Profesores</h3>
 <br>
 <div class="row">
-	<div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper">
+
+<div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper">
+
         <fieldset class="grey lighten-4">
+
             <div class="row">
                 <div class="input-field col s6 l4 m4 fuentes" >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
@@ -42,6 +45,7 @@
 				    <label>Periodo Academico</label>  	
                 </div>	
             </div>
+
         </fieldset>
 <br>
 	

@@ -33,6 +33,8 @@ class NotasController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        //dd($estudiantes[0]->items[0]->pivot->nota);
+
         return view('admin.notas.index')->with('estudiantes',$estudiantes)->with('asignatura',$asignatura)->with('tipo_items',$tipo_items)->with('porcentajeDisponible', $porcentajeDisponible);
     }
 

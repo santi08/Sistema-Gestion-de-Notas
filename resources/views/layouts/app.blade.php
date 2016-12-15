@@ -25,7 +25,7 @@
 
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        
+     
     </head>
 
     <body id="app-layout">

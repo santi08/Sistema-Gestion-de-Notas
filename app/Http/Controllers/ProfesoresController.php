@@ -32,10 +32,10 @@ class ProfesoresController extends Controller
             'path' => Paginator::resolveCurrentPath()
         ]);
     }
-    public function index(Request $request)
-    {
+    
+    public function index(Request $request){
         
-        $ProgramasAcademicos = Programaacademico::all(); 
+        $programas = Programaacademico::all(); 
         $PeriodosAcademicos = Periodoacademico::orderBy('id','DESC')->get();
         $profesores=array();
 
@@ -53,7 +53,7 @@ class ProfesoresController extends Controller
        }
 
 
-      return view('admin.profesores.index')->with('ProgramasAcademicos',$ProgramasAcademicos)->with('PeriodosAcademicos',$PeriodosAcademicos);
+      return view('admin.profesores.index')->with('programas',$programas)->with('PeriodosAcademicos',$PeriodosAcademicos);
     
     }
 

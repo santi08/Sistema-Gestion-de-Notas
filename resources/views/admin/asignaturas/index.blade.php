@@ -22,9 +22,7 @@
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
                         <select id="programas" name="programas">
                             @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
-                           
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
-                            
                             @endforeach
 
                         </select> 
