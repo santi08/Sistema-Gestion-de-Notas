@@ -17,12 +17,6 @@ Route::get('/',['middleware' => 'guest',function () {
 }] );
 
 
-Route::get('/',['middleware' => 'guest', function () {
-    return view('bienvenido.bienvenido');
-}]);
-
-
-
 
 Route::group(['middleware' => 'auth'],function(){
 

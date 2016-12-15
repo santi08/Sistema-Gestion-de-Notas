@@ -103,7 +103,7 @@ class NotasController extends Controller
 
             $matricula->subitems()->updateExistingPivot($id_subitem, array('nota'=> $nota));
 
-            $nota_item = $this->calcularNotaItem($matricula);
+            $nota_item = $this->calcularNotaItem($matricula,$item);
             $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota_item));
 
             $matricula->definitiva = $nota_estudiante= $this->calcularNotaEstudiante($matricula);
@@ -120,23 +120,39 @@ class NotasController extends Controller
     }
 
 
-    public function calcularNotaItem($matricula){
+    public function calcularNotaItem($matricula, $item){
 
+        $subitems= $matricula->subitems->where('item_id',$item->id);
+        $nota=null;
         
-        $subitems= $matricula->subitems;
+        if ($item->tipoitem->nombre == 'PARCIALES') {
+             
+             $arrya_notas = array();
 
-        $nota=0;
+              foreach ($subitems as $subitem) { 
 
-        foreach ($subitems as $subitem) {
-                
-                $nota_subitem = $subitem->pivot->nota;
-                $porcentaje = ($subitem->porcentaje)/100;
-                $nota_total= $nota_subitem * $porcentaje;
+                        array_push($arrya_notas, $subitem->pivot->nota);
+                    
+              }
+                  $nota_subitem_parcial = max($arrya_notas);
+                  $porcentaje = ($subitem->porcentaje)/100;
+                  $nota_total = $nota_subitem_parcial * $porcentaje;
 
-                $nota+=$nota_total;
-        }
+              return $nota_total;
 
-        return $nota;
+        }else{
+
+            foreach ($subitems as $subitem) {   
+
+                    $nota_subitem = $subitem->pivot->nota;
+                    $porcentaje = ($subitem->porcentaje)/100;
+                    $nota_total= $nota_subitem * $porcentaje;
+
+                    $nota+=$nota_total;     
+            }
+
+            return $nota;           
+        }       
     }
 
     public function calcularNotaEstudiante($matricula){

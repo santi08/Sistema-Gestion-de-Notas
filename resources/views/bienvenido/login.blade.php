@@ -51,7 +51,7 @@
                </div>
 
             {!! Form::close() !!}
-             <p class="center"><a href="www.google.com">¿Olvidaste tu contraseña?</a></p>
+             <p class="center"><a href="{{ url('http://docentes.univalleyumbo.com/login/recuperar') }}">¿Olvidaste tu contraseña?</a></p>
                
                </fieldset>
          </div>    

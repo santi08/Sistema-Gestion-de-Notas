@@ -58,73 +58,80 @@
 <br>
 <div class="divider grey darken-1"></div>
 			
-
-<div id="editableTable" class="section">
+<div id="mainTable" class="section">
 <div class="floatThead-container">
-	<table class="table-notas" id="mainTable" style="cursor: pointer;">
+	<table id="mainTable"  style="cursor: pointer;">
 
-		<thead style="background: rgb(236, 239, 241);">
-						<th class="floatThead-col" rowspan="2" style="height:105px;">Codigo</th>
-						<th class="floatThead-col" rowspan="2">Nombre Completo</th>
-						<th class="floatThead-col" rowspan="2">T. Mat.</th>
-						<th class="floatThead-col" rowspan="2">DEF</th>
+		<thead style="background: rgb(236, 239, 241);" >
+						<th style="border: 1px solid black;" class="floatThead-col" rowspan="2">Codigo</th>
+						<th style="border: 1px solid black;" class="floatThead-col" rowspan="2">Nombre Completo</th>
+						<th style="border: 1px solid black;" class="floatThead-col" rowspan="2">T. Mat.</th>
+						<th style="border: 1px solid black;" class="floatThead-col" rowspan="2">DEF</th>
 						@if (count($estudiantes[0]->items)>0)
 							@foreach ($estudiantes[0]->items as $item)
 								@if (count($item->subitems)>0)
-									<th class="floatThead-col center" colspan="{{count($item->subitems)}}">{{$item->nombre}} ({{$item->porcentaje}} %)
-									
-									<a data-target="#insertarSubitem" 
+
+									<th nowrap="" class="floatThead-col center" style="border: 1px solid black;" colspan="{{count($item->subitems)}}">{{$item->nombre}} ({{$item->porcentaje}} %)
+
+									@if ($item->tipoitem->nombre != "PARCIALES")
+
+										<a data-target="#insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="material-icons green-text" >add</i></a>
+									@endif
 
-									<a  onclick="eliminar({{$item->id}});"  class="modal-trigger btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
-
-
+										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" class="modal-trigger btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
 									</th>
 								@else
-									<th class="floatThead-col" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
+									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="#insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="modal-trigger btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
 
-										<a  onclick="eliminar({{$item->id}});" class="modal-trigger btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+										<a onclick="eliminar({{$item->id}});" class="modal-trigger btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
 									</th>
 
 
 								@endif
 							@endforeach
 						@endif
-							<tr>
+							<tr style="border: 1px solid black;">
 							@foreach ($estudiantes[0]->items as $item)			
 								@if (count($item->subitems)>0)			
 									@foreach ($item->subitems as $subitem)
-										<th>{{$subitem->nombre}} ({{$subitem->porcentaje}}%) 
+										<th nowrap class="floatThead-col center" style="border: 1px solid black;">{{$subitem->nombre}}
+										@if ($subitem->item->tipoitem->nombre != "PARCIALES")
+											({{$subitem->porcentaje}}%) 
+										@endif 
 											<a  onclick="eliminarSubitem({{$subitem->id}});" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
 
 										</th>
-									@endforeach		
+									@endforeach
 								@endif	
 							@endforeach
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($estudiantes as $estudiante)
-							<tr>
-								<th>{{$estudiante->estudiante->codigo}}</th>
-								<th>{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</th>
-								<th>
+							<tr style="border: 1px solid black;">
+								<th nowrap style="border: 1px solid black;">{{$estudiante->estudiante->codigo}}</th>
+								<th nowrap style="border: 1px solid black;">{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</th>
+								<th style="border: 1px solid black;">
 									{{$estudiante->tipoMatricula}}
 								</th>
-								<th id="matricula-{{$estudiante->id}}">{{$estudiante->definitiva}}</th>
+								<th nowrap id="matricula-{{$estudiante->id}}" style="border: 1px solid black;">{{$estudiante->definitiva}}</th>
 								@if (count($estudiante->items)>0)
 									@foreach ($estudiante->items as $item)
 										@if (count($item->subitems)>0)
 											@foreach ($estudiante->subitems as $subitem)
 
 												@if($item->id == $subitem->item_id)
-													<td id="subitem-{{$subitem->pivot->id}}" onchange="insertarNotaSubitem({{$subitem->pivot->id}},{{$subitem->pivot->matricula_id}},{{$subitem->pivot->subitem_id}})">{{$subitem->pivot->nota}}</td>
+													<td id="subitem-{{$subitem->pivot->id}}" onchange="insertarNotaSubitem({{$subitem->pivot->id}},{{$subitem->pivot->matricula_id}},{{$subitem->pivot->subitem_id}})" align="center"
+															style="border: 1px solid black;"
+													>{{$subitem->pivot->nota}}</td>
 												@endif
 											@endforeach										
 										@else
-											<td tabindex="1" id="item-{{$item->pivot->id}}" 
+											<td tabindex="1" id="item-{{$item->pivot->id}}" align="center" 
+											style="border: 1px solid black;"
 											onchange="insertarNotaItem({{$item->pivot->id}},{{$item->pivot->matricula_id}},{{$item->pivot->item_id}})">{{$item->pivot->nota}}</td>
 										@endif
 									@endforeach
@@ -141,36 +148,33 @@
 
 
 	@include('admin.notas.modales.subitems')
+	@include('admin.notas.modales.subitems-parcial')
 	@include('admin.notas.modales.items')
 	
 @endsection 
 
 @section('scripts')
-
-    <!-- Tabla Editable -->
-    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/numeric-input-example.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/mindmup-editabletable.js')}}"></script>
-    <!-- Tabla Flotante -->
-    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead-slim.min.js') }}"></script>
- 
+	
 	<script type="text/javascript">
-		$('#mainTable').editableTableWidget();
-		$('#mainTable').floatThead({
-			position: 'fixed',
-			scrollingTop:65
-		});
-
+		$('#mainTable').editableTableWidget().find('td:first').focus();
 		
+		$('#mainTable').floatThead({
+   		 	position: 'fixed',
+			top:64,
+		});			
 
 	 	$(document).ready(function(){ 
+
      	var m= $('mainTable #td').text();
 	 	$("#insertarItem").addClass("modalInsertarItem");
 	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
 	 	console.log(m);
-	 });
+	 	"use strict";
+
+	 	});
 		
 	function insertar_item(id){
+		
 	    $('#insertarItem').openModal();
 	    $('#horario').val(id);
 	    $('#tipo_item').material_select();
@@ -180,6 +184,12 @@
 	    $('#insertarSubitem').openModal();
 	    $('#id_item').val(id);
 	    $('#nombreItem').html(nombre);
+	}
+
+	function insertar_subitem_parcial(id,nombre){
+	    $('#insertarSubitemParcial').openModal();
+	    $('#id_item_parcial').val(id);
+	    $('#nombreItemParcial').html(nombre);
 	}
 
 
@@ -192,6 +202,7 @@
 
 		if(nota<0 || nota>5){
 			swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
+			$('#item-'+id).html("");
 		}else{
 
 			var ruta= "{{route('nota.store.item')}}";
@@ -221,6 +232,7 @@
 		if(nota<0 || nota>5){
 
 			swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
+			$('#subitem-'+id).html("");
 		}else{
 
 			var ruta= "{{route('nota.store.subitem')}}";
@@ -243,14 +255,16 @@
 		
 	}
 
+	</script>
+	<script type="text/javascript">
+
 	function eliminar(iditem){
-		
-		swal({
+			swal({
         		title: "¿Estas seguro de eliminar el item?",
         		text: "¡No podras recuperar este item!",
         		type: "warning",
         		showCancelButton: true,
-        		 cancelButtonColor:'#388E3C',
+        		cancelButtonColor:'#388E3C',
                	confirmButtonColor: '#E53935',
         		confirmButtonText: 'Si, Eliminarlo',
         		cancelButtonText: "Cancelar",
@@ -265,14 +279,14 @@
               		location.href=ruta;
             	} else {
               		swal("Cancelado", "El item esta a salvo", "error");
-              		location.reload();
-            	}
-        	});
+              	}
+        	});	
 	}
 
-	function eliminarSubitem(idsubitem){
 		
-		swal({
+	function eliminarSubitem(idsubitem){
+
+	     	swal({
         		title: "¿Estas seguro de eliminar el subitem?",
         		text: "¡No podras recuperar este subitem!",
         		type: "warning",
@@ -286,7 +300,6 @@
         	},
         	function(isConfirm){
             	if (isConfirm){
-              		
               		var ruta = "{{route('subitem.destroy', ['%idsubitem%'])}}";
               		ruta=ruta.replace('%idsubitem',idsubitem);
               		location.href=ruta;
@@ -295,8 +308,8 @@
               		location.reload();
             	}
         	});
-	}
 
+	}
 	</script>
 
 @endsection

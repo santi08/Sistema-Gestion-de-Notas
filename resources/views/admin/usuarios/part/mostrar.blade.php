@@ -24,7 +24,9 @@
             <td> {{ $estudiante->codigo }}</td>
             <td> {{ $estudiante->primerNombre}} {{$estudiante->segundoNombre}} {{$estudiante->primerApellido}}</td>
             <td> {{ $estudiante->email }}</td>
-             <td>{{$estudiante->programaAcademico->NombrePrograma}}</td>
+
+             <td>{!! $resultado = str_replace("TECNOLOGIA", "TEC.", $estudiante->programaAcademico->NombrePrograma); !!}</td>
+
             <td>
                 <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="material-icons blue-text text-darken-3">visibility</i></a> 
 
