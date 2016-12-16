@@ -23,13 +23,14 @@
 
 
                      @if(Auth::guard('admin')->user()->rolDocente())
-                        @if (count($asignatura->matriculas)>0)    
-                            <a href="{{route('docente.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-floating btn-small waves-effect waves-light red btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">
+                        @if (count($asignatura->matriculas)>0)  
+
+                            <a href="{{route('docente.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons red-text">
                             picture_as_pdf</i></a>
                         @endif
                     @else
                         @if (count($asignatura->matriculas)>0)    
-                            <a href="{{route('admin.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-floating btn-small waves-effect waves-light red btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">
+                            <a href="{{route('admin.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons red-text">
                             picture_as_pdf</i></a>
                         @endif
                     @endif     

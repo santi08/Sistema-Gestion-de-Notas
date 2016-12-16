@@ -30,8 +30,13 @@ class NotasController extends Controller
         $porcentajeDisponible = $this->porcentajeDisponible($asignatura->matriculas[0]);
 
        if (Gate::forUser(\Auth::guard('admin')->user())->denies('registrar-notas', $asignatura)) {
-            abort(403, 'Unauthorized action.');
+            abort(403);
         }
+
+        if(count($asignatura->matriculas)==0){
+            abort(404);
+        }
+
 
         //dd($estudiantes[0]->items[0]->pivot->nota);
 
@@ -131,7 +136,7 @@ class NotasController extends Controller
 
               foreach ($subitems as $subitem) { 
 
-                        array_push($arrya_notas, $subitem->pivot->nota);
+                array_push($arrya_notas, $subitem->pivot->nota);
                     
               }
                   $nota_subitem_parcial = max($arrya_notas);

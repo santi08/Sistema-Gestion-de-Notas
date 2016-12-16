@@ -1,12 +1,12 @@
-#mainTable{
+#Notas{
   overflow: scroll;
   width: 100%;
-  height: 375px;
+  height: 65%;
 
 }
 
-#mainTable table > thead > th,
-#mainTable table > tbody> tr,th,td {
+#Notas table > thead > th,
+#Notas table > tbody> tr,th,td {
  
    border: 1px solid black;
    font-size: 1rem;

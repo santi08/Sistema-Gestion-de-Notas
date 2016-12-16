@@ -29,7 +29,7 @@
 			</fieldset>
 			@if (session()->has('flash_notification.message'))
             	<div id="card-alert" class="card {{ session('flash_notification.level') }}" >
-                  	<div class="card-content white-text" style="height: 1%""> 
+                  	<div class="card-content white-text" style="height: 2%""> 
                         <p>	@if(session('flash_notification.level')=='success')
                         		<i class="mdi-navigation-check"></i>
                         	@elseif(session('flash_notification.level')=='danger')
@@ -49,7 +49,7 @@
 @if($porcentajeDisponible > 0)
 		<div class="row">
 			 <div class="col s6 m6 l6">
-					<button data-target="#insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="material-icons large modal-trigger" >add_circle</i> Agregar Item</button>
+					<button data-target="insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="material-icons large modal-trigger" >add_circle</i> Insertar Item</button>
 			</div>
 		</div>
 @endif
@@ -59,7 +59,7 @@
 <br>
 <div class="divider grey darken-1"></div>
 			
-<div id="mainTable" class="section">
+<div id="Notas" class="section">
 <div class="floatThead-container">
 	<table id="mainTable"  style="cursor: pointer;">
 
@@ -80,14 +80,29 @@
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="material-icons green-text" >add</i></a>
 									@endif
 
-										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" class="btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
+
+										<a data-target="EditarItem"
+										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
+										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+
+								
+
+										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" 
+										class=" btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
+
 									</th>
 								@else
 									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
-										<a data-target="#insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="modal-trigger btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
+										<a data-target="insertarSubitem" 
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
 
-										<a onclick="eliminar({{$item->id}});" class=" btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+
+										<a data-target="EditarItem"
+										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
+										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+
+										<a onclick="eliminar({{$item->id}});" class="btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+
 									</th>
 
 
@@ -101,8 +116,15 @@
 										<th nowrap class="floatThead-col center" style="border: 1px solid black;">{{$subitem->nombre}}
 										@if ($subitem->item->tipoitem->nombre != "PARCIALES")
 											({{$subitem->porcentaje}}%) 
-										@endif 
-											<a  onclick="eliminarSubitem({{$subitem->id}});" class=" btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+
+										@endif
+
+											<a data-target="EditarSubitem"
+											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
+											class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+
+											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+
 
 										</th>
 									@endforeach
@@ -151,8 +173,9 @@
 
 
 	@include('admin.notas.modales.subitems')
-	@include('admin.notas.modales.subitems-parcial')
 	@include('admin.notas.modales.items')
+	@include('admin.notas.modales.items-editar')
+	@include('admin.notas.modales.subitems-editar')
 	
 @endsection 
 
@@ -161,15 +184,9 @@
 	<script type="text/javascript">
 		$('#mainTable').editableTableWidget().find('td:first').focus();
 		
-		$('#mainTable').floatThead({
-   		 	position: 'fixed',
-			top:64,
-		});	
-
-		$(document).ready(function(){ 
-
-		$("#insertarItem").addClass("modalInsertarItem");
-	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+	 	$(document).ready(function(){ 
+			$("#insertarItem").addClass("modalInsertarItem");
+		 	$("#insertarSubitem").addClass("modalInsertarSubItem");
 		});		
 
 	 	$(document).ready(function(){ 
@@ -197,12 +214,31 @@
 	    $('#nombreItemParcial').html(nombre);
 	}
 
+	function editar_item(id,nombre,porcentaje,descripcion,tipo_item){
+
+				$('#EditarItem').openModal();
+				$('#EditarItem #id_item').val(id);
+				$('#EditarItem #nombre_item').val(nombre);
+        		$('#EditarItem #porcentaje').val(porcentaje);
+        		$('#EditarItem #descripcion').val(descripcion);
+        		$("#EditarItem #tipo_item option[value="+tipo_item+"]").attr("selected",true);
+	}
+
+	function editar_subitem(id,nombre,porcentaje,descripcion){
+
+				$('#EditarSubitem').openModal();
+				$('#EditarSubitem #id_subitem').val(id);
+				$('#EditarSubitem #nombre_subitem').val(nombre);
+        		$('#EditarSubitem #porcentaje').val(porcentaje);
+        		$('#EditarSubitem #descripcion').val(descripcion);
+	}
+
 
 
 	function insertarNotaItem(id, matricula, item){
 		//var id= $('#'+id).attr('id');
-		var nota=$('#item-'+id).html();
-		console.log(nota);	
+		var nota=$('#item-'+id).html().replace(",",".");
+
 		var ruta= "{{route('nota.store.item')}}";
 
 		if(nota<0 || nota>5){
@@ -231,9 +267,8 @@
 
 		function insertarNotaSubitem(id, matricula, subitem){
 		//var id= $('#'+id).attr('id');
-		var nota=$('#subitem-'+id).html();
+		var nota=$('#subitem-'+id).html().replace(",",".");
 
-		
 		if(nota<0 || nota>5){
 
 			swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
@@ -285,12 +320,11 @@
             	} else {
               		swal("Cancelado", "El item esta a salvo", "error");
               	}
-        	});	
+        	});
 	}
 
 		
 	function eliminarSubitem(idsubitem){
-
 	     	swal({
         		title: "¿Estas seguro de eliminar el subitem?",
         		text: "¡No podras recuperar este subitem!",
@@ -310,7 +344,6 @@
               		location.href=ruta;
             	} else {
               		swal("Cancelado", "El subitem esta a salvo", "error");
-              		location.reload();
             	}
         	});
 

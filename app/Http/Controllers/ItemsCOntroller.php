@@ -55,7 +55,7 @@ class ItemsController extends Controller
 
         $tipo_item = TipoItem::find($id_tipo_item);
 
-        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item >= 0){
+        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item > 0){
 
             if ($tipo_item->nombre == "PARCIALES") {
             try {
@@ -145,7 +145,6 @@ class ItemsController extends Controller
         
     }
     
-
     /**
      * Display the specified resource.
      *
@@ -154,7 +153,8 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        return response()->json($item);
     }
 
     /**
@@ -163,9 +163,60 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        
+
+        $id_item= $request->id_item;
+
+        $item= Item::find($id_item);
+        $tipo_item =TipoItem::find($request->tipo_item);
+        $porcentaje_disponible= $this->validarPorcentaje($item->matriculas[0]) + $item->porcentaje;
+
+        if ($porcentaje_disponible - $request->porcentaje >= 0){
+
+            if($tipo_item->nombre != "PARCIALES"){
+                $item->nombre = $request->nombre_item;
+                $item->porcentaje = $request->porcentaje;
+                $item->tipo_id= $request->tipo_item;
+                $item->descripcion = $request->descripcion;
+                $item->save();
+                flash('El item ha sido editado exitosamente', 'success');
+                return redirect()->back();
+            }else if($item->tipo_id == $request->tipo_item){
+                $item->nombre = $request->nombre_item;
+                $item->porcentaje = $request->porcentaje;
+                $item->tipo_id= $request->tipo_item;
+                $item->descripcion = $request->descripcion;
+                $item->save();
+                flash('El item ha sido editado exitosamente', 'success');
+                return redirect()->back();
+            }else{
+
+                flash('No es posible cambiar el tipo de item a parciales', 'warning');
+                return redirect()->back();
+            }
+
+        }else{
+
+            flash('El porcentaje del item supera el 100% disponible en la asignatura', 'warning');
+            return redirect()->back(); 
+
+        }
+    }
+
+    public function actualizarNotas($item){
+
+        $matriculas = $item->matriculas;
+        
+
+        foreach ($matriculas as $matricula) {
+           
+          $nota_previa = $matricula->items;
+          dd($nota_previa);
+        }
+
+
     }
 
     /**

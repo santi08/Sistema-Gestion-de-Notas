@@ -24,9 +24,6 @@
          
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
-        <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
-
-
 
         
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->

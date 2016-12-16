@@ -1,6 +1,6 @@
 @extends('layouts.modal')
 
-@section('id')'insertarSubitemParcial'
+@section('id')'EditarSubitem'
 @overwrite
 
 @section('contenido')
@@ -8,7 +8,7 @@
 
 			<div class="row">
 				<div class="col s6 m6 l6">
-					<h5>Registrar SubItem a: <strong><span id="nombreItemParcial"></span></strong></h5>
+					<h5>Editar Subitem <strong><span id="nombreItem"></span></strong></h5>
 				</div>
 
 				<div class="col s6 m6 l6">
@@ -19,36 +19,31 @@
 			<div class="row">
 
 				<div class="col s12 m12 l12">
-					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
+					{!! Form::open(['route'=>['subitem.edit'],'method' => 'POST'])!!}
 						<div class="row">
 							<div class="col s6 m6 l6 input-field">
 								
-								<input type="text" id="nombre" name="nombre" required>
+								<input type="text" id="nombre_subitem" name="nombre_subitem" required placeholder="">
 								<label for="nombre">Nombre</label>
 							</div>
 
-							<div class="col s3 m3 l3 input-field">
+							<div class="col s4 m4 l4 input-field">
 								
-								<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje">
-								<label for="porcentaje">Porcentaje (Opcional)</label>
-							</div>
-
-							<div class="col s3 m3 l3 input-field">
-								 <input type="checkbox" name="opcional" id="opcional" />
-      							 <label for="opcional">Crear Opcional</label>
+								<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje" placeholder="">
+								<label for="porcentaje">Porcentaje</label>
 							</div>
 						</div>
 
 						<div class="row">
 							
 							 <div class="input-field col s12 m12 l12">
-					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" rows="4" cols="50"></textarea>
+					          <textarea id="descripcion" name="descripcion" placeholder="" class="materialize-textarea" rows="4" cols="50"></textarea>
 					          <label for="textarea1">Descripción(Opcional)</label>
 					        </div>	
 						</div> 					
 							
 						<div>
-						<input type="hidden" id="id_item_parcial" name="id_item_parcial">	
+						<input type="hidden" id="id_subitem" name="id_subitem">	
 						</div>
 
 						

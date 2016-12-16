@@ -28,18 +28,21 @@
             	    
 
 
-                    <a data-target="#matricular" onclick=" return matricular({{ $asignatura->Id }});" class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text text-darken-1" >assignment_ind</i></a>
+                    <a data-target="#matricular" onclick=" return matricular({{ $asignatura->Id }});" 
+                    class=" modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Matricular"><i class="material-icons green-text text-darken-1" >assignment_ind</i></a>
   
                     <a onclick="return ver({{$asignatura->Id}});" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-target='#verDatosAsignaturas' data-tooltip="Ver"><i class="material-icons blue-text text-darken-3">visibility</i></a>
 
                     @if(Auth::guard('admin')->user()->rolDocente())
-                        @if (count($asignatura->matriculas)>0)    
-                            <a href="{{route('docente.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-floating btn-small waves-effect waves-light red btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">
+                        @if (count($asignatura->matriculas)>0)
+ 
+
+                            <a href="{{route('docente.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons red-text">
                             picture_as_pdf</i></a>
                         @endif
                     @else
                         @if (count($asignatura->matriculas)>0)    
-                            <a href="{{route('admin.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-floating btn-small waves-effect waves-light red btn tooltipped " data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons">
+                            <a href="{{route('admin.informes.pdfAsignatura',[$asignatura->Id])}}" target="_blank" class="btn-flat tooltipped " data-position="bottom" data-position="bottom" data-delay="50" data-tooltip="Informes"><i class="material-icons red-text">
                             picture_as_pdf</i></a>
                         @endif
                     @endif     
