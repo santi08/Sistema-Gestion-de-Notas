@@ -10,14 +10,24 @@
         <fieldset class="grey lighten-4">
             <div class="row">
                 
-                <div class="input-field col s12 l3 m3">                
-				    <select name="periodos" id="periodos">
-				                        
-				        @foreach($periodos as $periodo);
-    				        <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano."-".$periodo->Periodo}}</option>
-				        @endforeach
-				    </select>
+                <div class="input-field col s12 m12 l12">
+                    <div class="row">
+                        <div class="col s12 l3 m3">
+                            <select name="periodos" id="periodos">
+                                        
+                                @foreach($periodos as $periodo);
+                            <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano."-".$periodo->Periodo}}</option>
+                        @endforeach
+                    </select>
                     <label>Periodo Académico</label>
+                        </div>
+
+                        <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="puedes escoger un periodo para ver las asignaturas que dictaste anteriormente"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                        </div>  
+                    </div>               
+				    
+                   
                 </div>
 
             </div>
@@ -42,7 +52,7 @@
             <div class="row">
             <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
-               <i class="mdi-action-help blue-text" data-tooltip="Hola, éstas son las asignaturas que estas dictando éste periodo.
+               <i class="mdi-action-info blue-text" data-tooltip="Hola, éstas son las asignaturas que estas dictando éste periodo.
                podras generar un reporte de la asignatura que desees, matricular estudiantes y generar un reporte individual de la asignatura"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
             </dir>     

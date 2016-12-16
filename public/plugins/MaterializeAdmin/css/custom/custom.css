@@ -117,24 +117,9 @@ hr {
     -webkit-font-smoothing: antialiased;
 }
 
-.input-field .prefix {
-    position: absolute;
-    width: 0.5rem;
-    font-size: 2rem;
-    transition: color .2s;
-}
 
-.input-field .prefix ~ input, 
-.input-field .prefix ~ textarea, 
-.input-field .prefix ~ label, 
-.input-field .prefix ~ 
-.validate ~ label, 
-.input-field .prefix ~ 
-.autocomplete-content {
-    margin-left: 2rem;
-    width: 92%;
-    width: calc(100% - 3rem);
-}
+
+.
 
 .navbar-fixed {
     position: relative;

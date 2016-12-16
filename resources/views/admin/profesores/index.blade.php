@@ -43,14 +43,26 @@
                         @endforeach						  			
 				    </select>	
 				    <label>Periodo Academico</label>  	
-                </div>	
+                </div>
+                @if(Auth::guard('admin')->user()->rolCoordinador())
+                    <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="puedes escoger el periodo que desees filtrar, si coordinas más programas puedes tambien filtrar por el programa académico"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                </div>      
+                @elseif(Auth::guard('admin')->user()->rolAdministrador())
+
+                    <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="puedes escoger el periodo que desees filtrar, tambien puedes filtrar por el programa académico"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                    </div> 
+
+                @endif
+                
             </div>
 
         </fieldset>
         <div class="row">
             <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
-               <i class="mdi-action-help blue-text" data-tooltip="Hola, en esta sección podras consultar información de los  distintos profesores de la sede, ademas puedes generar un reporte individual de ellos."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+               <i class="mdi-action-info blue-text" data-tooltip="Hola, en esta sección podras consultar información de los  distintos profesores de la sede, ademas puedes generar un reporte individual de ellos."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
             </dir>     
         </div>

@@ -11,7 +11,7 @@
          <fieldset class="grey lighten-4"> 
             <div class="row">
             
-               <div class="input-field col s6 l4 m4 fuentes" >
+               <div class="input-field col s10 l4 m4 fuentes" >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
@@ -34,11 +34,23 @@
                         <label>Programa Académico</label>                   
                     @endif            
                 </div>
+                @if(Auth::guard('admin')->user()->rolCoordinador())
+                    <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="Si coordinas mas programas puedes filtrar por el programa que desees"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                </div>      
+                @elseif(Auth::guard('admin')->user()->rolAdministrador())
 
-               <div class="col s12 m5 l3 offset-l5" style="padding-top: 25px;">
+                    <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="Puedes realizar un filtrado por el programa académico que desees"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                    </div> 
+                @endif
+            
+
+               <div class="col s12 m5 l3 offset-l4" style="padding-top: 25px;">
                   <a onClick='openModalCrear()'  class=" teal waves-effect waves-green btn modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
-               </div>    
-            </div>
+               </div> 
+               </div>   
+            
          </fieldset>
 
          @if (session()->has('flash_notification.message'))
@@ -62,7 +74,7 @@
 
          <input type="hidden" id="idPrograma">
          <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s9">
               
                <i class="mdi-action-help blue-text" data-tooltip="Hola, esta sección contiene todos los estudiantes de la sede, puedes registrar estudiantes de manera individual o procesar un archivo plano para registrar muchos estudiantes, puedes editar su informaciónn y consultar sus datos"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 

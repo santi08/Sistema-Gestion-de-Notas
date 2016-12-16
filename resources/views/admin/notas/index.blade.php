@@ -14,16 +14,17 @@
 						<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
 					</div>
 					<div class="col s12 m4 l2">
-						<h5>Grupo: {{$asignatura->Grupo}}</h5></div>
+						<h5>Grupo: {{$asignatura->Grupo}}</h5>
 					</div>
-					<div class="row">
+				</div>
+				<div class="row">
 						<div class=" col s6 m6 l3">
 							<h6>Disponible: {{$porcentajeDisponible}}%</h6>
 						</div>
 						<div class=" col s6 m6 l3">
 							<h6>Asignado: {{100 - $porcentajeDisponible}}%</h6>
 						</div>
-					</div>
+				</div>
 				
 			</fieldset>
 			@if (session()->has('flash_notification.message'))
@@ -54,7 +55,7 @@
 @endif
 
 
-			</div>
+		
 <br>
 <div class="divider grey darken-1"></div>
 			
@@ -79,14 +80,14 @@
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="material-icons green-text" >add</i></a>
 									@endif
 
-										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" class="modal-trigger btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
+										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" class="btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
 									</th>
 								@else
 									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="#insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="modal-trigger btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
 
-										<a onclick="eliminar({{$item->id}});" class="modal-trigger btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+										<a onclick="eliminar({{$item->id}});" class=" btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
 									</th>
 
 
@@ -101,7 +102,7 @@
 										@if ($subitem->item->tipoitem->nombre != "PARCIALES")
 											({{$subitem->porcentaje}}%) 
 										@endif 
-											<a  onclick="eliminarSubitem({{$subitem->id}});" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+											<a  onclick="eliminarSubitem({{$subitem->id}});" class=" btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
 
 										</th>
 									@endforeach
@@ -141,7 +142,9 @@
 					</tbody>
 
 		</table>
+		</div>
 	</div>
+</div>
 </div>
 
 
