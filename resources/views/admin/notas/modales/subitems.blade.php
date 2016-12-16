@@ -8,7 +8,7 @@
 
 			<div class="row">
 				<div class="col s6 m6 l6">
-					<h5>Registrar SubItem a: <strong><span id="nombreItem"></span></strong></h5>
+					<h5>Registrar SubItem a: <strong><h4 id="nombreItem"></h4></strong></h5>
 				</div>
 
 				<div class="col s6 m6 l6">
@@ -19,7 +19,7 @@
 			<div class="row">
 
 				<div class="col s12 m12 l12">
-					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
+					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formSubitems'])!!}
 						<div class="row">
 							<div class="col s6 m6 l6 input-field">
 								

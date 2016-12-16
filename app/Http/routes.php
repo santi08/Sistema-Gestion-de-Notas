@@ -16,8 +16,6 @@ Route::get('/',['middleware' => 'guest',function () {
     return view('bienvenido.bienvenido');
 }] );
 
-
-
 Route::group(['middleware' => 'auth'],function(){
 
    Route::get('/index',function(){
@@ -45,20 +43,38 @@ Route::group(['middleware' => 'auth'],function(){
         'as' => 'items.store'
         ]);
 
-      Route::post('subitem',[
-        'uses' => 'SubitemsController@store',
-        'as' => 'subitems.store'
+
+      Route::post('item/edit' ,[
+        'uses' => 'ItemsController@edit',
+        'as' => 'item.edit'
       ]);
+
+      //cargar informacion del item
+       Route::get('item/show/{id}',[
+         'uses' =>'ItemsController@show',
+          'as' => 'item.show'
+        ]);
 
      Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
         ]);
 
+      Route::post('subitem',[
+        'uses' => 'SubitemsController@store',
+        'as' => 'subitems.store'
+      ]);
+
       Route::get('subitem/{id}/destroy',[
         'uses' => 'SubitemsController@destroy',
         'as' => 'subitem.destroy'
         ]);
+
+
+      Route::post('subitem/edit' ,[
+        'uses' => 'SubitemsController@edit',
+        'as' => 'subitem.edit'
+      ]);
 
      Route::get('nota',[
           'uses' => 'NotasController@storeItem',
@@ -299,6 +315,7 @@ Route::get('estudiantes','MatriculasController@index');
   Route::get('error',function($exception){
     abort(401);
   });
+
   Route::get('error',function($exception){
     abort(500);
   });

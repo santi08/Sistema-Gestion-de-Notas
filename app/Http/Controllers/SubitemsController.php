@@ -73,7 +73,7 @@ class SubitemsController extends Controller
                 if($request->porcentaje==""){
                    $this->actualizarPorcentajes($item);
                 }
-                flash('EL subitem se registro con exito', 'success');
+                flash('El subitem se registro con exito', 'success');
                 return redirect()->back();
             
             } catch (Exception $e) {
@@ -143,9 +143,38 @@ class SubitemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+
+       $subitem = Subitem::find($request->id_subitem);
+       $subitem->nombre = $request->nombre_subitem;
+       if($subitem->porcentaje == $request->porcentaje){
+            $subitem->asignadoPorUsuario = false;
+       }else{
+             
+             $subitem->asignadoPorUsuario = true;
+       }
+
+       
+       $subitem->porcentaje = $request->porcentaje;
+       $subitem->descripcion = $request->descripcion;
+       $porcentajeDisponible = $this->porcentajeAsignadoItem($subitem->item) + $request->porcentaje;
+
+       if($porcentajeDisponible - $request->porcentaje > 0){
+
+        $subitem->save();
+         flash('El subitem ha sido editado con exito', 'success');
+         return redirect()->back();
+
+       }else{
+
+        flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
+        return redirect()->back(); 
+
+       }
+       
+
+
     }
 
     /**
@@ -174,7 +203,7 @@ class SubitemsController extends Controller
              try {
 
             $subitem->delete();
-            flash('EL subitem ha sido eliminado con exito', 'success');
+            flash('El subitem ha sido eliminado con exito', 'success');
             return redirect()->back();
                  
              } catch (Exception $e) {
