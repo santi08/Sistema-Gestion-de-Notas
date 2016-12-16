@@ -46,11 +46,11 @@
             </div>
         </fieldset>
         <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
                <i class="mdi-action-info blue-text" data-tooltip="Hola, en esta sección podras: matricular estudiantes a las asignaturas que desees, puedes consultar información  y generar un reporte de aquellas asignaturas que tengan estudiantes matriculados"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
 
         

@@ -86,7 +86,12 @@
             <a href="{{route('admin.informes.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
           </li>
 </ul>
-<a href="#" data-activates="slide-out" class="sidebar-collapse  btn-floating  waves-effect waves-light hide-on-large-only transparent"><i class="mdi-navigation-menu white-text"></i></a>
+<div class="row">
+  <div class="col s1 m1 l1">
+    <a href="#" style="padding-top: 2px;" data-activates="slide-out" class="sidebar-collapse  btn-floating  waves-effect waves-light hide-on-large-only transparent"><i class="mdi-navigation-menu white-text"></i></a>
+  </div>
+</div>
+  
 </aside>      
     
   

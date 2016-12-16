@@ -5,6 +5,31 @@
 
 <div class="row">
 	<div class="col s12 m12 l12">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<div id="breadcrumbs-wrapper">
+           
+            				<div class="header-search-wrapper grey hide-on-large-only">
+                				<i class="mdi-action-search active"></i>
+                				<input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            				</div>
+          					<div class="container">
+            					<div class="row">
+              						<div class="col s12 m12 l12">
+                
+	                					<ol class="breadcrumbs">
+                    						<li><a href="{{url('/index')}}">Inicio</a></li>
+                    						<li><a href="{{route('matriculas.index')}}">Mis asignaturas</a></li>
+                    						<li class="active">Notas</li>
+                						</ol>
+              						</div>
+            					</div>
+          					</div>
+        				</div>
+					</div>
+				</div>
+				<br>
 			<fieldset class=" grey lighten-4">
 				<div class="row">
 					<div class="col s12 m7 l6">
@@ -48,9 +73,21 @@
 
 @if($porcentajeDisponible > 0)
 		<div class="row">
-			 <div class="col s6 m6 l6">
-					<button data-target="insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="material-icons large modal-trigger" >add_circle</i> Insertar Item</button>
+			 <div class="col s9 m4 l4">
+					<button data-target="insertarItem" onclick="insertar_item({{ $asignatura->Id}})" class="btn waves-light waves-effect  teal lighten-2"><i class="mdi-content-add-circle left modal-trigger" ></i> Insertar Item</button>
 			</div>
+
+			 <div class="col s1 m1 l1 offset-l6 " >
+              
+               <i style="padding-left: 70px" class="mdi-communication-live-help blue-text" data-tooltip="Hola, puedes ingresar la nota dando click en la celda, digitar la nota y presionar la tecla Enter"  data-tooltip-animate-function="slidein" data-tooltip-stickto="top"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+
+            </div>
+
+            <div class="col s1 m1 l1 " >
+              
+               <i class="mdi-action-info blue-text" data-tooltip="Hola, estas en la sección de registro de notas, puedes agregar items de evaluacion y a los items puedes agregarles subitems, puedes editarlos si lo deseas"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+
+            </div>
 		</div>
 @endif
 
@@ -77,31 +114,31 @@
 									@if ($item->tipoitem->nombre != "PARCIALES")
 
 										<a data-target="#insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="material-icons green-text" >add</i></a>
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="mdi-content-add green-text" ></i></a>
 									@endif
 
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
 								
 
 										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" 
-										class=" btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
+										class=" btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 									</th>
 								@else
 									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="mdi-content-add green-text" ></i></a>
 
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
-										<a onclick="eliminar({{$item->id}});" class="btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+										<a onclick="eliminar({{$item->id}});" class="btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 									</th>
 
@@ -121,9 +158,9 @@
 
 											<a data-target="EditarSubitem"
 											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
-											class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
+											class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ></a>
 
-											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 
 										</th>
@@ -187,6 +224,8 @@
 	 	$(document).ready(function(){ 
 			$("#insertarItem").addClass("modalInsertarItem");
 		 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+		 	$("#EditarSubitem").addClass("modalInsertarSubItem");
+		 	$("#EditarItem").addClass("modalInsertarSubItem");
 		});		
 
 	 	$(document).ready(function(){ 

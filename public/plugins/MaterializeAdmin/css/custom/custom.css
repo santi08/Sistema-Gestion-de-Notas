@@ -60,11 +60,11 @@ hr {
 .modalDetalleProfesor{ width: 45% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
 .modalMatricula{ width: 55% !important ; max-height: 90% !important;border-radius: 15px 15px 15px 15px; }
 
-.modalInsertarItem{ width: 40% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
+.modalInsertarItem{ width: 42% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
 
 .modalAsignaturaEstudiantes{ width: 50% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
 
-.modalInsertarSubItem{ width: 30% !important ; max-height: 77% !important;border-radius: 15px 15px 15px 15px; }
+.modalInsertarSubItem{ width: 42% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
 
 
 

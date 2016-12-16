@@ -53,9 +53,7 @@
                     <div class="col s1 m1 l1">
                              <i class=" mdi-communication-live-help blue-text" data-tooltip="puedes escoger el periodo que desees filtrar, tambien puedes filtrar por el programa académico"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
                     </div> 
-
                 @endif
-                
             </div>
 
         </fieldset>
