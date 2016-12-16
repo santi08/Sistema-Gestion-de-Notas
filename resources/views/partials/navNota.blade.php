@@ -1,14 +1,14 @@
 
 <aside id="left-sidebar-nav">
-   <ul id="slide-out" class="side-nav leftside-navigation gradient-side">
+   <ul id="slide-out" class="side-nav leftside-navigation gradient-side" >
 
-      <li class="user-details cyan darken-2">
+      <li class="user-details cyan darken-2 " style="padding-left: 0.5px;">
         
-         <div class="row">
-            <div class="col  s4 m4 l4">
-                  
+         <div class="row" style="padding-left: 0.5px;">
+            <div class="col  s2 m2 l2" style="padding-left: 0.5px;">
+                 <a href="#" class=""><i class="mdi-social-person white-text"></i></a> 
             </div>
-            <div class="col col s8 m8 l8">
+            <div class="col col s8 m8 l8" >
 
                  
                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" style="font-size: 15px;" data-activates="profile-dropdown">

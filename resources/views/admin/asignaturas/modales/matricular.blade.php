@@ -52,9 +52,9 @@
 						<div class="row">
 							<div class="col s12 m12 l12">
 								<div class="file-field input-field">
-			      					<div class="btn teal darken-1 btn-small">
+			      					<div class="btn blue-grey darken-1">
 			        					<span>Elegir Archivo</span>
-			        					<input type="file" name="file" id="file" required>
+			        					<input type="file" name="file" id="file" required=""><i class=" mdi-editor-insert-drive-file left"></i>
 			      					</div>
 			      					<div class="file-path-wrapper">
 			        					<input class="file-path validate" type="text">
@@ -63,7 +63,7 @@
 
 	    						<div class="row">
 	    							<div class="col s12 l8 m8  input-field">
-				         				<button class="green btn" id="btn-matricular">Enviar  <i class="mdi-content-send"></i></button>
+				         				<button class="green btn" id="btn-matricular">Enviar  <i class="mdi-content-send right"></i></button>
 				         			</div>
 	    						</div>
 	    					</div>

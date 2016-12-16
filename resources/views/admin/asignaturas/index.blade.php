@@ -20,7 +20,7 @@
                         </select>
                             <label>Programa Académico</label>
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
-                        <select id="programas" name="programas">
+                        <select id="programas" name="programas" required>
                             @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             @endforeach
@@ -38,14 +38,19 @@
                     </select>
                     <label>Periodo Académico</label>
                 </div>
+
+                <div class="col s1 m1 l1">
+                             <i class=" mdi-communication-live-help blue-text" data-tooltip="Escoge un programa o un perido que desees filtrar"  data-tooltip-animate-function="slidein" data-tooltip-stickto="right"  data-tooltip-color="#424242" data-tooltip-maxwidth="200"></i>
+                </div>  
+
             </div>
         </fieldset>
         <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
-               <i class="mdi-action-help blue-text" data-tooltip="Hola, en esta sección podras: matricular estudiantes a las asignaturas que desees, puedes consultar información  y generar un reporte de aquellas asignaturas que tengan estudiantes matriculados"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+               <i class="mdi-action-info blue-text" data-tooltip="Hola, en esta sección podras: matricular estudiantes a las asignaturas que desees, puedes consultar información  y generar un reporte de aquellas asignaturas que tengan estudiantes matriculados"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
 
         

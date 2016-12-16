@@ -25,9 +25,9 @@
 </body>
 	<footer>
 		<div id="footer" align="right">
-			<p>Creado por: Unisoft</p>
+			Creado por: Unisoft
   			<p>Contacto: <a >
-  			someone@example.com</a>.</p>
+  			scau.soporte@gmail.com</a></p>
 		</div>
 	</footer>
 </html>
@@ -54,11 +54,8 @@ body,header,footer {
 #footer{
 	background: #d51b23; /* For browsers that do not support gradients */
 	color: #fff;
-	width: auto;
-    margin-top:auto;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
-    box-sizing:border-box;
     border-top: 2px solid #000;
 }
 

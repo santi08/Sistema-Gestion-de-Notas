@@ -109,6 +109,19 @@ class AuthController extends Controller
         ]);
     }
 
+     protected function getFailedLoginMessage()
+    {
+        return 'Correo y/o contraseña incorrectos.';
+    }
+
+  
+
+    protected function getLockoutErrorMessage($seconds)  {
+
+    return 'Ha superado el número de intentos. Reintente en'.$seconds.' segundos.';
+    
+    }
+
 
 
 }

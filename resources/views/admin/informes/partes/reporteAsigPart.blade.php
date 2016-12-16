@@ -1,6 +1,6 @@
 <hr>
 <div id="tablaAsignatura" >
- <table width="100%" class="tabla" >
+ <table width="100%" class="tabla" border="1">
 	<thead>
 		<tr>
 			<th colspan="2">ASIGNATURA</th>
@@ -30,7 +30,7 @@
 
 <div id="tablaMatriculados">
 
- <table  width="100%" class="tabla"  >
+ <table  width="100%" class="tabla" border="1" >
 	<thead >
 		<tr >
 			<th colspan="3" >ESTUDIANTES MATRICULADOS</th>
@@ -55,7 +55,7 @@
 <div id="tablaCriterios">
   <table width="100%" class="tabla" style="border-style: hidden;">
 		<tr>
-			<th colspan="3" align="center">CRITERIO DE EVALUACION</th>
+			<th colspan="{{count($asignatura->matriculas[0]->items)+1}}" align="center">CRITERIO DE EVALUACION</th>
 	    </tr> 		
 	    <tr>
 	     	<th style="border-style: hidden;">Criterios</th>
@@ -126,14 +126,14 @@
 				<td >{{$estudiante->tipoMatricula}}</td>
 				<td class="definitivaPerdida">{{$estudiante->definitiva}}</td>
 		@endif		
-		@if(count($asignatura->items) > 0)
-			@foreach($asignaturas->items as $item)
+		@if(count($estudiante->items) > 0)
+			@foreach($estudiante->items as $item)
 				@if($item->pivot->nota >= 3 and !$item->pivot->nota == "")
-			   		<td>{{$item->pivot->nota}}</td>
+			   		<td align="center">{{$item->pivot->nota}}</td>
 			 	@elseif($item->pivot->nota == "")
-	           		<td class="itemSinNota">{{$item->pivot->nota}}</td>
+	           		<td align="center">-</td>
 			 	@else   
-	           		<td class="itemPerdido">{{$item->pivot->nota}}</td> 
+	           		<td class="itemPerdido" align="center">{{$item->pivot->nota}}</td> 
 			 	@endif
 			@endforeach
 		@endif	
@@ -164,7 +164,7 @@
 }
 
 .tabla { font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px}
+    font-size: 12px;  text-align: left;  border-collapse: collapse; padding: 4px ;}
 
 .tabla th{
   font-size: 13px; font-weight: normal; background: #cfd8dc;

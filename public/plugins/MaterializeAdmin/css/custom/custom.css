@@ -60,11 +60,11 @@ hr {
 .modalDetalleProfesor{ width: 45% !important ; max-height: 100% !important; border-radius: 15px 15px 15px 15px;}
 .modalMatricula{ width: 55% !important ; max-height: 90% !important;border-radius: 15px 15px 15px 15px; }
 
-.modalInsertarItem{ width: 40% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
+.modalInsertarItem{ width: 42% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
 
 .modalAsignaturaEstudiantes{ width: 50% !important ; max-height: 78% !important;border-radius: 15px 15px 15px 15px; }
 
-.modalInsertarSubItem{ width: 30% !important ; max-height: 77% !important;border-radius: 15px 15px 15px 15px; }
+.modalInsertarSubItem{ width: 42% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
 
 
 
@@ -117,24 +117,9 @@ hr {
     -webkit-font-smoothing: antialiased;
 }
 
-.input-field .prefix {
-    position: absolute;
-    width: 0.5rem;
-    font-size: 2rem;
-    transition: color .2s;
-}
 
-.input-field .prefix ~ input, 
-.input-field .prefix ~ textarea, 
-.input-field .prefix ~ label, 
-.input-field .prefix ~ 
-.validate ~ label, 
-.input-field .prefix ~ 
-.autocomplete-content {
-    margin-left: 2rem;
-    width: 92%;
-    width: calc(100% - 3rem);
-}
+
+.
 
 .navbar-fixed {
     position: relative;

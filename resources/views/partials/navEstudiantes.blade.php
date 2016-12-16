@@ -5,8 +5,8 @@
       <li class="user-details cyan darken-2">
         
          <div class="row">
-            <div class="col  s4 m4 l4">
-                 
+            <div class="col  s2 m2 l2" style="padding-left: 0.5px;">
+                 <a href="#" class=""><i class="mdi-social-person white-text"></i></a> 
             </div>
             <div class="col col s8 m8 l8">
 

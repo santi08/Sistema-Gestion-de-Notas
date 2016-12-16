@@ -1,5 +1,5 @@
-<div id="detalleProfesores" width="100%">
-	 <table width="100%" class="tabla" >
+<div id="detalleEstudiante" width="100%" >
+	 <table width="100%" class="tabla" border="1">
 		<thead>
 			<tr>
 				<th colspan="2">Estudiante</th>
@@ -109,10 +109,4 @@
 	background-color: #FF2727;	
 }
 
-.itemPerdido {
-   background-color: #FE6100;
-}   
-.itemSinNota{
-	background-color: yellow;
-} 
 </style>

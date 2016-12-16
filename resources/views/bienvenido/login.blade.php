@@ -24,7 +24,7 @@
                {{ csrf_field() }}
                <div class="row">
                   <div class="col s12  centrar input-field">
-                     <input id="UsuarioIdentificacion" type="email" name="UsuarioIdentificacion" class="validate">         
+                     <input id="UsuarioIdentificacion" type="email" name="UsuarioIdentificacion"  title="ingresar con el correo de S.C.A.D" class="validate">         
                      <label for="UsuarioIdentificacion">Correo</label>
                   </div>
                </div>
@@ -32,17 +32,18 @@
                <div class="row">
                   <div class="col s12  centrar input-field ">
 
-                     <input id="password" type="password" name="password" class="validate" name="password">
+                     <input id="password" type="password" name="password" 
+                      title="ingresar con la contraseña que usas en S.C.A.D" class="validate" name="password">
                      <label for="password ">Contraseña</label>
                   </div>
                </div>
 
                @if (count($errors) > 0)
-                  <ul>
+                  
                      @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <p class="center" style="font-size: 13px; color: red;">{{ $error }}</p>
                      @endforeach
-                  </ul>
+                  
                @endif
 
                <div class="row offset-m3">
@@ -87,11 +88,11 @@
                   </div>
 
                   @if (count($errors) > 0)
-                     <ul>
+                     
                         @foreach ($errors->all() as $error)
-                           <li>{{ $error }}</li>
+                            <p class="center" style="font-size: 13px; color: red;">{{ $error }}</p>
                         @endforeach
-                     </ul>
+                     
                   @endif
 
                   <div class="row offset-m3">
