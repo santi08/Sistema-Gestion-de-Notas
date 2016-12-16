@@ -81,10 +81,12 @@
             <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><i class="mdi-social-school"></i>Estudiantes</a>
           </li>
           @endif
-         
+
+         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
           <li class="no-padding mihover">
             <a href="{{route('admin.informes.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
           </li>
+          @endif
 </ul>
 <a href="#" data-activates="slide-out" class="sidebar-collapse  btn-floating  waves-effect waves-light hide-on-large-only transparent"><i class="mdi-navigation-menu white-text"></i></a>
 </aside>      

@@ -1,6 +1,6 @@
 
 <div id="detalleProfesores" width="100%">
-	 <table width="100%" class="tabla" >
+	 <table width="100%" class="tabla" border="1" >
 		<thead>
 			<tr>
 				<th colspan="2">PROFESOR</th>
