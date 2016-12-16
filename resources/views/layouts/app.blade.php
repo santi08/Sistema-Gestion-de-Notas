@@ -55,7 +55,7 @@
                                
                             <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
-                              data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="material-icons prefix left">power_settings_new</i></a>
+                              data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="mdi-action-settings-power left"></i></a>
                         
                             </div>
 

@@ -58,7 +58,7 @@
               
                   <!-- fila botones -->
                   <div class="col s3 l3 m3 input-field ">
-                     <button type="submit" class="green btn"><i class="material-icons left">save</i>Registrar</button>
+                     <button type="submit" class="waves-effect waves-light btn green lighten-2 btn"><i class="material-icons left">save</i>Registrar</button>
                   </div>
                </div>
             {!! Form::close()!!}       
@@ -79,16 +79,16 @@
                   <div class="file-field input-field">
                      <div class="btn blue-grey darken-1">
                         <span class="">Elegir Archivo</span>
-                        <input type="file" accept=".txt" name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
+                        <input type="file" accept=".txt" required=""  name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
                      </div>
                      <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                        <input class="file-path validate" required="" type="text">
                      </div>
                   </div>
             </div>
 
             <div class="col s3 m3 l3 input-field">
-               <button type='submit' class="btn teal">Enviar<i class="mdi-content-send small left"></i></button>
+               <button type='submit' class="btn teal">Enviar<i class="mdi-content-send  right"></i></button>
             </div>
          </div>
                {!! Form::close()!!}

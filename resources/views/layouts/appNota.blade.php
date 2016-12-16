@@ -13,9 +13,11 @@
         <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/gips.css')}}" type="text/css">
 
 
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">
+         
         
         <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
     
@@ -49,7 +51,7 @@
                                    
                                 <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
-                                  data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="material-icons prefix left">power_settings_new</i></a>
+                                  data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="mdi-action-settings-power left"></i></a>
                         
                             </div>
 
@@ -104,7 +106,11 @@
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
 
-    <!-- Tabla Editable -->
+    <!--tooltips-->
+    <script src="{{asset('plugins/tooltip/functions.js')}}"></script>
+    <script src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
+
+    
 
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/numeric-input-example.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/mindmup-editabletable.js')}}"></script>
