@@ -45,11 +45,11 @@
   </div>
         <header> 
             <div class="navbar-fixed" >
-                <nav class=" gradient  s12 m3 l12 ">
+                <nav class="gradient  s12 m3 l12">
                     <div class="nav-wrapper">
                         <div class="row">
                             <div class="col s6 m6 l6 hide-on-small-only hide-on-med-only">
-                                <img src="{{ asset('img/logo.png')}}"> 
+                                <img src="{{ asset('img/logo.png')}}" alt="Sistema control académico universitario"> 
                             </div>
                             <div class="col s1 l1 m1 offset-l5 offset-m11 offset-s10">
                                
@@ -92,7 +92,7 @@
      
     
     <!--<script src="{ {asset('plugins/jqueryui/external/jquery/jquery.js')}}"></script>-->
-    <script src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/jquery/jquery.form.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/js/pace.min.js')}}"></script>     
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.min.js')}}"></script>
@@ -113,10 +113,10 @@
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
 
     <!-- Custom functions file -->
-    <script src="{{asset('plugins/tooltip/functions.js')}}"></script>
+    <script type="text/javascript" src="{{asset('plugins/tooltip/functions.js')}}"></script>
 
     <!-- html5tooltips script -->
-    <script src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
+    <script  type="text/javascript" src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
 
     <!-- Tabla Editable -->
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/editable-table/numeric-input-example.js') }}"></script>

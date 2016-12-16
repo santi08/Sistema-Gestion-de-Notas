@@ -8,7 +8,7 @@
 			<fieldset class=" grey lighten-4">
 				<div class="row">
 					<div class="col s12 m7 l6">
-						<h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
+						<h5>Asignatura: {{$asignatura->Nombre}}</h5>
 					</div>
 					<div class="col s12 m6 l4">
 						<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
@@ -89,7 +89,7 @@
 										class=" btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
 									</th>
 								@else
-									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center">{{$item->nombre}} ({{$item->porcentaje}} %)
+									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center" nowrap>{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="material-icons green-text" >add</i></a>
 
