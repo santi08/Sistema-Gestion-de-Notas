@@ -8,7 +8,7 @@
     <div class="col s12 m12 l12 dataTables_wrapper" id="data-table-simple_wrapper"> 
         <fieldset class="grey lighten-4">  
             <div class="row">
-                <div class="input-field col s6 l4 m4 fuentes" >
+                <div class="input-field col s9 l4 m4 fuentes" >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
@@ -30,7 +30,7 @@
                     @endif            
                 </div>
 
-                <div class="input-field col s6 l3 m3">   
+                <div class="input-field col s3 l3 m3">   
                     <select name="periodos" id="periodos">
                         @foreach($periodos as $periodo);
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
@@ -40,10 +40,16 @@
                 </div>
             </div>
         </fieldset>
-        <div class="col s12 m12 l12">
-            
+        <div class="row">
+            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+              
+               <i class="mdi-action-help blue-text" data-tooltip="Hola, en esta sección podras: matricular estudiantes a las asignaturas que desees, puedes consultar información  y generar un reporte de aquellas asignaturas que tengan estudiantes matriculados"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+
+            </dir>     
         </div>
-<br>
+
+        
+
             <!--<div class="row">
                 <div class="col s12 l12 m12 ">
                     <div id="data-table-simple_filter" class="header-search-wrapper teal dataTables_filter" >
@@ -53,7 +59,8 @@
                 </div>               
             </div>-->
 
-<br>        
+
+       
 <div class="divider  grey darken-1"></div>
 <br>   
         <div class="row">
@@ -75,17 +82,21 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+       
         consulta();
 
-    $("#periodos").change(function() {
+        $("#verDatosAsignaturas").addClass("modalDelaMateria");
+        $("#matricular").addClass("modalMatricula");
+
+        $("#periodos").change(function() {
              consulta()
         });    
-    $("#programas").change(function() {     
+        
+        $("#programas").change(function() {     
              consulta()    
         });  
-
     });
-
+    
     function matricular(id){
           
        /* $('#codigo').autocomplete({

@@ -39,6 +39,14 @@
                     </div>
                 </div>
             @endif
+            <div class="row">
+            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+              
+               <i class="mdi-action-help blue-text" data-tooltip="Hola, éstas son las asignaturas que estas dictando éste periodo.
+               podras generar un reporte de la asignatura que desees, matricular estudiantes y generar un reporte individual de la asignatura"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+
+            </dir>     
+        </div>
          
 <br>
 <div class="divider grey darken-1"></div>

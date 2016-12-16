@@ -1,0 +1,28 @@
+body {padding-top: 110px; background: #89B399}
+nav .nombre-plugin {font-size: 20px}
+nav .link-post {padding-top: 5px}
+	
+.demos {text-align: center}
+.demos h2 {margin-bottom: 30px; margin-top: 0}
+.demos .row {padding: 50px 0; border-bottom: double; border-color: #E39B7D; margin-bottom: 15px}
+i {cursor: pointer;}
+
+.basicos i {font-size: 130px}
+.efectos i {font-size: 85px}
+
+.ampliados input {width: 50%; padding: 15px; font-size: 18px; border: none; border-bottom: solid 5px #c9c9c9; transition: border 0.3s;}
+.ampliados input:focus {border: none; outline: none; border-bottom: solid 5px #969696; -webkit-box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.5); box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.5);}
+
+
+
+
+
+
+
+@media (max-width: 992px) { 
+	i {margin-bottom: 50px}
+	.ampliados input {font-size: 14px}
+}
+
+
+

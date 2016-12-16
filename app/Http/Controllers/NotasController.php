@@ -136,7 +136,7 @@ class NotasController extends Controller
 
               foreach ($subitems as $subitem) { 
 
-                        array_push($arrya_notas, $subitem->pivot->nota);
+                array_push($arrya_notas, $subitem->pivot->nota);
                     
               }
                   $nota_subitem_parcial = max($arrya_notas);

@@ -10,7 +10,7 @@
 
     <div class="row">
 		<div class="col s12 m12 l12">
-			<a id="prueba" class="modal-trigger btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar" >delete</i></a>
+			
 		</div>    	
     </div>
 @endsection

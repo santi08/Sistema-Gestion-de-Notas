@@ -55,7 +55,7 @@ class ItemsController extends Controller
 
         $tipo_item = TipoItem::find($id_tipo_item);
 
-        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item >= 0){
+        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item > 0){
 
             if ($tipo_item->nombre == "PARCIALES") {
             try {
@@ -145,7 +145,6 @@ class ItemsController extends Controller
         
     }
     
-
     /**
      * Display the specified resource.
      *
@@ -174,7 +173,7 @@ class ItemsController extends Controller
         $tipo_item =TipoItem::find($request->tipo_item);
         $porcentaje_disponible= $this->validarPorcentaje($item->matriculas[0]) + $item->porcentaje;
 
-        if ($porcentaje_disponible - $request->porcentaje > 0){
+        if ($porcentaje_disponible - $request->porcentaje >= 0){
 
             if($tipo_item->nombre != "PARCIALES"){
                 $item->nombre = $request->nombre_item;
@@ -204,7 +203,18 @@ class ItemsController extends Controller
             return redirect()->back(); 
 
         }
+    }
 
+    public function actualizarNotas($item){
+
+        $matriculas = $item->matriculas;
+        
+
+        foreach ($matriculas as $matricula) {
+           
+          $nota_previa = $matricula->items;
+          dd($nota_previa);
+        }
 
 
     }

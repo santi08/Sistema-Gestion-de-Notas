@@ -36,7 +36,7 @@ class InformesController extends Controller
      /*if($identificar == 1){ return $pdf->stream('reporte');}
      if($identificar == 2){ return $pdf->download('reporte.pdf');}*/
 
-     return $pdf->stream('reporte');
+     return $pdf->stream('ReporteSCAU');
     }
 
     public function crearReporteAsignatura($id){
@@ -126,16 +126,30 @@ class InformesController extends Controller
 
     public function crearReporteEstudiante($idEstudiante,$idPeriodo){
       $estudiante = Estudiante::find($idEstudiante);
-
+      $periodo=Periodoacademico::find($idPeriodo);
+      $vistaurlestudiante="admin.informes.partes.reporteEstudiante";
+      $vistaurlReporte="admin.informes.partes.reportePrincipal";
       $matriculas=$estudiante->matriculas;
+      $matriculasPorPeriodo=array();
       $asignaturas = array();
+
       foreach ($matriculas as $matricula) {
         if ($matricula->horario->PeriodoAcademicoId == $idPeriodo) {
         array_push($asignaturas,$matricula->horario);
+        array_push($matriculasPorPeriodo,$matricula);
         }        
       }
       
-      dd($asignaturas);
-    }  
+      $string= \View::make($vistaurlestudiante,compact('periodo','asignaturas','estudiante','matriculasPorPeriodo'))->render();
+
+      $hora=new Carbon();
+      $vista= \View::make($vistaurlReporte,compact('string','hora'))->render();
+
+       return $this->crearPdf($vista);
+    } 
+
+    public function crearReporteGeneral(){
+
+    } 
       
 }

@@ -60,7 +60,7 @@ class EstudiantesController extends Controller
       
         if($request->file('file')->isValid()){
           
-          DB::table('Estudiantes')->update(['estado'=> 0]);
+         // DB::table('Estudiantes')->update(['estado'=> 0]);
 
           try{
             $files = $request->file('file');

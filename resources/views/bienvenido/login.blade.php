@@ -1,6 +1,6 @@
 
 <div class="row">                
-   <div class="col s12 m7 l3 card-panel  bordes micarpanel" style="margin-left:37.3%; height: 60%;">  
+   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">  
       
          
                    
@@ -16,6 +16,8 @@
 <div class="divider grey "></div>
 <br>
       <div id="loginDocentes" class="row">
+         
+
          <div class="col s12 m12 l12">
             <fieldset class="grey lighten-4" style="border-radius: 10px">
             {!! Form::open(['route'=> 'admin.login', 'method' => 'POST']) !!}
@@ -48,6 +50,11 @@
                         <button style="width: 100%" class="btn waves-effect waves-light waves-red red darken-4 offset-l4 valing" type="submit" name="action">Entrar</button> 
                                       
                      </div>
+                     <div class="col s1 m1 l1 offset-l11">
+                       <i class="mdi-action-help blue-text" data-tooltip="Puedes ingresar con el correo y la contraseña que usas en el sistema S.C.A.D."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+                                      
+                     </div>
+
                </div>
 
             {!! Form::close() !!}
@@ -58,6 +65,8 @@
       </div>
 
       <div id="loginEstudiantes" class="row" style="display: none;">
+      
+
          <div class="col s12 m12 l12">
             <fieldset class="grey lighten-4" style="border-radius: 10px">
             {!! Form::open(['route'=> 'user.login', 'method' => 'POST']) !!}
@@ -90,19 +99,25 @@
                         <button style="width: 100%" class="btn waves-effect waves-light waves-red red darken-4 offset-l4 valing" type="submit" name="action">Entrar</button> 
                                       
                      </div>
+
+                     <div class="col s1 m1 l1 offset-l11">
+                       <i class="mdi-action-help blue-text" data-tooltip="inicio de sesión. Ejemplo: código: 12342013-2711, Nombre: Pepito Casas, contraseña: P12342013C"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+                                      
+                     </div>
+
                </div>
 
             {!! Form::close() !!}
 
-           
+                 
+
                   <p class="center"><a href="www.google.com">¿Olvidaste tu contraseña?</a></p>
+
               
             </div>
 
             </fieldset>
          </div>
       </div>
-
-    
    </div>          
 </div>

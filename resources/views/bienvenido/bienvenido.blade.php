@@ -13,136 +13,68 @@
    <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
         <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/login/styles.css')}}">
+	
     
 </head>
 
 <body>
 
 <div class="row">
-   <div class="login col s12">
-	<div class="top">
-		<h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
-	</div>
-	<div class="login-box animated fadeInUp">
+<div class="col s12 m12 l12">
+
+<div class="row">
+    <div class="login col s12">
+       <div class="top">
+          <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
+       </div>
+       <div class="login-box animated fadeInUp">
                
-         @include('bienvenido.login')
-	   
-    </div>
+           @include('bienvenido.login')   
+        </div>
   </div>
 </div>
-	
-<br>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-            <h5 class="center">Alta Velocidad Y Desarrollo </h5>
-
-            <p class="light"> Gracias a la conexion directa que exite con el sistema registro de clases, usted tendra acceso con sus mismas credenciales a nuestro sistema ,ademas usted podra gestionar de manera detalla las calificaciones de cada uno de sus estudiantes.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">picture_as_pdf</i></h2>
-            <h5 class="center">Generacion de Informes</h5>
-
-            <p class="light">Nuestro sistema esta altamente centrador en la generacion de informes,usted tendra la facilidad de generar informes con las caracteristicas que desee.
-            También estamos siempre abiertos a la retroalimentación y podemos responder a cualquier pregunta que un usuario puede tener sobre materializarse.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">accessibility</i></h2>
-            <h5 class="center">Accesibilidad</h5>
-
-            <p class="light">Proporcionamos acceso a la informacion de sus estudiantes, de una manera rapida,eficaz y rapida desde cualquier lugar que desees conectarte.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
- </div>   
-
-
-   <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src="{{asset('plugins/bienvenido/images/graficos.jpg')}}"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{{asset('plugins/bienvenido/images/calificaciones.jpg')}}"> <!-- random image -->
-        <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
-        <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-
-  <footer class="page-footer gradient">
+   
+<div class="row">
+   <div class="col s12 m12 l12">
+      <footer class="page-footer gradient">
           <div class="container">
             <div class="row">
               <div class="col l6 s12 ">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <h5 class="white-text">Sistema Control Academico Universitario (S.C.A.U)</h5>
+                <h5 class="grey-text text-lighten-4">Desarrolladores</h5>
+                <p class="grey-text text-lighten-4">Kevin Cardona, Santiago Guarín, Carlos Almario</p>
+                
               </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-              </div>
+              
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2016 Copyright todos los derechos reservados, Universidad del Valle Sede Yumbo
+            <p class="grey-text text-lighten-4 right">scau.soporte@gmail.com</p>
             </div>
           </div>
         </footer>
+   </div>
+</div>
+  
+        </div>
+</div>
 
-</body>
+
 <script src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
 <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
 <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
-<script>
+ <!-- Custom functions file -->
+    <script src="{{asset('plugins/tooltip/functions.js')}}"></script>
 
-
+    <!-- html5tooltips script -->
+    <script src="{{asset('plugins/tooltip/html5tooltips.js')}}"></script>
+<script type="text/javascript" >
      
 $('.carousel.carousel-slider').carousel({full_width: true});
 	$(document).ready(function () {
@@ -212,5 +144,5 @@ $('.carousel.carousel-slider').carousel({full_width: true});
     </script>
 
 
-
+</body>
 </html>

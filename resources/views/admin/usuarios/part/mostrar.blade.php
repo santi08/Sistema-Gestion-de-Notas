@@ -14,7 +14,7 @@
          <th data-field="id">Nombre Completo</th>
          <th data-field="email">Correo</th>
          <th data-field="programa">Programa</th>
-         <th data-field="accion">Acciones</th>
+         <th data-field="accion" >Acciones</th>
       </tr>
    </tfoot>
 

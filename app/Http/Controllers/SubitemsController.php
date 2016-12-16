@@ -160,7 +160,7 @@ class SubitemsController extends Controller
        $subitem->descripcion = $request->descripcion;
        $porcentajeDisponible = $this->porcentajeAsignadoItem($subitem->item) + $request->porcentaje;
 
-       if($porcentajeDisponible - $request->porcentaje > 0){
+       if($porcentajeDisponible - $request->porcentaje >= 0){
 
         $subitem->save();
          flash('El subitem ha sido editado con exito', 'success');

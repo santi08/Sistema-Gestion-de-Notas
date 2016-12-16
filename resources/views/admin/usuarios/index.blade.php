@@ -61,7 +61,14 @@
          <br>
 
          <input type="hidden" id="idPrograma">
+         <div class="row">
+            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+              
+               <i class="mdi-action-help blue-text" data-tooltip="Hola, esta sección contiene todos los estudiantes de la sede, puedes registrar estudiantes de manera individual o procesar un archivo plano para registrar muchos estudiantes, puedes editar su informaciónn y consultar sus datos"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
+            </dir>     
+        </div>
+       
          <div class="divider grey darken-1"></div>
          <br>
 

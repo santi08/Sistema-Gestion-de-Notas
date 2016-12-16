@@ -97,7 +97,7 @@
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
 										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
 
-										<a onclick="eliminar({{$item->id}});" class="modal-trigger btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
+										<a onclick="eliminar({{$item->id}});" class="btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="material-icons red-text" id="eliminar">delete</i></a>
 									</th>
 
 
@@ -117,7 +117,7 @@
 											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
 											class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ><i class="material-icons yellow-text text-darken-4" >edit</i></a>
 
-											<a  onclick="eliminarSubitem({{$subitem->id}});" class="modal-trigger btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
+											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="material-icons red-text" >delete</i></a>
 
 										</th>
 									@endforeach
@@ -176,13 +176,14 @@
 		$('#mainTable').editableTableWidget().find('td:first').focus();
 		
 	 	$(document).ready(function(){ 
+			$("#insertarItem").addClass("modalInsertarItem");
+		 	$("#insertarSubitem").addClass("modalInsertarSubItem");
+		});		
 
+	 	$(document).ready(function(){ 
+	 		
      	var m= $('mainTable #td').text();
-	 	$("#insertarItem").addClass("modalInsertarItem");
-	 	$("#insertarSubitem").addClass("modalInsertarSubItem");
 	 	console.log(m);
-	 	"use strict";
-
 	 	});
 		
 	function insertar_item(id){
