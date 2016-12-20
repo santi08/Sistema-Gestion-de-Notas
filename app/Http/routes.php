@@ -187,6 +187,16 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.notas.index'
           ]);
 
+        Route::post('matricular/archivo',[
+          'uses' =>'MatriculasController@matricularEstudiantes',
+          'as' => 'admin.matricular.archivo'
+        ]);
+
+        Route::post('matricular/estudiante',[
+          'uses' =>'MatriculasController@store',
+          'as' => 'admin.matricular.estudiante'
+          ]);
+
     });
 //fin middleware administrador
 
@@ -246,12 +256,12 @@ Route::group(['middleware' => 'auth'],function(){
 
         Route::post('matricular/archivo',[
           'uses' =>'MatriculasController@matricularEstudiantes',
-          'as' => 'matricular.archivo'
+          'as' => 'docente.matricular.archivo'
         ]);
 
         Route::post('matricular/estudiante',[
           'uses' =>'MatriculasController@store',
-          'as' => 'matricular.estudiante'
+          'as' => 'docente.matricular.estudiante'
           ]);
 
 

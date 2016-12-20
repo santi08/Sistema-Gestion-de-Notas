@@ -86,17 +86,17 @@ class MatriculasController extends Controller
 
 
 
-                $mensaje= "El estudiante ".$estudiante->primerNombre." ".$estudiante->primerApellido." con exito";
+                $mensaje= "Se ha matriculado el estudiante ".$estudiante->primerNombre." ".$estudiante->primerApellido." con exito";
                  flash($mensaje, 'success');
-                 return redirect()->route('matriculas.index');
+                 return redirect()->back();
             
         } catch (Exception $e) {
                flash('Se ha producido un error, por favor intenta realizar la matricula nuevamente', 'danger');
-               
+               return redirect()->back();
             
         }
 
-    return redirect()->route('matriculas.index');
+   
 
     }
 

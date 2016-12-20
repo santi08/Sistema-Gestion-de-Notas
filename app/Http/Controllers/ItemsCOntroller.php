@@ -55,7 +55,7 @@ class ItemsController extends Controller
 
         $tipo_item = TipoItem::find($id_tipo_item);
 
-        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item > 0){
+        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item >= 0){
 
             if ($tipo_item->nombre == "PARCIALES") {
             try {

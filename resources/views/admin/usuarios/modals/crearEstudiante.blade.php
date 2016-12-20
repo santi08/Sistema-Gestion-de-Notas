@@ -40,7 +40,7 @@
                   </div>
                   <div class="col s6 m6 l6 input-field">
                      {!!Form::number('codigo',null,['class'=>'validate','id'=>'codigo','type'=>'number','required'])!!}
-                     {!!Form::label ('codigo','codigo',['for'=> 'codigo'])!!}
+                     {!!Form::label ('codigo','Código',['for'=> 'codigo'])!!}
                      
                   </div> 
                </div>  
@@ -58,7 +58,7 @@
               
                   <!-- fila botones -->
                   <div class="col s3 l3 m3 input-field ">
-                     <button type="submit" class="waves-effect waves-light btn green lighten-2 btn"><i class="material-icons left">save</i>Registrar</button>
+                     <button type="submit" class="waves-effect waves-light btn teal darken-1"><i class="material-icons left">save</i>Registrar</button>
                   </div>
                </div>
             {!! Form::close()!!}       
@@ -88,7 +88,7 @@
             </div>
 
             <div class="col s3 m3 l3 input-field">
-               <button type='submit' class="btn teal">Enviar<i class="mdi-content-send  right"></i></button>
+               <button type='submit' class="waves-effect waves-light btn teal darken-1">Enviar<i class="mdi-content-send  right"></i></button>
             </div>
          </div>
                {!! Form::close()!!}

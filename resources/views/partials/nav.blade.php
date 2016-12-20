@@ -46,10 +46,10 @@
             </div>
          </div>   
       </li>
-
-      <li class="mihover bold active"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
-      <li class="li-hover "><div class="divider"></div></li>
-      <br>            
+       <li class="li-hover "><div class="divider"></div></li>
+      <br> 
+      <li class="mihover"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
+                
         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
            <li>
             <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-av-my-library-books"></i>Asignaturas</a>

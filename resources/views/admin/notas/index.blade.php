@@ -33,7 +33,7 @@
 			<fieldset class=" grey lighten-4">
 				<div class="row">
 					<div class="col s12 m7 l6">
-						<h5>Asignatura: {{$asignatura->Nombre}}</h5>
+						<h5>Asignatura: {{$asignatura->programaAcademicoAsignatura->asignatura->Nombre}}</h5>
 					</div>
 					<div class="col s12 m6 l4">
 						<h5>Periodo Academico: {{$asignatura->periodoAcademico->Ano}}-{{$asignatura->periodoAcademico->Periodo}}</h5> 
@@ -114,18 +114,18 @@
 									@if ($item->tipoitem->nombre != "PARCIALES")
 
 										<a data-target="#insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="mdi-content-add green-text" ></i></a>
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger   " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="mdi-content-add green-text" ></i></a>
 									@endif
 
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
+										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
 								
 
 										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" 
-										class=" btn-warning-cancel btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+										class=" btn-warning-cancel btn-flat " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 									</th>
 								@else
@@ -136,9 +136,9 @@
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-										class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
+										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
-										<a onclick="eliminar({{$item->id}});" class="btn-flat tooltipped btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+										<a onclick="eliminar({{$item->id}});" class="btn-flat  btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 									</th>
 
@@ -158,9 +158,9 @@
 
 											<a data-target="EditarSubitem"
 											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
-											class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ></a>
+											class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ></a>
 
-											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat tooltipped " data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="mdi-action-delete red-text text-darken-4"></i></a>
 
 
 										</th>

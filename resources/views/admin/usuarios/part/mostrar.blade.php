@@ -28,11 +28,11 @@
              <td>{!! $resultado = str_replace("TECNOLOGIA", "TEC.", $estudiante->programaAcademico->NombrePrograma); !!}</td>
 
             <td nowrap>
-                <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="asignaturas"><i class="mdi-action-visibility blue-text text-darken-3"></i></a> 
+                <a onClick="listarAsignaturas({{$estudiante->id}})" class="btn-flat modal-trigger tooltipped" data-position="bottom" data-delay="50" data-target='#listarAsignaturas' data-tooltip="Ver"><i class="mdi-action-visibility blue-text text-darken-3"></i></a> 
 
-               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger"><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a> 
+               <a onClick="abrirModalEditar({{$estudiante->id}})"  data-target='#editarEstudiante' class="btn-flat modal-trigger tooltipped" data-tooltip="Editar"><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a> 
              
-               <a onclick="eliminar({{$estudiante->id}});" id="{{$estudiante->id}}"  class="btn-flat "><i class="mdi-action-delete red-text text-darken-4"></i></a>
+               <a onclick="eliminar({{$estudiante->id}});" id="{{$estudiante->id}}"  class="btn-flat tooltipped " data-tooltip="Desactivar"><i class="mdi-action-delete red-text text-darken-4" ></i></a>
              
               
             </td> 
