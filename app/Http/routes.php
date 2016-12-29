@@ -302,17 +302,7 @@ Route::get('matricular/autocomplete','MatriculasController@autocomplete');
 Route::get('estudiantes','MatriculasController@index');
 
 
-  
-
-  //Route::get('/home', 'HomeController@index');
-
-
-
-   //Route::post('redirigir','autenticacionController@obtenerControlador');
-   //Route::post('login','Admin\AdminAuthController@login');
-   //Route::get('login', 'Auth\AuthController@showLoginForm');
-   //Route::post('login','Auth\AuthController@login');
-   Route::get('logoutes','Auth\AuthController@logout');
+  Route::get('logoutes','Auth\AuthController@logout');
 
   Route::get('logoutdo','Admin\AuthController@logout');
 
@@ -321,10 +311,9 @@ Route::get('estudiantes','MatriculasController@index');
    
   //Route::get('archivo','MatriculasController@matricularEstudiantes');
   Route::get('encabezado','MatriculasController@leerEncabezado');
-
   Route::get('materias/','MatriculasController@materias');
 
-
+//rutas para el manejo de errores de paginas y de servidor
   Route::get('error',function($exception){
     abort(404);
   });
@@ -339,6 +328,12 @@ Route::get('estudiantes','MatriculasController@index');
     abort(500);
   });
 
+ Route::group(['prefix'=>'android'], function(){
+
+    Route::post('iniciarSesion','AuthenticateController@authenticate');
+    Route::get('notas','AuthenticateController@notas');
+
+ });
 
   
 

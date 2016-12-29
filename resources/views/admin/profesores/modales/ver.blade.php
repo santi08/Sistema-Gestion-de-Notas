@@ -19,10 +19,11 @@
 							<tr>
 								<th>Código</th>
 								<th>Asignatura</th>
-								<th>Creditos</th>
+								<th class="center">Grupo</th>
+								<th class="center">Creditos</th>
 							</tr>
 						</thead>
-						<tbody id="tablaAsignaturas">			
+						<tbody id="tablaAsignaturas" class="center">			
 						</tbody>
 					</table>
 				</div>

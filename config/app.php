@@ -162,13 +162,14 @@ return [
         Collective\Html\HtmlServiceProvider::class,
        
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+       
 
          //libreria PDF DomPdf
         Barryvdh\DomPDF\ServiceProvider::class,
 
 
         Laracasts\Flash\FlashServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
 
 
     ],
@@ -222,16 +223,18 @@ return [
 
         */
 
-        'Form' => Collective\Html\FormFacade::class,
-        'Html'=> Collective\Html\HtmlFacade::class,
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         //libreria PDF DomPdf
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
+
     
 
 

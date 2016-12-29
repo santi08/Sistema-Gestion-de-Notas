@@ -79,10 +79,10 @@
                   <div class="file-field input-field">
                      <div class="btn blue-grey darken-1">
                         <span class="">Elegir Archivo</span>
-                        <input type="file" accept=".txt" required=""  name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
+                        <input type="file" accept=".txt"   name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
                      </div>
                      <div class="file-path-wrapper">
-                        <input class="file-path validate" required="" type="text">
+                        <input class="file-path validate"  type="text">
                      </div>
                   </div>
             </div>

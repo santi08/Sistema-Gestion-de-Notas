@@ -58,11 +58,11 @@
 
         </fieldset>
         <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
                <i class="mdi-action-info blue-text" data-tooltip="Hola, en esta sección podras consultar información de los  distintos profesores de la sede, ademas puedes generar un reporte individual de ellos."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
 	
 		<!--<div class="row">		
@@ -189,7 +189,7 @@ $(document).ready(function(){
             success:function(data){
                 $(data).each(function(key,value){
                     $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-                    tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");    
+                    tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Grupo+"</td><td>"+value.Creditos+"</td></tr>");    
                 });
                 $('#ver').openModal();                                  
             }
