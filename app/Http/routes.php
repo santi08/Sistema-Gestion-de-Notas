@@ -117,7 +117,7 @@ Route::group(['middleware' => 'auth'],function(){
         ]);
 
       //reporte General
-      Route::get('informes/pdfEstudiante',[
+      Route::get('informes/pdfGeneral/{periodo}/{programa}',[
         'uses'=>'InformesController@crearReporteGeneral',
         'as'=>'admin.informes.pdfGeneral'
         ]);
@@ -187,6 +187,16 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.notas.index'
           ]);
 
+        Route::post('matricular/archivo',[
+          'uses' =>'MatriculasController@matricularEstudiantes',
+          'as' => 'admin.matricular.archivo'
+        ]);
+
+        Route::post('matricular/estudiante',[
+          'uses' =>'MatriculasController@store',
+          'as' => 'admin.matricular.estudiante'
+          ]);
+
     });
 //fin middleware administrador
 
@@ -195,6 +205,11 @@ Route::group(['middleware' => 'auth'],function(){
       Route::get('informes/pdfAsignatura/{idHorario}',[
         'uses'=>'InformesController@crearReporteAsignatura',
         'as'=>'docente.informes.pdfAsignatura'
+        ]);
+      //reporte General
+      Route::get('informes/pdfGeneral/{periodo}/{programa}',[
+        'uses'=>'InformesController@crearReporteGeneral',
+        'as'=>'docente.informes.pdfGeneral'
         ]);
 
       Route::post('item',[
@@ -241,12 +256,12 @@ Route::group(['middleware' => 'auth'],function(){
 
         Route::post('matricular/archivo',[
           'uses' =>'MatriculasController@matricularEstudiantes',
-          'as' => 'matricular.archivo'
+          'as' => 'docente.matricular.archivo'
         ]);
 
         Route::post('matricular/estudiante',[
           'uses' =>'MatriculasController@store',
-          'as' => 'matricular.estudiante'
+          'as' => 'docente.matricular.estudiante'
           ]);
 
 

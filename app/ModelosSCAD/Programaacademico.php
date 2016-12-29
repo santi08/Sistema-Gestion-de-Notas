@@ -29,7 +29,7 @@ class Programaacademico extends Model
     }*/
 
     public function usuario(){
-    	return $this->belongsTo('App\ModelosSCAD\Programaacademico','UsuarioID');
+    	return $this->belongsTo('App\ModelosSCAD\Usuario','UsuarioID');
     }
 
     public function programasAcademicosAsignaturas(){

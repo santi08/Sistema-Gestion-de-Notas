@@ -198,7 +198,7 @@ class EstudiantesController extends Controller
     
 
 
-      flash('Estudiante registrado con exito', 'success');
+      flash('El estudiante ha sido registrado con exito', 'success');
       return redirect()->route('admin.estudiantes.index');  
    }
 

@@ -163,7 +163,7 @@ class SubitemsController extends Controller
        if($porcentajeDisponible - $request->porcentaje >= 0){
 
         $subitem->save();
-         flash('El subitem ha sido editado con exito', 'success');
+        flash('El subitem ha sido editado con exito', 'success');
          return redirect()->back();
 
        }else{
@@ -175,6 +175,79 @@ class SubitemsController extends Controller
        
 
 
+    }
+
+    public function calcularNotaItem($matricula, $item){
+
+        $subitems= $matricula->subitems->where('item_id',$item->id);
+        $nota=null;
+        
+        if ($item->tipoitem->nombre == 'PARCIALES') {
+             
+             $arrya_notas = array();
+
+              foreach ($subitems as $subitem) { 
+
+                array_push($arrya_notas, $subitem->pivot->nota);
+                    
+              }
+                  $nota_subitem_parcial = max($arrya_notas);
+                  $porcentaje = ($subitem->porcentaje)/100;
+                  $nota_total = $nota_subitem_parcial * $porcentaje;
+
+              return $nota_total;
+
+        }else{
+
+            foreach ($subitems as $subitem) {   
+
+                    $nota_subitem = $subitem->pivot->nota;
+                    $porcentaje = ($subitem->porcentaje)/100;
+                    $nota_total= $nota_subitem * $porcentaje;
+
+                    $nota+=$nota_total;     
+            }
+
+            return $nota;           
+        }       
+    }
+
+     public function actualizarNotas($item){
+
+        //dd($item);
+        $matriculas = $item->matriculas;
+    
+        foreach ($matriculas as $matricula) {
+                $nota= 0;
+           foreach ($matricula->subitems as $subitem){
+ 
+                $nota_subitem= $subitem->pivot->nota;
+                $porcentaje = ($subitem->porcentaje)/100;
+                $nota_total= $nota_subitem * $porcentaje;
+                $nota+=$nota_total;
+                dd($nota);
+           }    
+                $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota));
+                $matricula->definitiva = $this->calcularNotaEstudiante($matricula);
+                $matricula->save();
+        }
+
+
+    }
+
+      public function calcularNotaEstudiante($matricula){
+
+        $items = $matricula->items;
+        $nota= 0;
+
+        foreach ($items as $item) {
+
+            $nota_item= $item->pivot->nota;
+            $porcentaje = ($item->porcentaje)/100;
+            $nota_total= $nota_item * $porcentaje;
+            $nota+=$nota_total;
+        }
+        return $nota;
     }
 
     /**
@@ -198,11 +271,13 @@ class SubitemsController extends Controller
     public function destroy($id)
     {
         $subitem = Subitem::find($id);
+        $item = $subitem->item;
          if ($this->validarSubitemSinNotas($subitem)) {
 
              try {
 
             $subitem->delete();
+            $this->actualizarPorcentajes($item);
             flash('El subitem ha sido eliminado con exito', 'success');
             return redirect()->back();
                  

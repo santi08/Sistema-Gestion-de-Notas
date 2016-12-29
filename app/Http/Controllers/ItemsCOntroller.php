@@ -55,7 +55,7 @@ class ItemsController extends Controller
 
         $tipo_item = TipoItem::find($id_tipo_item);
 
-        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item > 0){
+        if ($this->validarPorcentaje($estudiantes[0]) - $porcetanje_item >= 0){
 
             if ($tipo_item->nombre == "PARCIALES") {
             try {
@@ -151,8 +151,8 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
+    
         $item = Item::find($id);
         return response()->json($item);
     }
@@ -170,6 +170,8 @@ class ItemsController extends Controller
         $id_item= $request->id_item;
 
         $item= Item::find($id_item);
+        $porcentaje_sin_editar = $item->porcentaje;
+
         $tipo_item =TipoItem::find($request->tipo_item);
         $porcentaje_disponible= $this->validarPorcentaje($item->matriculas[0]) + $item->porcentaje;
 
@@ -181,6 +183,9 @@ class ItemsController extends Controller
                 $item->tipo_id= $request->tipo_item;
                 $item->descripcion = $request->descripcion;
                 $item->save();
+                if ($porcentaje_sin_editar != $request->porcentaje) {
+                    $this->actualizarNotas($item->matriculas[0]->horario);
+                }                
                 flash('El item ha sido editado exitosamente', 'success');
                 return redirect()->back();
             }else if($item->tipo_id == $request->tipo_item){
@@ -189,6 +194,9 @@ class ItemsController extends Controller
                 $item->tipo_id= $request->tipo_item;
                 $item->descripcion = $request->descripcion;
                 $item->save();
+                 if ($porcentaje_sin_editar != $request->porcentaje) {
+                    $this->actualizarNotas($item->matriculas[0]->horario);
+                }
                 flash('El item ha sido editado exitosamente', 'success');
                 return redirect()->back();
             }else{
@@ -205,18 +213,43 @@ class ItemsController extends Controller
         }
     }
 
-    public function actualizarNotas($item){
+    public function actualizarNotas($horario){
 
-        $matriculas = $item->matriculas;
-        
-
+        $matriculas = $horario->matriculas;
+    
         foreach ($matriculas as $matricula) {
-           
-          $nota_previa = $matricula->items;
-          dd($nota_previa);
+             $nota= 0;
+           foreach ($matricula->items as $item){
+                 //dd($matricula->items);
+                $nota_item= $item->pivot->nota;
+                $porcentaje = ($item->porcentaje)/100;
+                $nota_total= $nota_item * $porcentaje;
+                $nota+=$nota_total;
+           }    
+                $matricula->definitiva = $nota;
+                $matricula->save();
+            
         }
 
 
+    }
+
+    public function calcularNotaEstudiante($matricula){
+
+        $items = $matricula->items;
+        $nota= 0;
+
+        foreach ($items as $item) {
+
+            $nota_item= $item->pivot->nota;
+            $porcentaje = ($item->porcentaje)/100;
+            $nota_total= $nota_item * $porcentaje;
+
+           $nota+=$nota_total;
+
+        }
+
+        return $nota;
     }
 
     /**

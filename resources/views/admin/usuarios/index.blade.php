@@ -269,13 +269,13 @@
          $.get(rutaBusqueda,function(res){
             var nombre = res.primerNombre+" "+res.segundoNombre+" "+res.primerApellido;
             swal({
-               title: "¿Estas seguro de eliminar el Estudiante?",
+               title: "¿Estas seguro de desactivar el Estudiante?",
                text: nombre ,
                type: "warning",
                showCancelButton: true,
                cancelButtonColor:'#388E3C',
                confirmButtonColor: '#E53935',
-               confirmButtonText: 'Si, Eliminarlo',
+               confirmButtonText: 'Si, Desactivarlo',
                cancelButtonText: "Cancelar",
                closeOnConfirm: false,
                closeOnCancel: false
@@ -299,7 +299,7 @@
 
                }else {
                   
-                  swal("Cancelado", "El Estudiante no se ha eliminado", "error");
+                  swal("Cancelado", "El Estudiante no se ha desactivado", "error");
                  
                }
             });
