@@ -189,7 +189,7 @@ $(document).ready(function(){
             success:function(data){
                 $(data).each(function(key,value){
                     $("#nombreProfesor").text(value.name+" "+value.Apellidos); 
-                    tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Creditos+"</td></tr>");    
+                    tablaAsignaturas.append("<tr><td>"+value.Codigo+"</td><td>"+value.Nombre+"</td><td>"+value.Grupo+"</td><td>"+value.Creditos+"</td></tr>");    
                 });
                 $('#ver').openModal();                                  
             }

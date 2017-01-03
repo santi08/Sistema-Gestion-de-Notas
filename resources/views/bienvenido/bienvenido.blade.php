@@ -20,44 +20,40 @@
 <body>
 
 <div class="row">
-<div class="col s12 m12 l12">
-
-<div class="row">
-    <div class="login col s12">
-       <div class="top">
-          <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
-       </div>
-       <div class="login-box animated fadeInUp">
-               
-           @include('bienvenido.login')   
-        </div>
-  </div>
-</div>
-   
-<div class="row">
    <div class="col s12 m12 l12">
-      <footer class="page-footer gradient">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12 ">
-                <h5 class="white-text">Sistema Control Academico Universitario (S.C.A.U)</h5>
-                <h5 class="grey-text text-lighten-4">Desarrolladores</h5>
-                <p class="grey-text text-lighten-4">Kevin Cardona, Santiago Guarín, Carlos Almario</p>
-              </div>
-              
+      <div class="row">
+         <div class="login col s12">
+            <div class="top">
+               <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
             </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2016 Copyright todos los derechos reservados, Universidad del Valle Sede Yumbo
-            <p class="grey-text text-lighten-4 right">scau.soporte@gmail.com</p>
+            <div class="login-box animated fadeInUp row">   
+               @include('bienvenido.login')   
             </div>
-          </div>
-        </footer>
+         </div>
+      </div>
+   
+      <div class="row">
+         <div class="col s12 m12 l12">
+            <footer class="page-footer gradient">
+               <div class="container">
+                  <div class="row">
+                     <div class="col l6 s12 ">
+                        <h5 class="white-text">Sistema Control Academico Universitario (S.C.A.U)</h5>
+                        <h5 class="grey-text text-lighten-4">Desarrolladores</h5>
+                        <p class="grey-text text-lighten-4">Kevin Cardona, Santiago Guarín, Carlos Almario</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="footer-copyright">
+                  <div class="container">
+                     © 2016 Copyright todos los derechos reservados, Universidad del Valle Sede Yumbo
+                     <p class="grey-text text-lighten-4 right">scau.soporte@gmail.com</p>
+                  </div>
+               </div>
+            </footer>
+         </div>
+      </div>
    </div>
-</div>
-  
-        </div>
 </div>
 
 

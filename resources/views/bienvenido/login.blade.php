@@ -1,4 +1,3 @@
-
 <div class="row">                
    <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">        
       <div class="row">

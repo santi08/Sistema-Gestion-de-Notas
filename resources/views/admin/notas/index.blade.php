@@ -9,15 +9,9 @@
 				<div class="row">
 					<div class="col s12 m12 l12">
 						<div id="breadcrumbs-wrapper">
-           
-            				<div class="header-search-wrapper grey hide-on-large-only">
-                				<i class="mdi-action-search active"></i>
-                				<input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
-            				</div>
           					<div class="container">
             					<div class="row">
               						<div class="col s12 m12 l12">
-                
 	                					<ol class="breadcrumbs">
                     						<li><a href="{{url('/index')}}">Inicio</a></li>
                     						<li><a href="{{route('matriculas.index')}}">Mis asignaturas</a></li>
@@ -114,31 +108,38 @@
 									@if ($item->tipoitem->nombre != "PARCIALES")
 
 										<a data-target="#insertarSubitem" 
+
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger   " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="mdi-content-add green-text" ></i></a>
+
 									@endif
 
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
+
 										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
 								
 
 										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" 
+
 										class=" btn-warning-cancel btn-flat " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+
 
 									</th>
 								@else
 									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center" nowrap>{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="insertarSubitem" 
-											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  tooltipped " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem"><i class="mdi-content-add green-text" ></i></a>
+											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  " data-position="top"  data-tooltip="Insertar subitem"><i class="mdi-content-add green-text" ></i></a>
 
 
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
+
 										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
 										<a onclick="eliminar({{$item->id}});" class="btn-flat  btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+
 
 									</th>
 
