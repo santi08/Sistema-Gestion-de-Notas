@@ -2,8 +2,6 @@
 
 @section('title','Bienvenido')
 
-
-
 @section('content')
 
     <h3>Bienvenido(a) al Sistema de Control Académico Universitario</h3>

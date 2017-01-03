@@ -1,6 +1,5 @@
  <table id="data-table-simple" class="responsive-table bordered display dataTable"  aria-describedby="data-table-simple_info">
     <thead >
-        
             <th>Código</th>
             <th>Nombre</th>
             <th class="center">Creditos</th>

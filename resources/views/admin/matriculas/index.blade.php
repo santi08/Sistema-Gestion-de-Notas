@@ -15,7 +15,7 @@
                         <div class="col s12 l3 m3">
                             <select name="periodos" id="periodos">
                                         
-                                @foreach($periodos as $periodo);
+                                @foreach($periodos as $periodo)
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano."-".$periodo->Periodo}}</option>
                         @endforeach
                     </select>
@@ -50,12 +50,12 @@
                 </div>
             @endif
             <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
                <i class="mdi-action-info blue-text" data-tooltip="Hola, éstas son las asignaturas que estas dictando éste periodo.
                podras generar un reporte de la asignatura que desees, matricular estudiantes y generar un reporte individual de la asignatura"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
          
 <br>

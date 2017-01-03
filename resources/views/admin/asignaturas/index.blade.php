@@ -12,7 +12,7 @@
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
-                            @foreach($programas as $programa);
+                            @foreach($programas as $programa)
                                 @if($programa->NombrePrograma != 'GENERICO')
                                     <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                                 @endif
@@ -20,8 +20,8 @@
                         </select>
                             <label>Programa Académico</label>
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
-                        <select id="programas" name="programas" required>
-                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                        <select id="programas" name="programas">
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa)
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             @endforeach
 
@@ -32,7 +32,7 @@
 
                 <div class="input-field col s3 l3 m3">   
                     <select name="periodos" id="periodos">
-                        @foreach($periodos as $periodo);
+                        @foreach($periodos as $periodo)
                             <option value="{{$periodo->Id}}" id="{{$periodo->Id}}">{{$periodo->Ano." ".$periodo->Periodo}}</option>
                             @endforeach
                     </select>
@@ -77,10 +77,10 @@
 </div>
 
 
-
 @include('admin.asignaturas.modales.matricular')
 @include('admin.asignaturas.modales.verDatosAsignaturas')
 @overwrite
+
 
 @section('scripts')
 

@@ -15,7 +15,7 @@
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
-                            @foreach($programas as $programa);
+                            @foreach($programas as $programa)
                                 @if($programa->NombrePrograma != 'GENERICO')
                                     <option value="{{$programa->CodigoPrograma}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                                 @endif
@@ -24,7 +24,7 @@
                             <label>Programa Académico</label>
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
                         <select id="programas" name="programas">
-                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa)
                            
                                 <option value="{{$programa->CodigoPrograma}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             
@@ -74,11 +74,11 @@
 
          <input type="hidden" id="idPrograma">
          <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s9">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s9">
               
                <i class="mdi-action-help blue-text" data-tooltip="Hola, esta sección contiene todos los estudiantes de la sede, puedes registrar estudiantes de manera individual o procesar un archivo plano para registrar muchos estudiantes, puedes editar su informaciónn y consultar sus datos"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
        
          <div class="divider grey darken-1"></div>

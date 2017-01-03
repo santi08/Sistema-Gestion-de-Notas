@@ -31,7 +31,7 @@
 			<div class="input-field col s9 l4 m4 fuentes" >
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
-                            @foreach($programas as $programa);
+                            @foreach($programas as $programa)
                                 @if($programa->NombrePrograma != 'GENERICO')
                                     <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                                 @endif
@@ -40,7 +40,7 @@
                             <label>Programa Académico</label>
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
                         <select id="programas" name="programas">
-                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa)
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             @endforeach
 

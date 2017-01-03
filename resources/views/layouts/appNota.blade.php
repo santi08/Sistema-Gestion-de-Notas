@@ -9,20 +9,20 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
         <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection" >
+        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.css')}}" type="text/css" rel="stylesheet">
+        <link href="{{asset('plugins/MaterializeAdmin/js/plugins/data-tables/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet">
 
 
         <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
         <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">
          
         
-        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/sweetalert/dist/sweetalert.css')}}" type="text/css" rel="stylesheet" >
     
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/js/dataurl.css')}}">
          <link href="{{ asset('plugins/MaterializeAdmin/css/estilo-tabla-notas.css')}}" type="text/css" rel="stylesheet">
@@ -30,10 +30,10 @@
 
         
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.css')}}" type="text/css" rel="stylesheet">
 
-        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet" media="screen,projection'">
-        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/jvectormap/jquery-jvectormap.css')}}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/chartist-js/chartist.min.css')}}" type="text/css" rel="stylesheet">
 
 
     </head>
@@ -47,7 +47,7 @@
                         <div class="row">
 
                             <div class="col s6 m6 l6 hide-on-small-only hide-on-med-only offset-l1 hide-on-small-only  ">
-                                <img src="{{ asset('img/logo.png')}}"> 
+                                <img src="{{ asset('img/logo.png')}}" alt="Sistema Control Académico Universitario"> 
                             </div>
                             <div class="col s1 l1 m1 offset-l4 offset-s9">
 

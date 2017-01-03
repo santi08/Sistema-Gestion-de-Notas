@@ -1,9 +1,6 @@
 
 <div class="row">                
-   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">  
-      
-         
-                   
+   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">        
       <div class="row">
          <div class="col s6 l6 m6  center waves-effect waves-teal btn-flat" onclick="mostrarDocente()" id="boxDocentes">
             <h6>Docente</h6>
@@ -19,8 +16,9 @@
          
 
          <div class="col s12 m12 l12">
-            <fieldset class="grey lighten-4" style="border-radius: 10px">
+           
             {!! Form::open(['route'=> 'admin.login', 'method' => 'POST']) !!}
+             <fieldset class="grey lighten-4" style="border-radius: 10px">
                {{ csrf_field() }}
                <div class="row">
                   <div class="col s12  centrar input-field">
@@ -32,9 +30,8 @@
                <div class="row">
                   <div class="col s12  centrar input-field ">
 
-                     <input id="password" type="password" name="password" 
-                      title="ingresar con la contraseña que usas en S.C.A.D" class="validate" name="password">
-                     <label for="password ">Contraseña</label>
+                     <input id="password_docentes" type="password" name="password" title="ingresar con la contraseña que usas en S.C.A.D" class="validate" >
+                     <label for="password_docentes">Contraseña</label>
                   </div>
                </div>
 
@@ -57,11 +54,11 @@
                      </div>
 
                </div>
-
+                    </fieldset>
             {!! Form::close() !!}
              <p class="center"><a href="{{ url('http://docentes.univalleyumbo.com/login/recuperar') }}">¿Olvidaste tu contraseña?</a></p>
                
-               </fieldset>
+             
          </div>    
       </div>
 
@@ -69,8 +66,9 @@
       
 
          <div class="col s12 m12 l12">
-            <fieldset class="grey lighten-4" style="border-radius: 10px">
+          
             {!! Form::open(['route'=> 'user.login', 'method' => 'POST']) !!}
+              <fieldset class="grey lighten-4" style="border-radius: 10px">
                   {{ csrf_field() }}
 
                   <div class="row">
@@ -82,8 +80,8 @@
 
                   <div class="row">
                      <div class="col s12  centrar input-field ">
-                        <input id="password" type="password" class="validate" name="password" required="">
-                        <label for="password ">Contraseña</label>
+                        <input id="password_estudiantes" type="password" class="validate" name="password" required="">
+                        <label for="password_estudiantes">Contraseña</label>
                      </div>
                   </div>
 
@@ -107,7 +105,7 @@
                      </div>
 
                </div>
-
+                    </fieldset>
             {!! Form::close() !!}
 
                  
@@ -117,8 +115,7 @@
               
             </div>
 
-            </fieldset>
+          
          </div>
       </div>
-   </div>          
-</div>
+</div>          

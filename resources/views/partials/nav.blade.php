@@ -46,8 +46,9 @@
             </div>
          </div>   
       </li>
+        
        <li class="li-hover "><div class="divider"></div></li>
-      <br> 
+    
       <li class="mihover"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
                 
         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())

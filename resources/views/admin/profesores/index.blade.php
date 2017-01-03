@@ -16,7 +16,7 @@
                     @if (Auth::guard('admin')->user()->rolAdministrador())
                         <select id="programas" name="programas">
                             <option value="" disabled selected>Seleccione un programa</option>
-                            @foreach($programas as $programa);
+                            @foreach($programas as $programa)
                                 @if($programa->NombrePrograma != 'GENERICO')
                                     <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                                 @endif
@@ -25,7 +25,7 @@
                             <label>Programa Académico</label>
                     @elseif (Auth::guard('admin')->user()->rolCoordinador())
                         <select id="programas" name="programas">
-                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa);
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa)
                            
                                 <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
                             
@@ -58,11 +58,11 @@
 
         </fieldset>
         <div class="row">
-            <dir class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
+            <div class="col s1 m1 l1 offset-l11 offset-m11 offset-s11">
               
                <i class="mdi-action-info blue-text" data-tooltip="Hola, en esta sección podras consultar información de los  distintos profesores de la sede, ademas puedes generar un reporte individual de ellos."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
 
-            </dir>     
+            </div>     
         </div>
 	
 		<!--<div class="row">		
