@@ -33,7 +33,7 @@ class AuthenticateController extends Controller
         }
         $estudiante = Estudiante::where('codigo',$request->codigo)->get();
         // all good so return the token
-        return response()->json(compact('token','estudiante'));
+        return response()->json(['estudiante'=>$estudiante,'token'=>$token]);
     }
 
     public function notas(Request $request){
