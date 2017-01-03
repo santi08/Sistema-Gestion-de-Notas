@@ -3,107 +3,97 @@
 
 @section('content')
 	<h4 class="center">Gestion de Informes</h4>
-	<hr>
+	<br>        
+<div class="divider  grey darken-1"></div>
+<br>  
 	<p class="flow-text">Seleccione los items que desea filtrar</p>
 	<div class="row">
-		<div class="input-field col s5">
-							
-			<select>
-				<option value="1" disabled selected>Seleccione una opción</option>
-				@foreach($PeriodosAcademicos as $PeriodoAcademico)
-					  			
-			    <option value="{{ $PeriodoAcademico->Id}}">
-			    {{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
-			    </option>
-
-				@endforeach
-					  			
-			</select>
-				  	<label>Periodo Academico</label>
-		</div>
-
-		<div class="input-field col s5">
-			<select>
-			<option value="" >Seleccione una opción</option>
-
-			@foreach($ProgramasAcademicos as $ProgramaAcademico)
-			@if($ProgramaAcademico->NombrePrograma != 'GENERICO')
-				<option value="{{$ProgramaAcademico->id}}">		
+		<div class="col s12 m12 l12">
+			
+		<div class="row">
+			<div class="col s5 l5 m5">
 				
-				{{ $ProgramaAcademico->NombrePrograma }}
-			</option>
-			@endif
-			@endforeach
-			
-			</select>
-			<label>Programa Academico</label>
-			  			
-		</div>
+				<div class="input-field">
+					<select id='periodos'>
+						@foreach($PeriodosAcademicos as $PeriodoAcademico)
+					  			
+			    			<option value="{{ $PeriodoAcademico->Id}}">
+			    				{{ $PeriodoAcademico->Ano}} - {{ $PeriodoAcademico->Periodo }}
+			    			</option>
 
-		<div class="col s5 input-field ">
-          		<input id="Profesor" type="search" class="validate" >
-          	<label for="Profesor">Profesor</label>
-        </div>
-
-        <div class="col s5 input-field ">
-          		<input id="Asignatura" type="search" class="validate" >
-          	<label for="Asignatura">Asignatura</label>
-        </div>
-
-        <div class="col s5 input-field ">
-          		<input id="Estudiante" type="search" class="validate" >
-          	<label for="Estudiante">Estudiante</label>
-        </div>
-
-        <div class="input-field col s5">
-			<select>
-			<option value="" >Seleccione una opción</option>
-			<option value="1">TODOS</option>
-			<option value="2">REPITENTES</option>
-
-			
-			</select>
-			<label>Tipo de matricula</label>
-			  			
-		</div>
-
-		
-
-
-
-	</div>
-
-
-
-	<div class="row col s3">
-		  <p class="range-field">
-      		<input type="range" id="noUi-origin" min="0" max="5" />
-      		<label>Rango de notas</label>
-    	  </p>
-    </div>
-
-		<!-- <div id="slider-start" class="noUi-target noUi-ltr noUi-horizontal">
-			<div class="noUi-base">
-			|	<div class="noUi-origin" style="left: 13.9024%;">
-					<div class="noUi-handle" data-handle="0" style="z-index: 5;">
-					
-					</div>
-				</div>
-				<div class="noUi-origin" style="left: 80%;">
-					<div class="noUi-handle" data-handle="1" style="z-index: 4;">
-			
-					</div>
-				</div>
+						@endforeach
+					  			
+					</select>
+				  	<label>Periodo Academico</label>
+				</div>			
 			</div>
-		</div> -->  
 
-    <div class="row col s12 ">
-    	 <a class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
-    	 GENERAR REPORTE</a>
-    </div>
-	      
-	      
+			<div class="input-field col s9 l4 m4 fuentes" >
+                    @if (Auth::guard('admin')->user()->rolAdministrador())
+                        <select id="programas" name="programas">
+                            @foreach($programas as $programa)
+                                @if($programa->NombrePrograma != 'GENERICO')
+                                    <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                            <label>Programa Académico</label>
+                    @elseif (Auth::guard('admin')->user()->rolCoordinador())
+                        <select id="programas" name="programas">
+                            @foreach(Auth::guard('admin')->user()->usuarios[0]->programasAcademicos as $programa)
+                                <option value="{{$programa->Id}}" id="{{$programa->Id}}">{{$programa->NombrePrograma}}</option>
+                            @endforeach
+
+                        </select> 
+                        <label>Programa Académico</label>                   
+                    @endif            
+                </div>
+
+		</div>
+
+        <div class="row">
+	        @if(Auth('admin')->user()->rolDocente())
+	        	<div class="col s12 m12 l12">
+	        		<a onClick="generarPdf(1)" class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
+	    	 		GENERAR REPORTE</a>
+        		</div>
+        	@else	
+        		<div class="col s12 m12 l12">
+	        		<a  onClick="generarPdf(2)" class="waves-effect waves-light btn red darken-1"><i class="material-icons left">picture_as_pdf</i>
+	    	 		GENERAR REPORTE</a>
+        		</div>
+        	@endif
+    	</div>
+    	<br>
+    	</div>
+	</div>
+    
+@overwrite
+
+@section('scripts')
+<script type="text/javascript">
+
+$(document).ready(function(){
+ $('#periodos').material_select();
+ $('#programas').material_select();
+
+});
 
 
+function generarPdf(id){
+ 	var periodo= $("#periodos").val();
+ 	var programa= $("#programas").val();
+ 	if(id == 1){
+ 		var ruta= "{{route('docente.informes.pdfGeneral',['periodo','programa'])}}";
+ 	}else{
+ 		var ruta= "{{route('admin.informes.pdfGeneral',['periodo','programa'])}}";
+ 	}
+ 	ruta=ruta.replace('periodo',periodo);
+ 	ruta=ruta.replace('programa',programa);
 
-@endsection
+ 	window.open(ruta);
+ }
+	
+</script>
+@overwrite
+	     

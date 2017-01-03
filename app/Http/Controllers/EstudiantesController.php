@@ -13,74 +13,44 @@ use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
-use App\Alertas;
+
 
 class EstudiantesController extends Controller
 {
-    public $alerta;
 
-    public function listarAsignaturas($id){
-       $periodos = Periodoacademico::orderBy('Id','DESC')->get();
-       $ultimo_periodo=$periodos->first();
-       $id_periodo= $ultimo_periodo->Id;
-        //array para guardar las materias del ultimo periodo academico
-        $asignaturasUltimoPeriodo=array();
-
-        //Capturar el ultimo Periodo para listarlo por defecto
-          
-      $estudiante= Estudiante::find($id);
-      $asignaturas=$estudiante->matriculas;
-
-       //Buscar las matriculas en el periodo Capturado
-        foreach ($asignaturas as $asignatura) {
-          if($asignatura->horario->PeriodoAcademicoId == $id_periodo){
-              $asignaturasUltimoPeriodo[]= $asignatura; 
-            }
-        }
+    public function listarAsignaturas($idEstudiante,$idPeriodo){
+      
+      $estudiante= Estudiante::find($idEstudiante);
+      
       $nombre = $estudiante->primerNombre." ".$estudiante->primerApellido;
+      $matriculas =$estudiante->matriculas;
 
-      return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturasUltimoPeriodo'),compact('nombre'))->render());
-
-    }
-
-    public function index(Request $requests){
-
-     $programas= Programaacademico::all();
-     
-
-     if((!empty($requests->get('idPrograma'))) and (!empty($requests->get('valor')))){
-
-       $e = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
-
-      if($requests->ajax()){
-        return response()->json(view('admin.usuarios.part.mostrar2',compact('e'))->render()); 
-      };
-     }
-     
-    if(!empty($requests->get('idPrograma')) and empty($requests->get('valor'))){
-
-       $e= Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
-
-      if($requests->ajax()){
-        return response()->json(view('admin.usuarios.part.mostrar',compact('e'))->render()); 
-      };
-
-    }else {
-      $estudiantes = Estudiante::codigo($requests->get('valor'),$requests->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->paginate(10);
-
-      if($requests->ajax()){
-         return response()->json(view('admin.usuarios.part.mostrar1',compact('estudiantes'))->render()); 
-      
+      $asignaturas = array();
+      foreach ($matriculas as $matricula) {
+        if ($matricula->horario->PeriodoAcademicoId == $idPeriodo) {
+        array_push($asignaturas,$matricula->horario);
+        }        
       }
-     
+
+      return response()->json(view('admin.usuarios.part.listarAsignaturas',compact('asignaturas','nombre','estudiante'))->render());
       
-      return view('admin.usuarios.index')->with('estudiantes',$estudiantes)->with('programas',$programas);
     }
 
- 
+    public function index(Request $request){
 
+      $programas= Programaacademico::all();
+      $periodos= Periodoacademico::orderBy('Id','DESC')->get();
 
- }
+      if($request->ajax()){
+        $estudiantes = Estudiante::Programa($request->get('idPrograma'))->orderBy('primerApellido','ASC')->where('estado',1)->get();
+
+        $vista=view('admin.usuarios.part.mostrar',compact('estudiantes'));  
+        return response()->json($vista->render());       
+      }
+
+      return view('admin.usuarios.index')->with('programas',$programas)->with('periodos',$periodos);
+
+    }
       
     public function procesarArchivo(Request $request)
     {
@@ -90,7 +60,7 @@ class EstudiantesController extends Controller
       
         if($request->file('file')->isValid()){
           
-          DB::table('Estudiantes')->update(['estado'=> 0]);
+         // DB::table('Estudiantes')->update(['estado'=> 0]);
 
           try{
             $files = $request->file('file');
@@ -182,22 +152,22 @@ class EstudiantesController extends Controller
 
             $mensaje="";
             if($registrados>0){
-                $mensaje.=", se han guardado ". $registrados ." usuarios";
+                $mensaje.="Han sido registrados ". $registrados ." Estudiantes";
             }
              if($actualizados>0){
-                $mensaje.=", se han actualizado ". $actualizados ." usuarios";
+                $mensaje.="Han sido actualizados ". $actualizados ."Estudiantes";
              }
             if($errores>0){
-                $mensaje.=", no pudiero almacenarse ". $errores ." usuarios, lo mas probable es que estos no cuenten".
+                $mensaje.="No pudieron ser registrados ". $errores ." Estudiantes, es probable que no cuenten".
                 " con los campos obligatorios completos";
             }
-
-           $alerta->crearAlerta('success',$mensaje);
-
-            return response()->json(['mensaje'=>'procesamiento Correcto']);
+             flash($mensaje, 'success');
+          
+            return redirect()->route('admin.estudiantes.index');
 
           }catch(\Exception $e){
-           $alerta->crearAlerta('warning','el archivo no es legible');                   
+           flash('El archivo no se pudo procesar, por favor escoge el archivo adecuado', 'warning'); 
+           return redirect()->route('admin.estudiantes.index');                  
           }
         }else{
 
@@ -206,55 +176,62 @@ class EstudiantesController extends Controller
     }
 
     public function create(){
-
     	return view('admin.usuarios.index');
     }
 
-    public function store(Request $requests){
-    $user= new Estudiante($requests->all());
-    $contrasena=$this->crearContrasena($user);
-    $user->password=bcrypt($contrasena);
-    $user->save();
-    
-    $alerta= new alertas();
-    $alerta->crearAlerta('success','Estudiante Registrado');
 
-    return redirect()->route('admin.estudiantes.index');  
-    }
+   public function store(Request $requests){
+
+      $this->validate($requests, [
+        'primerNombre' => 'required',
+        'primerApellidor' => 'required',
+        'email' => 'required',
+        'codigo' => 'required',
+        'id_programaAcademico' => 'required',
+      ]);
+
+
+      $user= new Estudiante($requests->all());
+      $contrasena=$this->crearContrasena($user);
+      $user->password=bcrypt($contrasena);
+      $user->save();
+    
+
+
+      flash('El estudiante ha sido registrado con exito', 'success');
+      return redirect()->route('admin.estudiantes.index');  
+   }
+
 
 
     public function destroy($id){
-     $estudiante = Estudiante::find($id);
+      $estudiante = Estudiante::find($id);
     
-     return response()->json( 
+      return response()->json( 
         $estudiante->toArray()
-     );
-
+      );
     }
 
    
-
     public function editar(Request $requests){
      
+
      $user = Estudiante::find($requests->id);
      $user->fill($requests->all());
      $user->save();
-     $alerta= new alertas();
-     $alerta->crearAlerta('success','Estudiante Editado con Exito');
-     return redirect()->route('admin.estudiantes.index');
+    flash('Estudiante editado con exito', 'success');
+    return redirect()->route('admin.estudiantes.index');
      
+
     } 
     
     public function edit($id){
         $info=array();
         $programas=Programaacademico::all(); 
         $estudiante=Estudiante::find($id);
-
         $info[]=$programas;
         $info[]=$estudiante;
-        return response()->json(
-            $info
-        );
+        return response()->json($info);
     } 
 
     public function destroyupdate(Request $requests,$id){
@@ -262,9 +239,8 @@ class EstudiantesController extends Controller
      $user->estado=0;
      $user->save();
      
-     $alerta= new alertas();
-     $alerta->crearAlerta('success','Estudiante Eliminado con Exito');
-     return response()->json(["mensaje"=>"listo"]);
+      flash('Estudiante eliminado con exito', 'success');
+      return response()->json(["mensaje"=>"listo"]);
     }
 
     public function show(Request $requests){

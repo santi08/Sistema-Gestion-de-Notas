@@ -1,47 +1,109 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+<html lang="en">
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+<!--================================================================================
+    Item Name: Materialize - Material Design Admin Template
+    Version: 3.1
+    Author: GeeksLabs
+    Author URL: http://www.themeforest.net/user/geekslabs
+================================================================================ -->
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+  <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+  <title>503</title>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+  <!-- Favicons-->
+  <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <!-- Favicons-->
+  <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+  <!-- For iPhone -->
+  <meta name="msapplication-TileColor" content="#00bcd4">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <!-- For Windows Phone -->
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+  <!-- CORE CSS-->
+  
+  <link href="{{asset('plugins/MaterializeAdmin/css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet" media="">
+        <link href="{{ asset('plugins/MaterializeAdmin/css/layouts/page-center.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+
+  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+  <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/prism/prism.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.css')}}" type="text/css" rel="stylesheet" media="screen,projection">
+  
+</head>
+
+<body>
+  
+  <div id="error-page">
+
+      <div class="row">
+         <div class="col s12">
+            <div class="browser-window">
+               <div class="top-bar">
+                  <div class="circles">
+                     <div id="close-circle" class="circle"></div>
+                     <div id="minimize-circle" class="circle"></div>
+                     <div id="maximize-circle" class="circle"></div>
+                  </div>
+               </div>
+               
+               <div class="content">
+                  <div class="row">
+                     <div id="site-layout-example-top" class="col s12">
+                        <p class="flat-text-logo center white-text caption-uppercase">Estamos trabajando para mejorar</p>
+                     </div>
+                     
+                     <div id="site-layout-example-right" class="col s12 m12 l12">
+                        <div class="row center">
+                           <h1 class="text-long-shadow col s12">503</h1>
+                        </div>
+                        
+                     </div>
+
+                     <div class="row center">
+                           <p class="center  col s12">La pagina esta en mantenimiento vuelve mas tarde.</p>
+                           
+                        
+                        </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </body>
+         </div>
+      </div>
+
+
+  <!-- ================================================
+    Scripts
+    ================================================ -->
+
+  <!-- jQuery Library -->
+  <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/jquery-1.11.2.min.js')}}"></script>
+  <!--materialize js-->
+  <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
+  <!--prism-->
+  <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
+  <!--scrollbar-->
+  <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+
+      <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins.js')}}"></script>
+    <!--custom-script.js - Add your own theme custom JS-->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
+  
+  <script type="text/javascript">
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+
 </html>

@@ -8,7 +8,7 @@
 
 			<div class="row">
 				<div class="col s6 m6 l6">
-					<h5>Registrar SubItem a: <strong><span id="nombreItem"></span></strong></h5>
+					<h5>Registrar SubItem a: <strong><h4 id="nombreItem"></h4></strong></h5>
 				</div>
 
 				<div class="col s6 m6 l6">
@@ -19,7 +19,7 @@
 			<div class="row">
 
 				<div class="col s12 m12 l12">
-					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formItems'])!!}
+					{!! Form::open(['route'=>['subitems.store'],'method' => 'POST', 'id'=> 'formSubitems'])!!}
 						<div class="row">
 							<div class="col s6 m6 l6 input-field">
 								
@@ -37,8 +37,8 @@
 						<div class="row">
 							
 							 <div class="input-field col s12 m12 l12">
-					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" required></textarea>
-					          <label for="textarea1">Textarea</label>
+					          <textarea id="descripcion" name="descripcion" class="materialize-textarea" rows="4" cols="50"></textarea>
+					          <label for="textarea1">Descripción(Opcional)</label>
 					        </div>	
 						</div> 					
 							
@@ -49,7 +49,7 @@
 						
 						<div class="row">
 							<div class="col s12 m12 l12">
-								<button style="width: 100%" class="waves-effect waves-light btn">Guardar</button>
+								<button style="width: 100%" class="waves-effect waves-light btn  green lighten-2 "><i class=" mdi-content-save"></i> Guardar</button>
 							</div>
 						</div>
 						

@@ -623,13 +623,13 @@ ul.side-nav.leftside-navigation li a {
 }
 
 ul.side-nav.leftside-navigation li.user-details {
-  background: url("../images/fondo.png") no-repeat center center;
+  background: url("../images/fondo.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   margin-bottom: 15px;
-  padding: 15px 0 0 15px;
+  padding: 2px 0 0 2px;
 }
 
 ul.side-nav.leftside-navigation li.user-details #profile-dropdown a {

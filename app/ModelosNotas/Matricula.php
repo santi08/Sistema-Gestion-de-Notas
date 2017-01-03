@@ -42,4 +42,6 @@ class Matricula extends Model
         return $this->belongsToMany('App\ModelosNotas\Subitem','subitem_matricula')->withPivot('id','nota');
     }
 
+    
+
 }

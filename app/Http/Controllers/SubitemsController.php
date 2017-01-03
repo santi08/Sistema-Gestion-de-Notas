@@ -37,23 +37,16 @@ class SubitemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){   
       
         $id_item = $request->id_item;
         $item = Item::find($id_item);
         $estudiantes= $item->matriculas;
-
-
-
-       
         $nombre_item = $request->nombre;
         
         $descripcion_subitem= $request->descripcion;
 
         if($request->porcentaje==""){
-
             $asignadoPorUsuario= false;
             $porcetanje_subitem =0;
         }else{
@@ -61,7 +54,8 @@ class SubitemsController extends Controller
             $asignadoPorUsuario= true;
         }
 
-        try {
+        if ($this->porcentajeAsignadoItem($item) - $request->porcentaje >=0) {
+            try {
 
              $subitem = new Subitem();
              $subitem->item_id = $id_item;
@@ -70,23 +64,27 @@ class SubitemsController extends Controller
              $subitem->asignadoPorUsuario = $asignadoPorUsuario;
              $subitem->descripcion = $descripcion_subitem;
              $subitem->save();
-             foreach ($estudiantes as $estudiante) {
+                 foreach ($estudiantes as $estudiante) {
 
-                $estudiante->subitems()->attach($subitem->id);                
+                    $estudiante->subitems()->attach($subitem->id);                
 
-            }
+                }
 
-            if($request->porcentaje==""){
-               $this->actualizarPorcentajes($item);
-            }
-
-            return redirect()->back();
+                if($request->porcentaje==""){
+                   $this->actualizarPorcentajes($item);
+                }
+                flash('El subitem se registro con exito', 'success');
+                return redirect()->back();
             
-        } catch (Exception $e) {
-
-            echo "Ocurrio un error";
-            
+            } catch (Exception $e) {
+                flash('Ocurrio un error por favor intenta de nuevo', 'danger');
+                return redirect()->back();
+            }
+        }else{
+            flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
+            return redirect()->back(); 
         }
+             
     }
 
     public function actualizarPorcentajes($item){
@@ -145,9 +143,111 @@ class SubitemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+
+       $subitem = Subitem::find($request->id_subitem);
+       $subitem->nombre = $request->nombre_subitem;
+       if($subitem->porcentaje == $request->porcentaje){
+            $subitem->asignadoPorUsuario = false;
+       }else{
+             
+             $subitem->asignadoPorUsuario = true;
+       }
+
+       
+       $subitem->porcentaje = $request->porcentaje;
+       $subitem->descripcion = $request->descripcion;
+       $porcentajeDisponible = $this->porcentajeAsignadoItem($subitem->item) + $request->porcentaje;
+
+       if($porcentajeDisponible - $request->porcentaje >= 0){
+
+        $subitem->save();
+        flash('El subitem ha sido editado con exito', 'success');
+         return redirect()->back();
+
+       }else{
+
+        flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
+        return redirect()->back(); 
+
+       }
+       
+
+
+    }
+
+    public function calcularNotaItem($matricula, $item){
+
+        $subitems= $matricula->subitems->where('item_id',$item->id);
+        $nota=null;
+        
+        if ($item->tipoitem->nombre == 'PARCIALES') {
+             
+             $arrya_notas = array();
+
+              foreach ($subitems as $subitem) { 
+
+                array_push($arrya_notas, $subitem->pivot->nota);
+                    
+              }
+                  $nota_subitem_parcial = max($arrya_notas);
+                  $porcentaje = ($subitem->porcentaje)/100;
+                  $nota_total = $nota_subitem_parcial * $porcentaje;
+
+              return $nota_total;
+
+        }else{
+
+            foreach ($subitems as $subitem) {   
+
+                    $nota_subitem = $subitem->pivot->nota;
+                    $porcentaje = ($subitem->porcentaje)/100;
+                    $nota_total= $nota_subitem * $porcentaje;
+
+                    $nota+=$nota_total;     
+            }
+
+            return $nota;           
+        }       
+    }
+
+     public function actualizarNotas($item){
+
+        //dd($item);
+        $matriculas = $item->matriculas;
+    
+        foreach ($matriculas as $matricula) {
+                $nota= 0;
+           foreach ($matricula->subitems as $subitem){
+ 
+                $nota_subitem= $subitem->pivot->nota;
+                $porcentaje = ($subitem->porcentaje)/100;
+                $nota_total= $nota_subitem * $porcentaje;
+                $nota+=$nota_total;
+                dd($nota);
+           }    
+                $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota));
+                $matricula->definitiva = $this->calcularNotaEstudiante($matricula);
+                $matricula->save();
+        }
+
+
+    }
+
+      public function calcularNotaEstudiante($matricula){
+
+        $items = $matricula->items;
+        $nota= 0;
+
+        foreach ($items as $item) {
+
+            $nota_item= $item->pivot->nota;
+            $porcentaje = ($item->porcentaje)/100;
+            $nota_total= $nota_item * $porcentaje;
+            $nota+=$nota_total;
+        }
+        return $nota;
     }
 
     /**
@@ -171,12 +271,14 @@ class SubitemsController extends Controller
     public function destroy($id)
     {
         $subitem = Subitem::find($id);
+        $item = $subitem->item;
          if ($this->validarSubitemSinNotas($subitem)) {
 
              try {
 
             $subitem->delete();
-            
+            $this->actualizarPorcentajes($item);
+            flash('El subitem ha sido eliminado con exito', 'success');
             return redirect()->back();
                  
              } catch (Exception $e) {
@@ -185,7 +287,9 @@ class SubitemsController extends Controller
 
         }else{
 
-            dd('Subitem contiene notas, primero elimina las notas para eliminar el item');
+            flash('El subitem contiene notas registradas, primero elimina las notas para eliminar el subitem', 'warning');
+            return redirect()->back();
+            
         }
     }
 

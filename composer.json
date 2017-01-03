@@ -9,10 +9,13 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html":"5.2.*",
         "laravelcollective/bus": "^5.2.0",
-        "barryvdh/laravel-debugbar": "^2.3",
         "ignasbernotas/laravel-model-generator": "^1",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "maatwebsite/excel": "~2.1.0"
+        "maatwebsite/excel": "~2.1.0",
+        "barryvdh/laravel-dompdf": "^0.7.0",
+        "tymon/jwt-auth": "0.5.*",
+        "laracasts/flash": "^2.0"
+
 
     },
     "require-dev": {

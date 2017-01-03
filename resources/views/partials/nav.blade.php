@@ -4,13 +4,14 @@
 
       <li class="user-details cyan darken-2">
         
-         <div class="row">
-            <div class="col  s4 m4 l4">
-                  
+         <div class="row" >
+            <div class="col  s2 m2 l2" style="padding-left: 0.5px;">
+                 <a href="#" class=""><i class="mdi-social-person white-text"></i></a> 
             </div>
-            <div class="col col s8 m8 l8">
+            <div class="col col s8 m8 l8" >
+
                  
-               <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">
+               <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" style="font-size: 15px;" data-activates="profile-dropdown">
                         
                   @if (Auth::guard('admin')->check())
 
@@ -21,16 +22,37 @@
 
                      {{Auth::user()->primerNombre}} {{Auth::user()->primerApellido}}
                   @endif
-                  <i class="mdi-navigation-arrow-drop-down right"></i></a>
-                  <p class="user-roal">Administrator</p>
+                  </a>
+                  <p class="user-roal white-text">
+                  @if (Auth::guard('admin')->check())
+
+                     @if(Auth::guard('admin')->user()->rolAdministrador())
+                              Administrador
+
+                     @elseif(Auth::guard('admin')->user()->rolCoordinador())
+                              Coordinador
+
+                     @elseif(Auth::guard('admin')->user()->rolDocente())
+                              Docente
+                     @endif
+                     
+                     
+
+                  @elseif (Auth::check())
+
+                     Estudiante
+                  @endif
+                  </p>
             </div>
          </div>   
       </li>
-
-      <li class="mihover bold active"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
-      <li class="li-hover"><div class="divider"></div></li>            
-      @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
-           <li class="">
+        
+       <li class="li-hover "><div class="divider"></div></li>
+    
+      <li class="mihover"><a href="{{url('/index')}}"  class="white-text waves-effect"><i class="mdi-action-home"></i>Inicio</a></li>
+                
+        @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
+           <li>
             <a href="{{route('admin.asignaturas.index')}}" class=" white-text text-lighten-2 waves-effect"><i class="mdi-av-my-library-books"></i>Asignaturas</a>
           </li>
         @endif
@@ -60,12 +82,19 @@
             <a href="{{route('admin.estudiantes.index')}}" class="waves-effect white-text text-lighten-2 "><i class="mdi-social-school"></i>Estudiantes</a>
           </li>
           @endif
-         
+
+         @if (Auth::guard('admin')->user()->rolCoordinador() || Auth::guard('admin')->user()->rolAdministrador())
           <li class="no-padding mihover">
             <a href="{{route('admin.informes.index')}}" class="white-text text-lighten-2 waves-effect" ><i class="material-icons white-text text-lighten-2">picture_as_pdf</i>Informes</a>
           </li>
+          @endif
 </ul>
-<a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+<div class="row">
+  <div class="col s1 m1 l1">
+    <a href="#" style="padding-top: 2px;" data-activates="slide-out" class="sidebar-collapse  btn-floating  waves-effect waves-light hide-on-large-only transparent"><i class="mdi-navigation-menu white-text"></i></a>
+  </div>
+</div>
+  
 </aside>      
     
   

@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/',['middleware' => 'guest', function () {
+
+Route::get('/',['middleware' => 'guest',function () {
     return view('bienvenido.bienvenido');
-}]);
-
-
+}] );
 
 Route::group(['middleware' => 'auth'],function(){
 
-   Route::get('/index', function(){
+   Route::get('/index',function(){
       return view('welcome');
     });
 
@@ -44,20 +43,38 @@ Route::group(['middleware' => 'auth'],function(){
         'as' => 'items.store'
         ]);
 
-      Route::post('subitem',[
-        'uses' => 'SubitemsController@store',
-        'as' => 'subitems.store'
+
+      Route::post('item/edit' ,[
+        'uses' => 'ItemsController@edit',
+        'as' => 'item.edit'
       ]);
+
+      //cargar informacion del item
+       Route::get('item/show/{id}',[
+         'uses' =>'ItemsController@show',
+          'as' => 'item.show'
+        ]);
 
      Route::get('item/{id}/destroy',[
         'uses' => 'ItemsController@destroy',
         'as' => 'item.destroy'
         ]);
 
+      Route::post('subitem',[
+        'uses' => 'SubitemsController@store',
+        'as' => 'subitems.store'
+      ]);
+
       Route::get('subitem/{id}/destroy',[
         'uses' => 'SubitemsController@destroy',
         'as' => 'subitem.destroy'
         ]);
+
+
+      Route::post('subitem/edit' ,[
+        'uses' => 'SubitemsController@edit',
+        'as' => 'subitem.edit'
+      ]);
 
      Route::get('nota',[
           'uses' => 'NotasController@storeItem',
@@ -81,10 +98,35 @@ Route::group(['middleware' => 'auth'],function(){
         ]);
 
       Route::resource('informes','InformesController');
+
+
+      //reporte Asignatura
+      Route::get('informes/pdfAsignatura/{idHorario}',[
+        'uses'=>'InformesController@crearReporteAsignatura',
+        'as'=>'admin.informes.pdfAsignatura'
+        ]);
+      //reporte Profesores
+      Route::get('informes/pdfProfesor/{idProfesor}/{idPeriodo}/{idPrograma}',[
+        'uses'=>'InformesController@crearReporteProfesor',
+        'as'=>'admin.informes.pdfProfesor'
+        ]);
+      //reporte Estudiante
+      Route::get('informes/pdfEstudiante/{idEstudiante}/{idPrograma}',[
+        'uses'=>'InformesController@crearReporteEstudiante',
+        'as'=>'admin.informes.pdfEstudiante'
+        ]);
+
+      //reporte General
+      Route::get('informes/pdfGeneral/{periodo}/{programa}',[
+        'uses'=>'InformesController@crearReporteGeneral',
+        'as'=>'admin.informes.pdfGeneral'
+        ]);
+            
+
       Route::resource('estudiantes','EstudiantesController');
      
-        //cargar informacion en el modal listar asignaturas Estudiante
-      Route::GET('estudiantes/listarAsignaturas/{id}',[
+      //cargar informacion en el modal listar asignaturas Estudiante
+      Route::GET('estudiantes/listarAsignaturas/{idEstudiante}/{idPeriodo}',[
         'uses' =>'EstudiantesController@listarAsignaturas',
         'as' => 'admin.estudiantes.listarAsignaturas'
         ]);   
@@ -145,10 +187,30 @@ Route::group(['middleware' => 'auth'],function(){
           'as' => 'admin.notas.index'
           ]);
 
+        Route::post('matricular/archivo',[
+          'uses' =>'MatriculasController@matricularEstudiantes',
+          'as' => 'admin.matricular.archivo'
+        ]);
+
+        Route::post('matricular/estudiante',[
+          'uses' =>'MatriculasController@store',
+          'as' => 'admin.matricular.estudiante'
+          ]);
+
     });
 //fin middleware administrador
 
     Route::group(['prefix'=>'docente','middleware' => 'docente'],function(){
+      //reporte Asignatura
+      Route::get('informes/pdfAsignatura/{idHorario}',[
+        'uses'=>'InformesController@crearReporteAsignatura',
+        'as'=>'docente.informes.pdfAsignatura'
+        ]);
+      //reporte General
+      Route::get('informes/pdfGeneral/{periodo}/{programa}',[
+        'uses'=>'InformesController@crearReporteGeneral',
+        'as'=>'docente.informes.pdfGeneral'
+        ]);
 
       Route::post('item',[
         'uses' => 'ItemsController@store',
@@ -194,12 +256,12 @@ Route::group(['middleware' => 'auth'],function(){
 
         Route::post('matricular/archivo',[
           'uses' =>'MatriculasController@matricularEstudiantes',
-          'as' => 'matricular.archivo'
+          'as' => 'docente.matricular.archivo'
         ]);
 
         Route::post('matricular/estudiante',[
           'uses' =>'MatriculasController@store',
-          'as' => 'matricular.estudiante'
+          'as' => 'docente.matricular.estudiante'
           ]);
 
 
@@ -211,10 +273,18 @@ Route::group(['middleware' => 'auth'],function(){
 
 //rutas para el estudiante
   Route::group(['prefix'=>'admin'], function(){
+
     Route::get('asignaturasEstudiante',[
           'uses' => 'EstudiantesController@asignaturasEstudiante',
           'as' => 'admin.usuarios.asignaturasEstudiante'
     ]);
+
+    //reporte Estudiante
+      Route::get('informes/pdfEstudiante/{idEstudiante}/{idPrograma}',[
+        'uses'=>'InformesController@crearReporteEstudiante',
+        'as'=>'admin.informes.pdfEstudiante'
+        ]);
+
 
 
   });
@@ -247,17 +317,7 @@ Route::get('matricular/autocomplete','MatriculasController@autocomplete');
 Route::get('estudiantes','MatriculasController@index');
 
 
-  
-
-  //Route::get('/home', 'HomeController@index');
-
-
-
-   //Route::post('redirigir','autenticacionController@obtenerControlador');
-   //Route::post('login','Admin\AdminAuthController@login');
-   //Route::get('login', 'Auth\AuthController@showLoginForm');
-   //Route::post('login','Auth\AuthController@login');
-   Route::get('logoutes','Auth\AuthController@logout');
+  Route::get('logoutes','Auth\AuthController@logout');
 
   Route::get('logoutdo','Admin\AuthController@logout');
 
@@ -266,9 +326,29 @@ Route::get('estudiantes','MatriculasController@index');
    
   //Route::get('archivo','MatriculasController@matricularEstudiantes');
   Route::get('encabezado','MatriculasController@leerEncabezado');
-
   Route::get('materias/','MatriculasController@materias');
 
+//rutas para el manejo de errores de paginas y de servidor
+  Route::get('error',function($exception){
+    abort(404);
+  });
+  Route::get('error',function($exception){
+    abort(403);
+  });
+  Route::get('error',function($exception){
+    abort(401);
+  });
+
+  Route::get('error',function($exception){
+    abort(500);
+  });
+
+ Route::group(['prefix'=>'android'], function(){
+
+    Route::post('iniciarSesion','AuthenticateController@authenticate');
+    Route::get('notas','AuthenticateController@notas');
+
+ });
 
   
 
