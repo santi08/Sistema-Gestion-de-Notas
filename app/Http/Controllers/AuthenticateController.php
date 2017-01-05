@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\ModelosNotas\Estudiante;
+use App\ModelosNotas\Matricula;
+use App\ModelosSCAD\Horario; 
+use App\ModelosSCAD\Periodoacademico; 
+use App\ModelosSCAD\Programaacademico;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthenticateController extends Controller
@@ -37,10 +41,26 @@ class AuthenticateController extends Controller
     }
 
     public function notas(Request $request){
-        $id=$request->only('id');
+        $periodos = Periodoacademico::orderBy('Id','DESC')->get();
+        $id_estudiante = $request->id;
+        $matriculas= Matricula::where('estudiante_id',$id_estudiante)->get();
 
-        $estudiante=Estudiante::find($id);
+        $ultimo_Periodo=$periodos->first();
+        $id_periodo=$ultimo_Periodo->Id;
+        //array para guardar las materias en un determinado periodo academico
+        $asignaturas=array();
+        //array para guardar las materias en el ultimo periodo academico
+        $asignaturasUltimoPeriodo=array();
+
+        //Buscar las matriculas en el periodo Capturado
+        foreach ($matriculas as $matricula) {
+          if($matricula->horario->PeriodoAcademicoId == $id_periodo){
+              $asignaturasUltimoPeriodo[]= $matricula->horario->programaAcademicoAsignatura->asignatura->Nombre; 
+            }
+        }
         
-        return response()->json(compact('estudiante'));
-    }
+         return response()->json(compact('asignaturasUltimoPeriodo'));
+   
+    }    
+    
 }
