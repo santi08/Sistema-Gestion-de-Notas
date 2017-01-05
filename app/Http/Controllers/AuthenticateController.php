@@ -61,6 +61,30 @@ class AuthenticateController extends Controller
         
          return response()->json(compact('asignaturasUltimoPeriodo'));
    
-    }    
+    }
+
+    public function notas_asignatura(Request $request){
+
+        $id_matricula= $request->matricula;
+        $matricula= Matricula::find($id_matricula);
+
+        $notas_matricula = array();
+        $notas_item = array();
+        
+        if(count($matricula->items) > 0){
+            foreach ($matricula->items as $item){
+              if(!is_null($item->pivot->nota)){
+                 $notas_item = ['nombre_item' => $item->nombre, 'nota' => $item->pivot->nota];
+              }else{
+                $notas_item = ['nombre_item' => $item->nombre, 'nota' => 'NR'];
+              }
+              
+                $notas_matricula[]= $notas_item;
+            }
+        }
+        
+        $notas_matricula [] = ['definitiva' => $matricula->definitiva];
+        return response()->json($notas_matricula);
+    }
     
 }

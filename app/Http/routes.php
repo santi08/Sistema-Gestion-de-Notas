@@ -347,6 +347,7 @@ Route::get('estudiantes','MatriculasController@index');
 
     Route::post('iniciarSesion','AuthenticateController@authenticate');
     Route::get('notas','AuthenticateController@notas');
+    Route::get('notasAsignatura','AuthenticateController@notas_asignatura');
 
  });
 
