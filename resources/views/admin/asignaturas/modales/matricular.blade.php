@@ -86,7 +86,11 @@
 				</fieldset>
 				</div>
 			</div>
-
+			<div class="row">
+				<div class="col s12 l8 m8  input-field">
+				         				<button class="waves-effect waves-light btn teal darken-1" id="btn-salir">Salir  <i class="mdi-content-send right"></i></button>
+				 </div>
+			</div>
 
 @endsection				
 @overwrite

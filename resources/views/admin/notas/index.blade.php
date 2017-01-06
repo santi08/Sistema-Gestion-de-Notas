@@ -2,7 +2,6 @@
 @section('title','Notas')
 @section('content')
 <br>
-
 <div class="row">
 	<div class="col s12 m12 l12">
 
@@ -83,11 +82,9 @@
 
             </div>
 		</div>
+		<br>
 @endif
 
-
-		
-<br>
 <div class="divider grey darken-1"></div>
 			
 <div id="Notas" class="section">
@@ -103,47 +100,27 @@
 							@foreach ($estudiantes[0]->items as $item)
 								@if (count($item->subitems)>0)
 
-									<th nowrap="" class="floatThead-col center" style="border: 1px solid black;" colspan="{{count($item->subitems)}}">{{$item->nombre}} ({{$item->porcentaje}} %)
-
+									<th class="floatThead-col center" style="border: 1px solid black;" colspan="{{count($item->subitems)}}">{{$item->nombre}} ({{$item->porcentaje}} %)
 									@if ($item->tipoitem->nombre != "PARCIALES")
-
 										<a data-target="#insertarSubitem" 
-
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class="btn-flat modal-trigger   " data-position="bottom" data-delay="50" data-tooltip="Insertar subitem " ><i class="mdi-content-add green-text" ></i></a>
-
 									@endif
-
-
 										<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-
 										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
-
-								
-
 										<a onclick="eliminar({{$item->id}});" id="{{$item->id}}" 
-
 										class=" btn-warning-cancel btn-flat " data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
-
-
 									</th>
 								@else
-									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2" align="center" nowrap>{{$item->nombre}} ({{$item->porcentaje}} %)
+									<th class="floatThead-col center" style="border: 1px solid black;" rowspan="2"  >{{$item->nombre}} ({{$item->porcentaje}} %)
 										<a data-target="insertarSubitem" 
 											onclick="insertar_subitem({{$item->id}},'{{$item->nombre}}')" class=" btn-flat  " data-position="top"  data-tooltip="Insertar subitem"><i class="mdi-content-add green-text" ></i></a>
-
-
-										<a data-target="EditarItem"
+											<a data-target="EditarItem"
 										onclick="editar_item({{$item->id}},'{{$item->nombre}}',{{$item->porcentaje}},'{{$item->descripcion}}',{{$item->tipo_id}})" 
-
 										class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Item " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" ></i></a>
 
 										<a onclick="eliminar({{$item->id}});" class="btn-flat  btn-warning-cancel" data-position="bottom" data-delay="50" data-tooltip="Eliminar Item"><i class="mdi-action-delete red-text text-darken-4"></i></a>
-
-
 									</th>
-
-
 								@endif
 							@endforeach
 						@endif
@@ -151,19 +128,15 @@
 							@foreach ($estudiantes[0]->items as $item)			
 								@if (count($item->subitems)>0)			
 									@foreach ($item->subitems as $subitem)
-										<th nowrap class="floatThead-col center" style="border: 1px solid black;">{{$subitem->nombre}}
+										<th  class="floatThead-col center" style="border: 1px solid black;">{{$subitem->nombre}}
 										@if ($subitem->item->tipoitem->nombre != "PARCIALES")
 											({{$subitem->porcentaje}}%) 
-
 										@endif
-
 											<a data-target="EditarSubitem"
 											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
 											class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ></a>
 
 											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="mdi-action-delete red-text text-darken-4"></i></a>
-
-
 										</th>
 									@endforeach
 								@endif	
@@ -173,25 +146,25 @@
 					<tbody>
 						@foreach ($estudiantes as $estudiante)
 							<tr style="border: 1px solid black;">
-								<th nowrap style="border: 1px solid black;">{{$estudiante->estudiante->codigo}}</th>
-								<th nowrap style="border: 1px solid black;">{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</th>
+								<th  style="border: 1px solid black;">{{$estudiante->estudiante->codigo}}</th>
+								<th  style="border: 1px solid black;">{{$estudiante->estudiante->primerApellido}} {{$estudiante->estudiante->segundoApellido}} {{$estudiante->estudiante->primerNombre}} {{$estudiante->estudiante->segundoNombre}}</th>
 								<th style="border: 1px solid black;">
 									{{$estudiante->tipoMatricula}}
 								</th>
-								<th nowrap id="matricula-{{$estudiante->id}}" style="border: 1px solid black;">{{$estudiante->definitiva}}</th>
+								<th  id="matricula-{{$estudiante->id}}" style="border: 1px solid black;">{{$estudiante->definitiva}}</th>
 								@if (count($estudiante->items)>0)
 									@foreach ($estudiante->items as $item)
 										@if (count($item->subitems)>0)
 											@foreach ($estudiante->subitems as $subitem)
 
 												@if($item->id == $subitem->item_id)
-													<td id="subitem-{{$subitem->pivot->id}}" onchange="insertarNotaSubitem({{$subitem->pivot->id}},{{$subitem->pivot->matricula_id}},{{$subitem->pivot->subitem_id}})" align="center"
+													<td id="subitem-{{$subitem->pivot->id}}" onchange="insertarNotaSubitem({{$subitem->pivot->id}},{{$subitem->pivot->matricula_id}},{{$subitem->pivot->subitem_id}})" 
 															style="border: 1px solid black;"
 													>{{$subitem->pivot->nota}}</td>
 												@endif
 											@endforeach										
 										@else
-											<td tabindex="1" id="item-{{$item->pivot->id}}" align="center" 
+											<td tabindex="1" id="item-{{$item->pivot->id}}"  
 											style="border: 1px solid black;"
 											onchange="insertarNotaItem({{$item->pivot->id}},{{$item->pivot->matricula_id}},{{$item->pivot->item_id}})">{{$item->pivot->nota}}</td>
 										@endif
@@ -223,6 +196,7 @@
 		$('#mainTable').editableTableWidget().find('td:first').focus();
 		
 	 	$(document).ready(function(){ 
+	 		$.unblockUI();
 			$("#insertarItem").addClass("modalInsertarItem");
 		 	$("#insertarSubitem").addClass("modalInsertarSubItem");
 		 	$("#EditarSubitem").addClass("modalInsertarSubItem");
@@ -240,6 +214,22 @@
 	    $('#insertarItem').openModal();
 	    $('#horario').val(id);
 	    $('#tipo_item').material_select();
+	}
+
+	function loading(modal){
+		 $('#'+modal).closeModal(); 
+	        $.blockUI({ css: { 
+	            border: 'none', 
+	            padding: '15px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .5, 
+	            color: '#fff' 
+	                  },message:
+	                  ' <div class="preloader-wrapper small active"> <div class="spinner-layer spinner-red-only">  <div class="circle-clipper left">  <div class="circle"></div>  </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right">  <div class="circle"></div> </div> </div></div> Cargando ...'
+
+	         });
 	}
 
 	function insertar_subitem(id,nombre){
@@ -353,12 +343,13 @@
         	},
         	function(isConfirm){
             	if (isConfirm){
-              		
               		var ruta = "{{route('item.destroy', ['%iditem%'])}}";
               		ruta=ruta.replace('%iditem',iditem);
               		location.href=ruta;
+              		swal.close();
+              		loading('');
             	} else {
-              		swal("Cancelado", "El item esta a salvo", "error");
+              		swal("Cancelado", "El item esta a salvo", "success");
               	}
         	});
 	}
@@ -382,8 +373,10 @@
               		var ruta = "{{route('subitem.destroy', ['%idsubitem%'])}}";
               		ruta=ruta.replace('%idsubitem',idsubitem);
               		location.href=ruta;
+              		swal.close();
+              		loading('');
             	} else {
-              		swal("Cancelado", "El subitem esta a salvo", "error");
+              		swal("Cancelado", "El subitem esta a salvo", "success");
             	}
         	});
 

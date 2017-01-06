@@ -123,6 +123,8 @@
     <!-- Tabla Flotante -->
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/plugins/floatThead/jquery.floatThead-slim.min.js') }}"></script>
+    <!-- BlockUI -->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/jquery.blockUI.min.js') }}"></script>
     
    @yield('scripts')
  <script type="text/javascript">
