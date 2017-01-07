@@ -17,6 +17,7 @@ class MatriculasController extends Controller
 {
 
     private $codigoEncabezado, $grupoEncabezado, $alerta;
+    private $estudiantes_no_encontrados = 0;
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +34,6 @@ class MatriculasController extends Controller
         if ($request->ajax()) {
            
             $asignaturas = Horario::where('UsuarioID',$id_usuario)->where('PeriodoAcademicoId',$id_periodo)->get();
-
             return response()->json(view('admin.matriculas.parts.lista',compact('asignaturas'))->render());
 
         }else{
@@ -68,36 +68,40 @@ class MatriculasController extends Controller
 
         try {
 
-        $codigo = $request->codigo;
-        $id_horario = $request->horario_estudiante;
+            $codigo = $request->codigo;
+            $id_horario = $request->horario_estudiante;
 
-        $estudiante = Estudiante::where('codigo',$codigo)->first();
+            $estudiante = Estudiante::where('codigo',$codigo)->first();
 
-        $verificar_matricula = array(
-                            'horario_id' => $id_horario,
-                            'estudiante_id' => $estudiante->id
-                            );
-    
-        $matricula = Matricula::firstOrNew($verificar_matricula);
-                        $matricula->estudiante_id= $estudiante->id;
-                        $matricula->tipoMatricula = 'N';
-                        $matricula->estado= 1;
-                        $matricula->save();
-
-
+            if (!is_null($estudiante)) {
+                $verificar_matricula = array(
+                                    'horario_id' => $id_horario,
+                                    'estudiante_id' => $estudiante->id
+                                    );
+            
+                $matricula = Matricula::firstOrNew($verificar_matricula);
+                                $matricula->estudiante_id= $estudiante->id;
+                                $matricula->tipoMatricula = 'N';
+                                $matricula->estado= 1;
+                                $matricula->save();
 
                 $mensaje= "Se ha matriculado el estudiante ".$estudiante->primerNombre." ".$estudiante->primerApellido." con exito";
-                 flash($mensaje, 'success');
-                 return redirect()->back();
-            
+                flash($mensaje, 'success');
+                return redirect()->back();
+
+            }else{
+
+                $mensaje= "El estudiante no se encuentra en el sistema, intentelo de nuevo";
+                flash($mensaje, 'danger');
+                return redirect()->back();
+            }
+
+                
         } catch (Exception $e) {
-               flash('Se ha producido un error, por favor intenta realizar la matricula nuevamente', 'danger');
+               flash('Se ha producido un error, por favor intentalo de nuevo', 'danger');
                return redirect()->back();
             
         }
-
-   
-
     }
 
     /**
@@ -156,8 +160,8 @@ class MatriculasController extends Controller
 
         $codigoMateria = $horario->programaAcademicoAsignatura->asignatura->Codigo;
         $grupoMateria = $horario->Grupo;
-         global $alerta;
-
+        global $alerta;
+        global $estudiantes_no_encontrados;
 
        if ($this->leerEncabezado($codigoMateria,  $grupoMateria, $file )){
          
@@ -168,54 +172,59 @@ class MatriculasController extends Controller
         {
                     
             $estudiantes = $archivo->get();
-              global $alerta;
-           
-
+            global $alerta;      
+            global $estudiantes_no_encontrados;
 
             foreach ($estudiantes as $estudiante) {
 
-                # code...
-
                 if (!is_null($estudiante->codigo)) {
 
-                $codigo = substr($estudiante->codigo, 2).'-'.$estudiante->programa;
-                //dd($codigo);
+                    $codigo = substr($estudiante->codigo, 2).'-'.$estudiante->programa;
+                    $e = Estudiante::where('codigo',$codigo)->first();
 
-                $e = Estudiante::where('codigo',$codigo)->first();
+                    if (!is_null($e)) {
 
-                  try {
+                            try {
 
-                        $nuevos=0;
-                        $actualizado = 0;
+                                $nuevos=0;
+                                $actualizado = 0;
 
-                        $verificar_matricula = array(
-                            'horario_id' => $id_horario,
-                            'estudiante_id' => $e->id
-                            );
+                                $verificar_matricula = array(
+                                    'horario_id' => $id_horario,
+                                    'estudiante_id' => $e->id
+                                    );
 
-                        $matricula = Matricula::firstOrNew($verificar_matricula);
-                        $matricula->estudiante_id= $e->id;
-                        $matricula->tipoMatricula = $estudiante->t_mat;
-                        $matricula->estado=1;
-                        $matricula->save();
-                        $alerta =true;
-                      
-                  } catch (Exception $e) {
+                                $matricula = Matricula::firstOrNew($verificar_matricula);
+                                $matricula->estudiante_id= $e->id;
+                                $matricula->tipoMatricula = $estudiante->t_mat;
+                                $matricula->estado=1;
+                                $matricula->save();
+                                $alerta =true;
+                              
+                          } catch (Exception $e) {
 
-                    $alerta =false;
-                      
-                  }
-                 
+                            $alerta =false;
+                              
+                          }  
+                    }else{
+                        $estudiantes_no_encontrados++;
+
+                    }
                 }
-              
             }
            
 
         });
+
         if($alerta){
 
-         flash("Los estudiantes han sido matriculados con exito", 'success');
-         return redirect()->route('matriculas.index');
+            flash("Los estudiantes han sido matriculados con exito", 'success');
+             if ($estudiantes_no_encontrados > 0) {
+                flash("Los estudiantes han sido matriculados con exito, no se encontraron ".$estudiantes_no_encontrados." estudiantes", 'success');
+             }
+             
+
+             return redirect()->route('matriculas.index');
         }
         
        }else{
@@ -265,8 +274,6 @@ class MatriculasController extends Controller
                     $codigoEncabezado = $procesarListado[$i+1];
                 }
 
-                
-
                 if($procesarListado[$i]=="Gr.:"){
                    $grupoEncabezado = $procesarListado[$i+1];
                 }
@@ -275,18 +282,11 @@ class MatriculasController extends Controller
             
 
           if($codigoEncabezado == $codigoMateria && $grupoEncabezado == $grupoMateria){
-
                 return true ;
 
             }else{
-
-                return false;
-                
+                return false;  
             }
-
-       
-           
-           
     }
 
     public function materias(){

@@ -37,11 +37,14 @@
                     <div class="card-content white-text">
                         <p> @if(session('flash_notification.level')=='success')
                                 <i class="mdi-navigation-check"></i>
-                            @elseif(session('flash_notification.level')=='danger')
-                                <i class="mdi-alert-error"></i> 
-                            @elseif(session('flash_notification.level')=='warning')
+                            @endif
+                            @if(session('flash_notification.level')=='danger')
+                                <i class="mdi-alert-error"></i>
+                            @endif 
+                            @if(session('flash_notification.level')=='warning')
                                 <i class="mdi-alert-warning"></i> 
-                            @elseif(session('flash_notification.level')=='info')
+                            @endif
+                            @if(session('flash_notification.level')=='info')
                                 <i class="mdi-action-info-outline"></i> 
                             @endif
                         {!! session('flash_notification.message') !!}</p>
@@ -79,15 +82,13 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-	$('#periodos').material_select(); 
+	   $('#periodos').material_select(); 
+       $.unblockUI();
+	   var ruta=  "{{ route('matriculas.index') }}";
+	   var periodo= $('#periodos').val();
 
-	var ruta=  "{{ route('matriculas.index') }}";
-	var periodo= $('#periodos').val();
-
-	$('#periodos').change(function(){
-
+	   $('#periodos').change(function(){
 		var periodo= $('#periodos').val();
-
 			$.ajax({
             		type: "GET",
             		url: ruta,
@@ -102,11 +103,8 @@
             		} 
             		
         		});
-	});
-
-	
-
-			$.ajax({
+	   });
+		$.ajax({
             		type: "GET",
             		url: ruta,
             		data: {periodo:periodo},
@@ -119,13 +117,10 @@
 
             		} 
             		
-        		});
+        });
+
 
 	});
-
-
-
-
 	
 	function matricular(id){
          $('#horario_archivo').val(id);
@@ -139,8 +134,28 @@
                   }
                 });*/
 
-        $('#matricular').openModal();       
+        $('#matricular').openModal();
+
+        $('#btn-matricular').click(function() { 
+        $('#matricular').closeModal(); 
+        $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+                  },message:
+                  ' <div class="preloader-wrapper small active"> <div class="spinner-layer spinner-red-only">  <div class="circle-clipper left">  <div class="circle"></div>  </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right">  <div class="circle"></div> </div> </div></div> Matriculando estudiantes, un momento por favor ...'
+
+         }); 
+ 
+        //setTimeout($.unblockUI); 
+        });     
     }
+
+
 
 </script>
 @endsection

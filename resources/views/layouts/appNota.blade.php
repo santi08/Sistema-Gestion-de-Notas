@@ -123,6 +123,8 @@
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins.js')}}"></script>
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/custom-script.js')}}"></script>
+     <!-- BlockUI -->
+    <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/jquery.blockUI.min.js') }}"></script>
 
    
    @yield('scripts')

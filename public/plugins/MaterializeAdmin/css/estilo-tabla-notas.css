@@ -7,8 +7,19 @@
 
 #Notas table > thead > th,
 #Notas table > tbody> tr,th,td {
- 
+  
    border: 1px solid black;
    font-size: 1rem;
+   white-space: nowrap;
+   text-align: center;
+   margin: 0px;
+   padding: 0px;
 
 }
+
+#Notas i{
+   margin: 0px;
+   padding: 0px;
+}
+
+
