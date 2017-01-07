@@ -55,7 +55,7 @@ class AuthenticateController extends Controller
         //Buscar las matriculas en el periodo Capturado
         foreach ($matriculas as $matricula) {
           if($matricula->horario->PeriodoAcademicoId == $id_periodo){
-              $asignaturasUltimoPeriodo[]= $matricula->horario->programaAcademicoAsignatura->asignatura->Nombre; 
+              $asignaturasUltimoPeriodo[]= array('nombre_asignatura' => $matricula->horario->programaAcademicoAsignatura->asignatura->Nombre,'matricula_id'=>$matricula->id);
             }
         }
         
