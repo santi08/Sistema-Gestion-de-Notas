@@ -54,7 +54,7 @@
 					
 				<div class="row">
 					<div class="col s12 m12 l12">
-						<button class="waves-effect waves-light btn green lighten-2" style="width: 100%"><i class=" mdi-content-save"></i>Guardar</button>
+						<button class="waves-effect waves-light btn green lighten-2" style="width: 100%" id="btn-editar-item" onclick="loading('EditarItem')"><i class=" mdi-content-save"></i>Guardar</button>
 					</div>
 				</div>
 					
