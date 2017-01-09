@@ -55,7 +55,7 @@ class AuthenticateController extends Controller
         //Buscar las matriculas en el periodo Capturado
         foreach ($matriculas as $matricula) {
           if($matricula->horario->PeriodoAcademicoId == $id_periodo){
-              $asignaturasUltimoPeriodo[]= array('nombre_asignatura' => $matricula->horario->programaAcademicoAsignatura->asignatura->Nombre,'matricula_id'=>$matricula->id);
+              $asignaturasUltimoPeriodo[]= array('nombre_asignatura' => $matricula->horario->programaAcademicoAsignatura->asignatura->Nombre,'matricula_id'=>$matricula->id,'definitiva'=>$matricula->definitiva);
             }
         }
         
@@ -74,17 +74,16 @@ class AuthenticateController extends Controller
         if(count($matricula->items) > 0){
             foreach ($matricula->items as $item){
               if(!is_null($item->pivot->nota)){
-                 $notas_item = ['nombre_item' => $item->nombre, 'nota' => $item->pivot->nota];
+                 $notas_item = ['nombre_item' => $item->nombre, 'nota' => $item->pivot->nota,'item_id'=>$item->id];
               }else{
-                $notas_item = ['nombre_item' => $item->nombre, 'nota' => 'NR'];
+                $notas_item = ['nombre_item' => $item->nombre, 'nota' => 'NR','item_id'=>$item->id];
               }
               
                 $notas_matricula[]= $notas_item;
             }
         }
         
-        $notas_matricula [] = ['definitiva' => $matricula->definitiva];
-        return response()->json($notas_matricula);
+        return response()->json(compact('notas_matricula'));
     }
     
 }
