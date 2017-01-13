@@ -36,7 +36,6 @@
     </head>
 
     <body id="app-layout">
-
         <div id="loader-wrapper">
       <div id="loader"></div>        
       <div class="loader-section section-left grey"></div>
@@ -65,7 +64,7 @@
                 </nav>
             </div>
         </header>
-       
+         
         <div id="main">    
             <div class="wrapper">       
                 <section id="content">
@@ -75,15 +74,19 @@
                                 @include('partials.nav')
                             @else
                                 @include('partials.navEstudiantes')
+                                @include('admin.usuarios.modals.modificarContrasena')
+                                @include('admin.usuarios.modals.verPerfil')
                             @endif
                     
                             @yield('content')
                                
                     </div>
+
                 </section>
             </div>
         </div>
-    
+        
+  
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/jquery-1.11.2.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
     <script type="text/javascript" src="{{asset('plugins/MaterializeAdmin/js/plugins/prism/prism.js')}}"></script>
@@ -127,23 +130,42 @@
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/jquery.blockUI.min.js') }}"></script>
     
    @yield('scripts')
- <script type="text/javascript">
+        <script type="text/javascript">
+                
+            $( document ).ready(function(){
+                $('.button-collapse').sideNav();
+                $('.collapsible').collapsible();     
+                $('.tooltipped').tooltip({delay: 50});
+                     
+            });
+
+            function modificarContrasena(estado){
+                if(estado == 1){
+                    $('#modificarContrasena').openModal();
+                }else{
+                    $('#modificarContrasena').openModal({
+                            dismissible: false
+                        });  
+                    }
+                }  
+
+            function verPerfil(estado){
+                    $('#verPerfil').openModal();     
+                }       
+             
+
+        </script>
         
-    $( document ).ready(function(){
-        $('.button-collapse').sideNav();
-        $('.collapsible').collapsible();
-       // $('.dropdown-button').dropdown('open');      
-        $('.tooltipped').tooltip({delay: 50});
-        //$('select').material_select();  
-         
-         
+        <!--cambiar contraseña por defecto solo si es estudiante-->
+        @if(Auth::guard('admin')->check())
 
-    });
-   
-    
-</script>
-
-
-
+        @else
+            @if(Auth::user()->estadoContrasena == 0)
+                <script type="text/javascript">
+                    modificarContrasena();
+                </script>
+                
+            @endif    
+        @endif  
     </body>
 </html>

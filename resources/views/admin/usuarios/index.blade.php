@@ -47,7 +47,7 @@
             
 
                <div class="col s12 m5 l3 offset-l4" style="padding-top: 25px;">
-                  <a onClick='openModalCrear()'  class=" waves-effect waves-light btn green lighten-2  modal-trigger" data-target='#crearEstudiante'>Registrar Estudiante</a> 
+                  <a onClick='openModalCrear()'  class=" waves-effect waves-light btn green lighten-2 " data-target='crearEstudiante'>Registrar Estudiante</a> 
                </div> 
                </div>   
             

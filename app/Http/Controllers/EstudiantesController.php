@@ -36,6 +36,35 @@ class EstudiantesController extends Controller
       
     }
 
+    public function modificarContrasena(Request $request){
+      $Estudiante = Estudiante::find($request->id);
+        if (Hash::check($request->contrasenaAntigua, $Estudiante->password)) {
+            if(strcmp($request->contrasena,$request->contrasenaNueva)==0){
+                $Estudiante->password=bcrypt($request->contrasena);
+                $Estudiante->estadoContrasena=true;
+                $Estudiante->save();
+                flash('Contraseña actualizada exitosamente.', 'success');
+                return redirect()->back();
+
+            }else{
+                flash('Las contraseñas ingresadas no son iguales', 'warning');
+                return redirect()->back();
+            }
+
+        }else{
+            flash('La contraseña ingresada es erronea, por favor asegurese de que esta sea su contraseña.', 'error');
+            return redirect()->back();
+        }
+    }
+
+    public function modificarCorreo(Request $request){
+      $Estudiante = Estudiante::find($request->id); 
+      $Estudiante->email =$request->email;
+      $Estudiante->save();
+      flash('Correo actualizado exitosamente.', 'success');
+      return redirect()->back();    
+    }
+
     public function index(Request $request){
 
       $programas= Programaacademico::all();
@@ -54,14 +83,13 @@ class EstudiantesController extends Controller
       
     public function procesarArchivo(Request $request)
     {
-      $alerta= new alertas();
       set_time_limit(0);
       $programa = Programaacademico::all();
       
         if($request->file('file')->isValid()){
           
          // DB::table('Estudiantes')->update(['estado'=> 0]);
-
+          
           try{
             $files = $request->file('file');
             $file = fopen($files,"r");

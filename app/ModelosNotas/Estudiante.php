@@ -23,7 +23,8 @@ class Estudiante extends Authenticatable
         'password',
         'codigo',
         'estado',
-        'id_programaAcademico'
+        'id_programaAcademico',
+        'estadoContrasena'
     ];
 
     public function programaAcademico(){

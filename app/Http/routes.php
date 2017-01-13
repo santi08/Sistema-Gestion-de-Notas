@@ -16,16 +16,15 @@ Route::get('/',['middleware' => 'guest',function () {
     return view('bienvenido.bienvenido');
 }] );
 
+
+
 Route::group(['middleware' => 'auth'],function(){
-
-   Route::get('/index',function(){
+  
+  Route::get('/index',function(){
       return view('welcome');
-    });
-
+  });
    // Rutas para el administrador
   Route::group( ['prefix'=>'admin', 'middleware' => 'administrador' ],function(){
-
-  
 
     Route::get('verDatosAsignatura/{id}',[
         'uses' => 'AsignaturasController@verDatosAsignatura',
@@ -201,6 +200,7 @@ Route::group(['middleware' => 'auth'],function(){
 //fin middleware administrador
 
     Route::group(['prefix'=>'docente','middleware' => 'docente'],function(){
+
       //reporte Asignatura
       Route::get('informes/pdfAsignatura/{idHorario}',[
         'uses'=>'InformesController@crearReporteAsignatura',
@@ -272,7 +272,13 @@ Route::group(['middleware' => 'auth'],function(){
 
 
 //rutas para el estudiante
-  Route::group(['prefix'=>'admin'], function(){
+  Route::group(['prefix'=>'estudiante'], function(){
+
+    /*Route::get('index',[
+    'uses'=>'IndexController@index',
+    'as'=>'index'
+
+    ]);*/
 
     Route::get('asignaturasEstudiante',[
           'uses' => 'EstudiantesController@asignaturasEstudiante',
@@ -285,7 +291,17 @@ Route::group(['middleware' => 'auth'],function(){
         'as'=>'admin.informes.pdfEstudiante'
         ]);
 
+    //cambiar contraseña estudiante
+    Route::POST('modificarContrasena',[
+      'uses'=> 'EstudiantesController@modificarContrasena',
+      'as'=>'estudiante.modificarContrasena'
+      ]); 
 
+    //modificar correo estudiante
+    Route::POST('modificarCorreo',[
+      'uses'=> 'EstudiantesController@modificarCorreo',
+      'as'=>'estudiante.modificarCorreo'
+      ]);
 
   });
 

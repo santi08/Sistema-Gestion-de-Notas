@@ -23,6 +23,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('password');
             $table->integer('id_programaAcademico')->unsigned();
             $table->boolean('estado')->nullable()->default('1');
+            $table->boolean('estadoContrasena')->default('0');
             $table->rememberToken();
             $table->timestamps();
             
