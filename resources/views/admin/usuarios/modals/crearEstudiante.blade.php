@@ -48,7 +48,7 @@
                <div class="row">
                   <div class="col s6 m6 l6 input-field">
                      {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademico','type'=>'number','required'])!!}
-                     <select id="selectorPrograma1" >
+                     <select id="selectorPrograma1" required>
                         <option class="validate required" value="" disabled selected> Seleccione Programa Academico</option>
                         @foreach ($programas as $programa)
                            <option id="opcion" value="{{$programa->CodigoPrograma}}"> {{$programa->NombrePrograma}}</option>
@@ -79,7 +79,7 @@
                   <div class="file-field input-field">
                      <div class="btn blue-grey darken-1">
                         <span class="">Elegir Archivo</span>
-                        <input type="file" accept=".txt"   name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
+                        <input type="file" required="" accept=".txt" name="file" id="file"> <i class=" mdi-editor-insert-drive-file left"></i> 
                      </div>
                      <div class="file-path-wrapper">
                         <input class="file-path validate"  type="text">

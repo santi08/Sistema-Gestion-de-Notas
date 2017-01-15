@@ -39,18 +39,15 @@
         </div>
         <div class="col s6 input-field">
         {!!Form::hidden('id_programaAcademico',null,['class'=>'validate','id'=>'programaAcademico','type'=>'number','required'])!!}
-
-        <select id="selectorPrograma2">
-        <option value="" disabled selected> Seleccione Programa Academico</option> 
+        <select id="selectorPrograma2" required>
         </select>
-       <!--  {!!Form::text('id_programaAcademico',null,['class'=>'validate','id'=>'id_programaAcademic  o','type'=>'number','required'])!!}
-         <select id="selectorPrograma2">
-          <option value="" disabled selected> Seleccione Programa Academico</option>
+        <!-- <select id="selectorPrograma2" required>
+          <option value="" disabled selected > Seleccione Programa Academico</option> 
           @foreach ($programas as $programa)
           <option id="opcion" value="{{$programa->Id}}"> {{$programa->NombrePrograma}}</option>
           @endforeach
-         </select>-->
-        </div>
+         </select>
+        </div> -->
     
 
  <!--finaliza el boton crear-->

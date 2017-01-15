@@ -13,6 +13,7 @@ use Auth;
 use Mockery\CountValidator\Exception;
 use Hash;
 use DB;
+use Illuminate\Contracts\Validation\Validator;
 
 
 class EstudiantesController extends Controller
@@ -88,9 +89,8 @@ class EstudiantesController extends Controller
       
         if($request->file('file')->isValid()){
           
-         // DB::table('Estudiantes')->update(['estado'=> 0]);
-          
           try{
+            DB::table('Estudiantes')->update(['estado'=> 0]);
             $files = $request->file('file');
             $file = fopen($files,"r");
             $users = array();
@@ -146,7 +146,7 @@ class EstudiantesController extends Controller
                         $user['segundoApellido']="";
                     }
                     $password="contraseña";
-                 
+                    $user['estado']= 1;
                     $userDb= Estudiante::firstOrNew(["codigo"=>$user["codigo"]]);
                     $userDb->fill($user);
 
@@ -208,25 +208,23 @@ class EstudiantesController extends Controller
     }
 
 
-   public function store(Request $requests){
-
-      $this->validate($requests, [
-        'primerNombre' => 'required',
-        'primerApellidor' => 'required',
-        'email' => 'required',
-        'codigo' => 'required',
-        'id_programaAcademico' => 'required',
-      ]);
-
-
-      $user= new Estudiante($requests->all());
-      $contrasena=$this->crearContrasena($user);
-      $user->password=bcrypt($contrasena);
-      $user->save();
+   public function store(Request $request){
+      
+      $codigo=$request->codigo."-".$request->id_programaAcademico;
+      $e = Estudiante::where('codigo','=',$codigo)->get();
     
-
-
+      if(count($e)>0){
+        flash('El estudiante ya se encuentra registrado... Por favor compruebe los datos.', 'warning');
+      }else{
+      $estudiante= new Estudiante($request->all());
+      $contrasena=$this->crearContrasena($estudiante);
+      $estudiante->password=bcrypt($contrasena);
+      $estudiante->codigo = $request->codigo."-".$request->id_programaAcademico;
+      $estudiante->save();
+    
       flash('El estudiante ha sido registrado con exito', 'success');
+      }
+      
       return redirect()->route('admin.estudiantes.index');  
    }
 
@@ -241,24 +239,37 @@ class EstudiantesController extends Controller
     }
 
    
-    public function editar(Request $requests){
-     
+    public function editar(Request $request){
 
-     $user = Estudiante::find($requests->id);
-     $user->fill($requests->all());
-     $user->save();
-    flash('Estudiante editado con exito', 'success');
-    return redirect()->route('admin.estudiantes.index');
-     
-
+      $codigo=$request->codigo."-".$request->id_programaAcademico;
+      $e = Estudiante::where('codigo','=',$codigo)->get();
+    
+      if(count($e)>0){
+        flash('El estudiante ya se encuentra registrado... Por favor compruebe los datos.', 'warning');
+      }else{
+        $estudiante = Estudiante::find($request->id);
+        $estudiante->primerNombre = $request->primerNombre;
+        $estudiante->segundoNombre = $request->segundoNombre;
+        $estudiante->primerApellido = $request->primerApellido;
+        $estudiante->segundoApellido = $request->segundoApellido;
+        $estudiante->email = $request->email;
+        $estudiante->codigo = $request->codigo."-".$request->id_programaAcademico;
+        $estudiante->id_programaAcademico= $request->id_programaAcademico;
+        $estudiante->save();
+        flash('Estudiante editado con exito', 'success');
+      }
+ 
+      return redirect()->route('admin.estudiantes.index');
     } 
     
     public function edit($id){
         $info=array();
         $programas=Programaacademico::all(); 
         $estudiante=Estudiante::find($id);
-        $info[]=$programas;
-        $info[]=$estudiante;
+        $programaEstudiante=$estudiante->programaAcademico->NombrePrograma;
+        $info['programas']=$programas;
+        $info['estudiante']=$estudiante;
+        $info['programaEstudiante']= $programaEstudiante;
         return response()->json($info);
     } 
 

@@ -183,7 +183,7 @@
       });
    </script>
 
-<!-- capturar selector crear -->
+<!-- capturar selector editar -->
 <script type="text/javascript">
    $('#selectorPrograma2').change(function() {
       var opcion = $(this).children(":selected").attr("value");
@@ -191,7 +191,7 @@
    });
 </script>
 
-<!-- capturar selector editar-->
+<!-- capturar selector crear -->
 <script type="text/javascript">
    $('#selectorPrograma1').change(function() {
       var opcion = $(this).children(":selected").attr("value");
@@ -202,9 +202,9 @@
 <script type="text/javascript">
    function abrirCargarArchivo(){
       console.log('si');
-         // $('#crearEstudiante').closeModal();
-         //window.location= "{{route('admin.estudiantes.index')}}";
-      $('#cargarEstudiante').openModal();
+      // $('#crearEstudiante').closeModal();
+      //window.location= "{{route('admin.estudiantes.index')}}";
+      // $('#cargarEstudiante').openModal();
       $('#cargarEstudiante').openModal();
    }
 </script>
@@ -317,27 +317,32 @@
          $.get(ruta,function(res){ 
             $('#editarEstudiante').openModal();
             $('#selectorPrograma2 option').remove();
-            $('#id').val(res[1].id);
-            nombre = res[1].primerNombre+" "+res[1].segundoNombre+" "+res[1].primerApellido+" "+res[1].segundoApellido;
+            $('#id').val(res['estudiante'].id);
+            nombre = res['estudiante'].primerNombre+" "+res['estudiante'].segundoNombre+" "+res['estudiante'].primerApellido+" "+res['estudiante'].segundoApellido;
             $("#nombreEditar").text(nombre);
-            $("#firstname").val(res[1].primerNombre);
-            $("#segundoNombre").val(res[1].segundoNombre);
-            $("#primerApellido").val(res[1].primerApellido);
-            $("#segundoApellido").val(res[1].segundoApellido);
-            $("#email").val(res[1].email);
-            $("#codigo2").val(res[1].codigo);
+            $("#firstname").val(res['estudiante'].primerNombre);
+            $("#segundoNombre").val(res['estudiante'].segundoNombre);
+            $("#primerApellido").val(res['estudiante'].primerApellido);
+            $("#segundoApellido").val(res['estudiante'].segundoApellido);
+            $("#email").val(res['estudiante'].email);
+            var codigo= res['estudiante'].codigo.split("-");
+            $("#codigo2").val(codigo[0]);
+            $('#programaAcademico').val(res['estudiante'].id_programaAcademico);
 
-            $('#selectorPrograma2').append('<option disable selected> Seleccione un programa</option>');
-            for (var i =0; i < res[0].length; i++) {
-               $('#selectorPrograma2').append('<option value='+res[0][i].CodigoPrograma+'>'+res[0][i].NombrePrograma +'</option>');
+            $('#selectorPrograma2').append('<option selected value='+res['estudiante'].id_programaAcademico +'>'+res['programaEstudiante']+'</option>');
+
+            for (var i =0; i < res['programas'].length; i++) {
+              if(res['estudiante'].id_programaAcademico != res['programas'][i].CodigoPrograma){
+
+               $('#selectorPrograma2').append('<option value='+res['programas'][i].CodigoPrograma+'>'+res['programas'][i].NombrePrograma +'</option>');
+              }
             }
-    
             $('#selectorPrograma2').material_select();
          });   
       }
    </script> 
 
-<!-- Bloquear pantalla -->
+<!-- funcion enviar archivo .txt por ajax -->
    <script type="text/javascript">
       $(document).ready(function(){
          var option= { 
@@ -358,88 +363,33 @@
       });
 
       function showRequest(formData, jqForm, options) { 
-         var queryString = $.param(formData); 
-         jsShowWindowLoad();
+         var queryString = $.param(formData);
+         $('#crearEstudiante').closeModal();
+          $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+                  },message:
+                  ' <div class="preloader-wrapper small active"> <div class="spinner-layer spinner-red-only">  <div class="circle-clipper left">  <div class="circle"></div>  </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right">  <div class="circle"></div> </div> </div></div> Cargando estudiantes,esta accion puede tardar unos minutos. <br> un momento por favor ...'
+
+         }); 
+  
+         
          console.log('About to submit: \n\n' + queryString); 
          return true; 
       }   
 
       function showResponse(data)  { 
-         jsRemoveWindowLoad();
-         console.log(data);
          window.location="{{route('admin.estudiantes.index')}}";
       } 
 
-      function jsRemoveWindowLoad() {
-         // eliminamos el div que bloquea pantalla
-         $("#WindowLoad").remove();
-      }
- 
-      function jsShowWindowLoad(mensaje) {
-         console.log('si');
-         $('#crearEstudiante').closeModal();
-         //eliminamos si existe un div ya bloqueando
-         jsRemoveWindowLoad();
-         //si no enviamos mensaje se pondra este por defecto
-         if (mensaje === undefined) mensaje = "Procesando la información<br>Espere por favor";
- 
-         //centrar imagen gif
-         height = 20;//El div del titulo, para que se vea mas arriba (H)
-         var ancho = 0;
-         var alto = 0;
- 
-         //obtenemos el ancho y alto de la ventana de nuestro navegador, compatible con todos los navegadores
-         if (window.innerWidth == undefined) ancho = window.screen.width;
-         else ancho = window.innerWidth;
-            if (window.innerHeight == undefined) alto = window.screen.height;
-            else alto = window.innerHeight;
- 
-         //operación necesaria para centrar el div que muestra el mensaje
-         var heightdivsito = alto/2 - parseInt(height)/2;//Se utiliza en el margen superior, para centrar
- 
-         //imagen que aparece mientras nuestro div es mostrado y da apariencia de cargando
-         imgCentro = "<div style='text-align:center;height:" + alto + "px;'><div  style='color:#000;margin-top:" + heightdivsito + "px; font-size:20px;font-weight:bold'>" + mensaje + "</div><img src={{asset('img/load.gif')}}></div>";
- 
-         //creamos el div que bloquea grande------------------------------------------
-         div = document.createElement("div");
-         div.id = "WindowLoad"
-         div.style.width = ancho + "px";
-         div.style.height = alto + "px";
-         $("body").append(div);
- 
-         //creamos un input text para que el foco se plasme en este y el usuario no pueda escribir en nada de atras
-         input = document.createElement("input");
-         input.id = "focusInput";
-         input.type = "text"
- 
-         //asignamos el div que bloquea
-         $("#WindowLoad").append(input);
- 
-         //asignamos el foco y ocultamos el input text
-         $("#focusInput").focus();
-         $("#focusInput").hide();
- 
-         //centramos el div del texto
-         $("#WindowLoad").html(imgCentro);
-       
-      }
+     
    </script>
-
-<!-- funcion enviar archivo .txt por ajax -->
-   
-   <style>
-      #WindowLoad
-      {
-         position:fixed;
-         top:0px;
-         left:0px;
-         z-index:3200;
-         filter:alpha(opacity=65);
-         -moz-opacity:65;
-         opacity:0.65;
-         background:#999;
-      }
-   </style>
+ 
 @endsection
 
 
