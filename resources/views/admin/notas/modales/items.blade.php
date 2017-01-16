@@ -18,14 +18,14 @@
 				<div class="row">
 					<div class="col s6 m6 l6 input-field">
 						
-						<input type="text" id="nombre" name="nombre" required>
+						<input type="text" id="nombre" name="nombre" required="">
 						<label for="nombre">Nombre</label>
 
 					</div>
 					
 					<div class="col s6 m6 l6 input-field">
 						
-						<select name="tipo_item" id="tipo_item"   required="required" class="browser-default">
+						<select name="tipo_item" id="tipo_item"   required="" class="browser-default">
 							<option value="" disabled selected>Seleccione un tipo</option>
 							@foreach($tipo_items as $tipo);
 				                <option value="{{$tipo->id}}" id="{{$tipo->Id}}">{{$tipo->nombre}}</option>
@@ -37,7 +37,7 @@
 				
 				<div class="row">
 					<div class="col s6 m6 l6 input-field" id="div-porcentaje">
-						<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje" required>
+						<input type="number" step="any" id="porcentaje" min="0" max="100" name="porcentaje" required="">
 						<label for="porcentaje">Porcentaje</label>
 					</div>
 					

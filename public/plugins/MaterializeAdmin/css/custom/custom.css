@@ -66,6 +66,10 @@ hr {
 
 .modalInsertarSubItem{ width: 42% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
 
+.modalVerPerfil{ width: 42% !important ; max-height: 75% !important; border-radius: 15px 15px 15px 15px; }
+
+.modalModificarContrasena{ width: 30% !important ; max-height: 75% !important;border-radius: 15px 15px 15px 15px; }
+
 
 
 .boton{

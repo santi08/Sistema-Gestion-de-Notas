@@ -129,17 +129,24 @@
     <!-- BlockUI -->
     <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/jquery.blockUI.min.js') }}"></script>
     
+    
    @yield('scripts')
+
         <script type="text/javascript">
                 
             $( document ).ready(function(){
                 $('.button-collapse').sideNav();
                 $('.collapsible').collapsible();     
                 $('.tooltipped').tooltip({delay: 50});
-                     
+        
+                $('#modificarContrasena').addClass("modalModificarContrasena");
+                 $('#verPerfil').addClass("modalVerPerfil"); 
+
+
             });
 
             function modificarContrasena(estado){
+                 $('#modificarContrasena').addClass("modalModificarContrasena");
                 if(estado == 1){
                     $('#modificarContrasena').openModal();
                 }else{
@@ -150,6 +157,7 @@
                 }  
 
             function verPerfil(estado){
+                
                     $('#verPerfil').openModal();     
                 }       
              
@@ -162,6 +170,7 @@
         @else
             @if(Auth::user()->estadoContrasena == 0)
                 <script type="text/javascript">
+
                     modificarContrasena();
                 </script>
                 

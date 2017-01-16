@@ -1,7 +1,7 @@
 @extends('layouts.modal')
 @section('id')'verPerfil'
 @overwrite
-@section('class')bottom-sheet  
+@section('class')bottom-sheet   
 @overwrite
 
 @section('contenido')
