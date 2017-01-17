@@ -131,12 +131,14 @@
 										<th  class="floatThead-col center" style="border: 1px solid black;">{{$subitem->nombre}}
 										@if ($subitem->item->tipoitem->nombre != "PARCIALES")
 											({{$subitem->porcentaje}}%) 
-										@endif
+
 											<a data-target="EditarSubitem"
 											onclick="editar_subitem({{$subitem->id}},'{{$subitem->nombre}}',{{$subitem->porcentaje}},'{{$subitem->descripcion}}')" 
-											class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ></a>
+											class="btn-flat  " data-position="bottom" data-delay="50" data-tooltip="Editar Subitem " ><i class="mdi-editor-mode-edit yellow-text text-darken-4" > </i></a>
 
 											<a  onclick="eliminarSubitem({{$subitem->id}});" class="btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar subitem"><i class="mdi-action-delete red-text text-darken-4"></i></a>
+										@endif
+											
 										</th>
 									@endforeach
 								@endif	

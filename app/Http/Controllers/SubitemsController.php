@@ -96,6 +96,7 @@ class SubitemsController extends Controller
         foreach ($subitems as $subitem) {
                 $subitem->porcentaje = $porcentajeSinAsignar/$subitemsSinAsignar;
                 $subitem->save();
+                $this->actualizarNotaItem($item);
         }
 
     }
@@ -148,91 +149,70 @@ class SubitemsController extends Controller
 
        $subitem = Subitem::find($request->id_subitem);
        $subitem->nombre = $request->nombre_subitem;
+
        if($subitem->porcentaje == $request->porcentaje){
             $subitem->asignadoPorUsuario = false;
        }else{
-             
              $subitem->asignadoPorUsuario = true;
        }
 
-       
        $subitem->porcentaje = $request->porcentaje;
        $subitem->descripcion = $request->descripcion;
        $porcentajeDisponible = $this->porcentajeAsignadoItem($subitem->item) + $request->porcentaje;
 
+
        if($porcentajeDisponible - $request->porcentaje >= 0){
-
-        $subitem->save();
-        flash('El subitem ha sido editado con exito', 'success');
-         return redirect()->back();
-
+            $subitem->save();
+            $this->actualizarNotaItem($subitem->item);
+            flash('El subitem ha sido editado con exito', 'success');
+            return redirect()->back();
        }else{
-
-        flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
-        return redirect()->back(); 
-
+            flash('El porcentaje del subitem supera el 100% disponible del item '.$item->nombre, 'warning');
+            return redirect()->back(); 
        }
        
 
 
     }
 
-    public function calcularNotaItem($matricula, $item){
+    public function actualizarNotaItem($item){
 
-        $subitems= $matricula->subitems->where('item_id',$item->id);
-        $nota=null;
+        $estudiantes = $item->matriculas;
         
-        if ($item->tipoitem->nombre == 'PARCIALES') {
-             
-             $arrya_notas = array();
+        foreach ($estudiantes as $estudiante) {
+           $nota=null;
+           if($estudiante->pivot->nota != null){
 
-              foreach ($subitems as $subitem) { 
+                $subitems = $estudiante->subitems->where('item_id',$item->id);
 
-                array_push($arrya_notas, $subitem->pivot->nota);
-                    
-              }
-                  $nota_subitem_parcial = max($arrya_notas);
-                  $porcentaje = ($subitem->porcentaje)/100;
-                  $nota_total = $nota_subitem_parcial * $porcentaje;
-
-              return $nota_total;
-
-        }else{
-
-            foreach ($subitems as $subitem) {   
-
+                foreach ($subitems as $subitem) {
                     $nota_subitem = $subitem->pivot->nota;
                     $porcentaje = ($subitem->porcentaje)/100;
                     $nota_total= $nota_subitem * $porcentaje;
+                    $nota+=$nota_total;
+                }
+                $estudiante->items()->updateExistingPivot($item->id, array('nota'=> $nota));
+           }
+        }
+          $this->actualizarNotas($item->matriculas[0]->horario);
 
-                    $nota+=$nota_total;     
-            }
-
-            return $nota;           
-        }       
     }
 
-     public function actualizarNotas($item){
+    public function actualizarNotas($horario){
 
-        //dd($item);
-        $matriculas = $item->matriculas;
+        $matriculas = $horario->matriculas;
     
         foreach ($matriculas as $matricula) {
-                $nota= 0;
-           foreach ($matricula->subitems as $subitem){
- 
-                $nota_subitem= $subitem->pivot->nota;
-                $porcentaje = ($subitem->porcentaje)/100;
-                $nota_total= $nota_subitem * $porcentaje;
+             $nota= 0;
+           foreach ($matricula->items as $item){
+                $nota_item= $item->pivot->nota;
+                $porcentaje = ($item->porcentaje)/100;
+                $nota_total= $nota_item * $porcentaje;
                 $nota+=$nota_total;
-                dd($nota);
            }    
-                $matricula->items()->updateExistingPivot($item->id, array('nota'=> $nota));
-                $matricula->definitiva = $this->calcularNotaEstudiante($matricula);
+                $matricula->definitiva = $nota;
                 $matricula->save();
         }
-
-
     }
 
       public function calcularNotaEstudiante($matricula){
