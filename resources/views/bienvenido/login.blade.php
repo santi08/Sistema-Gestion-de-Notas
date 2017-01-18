@@ -25,7 +25,7 @@
                </div>
 
                <div class="row">
-                  <div class="col s12  centrar input-field ">
+                  <div class="col s12 m12 l12 centrar input-field ">
 
                      <input id="password_docentes" type="password" name="password" title="ingresar con la contraseña que usas en S.C.A.D" class="validate" >
                      <label for="password_docentes">Contraseña</label>
@@ -40,13 +40,13 @@
                   
                @endif
 
-               <div class="row offset-m3">
+               <div class="row">
                      <div class="col s12 m12 l12">
                         <button style="width: 100%" class="btn waves-effect waves-light waves-red red darken-4 offset-l4 valing" type="submit" name="action">Entrar</button> 
                                       
                      </div>
-                     <div class="col s1 m1 l1 offset-l11">
-                       <i class="mdi-action-help blue-text" data-tooltip="Puedes ingresar con el correo y la contraseña que usas en el sistema S.C.A.D."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+                     <div class="col s1 m1 l1 offset-l11 offset-s11">
+                       <i class="mdi-action-help blue-text" data-tooltip="Puedes ingresar con el correo y la contraseña que usas en el sistema S.C.A.D."  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="270"></i>
                                       
                      </div>
 
@@ -90,14 +90,14 @@
                      
                   @endif
 
-                  <div class="row offset-m3">
+                  <div class="row ">
                      <div class="col s12 m12 l12">
                         <button style="width: 100%" class="btn waves-effect waves-light waves-red red darken-4 offset-l4 valing" type="submit" name="action">Entrar</button> 
                                       
                      </div>
 
-                     <div class="col s1 m1 l1 offset-l11">
-                       <i class="mdi-action-help blue-text" data-tooltip="inicio de sesión. Ejemplo: código: 12342013-2711, Nombre: Pepito Casas, contraseña: P12342013C"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="300"></i>
+                     <div class="col s1 m1 l1  offset-l11 offset-s11">
+                       <i class="mdi-action-help blue-text" data-tooltip="inicio de sesión. Ejemplo: código: 12342013-2711, Nombre: Pepito Casas, contraseña: P12342013C"  data-tooltip-animate-function="slidein" data-tooltip-stickto="left"  data-tooltip-color="#424242" data-tooltip-maxwidth="270"></i>
                                       
                      </div>
 
