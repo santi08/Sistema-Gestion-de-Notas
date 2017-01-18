@@ -277,11 +277,11 @@
 		if(nota<0 || nota>5 || isNaN(nota)){
 			if (isNaN(nota)) {
 				swal("Espera", "la nota debe ser numerica", "error");
-			$('#item-'+id).html("");
+				$('#item-'+id).html("");
 			}
 			if (nota<0 || nota>5) {
 				swal("Espera", "para registrar la nota, ésta no puede ser mayor que 5 ni menor que 0", "error");
-			$('#item-'+id).html("");
+				$('#item-'+id).html("");
 			}
 			
 		}else{

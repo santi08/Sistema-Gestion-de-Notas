@@ -13,17 +13,20 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   margin-left: 37.3%;
 }
 
+@media (max-width: 400px) {
+  #box-login{
+     margin-left: 0;
+     
+  }
+}
 @media (max-width: 600px) {
   #box-login{
-     margin-left: 0%;;
+     margin-left: 0;
+
   }
 }
 
-@media (max-width: 980px) {
-  #box-login{
-     margin-left: 18%;;
-  }
-}
+
 
 
 .gradient{
