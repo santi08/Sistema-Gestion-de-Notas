@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="utf-8">
@@ -15,23 +15,27 @@
   <link href="{{ asset('plugins/MaterializeAdmin/css/custom/custom.css')}}" type="text/css" rel="stylesheet">
   <link href="{{asset('plugins/tooltip/css/html5tooltips.css')}}" rel="stylesheet">
   <link href="{{asset('plugins/tooltip/css/html5tooltips.animation.css')}}" rel="stylesheet">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
-<body>
+<body class="login">
 
 <div class="row">
-   <div class="col s12 m12 l12">
+   <div class="col s12 m12 l12 top">   
       <div class="row">
-         <div class="login col s12">
-            <div class="top">
-               <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
-            </div>
-            <div class="login-box animated fadeInUp row">   
+         <div class="col s12 m12 l12">
+            <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col s12 m12 l12">
+            <div class="animated fadeInUp">   
                @include('bienvenido.login')   
             </div>
          </div>
-      </div>
-   
+      </div>  
+   </div>
+
       <div class="row">
          <div class="col s12 m12 l12">
             <footer class="page-footer gradient">
@@ -53,7 +57,6 @@
             </footer>
          </div>
       </div>
-   </div>
 </div>
 
 
