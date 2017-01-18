@@ -1,5 +1,5 @@
-<div class="row">                
-   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="loginPrincipal">        
+               
+   <div class="col s12 m7 l3 card-panel  bordes micarpanel" id="box-login">        
       <div class="row">
          <div class="col s6 l6 m6  center waves-effect waves-teal btn-flat" onclick="mostrarDocente()" id="boxDocentes">
             <h6>Docente</h6>
@@ -12,8 +12,6 @@
 <div class="divider grey "></div>
 <br>
       <div id="loginDocentes" class="row">
-         
-
          <div class="col s12 m12 l12">
            
             {!! Form::open(['route'=> 'admin.login', 'method' => 'POST']) !!}
@@ -116,5 +114,4 @@
 
           
          </div>
-      </div>
-</div>          
+      </div>          

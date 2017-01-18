@@ -8,12 +8,12 @@
 		<div class="col s12 m12 l12">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5 class="center" id="nombreMateria"></h5>
+					<h5 class="center gradient darken-3 white-text" id="nombreMateria"></h5>
 			</div>
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<fieldset class="grey lighten-3">
-					<table class="bordered">
+					
+					<table class="responsive-table striped bordered">
 						<thead>
 							<tr>
 								<th>Profesor</th>
@@ -23,7 +23,7 @@
 						<tbody id="tablaAsignaturas">			
 						</tbody>
 					</table>
-					</fieldset>
+				
 				</div>
 			</div>
 

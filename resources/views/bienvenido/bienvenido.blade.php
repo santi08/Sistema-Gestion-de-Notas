@@ -27,13 +27,15 @@
             <h1 id="title" class="hidden"><span id="logo"> <span>Bienvenido</span></span></h1>
          </div>
       </div>
-      <div class="row">
-         <div class="col s12 m12 l12">
-            <div class="animated fadeInUp">   
-               @include('bienvenido.login')   
-            </div>
-         </div>
+      
+      <div class="row animated fadeInUp">
+               
+                   @include('bienvenido.login')  
+          
+               
       </div>  
+     
+      
    </div>
 
       <div class="row">
@@ -61,7 +63,6 @@
 
 
 <script type="text/javascript" src="{{asset('plugins/jquery/jquery-3.1.0.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css"></script>
 <script type="text/javascript" src="{{ asset('plugins/MaterializeAdmin/js/materialize.js')}}"></script>
  <!-- Custom functions file -->
     <script src="{{asset('plugins/tooltip/functions.js')}}"></script>

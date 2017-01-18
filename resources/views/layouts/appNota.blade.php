@@ -44,12 +44,11 @@
                     <div class="nav-wrapper">
                         <div class="row">
 
-                            <div class="col s6 m6 l6 hide-on-small-only hide-on-med-only offset-l1 hide-on-small-only  ">
+                            <div class="col s6 m6 l6 hide-on-small-only offset-l1 offset-m1 hide-on-small-only  ">
                                 <img src="{{ asset('img/logo.png')}}" alt="Sistema Control Académico Universitario"> 
                             </div>
-                            <div class="col s1 l1 m1 offset-l4 offset-s9 offset-m11">
-
-                                   
+                            <div class="col s1 l1 m1 offset-l4 offset-s9 offset-m4">
+  
                                 <a class="" @if(Auth::guard('admin')->check()) href="{{url('/logoutdo')}}" @elseif(Auth::check()) href="{{ url('/logoutes') }}" @endif()
 
                                   data-activates="usuario" data-position="bottom" data-delay="50" data-tooltip="asignaturas"><i class="mdi-action-settings-power left"></i></a>

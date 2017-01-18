@@ -9,8 +9,7 @@
                  <a href="#" class=""><i class="mdi-social-person white-text"></i></a> 
             </div>
             <div class="col col s8 m8 l8" >
-
-                 
+  
                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" style="font-size: 15px;" data-activates="profile-dropdown">
                         
                   @if (Auth::guard('admin')->check())
@@ -87,6 +86,6 @@
           </li>
           @endif
 </ul>
-<a href="#" data-activates="slide-out" class="sidebar-collapse  btn-floating  waves-effect waves-light  transparent"><i class="mdi-navigation-menu white-text"></i></a>
+<a href="#" data-activates="slide-out" class="sidebar-collapse  btn-flat transparent"><i class="mdi-navigation-menu white-text"></i></a>
 </aside>      
     
