@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Reporte SCAU</title>
+	<meta charset="UTF-8">
 </head>
 <header >
 	<div id="header">

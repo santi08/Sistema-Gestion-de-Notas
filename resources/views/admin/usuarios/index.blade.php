@@ -108,13 +108,14 @@
 
       </div>
    </div>
- </div>     
-      
+ </div> 
+     
+@include('admin.usuarios.modals.listarAsignaturas',['periodos'=>$periodos])  
 @include('admin.usuarios.modals.crearEstudiante',['programas' => $programas])
 @include('admin.usuarios.modals.eliminarEstudiante')
 @include('admin.usuarios.modals.editarEstudiante',['programas'=> $programas])
 @include('admin.usuarios.modals.cargarEstudiante')
-@include('admin.usuarios.modals.listarAsignaturas',['periodos'=>$periodos])
+
 
 @overwrite
 
@@ -128,6 +129,7 @@
     $('#idEstudiantehidden').remove();
       consultaModalListar(id);
    }
+
    function generarPdf(){
     idEstudiante=$('#idEstudiantehidden').val();
     idPeriodo=$('#periodos').val();
